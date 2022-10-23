@@ -1,0 +1,145 @@
+{
+  "main": {
+    "id": "26c3ff692383bc99",
+    "type": "split",
+    "children": [
+      {
+        "id": "db3108e0a7bfb2fe",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8fdf322ac0e01719",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "This is a MarkDown Test.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d55a8a8e802d3069",
+    "type": "split",
+    "children": [
+      {
+        "id": "c07883bc71bfd3ed",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "35b9fc0ab5e72c93",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "9922d6e0170482be",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "sdasdsd",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "8c82384ad08fa1e1",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "8b37c786c9d7f2e1",
+    "type": "split",
+    "children": [
+      {
+        "id": "c755a21c9292ba2e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "79ee792b97122e35",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "This is a MarkDown Test.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "020c4f20a03026b8",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "This is a MarkDown Test.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "eddf14f9fe48c1d7",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "d5077f022b137dc5",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "This is a MarkDown Test.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "ribbon": {
+    "mostRecentAction": ""
+  },
+  "active": "9922d6e0170482be",
+  "lastOpenFiles": []
+}
