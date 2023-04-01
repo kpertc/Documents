@@ -1,0 +1,90 @@
+#JavaScript #TypeScript #markdown 
+
+[[CSS]]
+
+### Components
+
+Codeblock
+
+Highlight line
+
+Tab
+
+Callout
+
+<br>
+
+`baseUrl: '/docs/'`
+![[docs-mainpage.png]]
+
+
+<br>
+
+### Enable Doc-only
+
+1.  Diable Blog @`docusaurus.config.js`
+2.  add at the document index page
+    ```markdown
+    ---
+    slug: /
+    ---
+    ```
+3.  Remove `src/pages/index.js`    
+4.  routeBasePath: ‘/’
+
+<br>
+
+### Hide file
+
+Simple way: ignore the file → add `.` before the doc / folder
+
+<br>
+
+### Theme Config
+
+[Theme configuration](https://docusaurus.io/docs/api/themes/configuration)
+
+<br>
+
+### MDX
+
+[MDX and React](https://docusaurus.io/docs/markdown-features/react#exporting-components)
+
+1.  Write in the same mdx
+2.  Write in separated js/tsx
+
+<br>
+
+### Multiple docs
+
+[Multiple Docs - Stack Overflow](https://stackoverflow.com/questions/60783595/is-there-a-way-to-have-two-docs-in-docusaurus-2)
+
+1.  Download the plugin: [plugin-content-docs](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs)
+2.  Add to `docusaurus.config.js` Plugin section
+
+```jsx
+[
+    '@docusaurus/plugin-content-docs',
+    {
+      id: 'docs-api',
+      path: 'docs-api', // file path
+      routeBasePath: 'docs-api', // route path can not start with / 
+      sidebarPath: require.resolve('./sidebars.js'),
+    }, 
+],
+```
+
+1.  Add to `docusaurus.config.js` navbar section
+
+```jsx
+{
+    to: '/docs-api/Intro',    // openpage -> routeBasePath + doc
+    label: 'API', // label
+    position: 'left',
+    activeBaseRegex: `/docs-api/`, // unknow
+},
+```
+
+<br>
+
+### Versioning

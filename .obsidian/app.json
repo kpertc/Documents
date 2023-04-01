@@ -1,0 +1,20 @@
+{
+  "promptDelete": false,
+  "alwaysUpdateLinks": true,
+  "showFrontmatter": false,
+  "spellcheck": true,
+  "attachmentFolderPath": "/",
+  "newLinkFormat": "shortest",
+  "pdfExportSettings": {
+    "includeName": true,
+    "pageSize": "Letter",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  },
+  "useMarkdownLinks": false,
+  "showUnsupportedFiles": true,
+  "vimMode": false,
+  "livePreview": false,
+  "useTab": true
+}
