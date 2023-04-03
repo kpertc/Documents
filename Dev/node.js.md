@@ -41,8 +41,9 @@ Remove node_modules, packages and yarn
 <br>
 
 ##### NVM Node Version Manager
-ß
+
 Install at https://github.com/nvm-sh/nvm
+Windows version: https://github.com/coreybutler/nvm-windows
 
 If problem`-bash: nvm: command not found` use `source ~/.nvm/nvm.sh`
 
