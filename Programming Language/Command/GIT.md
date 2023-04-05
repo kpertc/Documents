@@ -4,7 +4,7 @@
 
 ##### Official Docs
 
-```
+``` bash
 git clone <url>
 
 git clone ../remote_repo.git . → local path
@@ -78,6 +78,7 @@ Github use https://github.com/GitCredentialManager/git-credential-manager/blob/m
 
 ##### Git Help
 
+```bash
 git help <verb>
 
 git <verb> --help
@@ -85,15 +86,16 @@ git <verb> --help
 git help config
 
 git config --help
+```
 
 ##### Git Config
 
-```
+```bash
 git config -- global user.name "Jingfu Chen"
 git config -- global user.email "chenjingfu.design@bytedance.com"
 ```
 
-```
+```bash
 git config --list
 ```
 ![[output.png]]
@@ -106,7 +108,7 @@ Start new
 ```bash
 git init
 
-git remote -v →  show remote
+git remote -v # show remote
 ```
 
 Clone
@@ -135,7 +137,7 @@ git --version → Check git version & if installed on the computer
 
 git status
 
-// add all files / stage file
+# add all files / stage file
 git add . 
 → --- command will index any new files and staging modified files from your working tree to be committed. But it will ignore whatever you have removed files from your working tree.
 
@@ -144,19 +146,19 @@ git add -A / -all
 
 git add filename.extension
 
-// reset stage files / unstage
-git reset "file-name" → unstage files
-git reset . → unstage all changes
-git reset -- hard → unstage and also delete files 
+# reset stage files / unstage
+git reset "file-name" # unstage files
+git reset . # unstage all changes
+git reset -- hard # unstage and also delete files 
 
-// also remove files
+# also remove files
 git clean 
 
-//need to type at least one message
+# need to type at least one message
 git commit -m "Added index.html" -m "asdasasdasdasd"
 
-//add and commit, 
-//only for modified file not new created file
+# add and commit, 
+# only for modified file not new created file
 git commit -am "meesage"
 
 git log 
@@ -177,12 +179,13 @@ git pull origin master branch name
 git push origin master
 ```
 
+Force Push -> Replace the origin branch
 ```bash
-`git push -f origin master`
+git push -f origin master
 ```
 
 ```bash
-git remote add origin //gitAddressHere
+git remote add origin # gitAddressHere
 ```
 
 <br>
@@ -192,16 +195,43 @@ git remote add origin //gitAddressHere
 -   Master Branch
 -   Feature Branch
 
-`git branch -a` List all branch
+```bash
+git branch -a # List all branch
 
-`git branch` Show currency branch
+git branch # Show currency branch
+```
 
 1.  Create branch `git checkout -b branch-name`
 2.  Switch branch `git checkout main`
 3.  Merge branch
     1.  `git diff` show different
     2.  `git merge`
+
 4.  Delete branch `git branch -d branch-name`
+
+
+###### Delete all commit history
+
+https://stackoverflow.com/questions/13716658/how-to-delete-all-commit-history-in-github
+
+Github → main
+GitLab → master
+
+```bash
+git checkout --orphan latest_branch # start a branch without history
+
+git add -A
+
+git commit -am "commit message"
+
+git branch -D main
+
+git branch -m main
+
+git push -f origin main
+```
+
+
 
 <br>
 
@@ -219,22 +249,22 @@ git remote add origin //gitAddressHere
 [Tutorial](https://www.youtube.com/watch?v=KLEDKgMmbBI)
 
 ```bash
-git stash list // list all stash
+git stash list # list all stash
 
-// save current working on files to stash. name
+# save current working on files to stash. name
 git stash save "Worked on XXX"
 
 then git diff and git commit no longer have working  on files
 
-// apply by stash id, will not delete the stash
+# apply by stash id, will not delete the stash
 git stash apply stash@{0}
 
-// apply the most recent stash and delete the stash
+# apply the most recent stash and delete the stash
 git stash pop
 
-// delete stash
-git stash drop stash@{0} // delete by stash id
-git stash clear // delete all stash
+# delete stash
+git stash drop stash@{0} # delete by stash id
+git stash clear # delete all stash
 ```
 <br>
 Merge other Branch to Master

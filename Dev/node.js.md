@@ -28,15 +28,24 @@ Local & Global install
 -   Local installs have links created at `./node_modules/.bin/directory`
 -   Global installs have links created from global `/bin` directory
 
+
+```bash
+
 Command:
-- `npm run` list all commands
-- Uninstall package: `npm uninstall ` + package name
+npm run # list all commands
 
-Set registry
-- `npm config set registry=http://xxxxxxx`
+npm uninstall + package name # Uninstall package:
 
-Remove node_modules, packages and yarn
-`rm -rf node_modules yarn.lock package-lock.json`
+npm config set registry=http://xxxxxxx # Set registry
+
+npm init + xxx # start a project with settings
+
+```
+
+```bash
+# Remove node_modules, packages and yarn
+rm -rf node_modules yarn.lock package-lock.json
+```
 
 <br>
 

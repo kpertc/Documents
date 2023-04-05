@@ -112,3 +112,18 @@ const buttonStyle: React.CSSProperties = {
 
 <button style={buttonStyle}> ... </button>
 ```
+
+### .module.css
+
+component scope css
+```jsx
+import React from "react"
+import * as containerStyles from "./container.module.css"
+
+export default function Container({ children }) {
+
+	return (
+	<section className={containerStyles.container}>{children}</section>
+	)
+}
+```
