@@ -88,3 +88,11 @@ Simple way: ignore the file → add `.` before the doc / folder
 <br>
 
 ### Versioning
+
+
+### Swizzling
+https://docusaurus.io/docs/swizzling
+
+Ejecting -> can complete replace the original component via React Component, e.g. footer
+Wrapping
+
