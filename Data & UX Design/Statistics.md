@@ -282,7 +282,7 @@ e.g. A participant is blinded to treatment or placebo
 
 **Double-blind**: study staff and participants do not know treatment assigment
 
-  
+<br>
 
 ### Frequency Histograms & Distributions
 
@@ -316,12 +316,37 @@ Aways going one direction
 
 ### Other Graphs
 
-Time Series Graphs
-![[time-series-graphs.png | 500]]
+##### Time Series Graphs
+![[time-series-graphs.png | 300]]
+
 <br/>
-Bar Graph (Vertical or Horizontal)
-![[Data & UX Design/img/Statistics-img/bar-graph.png | 500]]
+
+### Bar Graph (Vertical or Horizontal)
+![[Data & UX Design/img/Statistics-img/bar-graph.png | 300]]
   
 
-Bar Graph vs. Frequency Histogram
+##### Bar Graph vs. Frequency Histogram
 Histogram is a special case of bar graph, must have quantitative variable on x-axis and frequency or relative frequency on the y-axis
+
+###### Pareto Charts
+Pareto chart is special bar chart
+Bar chart + Left to right frequency high to low + Cumulative Frequency
+
+![[paretoR2.png | 300]]
+
+##### Pie Charts
+Count ==Mutually Exclusive (互斥)== frequencies
+if one in multiple category -> should be bar graph, otherwise total is > 1
+`%` > frequency
+
+```mermaid
+pie title Pets adopted by volunteers 
+"Dogs" : 386
+"Cats" : 85
+"Rats" : 15
+```
+
+### All graphs
+- title 
+- Label Axes
+- unit of measurement

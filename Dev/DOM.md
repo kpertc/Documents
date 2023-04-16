@@ -18,8 +18,9 @@ Not recommended to use `innerHTML` for ==performance== and ==security== issues.
 
 `window.onbeforeunload` -> before close the page
 
+<br/>
 
-### `window` in node.js
+### Browser or node.js
 
 https://bobbyhadz.com/blog/javascript-referenceerror-window-is-not-defined
 

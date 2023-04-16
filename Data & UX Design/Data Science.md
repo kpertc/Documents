@@ -1,0 +1,11 @@
+
+### Other subjects
+
+- Business intelligence (BI) is goal-oriented
+	DS prepares data & form
+	DS can learn from BI
+
+DS has potential & risks
+Analyses can't be neutral
+Good judgment is vital (dependent on human)
+
