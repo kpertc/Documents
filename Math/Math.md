@@ -1,4 +1,5 @@
 [[Linear Algebra]]
+[[Statistics Math]]
 
 [[Python math]]
 [[Houdini VEX Math]]
@@ -8,6 +9,14 @@
 ##### Math Learning
 **[3Blue1Brown](https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw)**
 **[Calculus Blue - Prof Ghrist Math](https://www.youtube.com/c/ProfGhristMath)**
+
+<br>
+
+基础
+
+英文|符号|中文
+---|---|---
+Denominator||分母
 
 <br>
 

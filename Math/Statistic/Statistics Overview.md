@@ -2,6 +2,9 @@
 
 [YouTube](https://youtu.be/xxpc-HPKN28)
 
+[[Statistics Math]]
+[[Probability]]
+
 Statistic is the study of how to collect, organize, analyze, and interpret numerical information and data.
 Statistic is both the science of uncertainty and the technology of extracting information from data.
 Statistics is used to help us make decision. This is especially important in health care and public health
@@ -322,7 +325,7 @@ Aways going one direction
 <br/>
 
 ### Bar Graph (Vertical or Horizontal)
-![[Data & UX Design/img/Statistics-img/bar-graph.png | 300]]
+![[Math/Statistic/img/Statistics-img/bar-graph.png | 300]]
   
 
 ##### Bar Graph vs. Frequency Histogram

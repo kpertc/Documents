@@ -24,7 +24,7 @@ Visual → convincing story → change others' mind
 
 1.  ##### Bar Graphs
     
-     ![[Data & UX Design/img/Data Visualization & Crafting Stories with Data img/bar-graph.png]]
+     ![[Data Science/img/Data Visualization & Crafting Stories with Data img/bar-graph.png]]
     
       Use size contrast to compare two or more values
     
