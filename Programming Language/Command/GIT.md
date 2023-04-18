@@ -285,3 +285,11 @@ The Perfect Commit
 
 
 <br>
+
+### lfs
+```shell
+brew install git-lfs
+git lfs install
+
+git lfs pull
+```

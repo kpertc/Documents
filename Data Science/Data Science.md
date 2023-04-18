@@ -1,7 +1,7 @@
 
 [[Statistics Overview]]
 
-Data Science takes unstructed data to find ==order, meaning, and value==
+Data Science takes instructed data to find ==order, meaning, and value==
 Data Science provides insight & competitive advantage.
 
 ![[coding-stats-domain.jpg | 300]]
