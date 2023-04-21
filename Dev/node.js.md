@@ -49,6 +49,17 @@ rm -rf node_modules yarn.lock package-lock.json
 
 <br>
 
+```shell
+npm install ... # save to package.json dependencies 
+npm install ... --save # save to package.json dependencies 
+npm install ... --save-dev # save to package.json devDependencies 
+```
+
+- dependencies : Packages required by your application in production. 
+- devDependencies: Packages that are only needed for local development and testing.
+
+<br>
+
 ##### NVM Node Version Manager
 
 Install at https://github.com/nvm-sh/nvm
@@ -66,7 +77,6 @@ nvm ls
 nvm install [verison] # install a node js
 nvm use [version] # use a version of node js
 ```
-  
 
 NPX (run something)
 
@@ -78,4 +88,4 @@ Install NPX `npm install -g npx`
 
 
 
-Install Command Line Tools: [[Xcode Command Line Tools]]
+Install Command Line Tools: [[Env Tools]]

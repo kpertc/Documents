@@ -15,7 +15,7 @@ To Check if has C++ installed
 gcc -v
 ```
 
-Install Command Line Tool:[[Xcode Command Line Tools]]
+Install Command Line Tool:[[Env Tools]]
 
 
 ```

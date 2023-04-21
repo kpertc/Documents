@@ -1,47 +1,6 @@
 #JavaScript #programming-language #web-dev 
 
->Any application that can be written in JavaScript, will eventually be written in JavaScript. - Jeff Atwood
-
-<br>
-
-[State of JS](https://stateofjs.com/en-us/)
-
-<br>
-
-### [[node.js]]
-  
-
-### [[Yarn]] (Yet Another Resources Negotiator) developed by Facebook
-
----
-
-Primitive Value: Boolean
-
-Objects:
-
-  
-
-### History
-
-> 1993 - First Browser -> Mosaic
-> 
-> 1994 - Mosaic founded company -> Netscape, and release browser
-> 
-> Need a more interactive language as glue language, at the same time, Java was popular,
-> 
-> `MOCHA` -> `LiveScript` -> `JavaScript`
-
-  
-
-**ECMA** (European Computer Manufactures Association) is an international non-profit standard organization.
-
-ECMAScript (ES)
-
-ES5 -> 2009
-
-ES6 -> 2015
-
-  
+JavaScript Background knowledge: [[JavaScript Overview]]
 
 ### HTML Template & Hello World
 

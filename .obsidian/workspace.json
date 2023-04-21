@@ -14,7 +14,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Markdown.md"
+                "file": "Programming Language/JavaScript/JavaScript.md"
               }
             }
           }
@@ -31,7 +31,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Software & Tool/Xcode Command Line Tools.md",
+                "file": "Software & Tool/Env/Env Tools.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": true
@@ -44,7 +44,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Markdown.md",
+                "file": "Programming Language/JavaScript/JavaScript.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": true
@@ -52,12 +52,38 @@
             }
           },
           {
-            "id": "cfbbaf1510f0e856",
+            "id": "5ed15bc2bdbfb819",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming Language/Command/Linux Command.md",
+                "file": "Programming Language/JavaScript/JavaScript.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "565d52e25c2a7098",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Programming Language/JavaScript/JavaScript.md",
+                "mode": "preview",
+                "backlinks": true,
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "0df1b810cd477cb0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Programming Language/JavaScript/ECMA (ES).md",
                 "mode": "source",
                 "backlinks": true,
                 "source": true
@@ -65,7 +91,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -94,7 +120,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "xcode",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -131,7 +157,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Markdown.md",
+                "file": "Programming Language/JavaScript/JavaScript.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -148,7 +174,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Markdown.md",
+                "file": "Programming Language/JavaScript/JavaScript.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -185,8 +211,30 @@
       "workspaces:管理工作区布局": false
     }
   },
-  "active": "f88d9998e8930c6a",
+  "active": "565d52e25c2a7098",
   "lastOpenFiles": [
+    "Dev/DOM.md",
+    "Dev/node.js.md",
+    "Programming Language/JavaScript/JavaScript Overview.md",
+    "Programming Language/JavaScript/ECMA (ES).md",
+    "Programming Language/JavaScript/JavaScript.md",
+    "Programming Language/JavaScript/TypeScript.md",
+    "Programming Language/JavaScript",
+    "Programming Language/Command/GIT.md",
+    "Dev/React/React with TypeScript.md",
+    "Dev/React/React UI Componets.md",
+    "Dev/React/React Native.md",
+    "Dev/API.md",
+    "Dev/JavaScript API.md",
+    "Software & Tool/Env/Env Tools.md",
+    "Software & Tool/Env",
+    "Tips/Computer Tips.md",
+    "Programming Language/Command/Linux Command.md",
+    "Programming Language/Command/img/Git-img/ssh.png",
+    "Programming Language/C++/C++ Basic.md",
+    "Programming Language/Command/GitLab CI.md",
+    "Programming Language/Command/Networking Command.md",
+    "Markdown.md",
     "Regular Expression.md",
     "Dev/HTML.md",
     "where-to-invest.png",
@@ -194,7 +242,6 @@
     "Untitled.md",
     "Network Command.md",
     "Dev/three.js & Web XR.md",
-    "Dev/node.js.md",
     "Dev/img/three.js & Web XR/xr-standard-controller.png",
     "Dev/img/three.js & Web XR/vite.config.js",
     "Dev/img/three.js & Web XR/vite.config 1.js",
@@ -205,34 +252,13 @@
     "Dev/img/three.js & Web XR/controller-event.png",
     "Dev/img/three.js & Web XR/axis-helper.png",
     "Dev/img/three.js & Web XR",
-    "Dev/img/nodejs-img/run_JavaScript_VSCode.gif",
     "Dev/img/nodejs-img",
     "Dev/img/network",
-    "Dev/img/javascript-img",
+    "Programming Language/JavaScript/javascript-img",
     "Dev/img/Docusaurus-img",
     "Dev/img/CSS",
-    "Dev/React/React with TypeScript.md",
-    "Dev/React/React UI Componets.md",
-    "Dev/React/React Native.md",
-    "Dev/React/React Native img",
     "Dev/DevOps/GitLab CI.md",
     "Dev/DevOps/Docker-Kubernetes.md",
-    "Dev/img",
-    "Dev/Yarn.md",
-    "Dev/YAML.md",
-    "Dev/Vite.md",
-    "Dev/TypeScript.md",
-    "Dev/Require vs Import.md",
-    "Dev/Open AI API.md",
-    "Dev/Network.md",
-    "Dev/Memorization.md",
-    "Dev/JavaScript.md",
-    "Dev/JavaScript API.md",
-    "Dev/JSON.md",
-    "Dev/Docusaurus.md",
-    "Dev/DOM.md",
-    "Dev/CSS.md",
-    "Dev/Beautifulsoup - Web Scraping.md",
     "未命名.canvas"
   ]
 }

@@ -3,26 +3,18 @@
 TypeScript, by Microsoft.
 
 -   JavaScript -> Dynamic
-    
 -   TypeScript -> Static
 
 TypeScript needs to be complied to JavaScript
 
-  
-
 Check TypeScript installed: `tsc --version`
-
 Install TypeScript `npm install -g typescript`
-
 Convert TypeScript to JavaScript `tsc name.tx`
-
   
 
-`tsc --init` to create a tsconfig.json
+`tsc --init` to create a `tsconfig.json`  
 
-  
-
-Watch -> complier will automatcially comple after file changed
+Watch -> complier will automatically compile after file changed
 
 Problem
 https://blog.csdn.net/dujyong/article/details/106359483
