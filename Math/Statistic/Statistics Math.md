@@ -52,8 +52,90 @@ $$z = \frac{\text{data point − mean}}{\text{standard deviation}}$$
 $$z = \frac{x - \mu}{\sigma}$$
 
 
-z分数（z-score），也叫标准分数（standard score）是一个数与平均数的差再除以标准差的过程。
+z分数（z-score），也叫标准分数（standard score）是一个数与平均数的差再除以标准差的过程。 
+
+can apply to non-normal distribution
+
+[table](https://www.math.arizona.edu/~rsims/ma464/standardnormaltable.pdf)
 
 <br>
 
-###
+### Density Curve
+
+curve area = 1, 100%
+![[density_curve.png | 300]]
+![[skewed-distrubution-mean-median.png]]
+
+<br>
+
+### Normal Distribution
+
+![[normal-distributions.png | 300]]
+
+[# Normal distributions review- Khan Academy](https://www.khanacademy.org/math/statistics-probability/modeling-distributions-of-data/normal-distributions-library/a/normal-distributions-review)
+
+> -   symmetric bell shape
+> -   mean and median are equal; both located at the center of the distribution
+
+<br>
+
+##### Empirical Rule
+![[Empirical-Rule.jpg | 300]]
+
+> -   ≈68% the data falls within 1 standard deviation of the mean
+> -   ≈95% of the data falls within 2 standard deviations of the mean
+> -   ≈99.7% of the data falls within 3 standard deviations of the mean
+
+<br>
+
+### Standard Normal Distribution
+$\mu$ = 0, $\sigma$ = 1
+![[standard-normal-distibution.png | 300]]
+
+<br>
+
+### Scatter Plot
+A scatterplot is a type of data display that shows the relationship between two numerical variables.
+
+Positive correlation|Negative correlation|No correlation
+---|---|---
+![[positive-corelation.png]]|![[negative-corelation.png]]|![[no-corelation.png]]
+
+<br>
+
+##### Description
+**Direction**: positive/negative
+**Strength**: strong/weak
+**Form**: linear/nonlinear
+outlier
+clusters
+
+###### Example description
+![[example-description.png | 300]]
+
+A quick description of the association in a scatterplot should always include a description of the form, direction, and strength of the association, along with the presence of any outliers.
+
+> "This scatterplot shows a ==strong, negative, linear== association between age of drivers and number of accidents. There don't appear to be any ==outliers== in the data.”
+
+<br>
+
+### Correlation Coefficient (相关系数)
+
+aka Pearson correlation coefficient PCC
+
+[Correlation coefficient](https://www.khanacademy.org/math/statistics-probability/describing-relationships-quantitative-data/scatterplots-and-correlation/a/correlation-coefficient-review)
+
+The correlation coefficient _r_ measures the direction and strength of a linear relationship.
+
+-   It always has a value between `−1 ≤ r ≤ 1`.
+-   Strong positive linear relationships have values of _r_ closer to 1.
+-   Strong negative linear relationships have values of _r_ closer to −1.
+-   Weaker relationships have values of _r_ closer to 0
+
+Equation:
+
+$r = \frac{1}{n-1} \sum(\frac{x_i - \bar{x}}{S_x})(\frac{y_i - \bar{y}}{S_y})$
+
+$r = \frac{1}{n-1} \sum( \text{z score x} )(\text{z score y} )$
+
+![[r-process.png]]

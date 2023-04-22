@@ -1,6 +1,12 @@
 #data #programming-language 
 
-Structured Query Language
+SQL -> Structured Query Language
+
+Brew install SQL
+```shell
+brew install mysql
+```
+
 
 ### Tutorial:
 

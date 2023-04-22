@@ -17,4 +17,33 @@ Analyses can't be neutral
 Good judgment is vital (dependent on human)
 
 
+Analysis * max(Story) = max(value)
+Direction 
+
+Clarify statement
+not Technical process
+
+Analysis = simplification
+Be Minimal, more chart less text, avoid table
+Steps / Next steps
+
+Correlation / causation
+- experimental studies
+- Quasi-experiment 准实验
+- Theory & experience
+- domain specific 
+
+Social
+- exploratory graphic
+- presentation graphic
+
+
+Reproducible Research
+Incremental & cumulative
+
+
+Share & archive data
+ODSC.com
+OSF.io
+
 
