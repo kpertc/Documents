@@ -10,6 +10,10 @@ https://reactjs.org/docs/hello-world.html
 
 Build IOS, Android, Web APP with React → [[React Native]]
 
+
+<br>
+
+
 ### Installation
 
 Folder name can not have capital letters and space.
@@ -170,7 +174,7 @@ useRef will not re-render
 
 Reference a value
 
-```JavaScript
+```ts
 const renderCount = useRef(1) // ref -> 1
 
 useEffect(() => {
@@ -211,6 +215,8 @@ const _sceneManager: SceneManager = useContext(ThemeContext)!;
 
 ### [useMemo](https://youtu.be/THL1OPn72vo) (Memo -> Memorization)
 
+<br>
+
 ### Class
 
 Previously, ONLY class based component could have STATE in a component. This is no longer the case since React Hooks. Functional Components to the Rescue!
@@ -222,5 +228,39 @@ export default class App extends Component {
         <div>...</div>
         }
     }
+}
+```
+
+
+class reserved for class -> class -> className
+
+```JavaScript
+export default class AppClass extends Component {
+
+	constructor(props) {
+		super(props);
+	}
+
+	this.state = {
+		name: "",
+		age: 100,
+		isMale: true,
+	};
+
+	this.setState ...
+
+	render() {
+
+		// const { name, age, isMale } = this.state;
+		
+		return (
+			<div>
+				<h1>My name is {this.state.name}</h1>
+				<h2>I am {this.state.age} years old</h2>
+				<h3>I am a {this.state.isMale ? "Male" :"Female"}</h3>
+			
+			</div>
+		)
+	}
 }
 ```

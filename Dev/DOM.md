@@ -42,3 +42,11 @@ if (typeof window !== 'undefined') {
   // ⛔️ Don't use window here
 }
 ```
+
+<br>
+
+### Get Page URL / BaseURL
+```js
+const base_url = window.location.origin; // http://localhost:3000
+const host = window.location.host; // localhost:3000
+```

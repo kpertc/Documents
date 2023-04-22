@@ -100,6 +100,18 @@ git config --list
 ```
 ![[output.png]]
 
+```shell
+ssh-keygen -t rsa -C 'xxx@xxx.com'
+```
+
+<br>
+
+##### SSH
+https://www.cnblogs.com/hafiz/p/8146324.html
+![[ssh.png]]
+在GitLab中ssh把文件中的密钥粘贴上去
+
+<br>
 
 ##### Start → Git init
 
@@ -285,3 +297,33 @@ The Perfect Commit
 
 
 <br>
+
+### lfs
+```shell
+brew install git-lfs
+git lfs install
+
+git lfs pull
+```
+
+<br>
+
+### Submodules
+[Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
+
+```shell
+
+# add
+git submodule add https://github.com/chaconinc/DbConnector
+# add .gitmodules & git-submodule file
+
+# check submodule status
+git submodule status
+
+# initial clone submodule
+git submodule update --init
+
+# update
+git submodule update --remote
+
+```
