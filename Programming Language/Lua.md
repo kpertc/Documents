@@ -1,6 +1,10 @@
 [https://www.lua.org/](https://www.lua.org/)
 
-适合游戏开发 C语言 胶水语言 热更 即使编译 JIT 体积小
+> Lua(pronounced **LOO-ah**), 就是单纯的葡萄牙语中的月亮("Moon")
+
+> 适合游戏开发 C语言 胶水语言 热更 即使编译 JIT 体积小
+> 5.4.3的压缩包压缩的话只有350K, 不压缩只有1.3M
+
 
 ```lua
 -- comment
@@ -56,6 +60,11 @@ function functionname (a,b,c)
 	print(a,b,c)
 	return a,b,c -- define return
 end
+```
+
+```lua
+t:a() 
+t.a(t)
 ```
 
 ### Table
@@ -166,4 +175,9 @@ while n > 1 do
 	if n == 5 then break end -- break in while loop
 	n = n - 1
 end
+```
+
+### math
+```lua
+math.sin(time)
 ```

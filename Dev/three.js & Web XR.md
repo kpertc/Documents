@@ -35,7 +35,7 @@ Initialize a project: `npm init vite`
 
 Vite Config file
 file name `vite.config.js`
-```
+``` js
 // vite.config.js
 import { defineConfig } from 'vite';
 
@@ -108,7 +108,7 @@ const light = new THREE.DirectionalLigh(0xffffff, 1)
 scene.add(light)
 ```
 
-##### Aniamtion
+##### Animation
 
 ```JavaScript
 function animate() {
@@ -190,6 +190,7 @@ function onWindowResize() {
 
 Attach: maintaining the object's world transform.
 
+##### Shader -> [[OpenGL]]
   
 
 ### XR

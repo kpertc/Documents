@@ -9,3 +9,15 @@ Mac 截图软件 iShot
 - OCR
 
 LICEcap
+
+<br>
+
+Show hidden file on Mac
+`⇧ + ⌘ + .`
+
+![[show-hidden-file.gif]]
+
+<br>
+
+Paste without formatting
+`⇧ + ⌥ + ⌘ + v`

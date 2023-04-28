@@ -18,7 +18,7 @@ list:
 
 
 Use indentation to include value pair
-```
+```YAML
 address:
 	street: 123 Mayfield Ave.
 	city: New York

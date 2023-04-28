@@ -76,6 +76,34 @@ Color from [Arco Design Palette](https://arco.bytedance.net/palette/list)
 	</div>
 </div>
 
+```html
+<span style="color: #86909c">&#9632中性灰 86909c</span>
+
+<div style="display: grid; grid-template-columns: repeat(3, 2fr); grid-gap: 10px;">
+	<div>
+		<span style="color: #F53F3F">&#9632  浪漫红 F53F3F</span><br>
+		<span style="color: #F77234">&#9632晚秋红 F77234</span><br>
+		<span style="color: #FF7D00">&#9632活力橙 FF7D00</span><br>
+		<span style="color: #F7BA1E">&#9632黄昏 F7BA1E</span><br>
+		<span style="color: #FADC19">&#9632柠檬黄 FADC19</span><br>
+	</div>
+	<div>
+			<span style="color: #9FDB1D">&#9632新生绿 9FDB1D</span><br>
+			<span style="color: #00B42A">&#9632仙野绿 00B42A</span><br>
+			<span style="color: #14C9C9">&#9632碧涛青 14C9C9</span><br>
+			<span style="color: #3491FA">&#9632海蔚蓝 3491FA</span><br>
+	</div>
+	<div>
+			<span style="color: #165DFF">&#9632极致蓝 165DFF</span><br>
+			<span style="color: #722ED1">&#9632暗夜紫 722ED1</span><br>
+			<span style="color: #D91AD9">&#9632青春紫 D91AD9</span><br>
+			<span style="color: #F5319D">&#9632品红 F5319D</span><br>
+	</div>
+</div>
+```
+
+<br>
+
 ==Highlight==
 ```markdown
 ==Hightlight==
