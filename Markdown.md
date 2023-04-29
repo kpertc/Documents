@@ -321,14 +321,35 @@ graph TD
 Biology --> Chemistry 
 ```
 
-### Equation
+<br>
+
+### Equation Latex
 
 https://katex.org/docs/supported.html
+
+[Math Symbol](https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols)
+
+
+```latex
+inline equation
+$ ... $
+
+equation block
+$$ ... $$
+```
+
+<br>
 
 $$\begin{bmatrix}a&b\\c&d\end{bmatrix}$$
 
 $$ A^T \times B^T = (B \times A)^T $$
 
+<br>
+
+Name|Sign|Latex
+---|---|---
+intersection|$\cap$  $\bigcap$|`\cap`  `\bigcap`
+union|$\cup$|`\cup`
 
 
 
