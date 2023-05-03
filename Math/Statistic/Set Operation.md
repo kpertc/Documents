@@ -74,3 +74,8 @@ $\supseteq$|is superset of|A $\supseteq$ B
 $\supset$|is strict/proper superset of| A $\supset$ B
 $\subseteq$|is subset of|B $\subseteq$ A
 $\subset$|is strict/proper subset of|B $\subset$ A
+
+---
+
+Probability of A given B:  $P(A|B)=\frac{P(A\cap B)}{P(B)}$
+在B发生的时候，A发生的概率

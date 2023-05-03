@@ -15,6 +15,15 @@ Statistics is used to help us make decision. This is especially important in hea
 Statistic Help decision making
 
 ---
+### Statistical Question
+
+to collect data with variability
+
+Examples:
+- What is the average number of cars in a parking lot on Monday mornings?
+- How much time do the members of my family spending eating per year?
+
+---
 ##### 3 Types of data
 
 1.  Numerical → Quantitive (数量的)
@@ -201,28 +210,29 @@ Replication (实验)再现
 -   Replicating the results of observational studies and experiments is necessary for science to progress.
     
 
-  
+<br>
 
 Avoiding Bias in Survey Design - Minimize "bias"
 
 -   Non-response & Voluntary Response - people refuse the survey have bias (Topics e.g. drugs, Transportation)
     
 -   Truthfulness of Response
-    
     -   Respondents may lie on purpose (too personal, too hard)
-        
     -   Respondents may lie advertently "recall bias" (forgotten or influenced by biased event)
         
 -   Hidden Bias
-    
     -   Question wording may induce a certain response
-        
-    -   Order of questions
-        
+    -   Order of questions        
     -   Scale of questions may not accurately (How do you feel fit on a scale of 1 of 5?)
-        
 
-  
+<br>
+
+Examples of source of bias:
+- Nonresponse
+- Under-coverage
+- Voluntary Response Sampling
+
+<br>
 
 Interviewer Influence
 
@@ -241,7 +251,20 @@ Including grounding language
 
 Lurking Variable (**潜伏变量，干扰因素**)- races
 
-  
+<br>
+
+##### Correlation and Causality
+
+[Correlation vs. Causation | Difference, Designs & Examples](https://www.scribbr.com/methodology/correlation-vs-causation/)
+
+Causality → A change in one variable causes a change in another variable.
+- A directly result B
+
+Correlation → A statistical association between variables
+- A more likely happen when B
+- B more likely happen when A
+
+<br>
 
 ### Randomization
 

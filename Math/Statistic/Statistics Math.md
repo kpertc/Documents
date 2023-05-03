@@ -139,3 +139,34 @@ $r = \frac{1}{n-1} \sum(\frac{x_i - \bar{x}}{S_x})(\frac{y_i - \bar{y}}{S_y})$
 $r = \frac{1}{n-1} \sum( \text{z score x} )(\text{z score y} )$
 
 ![[r-process.png]]
+
+<br>
+
+##### Residuals
+
+A residual is a measure of how well a line fits an individual data point.
+residual = actual - expected
+
+This vertical distance is known as a residual. The residual is 4
+![[residual.png|300]]
+
+r → residual
+$$\sum(|r_n|)$$ 
+$$\sum(r_n)^2$$
+
+
+[$r^2$ intuition](https://www.khanacademy.org/math/statistics-probability/describing-relationships-quantitative-data/assessing-the-fit-in-least-squares-regression/a/r-squared-intuition)
+
+$r^2$ is also called → coefficient of determination.
+
+<br>
+
+Least sqaured 
+$$m = r \frac{s_y}{s_x} + b$$
+
+<br>
+
+Residual plot
+![[residual-plot.png]]
+
+<br>

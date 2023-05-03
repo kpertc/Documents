@@ -44,7 +44,7 @@ Polar coordinates||极坐标系|(r,θ)
 |<span style="font-weight:normal">Radian (rad)</span>|<img width="50px" />|<span style="font-weight:normal">弧度</span>|<span style="font-weight:normal">1 Radian = 57.295 degree</span>
 --|--|--|--
 Tau|τ| |1Tau = 2π _≈_ 6.28
-Euler's number|e||2.71828182846...
+Euler's number|e||2.71828182846...<br>$e = \mathop {\lim }\limits_{n \to \infty } \left( {1 + \frac{1}{n}} \right)^n$
 
 
 <br>
