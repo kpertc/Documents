@@ -1,5 +1,7 @@
 #CG
 
+[[OpenGL]]
+
 [[Math]] Matrix Calculation
 [acegikmo.notion.site](https://acegikmo.notion.site/Math-for-Game-Dev-1f3269e5af544ac9a8c92964a5f508c2)
 [[Games 101]]
