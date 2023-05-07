@@ -170,3 +170,35 @@ Residual plot
 ![[residual-plot.png]]
 
 <br>
+
+
+
+### Permutations & Combination 排列组合
+
+Permutation
+
+> Factorial 阶乘  $5! = 5 \times 4 \times 3 \times 2 \times 1 = 120$
+> $1! = 1$
+> $0! = 1$
+
+Seat Arrangement
+
+Formula:
+$P(n,r)=\frac{n!}{(n-r)!}$
+
+Example:
+$_nP_r=_{26}P_3 = 26 \times 25 \times 24= \frac{26!}{(26-3)!}$
+
+n -> 整个数量
+r -> 椅子数量
+
+<br>
+
+Combination
+
+多少种组合？
+`A,B,C,D` 和 `D,A,B,C` 算一种
+
+Formula: $_nC_K=\frac{\frac{n!}{(n-K!)}}{K!}=\frac{n!}{K!(n-K)!}$
+多了除以“椅子”的组合数量
+4！4 x 3 x 2 x 1

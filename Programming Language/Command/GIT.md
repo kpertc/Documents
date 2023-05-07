@@ -13,9 +13,12 @@ git clone https://github.com/xxx/remote_repo.git . → website
 
 https://git-scm.com/docs
 
-##### Git Book
+<br>
 
+##### Git Book
 https://git-scm.com/book/zh/v2
+
+<br>
 
 ##### Tutorials:
 
@@ -25,9 +28,13 @@ https://git-scm.com/book/zh/v2
 
 [Git Tutorial for Beginners: Command-Line Fundamentals](https://youtu.be/HVsySz-h9r4)
 
+<br>
+
 ##### Installation
 
 https://www.atlassian.com/git/tutorials/install-git#windows
+
+<br>
 
 ##### What is Version Control?
 
@@ -64,6 +71,8 @@ The management of changes to documents, computer programs, large websites, and o
 >[!note]
 >Command + Shift + . Show hidden file
 
+<br>
+
 ##### SSH Key
 
 An SSH key is an access credential for the SSH (secure shell) network protocol.
@@ -87,6 +96,8 @@ git help config
 
 git config --help
 ```
+
+<br>
 
 ##### Git Config
 
@@ -117,10 +128,16 @@ https://www.cnblogs.com/hafiz/p/8146324.html
 
 Start new
 
-```bash
+```shell
 git init
 
-git remote -v # show remote
+git remote -v # show rem
+
+# add existing project and push to git
+
+git remote add origin # gitAddressHere
+
+git push -u -f origin master
 ```
 
 Clone
@@ -194,10 +211,6 @@ git push origin master
 Force Push -> Replace the origin branch
 ```bash
 git push -f origin master
-```
-
-```bash
-git remote add origin # gitAddressHere
 ```
 
 <br>

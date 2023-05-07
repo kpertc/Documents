@@ -1,3 +1,4 @@
+#IT #web-dev 
 
 [[YAML]]
 [[Docker-Kubernetes]]
@@ -29,4 +30,29 @@ test:
 	- shared
 ```
 
-image
+image 镜像
+安装系统
+
+
+
+```yml
+stages:
+	- build
+	- test
+
+A:
+	stage: build
+
+B:
+	stage: test
+```
+
+the container of each stage will destroy immediately after complete
+
+Artifacts is the output
+
+`test`
+
+`exit`
+`exit 1`
+⤷ ERROR: Job failed: exit code 1 

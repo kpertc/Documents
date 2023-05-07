@@ -9,10 +9,23 @@
 background: var(--variable);
 ```
 
+```css
+:root {
+	--dark-color: #535bff;
+	--light-color: #80e9ff;
+}
+
+#darkGroup {
+	fill: var(--dark-color);
+}
+```
+
+<br>
 
 ### Todo React
 
 
+<br>
 
 ### Units
 
@@ -21,7 +34,7 @@ background: var(--variable);
 `rem`, `em`: both relative to font size, rem -> always root font size; em -> relative to parent's font size. Useful when scaling font with elements.
 `fr`: use in flex and grid
 
-  
+<br>
 
 ### Position
 
@@ -36,6 +49,7 @@ background: var(--variable);
 `Sticky`:
 
   
+<br>
 
 ### Display
 
@@ -102,6 +116,8 @@ html[data-theme='dark'] {
 }
 ```
 
+<br>
+
 ### React CSS Properties Object
 ```jsx
 const buttonStyle: React.CSSProperties = {
@@ -112,6 +128,8 @@ const buttonStyle: React.CSSProperties = {
 
 <button style={buttonStyle}> ... </button>
 ```
+
+<br>
 
 ### .module.css
 
@@ -127,3 +145,7 @@ export default function Container({ children }) {
 	)
 }
 ```
+
+<br>
+
+### [[SCSS]]

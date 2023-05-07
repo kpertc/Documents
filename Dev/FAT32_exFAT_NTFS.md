@@ -1,3 +1,5 @@
+#IT 
+
 | FAT32 | exFAT | NTFS |
 | --- | --- | --- |
 | File allocation table | Extended f ile allocation table | New Technology file System |

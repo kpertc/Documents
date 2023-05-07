@@ -163,7 +163,10 @@ Get type
 
 ```JavaScript
 console.log(typeof var);
+console.log(typeof "23");
 ```
+
+<br>
 
 ### Working with Strings
 
@@ -560,6 +563,28 @@ button.addEventListener("click", function()){
 });
 document.write(localStorage.name);
 ```
+
+<br>
+
+### Bind
+[Bind Explained in JavaScript](https://www.youtube.com/watch?v=g2WcckBB_q0)
+```js
+// 组合函数到object上
+// Bind an object to a function
+// Reference it using 'this'
+
+let c1 = {x:5, y:10}
+
+function printCoordinates () {
+	console.log(this.x + ',' + this.y);
+}
+
+let c1_func = printCoordinates.bind(c1);
+
+c1_func(); // output 5,10
+```
+
+<br>
 
 ### OOP
 

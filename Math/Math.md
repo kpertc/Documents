@@ -1,6 +1,13 @@
-[[Linear Algebra]]
-[[Statistics Math]]
 
+[[Algebra]]
+[[Linear Algebra]]
+
+[[Statistics Math]]
+[[Probability]]
+[[Calculus]]
+
+
+3D
 [[Python math]]
 [[Houdini VEX Math]]
 
@@ -17,6 +24,8 @@
 英文|符号|中文
 ---|---|---
 Denominator||分母
+Factorial|$!$<br>$5! = 5 \times 4 \times 3 \times 2 \times 1 = 120$|阶乘
+
 
 <br>
 

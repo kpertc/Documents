@@ -3,26 +3,45 @@
 ### Basics
 
 -   JavaScript -> only run in browser
-    
--   Node.js
-    
-    -   Open source, cross platform, runtime environment for executing JavaScript code outside a browser. (Not a language or a framework)
-        
-    -   Built on the V8 JavaScript engine (Same a Google Chrome)
-        
-    -   Written in C++
+- node.js
+	-   Open source, cross platform, runtime environment for executing JavaScript code outside a browser. (Not a language or a framework)
+	-   Built on the V8 JavaScript engine (Same a Google Chrome)
+	-   Written in C++
 
 **NPM** is a package manager for Node.js
 
 `node -v` nodejs version to check if nodejs is installed
 
-### Run JS in VS Code
+<br>
+
+###  Execute JavaScript
+
+Execute JS code
+`node`
+![[node.png | 200]]
+
+Execute JS file
 ![[run_JavaScript_VSCode.gif]]
 
 <br>
 
+```shell
+console.log(process)
+```
+
+![[prrocess.png | 300]]
+
+```js
+process
+process.platform
+process.env // webpack
+```
+
+<br>
 
 ### NPM (Node Package manager) (download something)
+Acquired by Microsoft
+
 -   is an online repository for open- source node.js projects
 -   CLI tool that helps with installation, version and dependency management.
 
@@ -30,18 +49,20 @@ Local & Global install
 -   Local installs have links created at `./node_modules/.bin/directory`
 -   Global installs have links created from global `/bin` directory
 
+```shell
+npm init # create package.json
+npm init -y # default settings
+```
 
-```bash
-
-Command:
+```shell
 npm run # list all commands
+# command script defined in package.json
 
 npm uninstall + package name # Uninstall package:
 
 npm config set registry=http://xxxxxxx # Set registry
 
 npm init + xxx # start a project with settings
-
 ```
 
 ```bash

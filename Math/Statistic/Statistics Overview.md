@@ -81,52 +81,44 @@ Statistic is a measure that describes only a sample of a population
     -   Non-sampling error - Bad list, not in sample frame
         
 -   Simulation - numerical facsimile or representation of a real-world phenomenon
-    
 
-  
+
+<br>  
 
 ### Sampling Method
 
--   Simple Random Sample (e.g. select people by random ID)
-    
-    -   When the entire list is available
-        
-    -   The list is good
-        
--   Stratified Sampling（分层采样）
-    
-    -   Certain amount from each group
-        
-    -   Give minority a voice
-        
-    -   May Oversampling -> unbalanced
-        
--   Systematic Sampling
-    
-    -   every kth （每k个）
-        
-    -   Cannot do it when there is a pattern: periodicity
-        
--   Cluster Sampling （整群抽样）
-    
-    -   Particular geographical
-        
-    -   pick a random box from a pipeline of box
-        
--   Convenience Sampling
-    
-    -   Non-probability sampling
-        
-    -   Online-Ads survey, street in-person recruitment
-        
-    -   Maybe (severely) biased, miss important subpopulation
-        
--   Multi-stage Sampling
-    
-    -   Combination of sampling strategies layered in stages
-        
-    -   Use in large survey
-  
+##### Random
+Simple Random Sample (Random number: e.g. select people by random ID)
+-   When the entire list is available
+-   The list is good
+
+Stratified Sampling（分层采样）
+-   Certain amount from each group
+-   Give minority a voice
+-   May Oversampling -> unbalanced
+
+Systematic Sampling
+-   every kth （每k个）
+-   Cannot do it when there is a pattern: periodicity
+
+Cluster Sampling （整群抽样）
+-   Particular geographical
+-   pick a random box from a pipeline of box
+
+Multi-stage Sampling
+-   Combination of sampling strategies layered in stages
+-   Use in large survey
+
+##### Not Random
+
+Voluntary -> More Bias
+
+Convenience Sampling -> More Bias
+-   Non-probability sampling
+-   Online-Ads survey, street in-person recruitment
+-   Maybe (severely) biased, miss important subpopulation
+
+<br>
 
 ### Describing vs Inferring
 
@@ -156,32 +148,25 @@ Inferential statistic - from sample to conclude entire population
 ##### Basic Guidelines for Planning a statistical study
 
 1.  State a hypothesis
-    
+   
 2.  Identify the individuals of interest
-    
+   
 3.  Specify the variables to measure
-    
+
 4.  Determine use entire population or a sample
-    
-    1.  Collect data or existing dataset
-        
+    1.  Collect data or existing dataset       
     2.  If sample, choose a sampling method
-        
+
 5.  Address ethical concerns before data collection
-    
     1.  Sensitive question, painful
-        
     2.  may need consent
-        
+
 6.  Collect the data
-    
-7.  Use descriptive or inferential statistics to answer your hypothesis
-    
-8.  Note any concerns about your data collection or analysis
-    
-    1.  Make recommendations for future studies
-        
-    
+
+8.  Use descriptive or inferential statistics to answer your hypothesis
+9.  Note any concerns about your data collection or analysis
+    1.  Make recommendations for future studies        
+
       Peer review, journey publication ...
     
 
@@ -190,36 +175,30 @@ Inferential statistic - from sample to conclude entire population
 ### Experiment vs. Observational Study (OS)
 
 Experiment
-
 -   A treatment of intervention
-    
 -   The purpose is to study the possible effect of the treatment or intervention on the variables measured
-    
 
 Observational
-
 -   No treatment or intervention is assigned
-    
 
   
 
 Replication (实验)再现
-
 -   Studies must be done rigorously enough to be replicated.
-    
 -   Replicating the results of observational studies and experiments is necessary for science to progress.
-    
 
 <br>
 
 Avoiding Bias in Survey Design - Minimize "bias"
 
--   Non-response & Voluntary Response - people refuse the survey have bias (Topics e.g. drugs, Transportation)
-    
+Wording bias
+
+-   Non-response & Voluntary Response - people refuse the survey have bias (Topics e.g. drugs, Transportation) (Response Bias)
+
 -   Truthfulness of Response
     -   Respondents may lie on purpose (too personal, too hard)
     -   Respondents may lie advertently "recall bias" (forgotten or influenced by biased event)
-        
+
 -   Hidden Bias
     -   Question wording may induce a certain response
     -   Order of questions        
