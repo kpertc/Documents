@@ -14,7 +14,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Programming Language/JavaScript/JavaScript.md"
+                "file": "Programming Language/Command/GIT.md"
               }
             }
           }
@@ -26,25 +26,12 @@
         "dimension": 77.07756232686981,
         "children": [
           {
-            "id": "c2adb695951512ce",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Software & Tool/Env/Env Tools.md",
-                "mode": "source",
-                "backlinks": true,
-                "source": true
-              }
-            }
-          },
-          {
             "id": "f88d9998e8930c6a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming Language/JavaScript/JavaScript.md",
+                "file": "Programming Language/Command/GIT.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": true
@@ -57,20 +44,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming Language/JavaScript/JavaScript.md",
-                "mode": "source",
-                "backlinks": true,
-                "source": true
-              }
-            }
-          },
-          {
-            "id": "565d52e25c2a7098",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Programming Language/JavaScript/JavaScript.md",
+                "file": "Markdown.md",
                 "mode": "preview",
                 "backlinks": true,
                 "source": true
@@ -83,15 +57,27 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming Language/JavaScript/ECMA (ES).md",
+                "file": "Programming Language/Lua.md",
+                "mode": "preview",
+                "backlinks": true,
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "a15fb34163626b56",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Computer Science/Computer Graphics/Computer Graphics.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": true
               }
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -120,7 +106,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "xcode",
+                "query": "vscode",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -136,8 +122,17 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "d25c1dc2998d03ed",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -157,7 +152,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Programming Language/JavaScript/JavaScript.md",
+                "file": "Programming Language/Command/GIT.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -174,7 +169,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Programming Language/JavaScript/JavaScript.md",
+                "file": "Programming Language/Command/GIT.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -211,54 +206,54 @@
       "workspaces:管理工作区布局": false
     }
   },
-  "active": "565d52e25c2a7098",
+  "active": "9922d6e0170482be",
   "lastOpenFiles": [
-    "Dev/DOM.md",
+    "residual.png",
+    "Software & Tool/Game Engine/Unreal Engine/img/Unreal Engine Blueprints img/split&recombine.gif",
+    "Software & Tool/Dev Editor/img/visual-studio-code-img/vscode-open-settingjson.gif",
+    "Software & Tool/Dev Editor/img/visual-studio-code-img/builtin-bracket-pair-colorizer.png",
+    "Software & Tool/Dev Editor/Visual Studio Code (VSCode).md",
+    "Product/product-manager-img/product-lifecycle.png",
+    "Product/product-manager-img/PM-stage-complementaryroles.png",
+    "Product/product-manager-img",
+    "Product/Project Manager.md",
+    "Product/Product Manager.md",
+    "Product/Internet Company.md",
+    "Product",
+    "Math/img/Calculus/calculus-notation.png",
+    "Math/img/3D math img/zero.png",
+    "Math/img/3D math img/shear.png",
+    "Math/img/3D math img/scale.png",
+    "Math/img/3D math img/rotation.png",
+    "Math/img/Calculus",
+    "Math/img/3D math img",
+    "Math/img",
+    "Math/Statistic/Set Operation.md",
+    "Math/Calculus.md",
+    "Math/Algebra.md",
+    "Dev/SCSS.md",
+    "Dev/JS/React/React with TypeScript.md",
+    "Dev/JS/React/React UI Componets.md",
+    "Dev/JS/React/React Native.md",
+    "Dev/JS/React/React Native img",
+    "Dev/JS/three.js & Web XR.md",
+    "Dev/JS/node.js.md",
+    "Dev/JS/Yarn.md",
+    "Dev/JS/Webpack.md",
+    "Dev/JS/Vite.md",
+    "Dev/JS/Require vs Import.md",
+    "Dev/JS/React",
+    "Dev/JS/JavaScript API.md",
+    "Dev/JS/Docusaurus.md",
+    "Dev/JS/DOM.md",
+    "Dev/JS/D3.md",
+    "Dev/JS",
     "Dev/node.js.md",
-    "Programming Language/JavaScript/JavaScript Overview.md",
-    "Programming Language/JavaScript/ECMA (ES).md",
-    "Programming Language/JavaScript/JavaScript.md",
-    "Programming Language/JavaScript/TypeScript.md",
-    "Programming Language/JavaScript",
-    "Programming Language/Command/GIT.md",
-    "Dev/React/React with TypeScript.md",
-    "Dev/React/React UI Componets.md",
-    "Dev/React/React Native.md",
-    "Dev/API.md",
-    "Dev/JavaScript API.md",
-    "Software & Tool/Env/Env Tools.md",
-    "Software & Tool/Env",
     "Tips/Computer Tips.md",
-    "Programming Language/Command/Linux Command.md",
-    "Programming Language/Command/img/Git-img/ssh.png",
-    "Programming Language/C++/C++ Basic.md",
-    "Programming Language/Command/GitLab CI.md",
-    "Programming Language/Command/Networking Command.md",
-    "Markdown.md",
-    "Regular Expression.md",
-    "Dev/HTML.md",
-    "where-to-invest.png",
-    "feature-table.png",
-    "Untitled.md",
-    "Network Command.md",
-    "Dev/three.js & Web XR.md",
-    "Dev/img/three.js & Web XR/xr-standard-controller.png",
-    "Dev/img/three.js & Web XR/vite.config.js",
-    "Dev/img/three.js & Web XR/vite.config 1.js",
-    "Dev/img/three.js & Web XR/vite-setting2.png",
-    "Dev/img/three.js & Web XR/vite-setting1.png",
-    "Dev/img/three.js & Web XR/grid-helper.png",
-    "Dev/img/three.js & Web XR/dat-gui.png",
-    "Dev/img/three.js & Web XR/controller-event.png",
-    "Dev/img/three.js & Web XR/axis-helper.png",
-    "Dev/img/three.js & Web XR",
-    "Dev/img/nodejs-img",
-    "Dev/img/network",
-    "Programming Language/JavaScript/javascript-img",
-    "Dev/img/Docusaurus-img",
-    "Dev/img/CSS",
-    "Dev/DevOps/GitLab CI.md",
-    "Dev/DevOps/Docker-Kubernetes.md",
+    "Dev/Webpack.md",
+    "Programming Language/JavaScript/JavaScript.md",
+    "Computer Science/Graphic API/img/OpenGL-examples",
+    "Computer Science/Graphic API/img",
     "未命名.canvas"
   ]
 }

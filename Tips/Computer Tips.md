@@ -21,3 +21,8 @@ Show hidden file on Mac
 
 Paste without formatting
 `⇧ + ⌥ + ⌘ + v`
+
+<br>
+
+在预览中用鼠标拖动
+`⌥ + space`
