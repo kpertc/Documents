@@ -261,9 +261,9 @@ git push -f origin main
 <br>
 
 ##### Git log
-
-`git log --oneline`
-
+```shell
+git log --oneline
+```
 ![[git-log-oneline.png]]
 
 
@@ -308,6 +308,29 @@ https://www.youtube.com/watch?v=Uszj_k0DGsg&t=22s
 
 The Perfect Commit
 
+<br>
+
+### Cherry Pick
+
+```shell
+# stop cherry-pick
+git cherry-pick --abort
+
+# main branch
+git cherry-pick 4314d45 # hash
+
+# multiple commits
+git cherry-pick 384c452 3a3bd61
+# depend on order 384c452 -> c28a9a1, 3a3bd61 -> 2cea4bd
+```
+
+Single|Multiple
+---|---
+![[cherry-pick.png \| 300]]|![[cherry-pick-multiple.png\| 300]]
+
+```shell
+
+```
 
 <br>
 

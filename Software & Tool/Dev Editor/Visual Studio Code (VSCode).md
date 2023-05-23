@@ -31,5 +31,13 @@ Builtin bracket pair colorizer
 
 <br>
 
-Other Plugin
-- Quokka.js display result in editor
+### Compare with Selected
+[Compare Contents of Two Files](https://www.mytecbits.com/microsoft/dot-net/compare-contents-of-two-files-in-vs-code)
+
+1. Select a file
+2. `RMB` on `Compare with Selected`
+
+### Plugin
+Plugin|Function
+---|---
+Quokka.js|display JavaScript result in editor
