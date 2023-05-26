@@ -12,6 +12,22 @@ Cmd + K|clear
 Up / Down Arrow Key|History
 q|quit
 
+### Variable
+```bash
+cp /my/location/from /my/location/to
+
+# VARIABLE
+MY_LOCATION_FROM = /my/location/from
+MY_LOCATION_TO = /my/location/to
+
+cp $MY_LOCATION_FROM $MY_LOCATION_TO
+```
+
+```shell
+~ → home dir
+cat → print file
+```
+
 ```bash
 # for comment 
 ```
@@ -22,8 +38,10 @@ clear # clear code / shortcut -> command + K
 ls # list folder
 ls -la # list all files
 ls -lh # show more info
-```
 
+ls -l # long
+```
+![[ls-l.png]]
 ``` bash
 pwd # print working directory
 open #
@@ -40,7 +58,10 @@ mkdir test_directory # create folder
 rm test_file.txt # remove
 rmdir test_directory # remove folder, the folder need to be empty
 rm -r directory # remove directory / folder anyways
-cp the_original.txt the_new.txt # copy
+
+# copy
+cp the_original.txt the_new.txt
+cp /Users/chenjingfu/pymel.log /Users/chenjingfu/Desktop/xxx.log
 ```
 
 ```bash

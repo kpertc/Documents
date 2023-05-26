@@ -37,6 +37,10 @@ Builtin bracket pair colorizer
 1. Select a file
 2. `RMB` on `Compare with Selected`
 
+### (File) Timeline
+https://github.com/microsoft/vscode-docs/blob/vnext/release-notes/v1_66.md#local-history
+
+
 ### Plugin
 Plugin|Function
 ---|---
