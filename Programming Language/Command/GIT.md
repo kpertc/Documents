@@ -1,4 +1,4 @@
-[[Linux Command]]
+[[Shell]]
 
 [字节GitLab SourceTree设置](https://bytedance.feishu.cn/wiki/wikcntgeqxeRZ76S3wknA6CTZUc)
 

@@ -1,4 +1,10 @@
-### Limits
+### Derivative (导数)
+[Derivative notation review](https://www.khanacademy.org/math/differential-calculus/dc-diff-intro/dc-diff-calc-intro/a/derivative-notation-review)
+
+
+<br>
+
+### Limits (极限)
 [Limits Intro](https://www.khanacademy.org/math/differential-calculus/dc-limits/dc-limits-intro/a/limits-intro)
 
 ![[calculus-notation.png | 300]]
