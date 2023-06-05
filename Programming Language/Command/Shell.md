@@ -17,7 +17,19 @@ q|quit
 
 ```bash
 # for comment 
+
+"" double quote 
+'' single quote 
+
+"Hello, my name is $myname" # Hello, my name is $Jay 
+'Hello, my name is $myname' # Hello, my name is $myname
+
+files=$(ls) #sub shell?
+
+env # show all environment variable
+date
 ```
+![[date.png]]
 
 <br>
 
@@ -27,6 +39,9 @@ echo $SHELL #/bin/bash → Bash Shell
 
 which bash # show bash path
 /bin/bash # use bash
+
+\'  
+\"
 ```
 
 <br>
@@ -48,6 +63,7 @@ bash xxx.sh
 chmod u+x xxx.sh
 ```
 
+
 <br>
 
 Positional argument `$1` `$2` `$3` ...
@@ -62,6 +78,8 @@ if [ $2 - lt 21 ]; then # -lt less than
 else
 	echo ""
 fi
+
+#-eq # equal
 ```
 
 ```bash
@@ -131,10 +149,6 @@ cp /Users/chenjingfu/pymel.log /Users/chenjingfu/Desktop/xxx.log
 
 
 ```bash
-echo "text" >> build/computer.txt # write "text" into the txt file
-```
-
-```bash
 grep "John" names.txt # search text of "John" in names.txt
 ```
 
@@ -143,8 +157,88 @@ rsync
 ```
 
 
+<br>
 
+### exit
+```bash
+exit
+# variables are gone
 
+# show last command exit code
+echo $?
+
+0 -> successful
+other number -> failed
+```
+
+<br>
+
+### Save to log, redirect output to file
+
+```bash
+echo "Hello World" >> package.log
+echo "text" >> build/computer.txt # write "text" into the txt file
+```
+
+![[redirect_output.png]]
+
+<br>
+
+### Math
+
+```bash
+expr 30 + 10
+expr 2 \* 3 # multiply
+```
+
+<br>
+
+### `grep` Global Regular Expression
+
+```bash
+grep "John" names.txt # search text of "John" in names.txt
+grep searchword test.txt
+grep searchworl * # all file
+
+-v # reverse
+-n # show line number
+-c # count, number of time appears
+-i # not case sensitive, default is case sensitive
+-r # recursively search
+-ri <- combination
+```
+
+```bash
+rsync
+```
+
+  
+
+<br>
+
+  
+
+### Check directory exists
+
+```bash
+
+directory=/etc
+
+  
+
+if [ -d $directory ]
+
+then
+
+echo "The directory $directory exists."
+
+else
+
+echo "The directory $directory doesn't exist."
+
+fi
+
+```
 
 
 
