@@ -37,8 +37,16 @@ Builtin bracket pair colorizer
 1. Select a file
 2. `RMB` on `Compare with Selected`
 
+<br>
+
 ### (File) Timeline
 https://github.com/microsoft/vscode-docs/blob/vnext/release-notes/v1_66.md#local-history
+
+<br>
+
+### Restart TS server
+当TS自动补全失效时尝试
+![[restart-eslint-server.webp]]
 
 
 ### Plugin
