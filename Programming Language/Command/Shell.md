@@ -28,6 +28,7 @@ files=$(ls) #sub shell?
 
 env # show all environment variable
 date
+echo $PATH
 ```
 ![[date.png]]
 
@@ -101,6 +102,12 @@ echo $variable_does_not_exist # empty
 # no space
 MY_LOCATION_FROM=/my/location/from
 MY_LOCATION_TO=/my/location/to
+
+```
+
+```bash
+# move
+mv 
 
 # copy
 cp /my/location/from /my/location/to
@@ -212,34 +219,32 @@ grep searchworl * # all file
 rsync
 ```
 
-  
-
 <br>
-
   
-
 ### Check directory exists
 
 ```bash
-
 directory=/etc
 
-  
-
 if [ -d $directory ]
-
 then
-
-echo "The directory $directory exists."
-
+	echo "The directory $directory exists."
 else
-
-echo "The directory $directory doesn't exist."
-
+	echo "The directory $directory doesn't exist."
 fi
-
 ```
 
+
+<br>
+
+### Where to save the script
+Filesystem Hierarchy Standard (FHS) -> 
+`user/bin`
+can run the script anyway
+file extension is not required in Linux system
+
+add usr/local/bin to PATH if is not in:
+`export PATH=/usr/local/bin:$PATH`
 
 
 
