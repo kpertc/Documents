@@ -1,4 +1,6 @@
 #programming-language 
+
+
 Bash Shell
 
 [[GIT]]
@@ -152,18 +154,10 @@ rm -r directory # remove directory / folder anyways
 # copy
 cp the_original.txt the_new.txt
 cp /Users/chenjingfu/pymel.log /Users/chenjingfu/Desktop/xxx.log
+
+# to base64
+echo  'linuxhint.com' | base64
 ```
-
-
-```bash
-grep "John" names.txt # search text of "John" in names.txt
-```
-
-```sh
-rsync 
-```
-
-
 <br>
 
 ### exit

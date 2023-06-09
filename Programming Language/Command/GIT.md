@@ -367,3 +367,6 @@ git submodule update --remote
 <br>
 
 ### Git Hook
+.git/ 
+
+javascript -> husky

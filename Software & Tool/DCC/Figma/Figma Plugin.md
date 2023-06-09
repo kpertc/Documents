@@ -26,7 +26,7 @@ New Plugin|Open Console
 > [!info]
 >Recommend writing in Typescript then convert to Javascript
 
-Install [NodeJs](https://nodejs.org/en/download/) include npm
+Install [Node.js](https://nodejs.org/en/download/) include npm
 Install TypeScript `sudo npm install -g typescript`
 安装TypeScript后在Figma中新建~~的Plugin就有.~~~~ts~~~~文件了！~~
 
