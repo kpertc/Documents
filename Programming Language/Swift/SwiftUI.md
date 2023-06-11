@@ -5,6 +5,7 @@ Recommend|Resources
 ⭐⭐⭐⭐⭐|[Official](https://developer.apple.com/documentation/swiftui)
 ⭐⭐⭐⭐⭐|[Introduction to SwiftUI](https://developer.apple.com/videos/play/wwdc2020/10119/)
 ⭐⭐⭐⭐|[Design with SwiftUI](https://developer.apple.com/videos/play/wwdc2023/10115/)
+⭐⭐⭐⭐⭐|[Swiftful Thinking](https://www.youtube.com/@SwiftfulThinking)
 
 ---
 
