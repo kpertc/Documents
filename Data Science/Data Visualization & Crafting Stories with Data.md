@@ -1,4 +1,4 @@
-#deisgn #UX #data
+#design #UX #data
 
 [[YouTube] The Recipe for Powerful Data Visualization | Google Data Analytics Certificate](https://www.youtube.com/watch?v=jur8_iFr5_M)  
 

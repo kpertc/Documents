@@ -1,4 +1,4 @@
-#UX #deisgn 
+#UX #design 
 
 https://www.youtube.com/watch?v=_PFqcMh7Uqk
 

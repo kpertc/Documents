@@ -46,7 +46,7 @@ https://github.com/microsoft/vscode-docs/blob/vnext/release-notes/v1_66.md#local
 
 ### Restart TS server
 当TS自动补全失效时尝试
-![[restart-eslint-server.webp]]
+![[restart-TS-server.webp]]
 
 
 ### Plugin
