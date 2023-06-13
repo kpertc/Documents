@@ -105,7 +105,7 @@ X --> Z(Steer/Accelerate/Brake)
 
 ```
 
-### Roles (** Still Evolving **)
+### Roles ( Still Evolving **)
 
 - Software Engineer
 ---

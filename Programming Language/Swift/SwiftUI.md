@@ -77,24 +77,42 @@ NavigationView {
 }
 .navigationTitle("Title")
 
-
 VStack()
+VStack(spacing: 12) 
+LazyVStack() // optimiza create when need to LazyHStack
+
 HStack()
 ZStack() // front back
 
 List()
 Picker() // UI?
+ScrollView(.horizontal)
 ```
 
+<br>
+
+### Enum
+```swift
+enum Fruit {
+	case apple
+	case orange
+}
+
+fruit: Fruit
+fruit = .apple
+fruit = .orange
+```
+
+<br>
 
 ```swift
-// Text
-Text()
-	.font()
+let count: Int = 5 
+Text("\(count)") // convert int to string
 
-@State var TextVariable: String = ""
-TextField("Textfield", text: $TextVariable)
-Label("Spicy", systemImage: "flame.fill")
+// Text
+Text("Text".uppercased())
+	.font()
+	.underline()
 
 // Shapes
 Circle()
@@ -105,11 +123,18 @@ RoundedRectangle(cornerRadius: 50)
 
 // modifier
 .padding()
+.padding(.horizontal, 20)
+
 .fill() // color
+
 .stroke()
+.stroke(Color.gray, lineWidth: 3.0)
+
 .trim()
 .frame(width: 200, height: 100)
 .cornerRadius(8)
+
+.overlay()
 
 // shadow
 .shadow(radius: 10)
@@ -132,6 +157,8 @@ UIColor.systemcolor ?
 var color = #colorLiteral() // then press enter
 var color = Color("CustomColor") // set color in Assets.xcassets
 ```
+Image set / Color set
+![[managing-assets-with-asset-catalogs-1~dark@2x.png]]
 
 ![[colorliteral.gif]]
 ![[assets-color.png]]
@@ -195,6 +222,10 @@ Image(systemName: "heart.fill") // filled Color
 
 ### Button
 ```swift
+Button("Press me!") {
+	 // code
+}
+
 Button(
   "Button Title",
   action: {
@@ -202,6 +233,19 @@ Button(
 	print("log")
   }
 )
+
+Button(action: { // code
+}, label: {
+	// View Here
+	Text("Save")
+		.padding()
+		.background(
+			Color.blue
+				.cornerRadius(10)
+		)		   
+})
+
+
 ```
 
 <br>
@@ -210,6 +254,64 @@ Button(
 
 ```swift
 .transition(.move(edge: .bottom))
+```
+
+<br>
+
+### ScrollView
+```swift
+ScrollView( 
+// content 
+) 
+
+ScrollView(.vertical, showIndicators: false, content: { ... })
+```
+
+showsIndicators
+![[showsIndicators.png | 100]]
+
+<br>
+
+### Grid
+```swift
+let columns: [GridItems] = [
+	GridItem(.fix(50), spacing: nil, alignment: nil),
+	// spacing -> horizontal or column spacing
+]
+
+// .fix .flexible .adaptive 
+GridItem(.flexible(), spacing: nil, alignment: nil),
+GridItem(.adaptive(minimum: 50, maximum: 300), spacing: nil, alignment: nil),
+
+LazyVGrid(columns: columns
+	spacing: 10 // row spacing or vertical
+	pinnedViews: [.sectionHeaders]
+) {
+	Section: // .header .footer
+
+	// create content
+	ForEach(0..<50) {index in 
+		Rectangle()
+	}
+}
+```
+
+<br>
+
+### Custom init()
+```swift
+// normally swiftUI no need to create a init function
+
+let backgroundColor: Color
+let count: Int
+let title: String
+
+// custom init
+init(backgroundColor: Color, count: Int, title: String) {
+	self.backgroundColor = backgroundColor
+
+	// ... custom here
+}
 ```
 
 <br>
@@ -224,4 +326,51 @@ if sandwich.isSpicy {
 		Spacer()
 	 }
 }
+```
+
+<br>
+
+### ForEach
+```swift
+ForEach(0..<10, { index in 
+	print("\\(index)")
+})
+// 0, 1, 2, 3 ... 9
+
+// ForEach create Text base on String[]
+let data: [String] = ["Hi"]
+
+ForEach(data.indices) { index in 
+	Text("\\(data[index])")
+}
+```
+
+<br>
+
+### safearea
+
+```swift
+// .edgesIgnoringSafeArea -> deprecated
+.ignoresSafeArea() = .edgesIgnoringSafeArea(.all)
+
+// .edgesIgnoringSafeArea(.top) 
+.ignoresSafeArea(edges: .top) //.bottom .all
+
+// practics
+// Create a separate view to ignore the safearea by ZStack
+ZStack {
+	//background
+	Color.blue
+		.edgesIgnoringSafeArea(.all)
+
+	//foreground
+	... content
+}
+
+// Set .background to ignore safearea while the main content is in the safeare
+Rectangle()
+	.background(
+		Color.red
+			.edgesIgnoringSafeArea(.all)
+	)
 ```
