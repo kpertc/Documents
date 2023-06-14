@@ -16,3 +16,13 @@ df = pd.read_csv('xxx/xxx.csv')
 return (Row, Column)
 df.shape # (3000, 9)
 ```
+
+```python
+# read csv line by line
+df = pd.read_csv('xxx/xxx.csv')
+
+for index, row in df.iterrows():  
+    # print(row)  
+    print(row["text"])  
+    print(row["embedding"])
+```

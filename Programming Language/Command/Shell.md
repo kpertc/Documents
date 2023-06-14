@@ -122,7 +122,8 @@ cat → print file
 ```
 
 ```bash
-clear # clear code / shortcut -> command + K
+clear # clear code / shortcut -> command + K / command + L
+reset # reset shell
 
 ls # list storage
 ls -la # list all files
@@ -142,6 +143,10 @@ cd # change directory
 cd . # current directory
 cd .. # parent directory (Back directory)
 cd ~ # home user directory
+cd - # to pre directory
+
+pushd
+popd
 
 touch test_file.txt # CG creat test_file.txt or replace if the file already exis
 nano test_file.txt # text editor

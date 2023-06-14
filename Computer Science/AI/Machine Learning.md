@@ -66,3 +66,9 @@ Automated Visual Inspection
 - Scikit-learn
 - R
 - Weka
+
+<br>
+
+[**Hugging Face**](https://huggingface.co/)
+- 一家主要刚开始致力于NLP的人工智能公司
+- 一套方便进行深度学习相关使用开发的工具集合
