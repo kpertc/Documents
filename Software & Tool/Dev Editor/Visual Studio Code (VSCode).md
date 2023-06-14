@@ -10,15 +10,6 @@ https://code.visualstudio.com/docs/languages/markdown
 Preview markdown `⇧⌘V`
 Preview markdown side by side
 ![[md-dynamic-preview.gif]]
-
-
-<br>
-
-### [How to Open Visual Studio Code From Your Terminal](https://www.freecodecamp.org/news/how-to-open-visual-studio-code-from-your-terminal/)
-
-1.  Install code command
-2.  `cd {path}` `code .`
-
 <br>
 
 ### Open Setting.json
@@ -48,8 +39,54 @@ https://github.com/microsoft/vscode-docs/blob/vnext/release-notes/v1_66.md#local
 当TS自动补全失效时尝试
 ![[restart-TS-server.webp]]
 
+<br>
+
+### `code`
+
+### [How to Open Visual Studio Code From Your Terminal](https://www.freecodecamp.org/news/how-to-open-visual-studio-code-from-your-terminal/)
+
+1.  Install code command
+
+[https://code.visualstudio.com/docs/editor/command-line](https://code.visualstudio.com/docs/editor/command-line)
+
+```shell
+# open folder by VSCode
+cd {path} 
+code .
+
+# open the file
+code src/Data.ts
+
+# open folder in a new window
+code src/Plugin/
+```
+
+
 
 ### Plugin
 Plugin|Function
 ---|---
 Quokka.js|display JavaScript result in editor
+
+
+
+### Command Runner
+![[vscode-command-runner.gif]]
+
+```JSON
+"command-runner.commands": {
+	"node version to 14.18.1": "nvm use 14.18.1",
+	"1. npm run clean && git clean -xdf": "npm run clean && git clean -xdf",
+	... 
+},
+```
+
+<br>
+
+### Extension
+
+[https://code.visualstudio.com/api/get-started/your-first-extension](https://code.visualstudio.com/api/get-started/your-first-extension)
+
+```shell
+npm install -g yo generator-code yo code
+```

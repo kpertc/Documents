@@ -93,6 +93,11 @@ command_3 &
 ```
 
 
+```shell
+# open webpage MacOS 
+open https://stackoverflow.com
+```
+
 ### Variable
 ```bash
 echo Hello World # string

@@ -4,8 +4,6 @@ Comment -> JS Documentation generator
 
 `jsdoc.json` -> config file
 
-jsdoc/templates/
-
 ```bash
 npm run doc
 ```
@@ -34,10 +32,26 @@ const grades = [98. 97.7, 76]
  */
 const todo = {id: 1, text: 'Hello'}
 
+// Multiple Types
+
 /**
  * @type {{id: number|string, text}}
  */
 const todo = {id: "string", text: 'Hello'}
+```
+
+Function
+```js
+/**
+ * Calculate tax
+ * @param {number} amount - Total amount
+ * @param {number} tax - Tax percentage
+ * @returns {string} - Total with a dollar sign
+ */
+
+const calculateTax = (amount, tax) => {
+	return `$${amount + tax * amount}`;
+}
 ```
 
 
@@ -52,3 +66,13 @@ or
 //  VSCode setting
 "javascript.implicitProjectConfig.checkJs": true
 ```
+
+
+Duplicate from `jsdoc/templates/default`
+```json
+// jsdoc.json
+"opts": {
+	"template": 
+}
+```
+![[jsdoc-templates-default.png | 300]]
