@@ -19,9 +19,6 @@ Declarative Ul
 
 ---
 
-Views are lightweight
-> extracting a subview has virtually no runtime overhead
-
 Views are `struct`, only require `body`
 
 ```swift
@@ -50,7 +47,7 @@ NVVM Architecture
 
 ---
 ### Shortcut
-[[Xcode]]
+![[Xcode#SwiftUI]]
 
 <br>
 
@@ -347,6 +344,10 @@ ForEach(data.indices) { index in
 
 <br>
 
+![[Swift#Condition]]
+
+<br>
+
 ### safearea
 
 ```swift
@@ -373,4 +374,70 @@ Rectangle()
 		Color.red
 			.edgesIgnoringSafeArea(.all)
 	)
+```
+
+<br>
+
+### Extract Code
+
+Views are lightweight
+> extracting a subview has virtually no runtime overhead
+
+```swift
+// Extract Code as function
+Button(action: {
+	buttonPressed()
+}, label: {})
+
+func buttonPressed() {
+	...
+}
+
+// Extract View as variable
+// no custom init → static
+_view
+
+var _view: some View {
+	VStack {
+		...
+	}
+}
+
+// Extract View as Struct
+// struct → custom init()
+struct _view: View {
+	var body: some View {
+		VStack {
+			...
+		}
+}
+```
+
+<br>
+
+### @Binding
+Parent ← connect @state ← Child 
+```swift
+struct MainView; View {
+	@State var backgroundColor: Color = Color.green
+	@State var title: String = "Title"
+
+	var body: some View {
+		ChildView(backgroundColor: $backgroundColor)
+	}
+}
+
+struct ChildView: View {
+	@Binding var backgroundColor: Color
+	@Binding var title: String
+
+	var body: some View {
+		Button(action: {
+			backgroundColor = Color.orange
+			title = "New Title"
+		}, label: {
+			Text("Button")
+		})		
+	}
+}
 ```

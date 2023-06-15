@@ -2,17 +2,14 @@
 
 [[SwiftUI]]
 
-Practicing using XCode playground
+Practicing using Xcode playground
 
 ### Tutorial
 
 https://www.youtube.com/watch?v=comQ1-x2a1Q
 
-  
-
 ### Documentation
 
-  
 
 ### Hello World
 
@@ -22,13 +19,11 @@ print(greeting)
 ```
 
   
-
 ### Variable vs Constant
 
 `var` -> declare a variable
-
 `let` -> declare a constant
-
+	= `const` in JavaScript
   
 
 ### Data Types
@@ -36,9 +31,7 @@ print(greeting)
 String, Int, Float, Double, Bool
 
 -   Float -> 32-bit floating point number
-    
 -   Double -> 64-bit floating point number
-    
 
 ```Swift
 var language: String = "swift" // specify the type "String"
@@ -50,9 +43,13 @@ Int() // Convert variable to Int
 round() //
 ```
 
-  
+### Condition
 
-### If Statement
+```swift
+@State var isShow: Bool = false
+isShow.toggle() // isShow = !isShow
+print(isShow.description) // true or false
+```
 
 ```Swift
 var a = 5
@@ -67,6 +64,15 @@ else {
 
 }
 
-&& and
-|| or
+&&  // and
+||  // or
+```
+
+Ternary Operator
+```swift
+@var isState: Bool = false
+...
+Rectangle()
+	// .fill(condition ? true : false)
+	.fill(isState ? Color.red : Color. blue)
 ```
