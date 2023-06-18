@@ -41,7 +41,18 @@ print (type(of: language)) // print type var "language" -> String
 
 Int() // Convert variable to Int 
 round() //
+
+// convert int to string
+let count: Int = 5 
+Text("\(count)")
 ```
+
+```swift
+array.append(  )
+```
+
+
+### ![[SwiftUI#Enum]]
 
 ### Condition
 
@@ -75,4 +86,17 @@ Ternary Operator
 Rectangle()
 	// .fill(condition ? true : false)
 	.fill(isState ? Color.red : Color. blue)
+```
+
+<br>
+
+### ![[SwiftUI#ForEach]]
+
+<br>
+
+### Function
+```swift
+func _funcname() -> Bool {
+	
+}
 ```

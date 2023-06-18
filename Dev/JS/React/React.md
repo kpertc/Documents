@@ -10,16 +10,12 @@ https://reactjs.org/docs/hello-world.html
 
 Build IOS, Android, Web APP with React → [[React Native]]
 
-
 <br>
-
 
 ### Installation
 
 Folder name can not have capital letters and space.
-
 `npx create-react-app` need to specify a folder
-
 `npx create-react-app .` Create React app in the folder, the folder should be empty.
 
   
@@ -44,18 +40,11 @@ Chrome Extension `React Developer Tools`
 
 ### Basics
 
-  
-
 -   Structure the "view" layer of your application
-    
 -   Reusable components with their own state
-    
 -   Interactive UIs with Virtual DOM
-    
 -   JSX - Dynamic markup
-    
 -   Performance & test
-    
 -   Popularity
 
   
@@ -112,19 +101,14 @@ const Button = ({ color, text }) => {
 ```
 
   
-
-### **React Hooks**
+### React Hooks
 
 are functions that let us **hook** into the **React** state and lifecycle features from function components
 
 -   **useState** - Return a stateful value and a function to update it
-    
 -   **useEffect** Perform side effects in function components
-    
 -   useContext, useReducer, useRef
-    
 
-  
 
 ### useState
 

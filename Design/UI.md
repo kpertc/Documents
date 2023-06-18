@@ -2,7 +2,7 @@
 
 [[SwiftUI]]
 
-[[React with TypeScript]]
+[[React]]
 [[React UI Componets]]
 
 [[PyQT-PySide]]
