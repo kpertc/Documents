@@ -96,3 +96,55 @@ https://docusaurus.io/docs/swizzling
 Ejecting -> can complete replace the original component via React Component, e.g. footer
 Wrapping
 
+
+### i18n
+
+Translation [https://docusaurus.io/docs/cli#docusaurus-write-translations-sitedir](https://docusaurus.io/docs/cli#docusaurus-write-translations-sitedir)
+
+```JavaScript
+// docusaurus.config
+i18n: {
+    defaultLocale: 'zh',
+    locales: ['zh', 'en']
+},
+```
+
+```shell
+# create a i18n folder
+npm run write-translations
+
+# with specific locale
+npm run write-translations -- --locale en
+# i18/en/code.json
+
+```
+
+```shell
+npm run start -- --locale en # not work?
+npm run build -- --locale en # will should locale as /
+```
+
+##### locale dropdown
+[https://docusaurus.io/docs/i18n/tutorial#theme-configuration](https://docusaurus.io/docs/i18n/tutorial#theme-configuration)
+
+<br>
+
+### Search Plugin
+Support Chinese
+[https://github.com/easyops-cn/docusaurus-search-local](https://github.com/easyops-cn/docusaurus-search-local)
+
+<br>
+
+### `docusaururConfig.js`
+
+Plugin
+Webpack setting
+```jsx
+configureWebpack()
+```
+
+##### ssrTemplate → ejs
+```jsx
+<% let lang = 'en' %>
+<% console.log(lang) %>
+```

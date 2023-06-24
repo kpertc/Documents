@@ -2,7 +2,7 @@
 
 ### Basics
 
--   JavaScript -> only run in browser
+- JavaScript -> only run in browser
 - node.js
 	-   Open source, cross platform, runtime environment for executing JavaScript code outside a browser. (Not a language or a framework)
 	-   Built on the V8 JavaScript engine (Same a Google Chrome)
@@ -112,3 +112,21 @@ Install NPX `npm install -g npx`
 
 
 Install Command Line Tools: [[Env Tools]]
+
+<br>
+
+### fs
+fs → file system module
+
+```js
+const fs = require("fs");
+
+// read file
+const fileContents = fs.readFileSync("./file.txt", "utf-8");
+
+fs.readFile("./file.txt", (error, data) => {
+	
+})
+
+// internal buffer
+```

@@ -119,6 +119,8 @@ mv
 # copy
 cp /my/location/from /my/location/to
 cp $MY_LOCATION_FROM $MY_LOCATION_TO
+
+cp 
 ```
 
 ```shell

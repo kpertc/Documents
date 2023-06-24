@@ -23,6 +23,7 @@ Views are `struct`, only require `body`
 
 ```swift
 // state changed -> View update
+// @State -> only in struct : View
 @state var zoomed = false 
 @state private var zoomed = false
 ...
@@ -263,6 +264,7 @@ Image(systemName: "heart.fill") // filled Color
 
 ```swift
 systemName: "xmark" // x
+"checkmark.seal.fill"
 ```
 
 <br>
@@ -308,6 +310,55 @@ Toggle(isOn: $_bool, label: {
 	Text("Label")
 })
 .toggleStyle(SwitchToggleStyle(tint: .red))
+```
+
+<br>
+
+### Slider
+
+![[slider.png | 200]]
+
+```swift
+@State var _value: Double = 10
+
+Slider(value: $_value)
+Slider(value: $_value, in: -10...10)
+Slider(value: $_value, in: -10...10, step: 1.0)
+
+Slider(value: $_value,
+       in: -10...10,
+       step: 1.0,
+       onEditingChanged: { (_) in },
+       minimumValueLabel: Text("min"),
+       maximumValueLabel: Text("max"),
+       label:{Text("Label")}
+)
+```
+
+<br>
+
+### Stepper
+
+![[stepper.png | 200]]
+
+```swift
+@State var stepperValue: Int = 10
+    
+Stepper("Title", value: $stepperValue)
+
+// custom +- 10
+Stepper("Title"){ // increment
+    stepperValue += 10
+} onDecrement: {
+    stepperValue -= 10
+}
+```
+
+```swift
+// String format
+Text(String(format: "%.2f", _value)) // 0.00
+Text(String(format: "%.1f", _value)) // 0.0
+Text(String(format: "%.0f", _value)) // 0
 ```
 
 <br>
@@ -379,6 +430,209 @@ LazyVGrid(columns: columns
 
 <br>
 
+### List
+
+similar to `VStack()`, can move, add, delete items
+
+```swift
+List {
+	Text("Text")
+	Text("Text")
+	Text("Text")
+}
+
+// Section
+List {
+  Section(header: Text("Fruits")) {
+    Text("Text")
+    Text("Text")
+    Text("Text")
+  }
+}
+
+// Delete
+@State var fruits: [String] = [ "apple", "orange", "banana" ]
+
+List {
+	ForEach(fruits, id: \.self) { fruit in
+      Text(fruit)
+  }
+  .onDelete(perform: { indexSet in
+      print(indexSet)
+      fruits.remove(atOffsets: indexSet)
+  })
+  // or extract in function
+  .onDelete(perform: delete) 
+}
+
+func delete(indexSet: IndexSet) {
+	 fruits.remove(atOffsets: indexSet)
+}
+
+```
+
+![[list-delete.gif | 300]]
+
+##### swipeActions
+
+![[List-swipeActions.gif]]
+
+```swift
+List {
+    Text("ListItem")
+        .swipeActions(edge: .trailing, // .leading
+                      allowsFullSwipe: true // allow swipe to execute
+        ) {
+            Button("Function") {
+                print("execute")
+            }
+            .tint(Color.green)
+        }
+}
+```
+
+<br>
+
+### Picker
+
+```swift
+Picker(
+	selection: $selection,
+	label: Text("Picker")
+	content: {
+		Text("1").tag("1")
+		Text("2").tag("2")
+		})
+	}
+	// Text("1") -> UI
+	// .tag("1") -> value
+	
+)
+
+Picker(
+	selection: $selection,
+	label: Text("Picker")
+	content: {
+		Text("1").tag("1")
+		Text("2").tag("2")
+		// or
+		ForEach(18 ..< 100 { number in
+			Text("\\(number)")
+				.font( ... )
+				.foregroundColor( ... )
+			.tag("\\(number)")
+		})
+	}
+)
+	.background( ... )
+	.pickerStyle(WheelPickerStyle()) 
+	// MenuPickerStyle() Dropdown, will show label
+	// SegmentedPickerStyle()
+```
+
+```jsx
+init() {
+	// UIKit
+	UISegmentedControl.appearance().selectedSegmentTintColor = UI.Color.red
+}
+```
+
+<br>
+
+### Menu
+
+```swift
+Menu("Click Me") {
+	Button ("Button 1") {}
+	Button ("Button 2") {}
+	Button ("Button 3") {}
+}
+```
+
+<br>
+
+### ColorPicker
+
+```swift
+@State var color: Color = Color.red
+
+ColorPicker("Select Color",
+	selection: $color,
+	supportsOpacity: true
+)
+	.datePickerStyle(
+		// WheelDatePickerStyle()
+		// GraphicalDatePickerStyle()
+	)
+```
+
+<br>
+
+### DatePicker
+
+[https://developer.apple.com/documentation/swiftui/datepicker](https://developer.apple.com/documentation/swiftui/datepicker)
+
+```swift
+var startingDate: Date = Date()
+var endingDate: Date = Date()
+
+DatePicker("title",
+   selection: $date,
+   displayedComponents: [.date, .hourAndMinute]
+   in: startingDate...endingDate // range
+)
+```
+
+```swift
+var dataFormatter: DateFormatter{
+    let formatter = DateFormatter()
+    formatter.dateStyle = .medium // short | long
+    return formatter
+}
+
+Text(date.description)
+Text(dataFormatter.string(from: date))
+```
+
+![[dateFormatter.png]]
+
+<br>
+
+### Badges
+
+> Badges appear only in list rows, tab bars, and menus.
+
+[https://developer.apple.com/documentation/swiftui/view/badge(_:)-84e43](https://developer.apple.com/documentation/swiftui/view/badge(_:)-84e43)
+
+```swift
+tabItem{ ... }
+	.badge(2)
+	.badge("NEW")
+
+List {
+	Text("")
+		.badge("New Item!")
+}
+```
+
+
+<br>
+
+### Alerts
+
+![[aliert.gif]]
+
+```swift
+@State var showAlert: Bool = false
+
+Button ("Click") { ... }
+	.alert(isPresented: $showAlert, content: {
+		Alert(title: Text("Title"))
+	}
+```
+
+<br>
+
 ### Custom init()
 ```swift
 // normally swiftUI no need to create a init function
@@ -429,6 +683,22 @@ ForEach(data.indices) { index in
 <br>
 
 ### ![[Swift#Condition]]
+
+<br>
+
+### `.onAppear()` & `.onDisappear()`
+
+```swift
+.onAppear(perform: {
+	myText = "New Text"
+})
+.onAppear(perform: {
+	DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // delay 5 seconds
+	myText = "New Text"
+	}	
+})
+.onDisappear()
+```
 
 <br>
 
@@ -617,3 +887,92 @@ Do not nest a NavigationView inside a NavigationView
 ![[navigationBarTitle-automatic.gif \| 200]]|![[navigationBarTitle-Large.png \| 200]]|![[navigationBarTitle-Inline.png \| 200]]
 
 <br>
+
+### TabView
+
+![[tabview.png | 200]]
+
+```swift
+// view ↓
+// Tab Button
+TabView {
+	ZStack {
+		Color.red.ignoresSafeArea()
+	}
+		.tabItem {
+		    Image(systemName: "house.fill")
+		    Text("title")
+		}
+	
+	Text("aaa")
+		.tabItem {
+		    Image(systemName: "house.fill")
+		    Text("title")
+		}
+	
+	HomeView()
+		.tabItem {
+		    Image(systemName: "house.fill")
+		    Text("title")
+		} 
+}
+```
+
+```swift
+@State var _selection : Int = 1
+
+// init to view2
+TabView (selection: $_selection) {
+	view1()
+		.tag(0)
+	
+	view2()
+		.tag(1)
+}
+```
+
+##### PageTabViewStyle
+
+![[tabview-PageTabViewStyle.gif]]
+
+```swift
+TabView {
+  RoundedRectangle(cornerRadius: 25.0)
+      .frame(height: 200)
+      .padding(30)
+  RoundedRectangle(cornerRadius: 25.0)
+      .frame(height: 200)
+      .padding(30)
+  RoundedRectangle(cornerRadius: 25.0)
+      .frame(height: 200)
+      .padding(30)
+}
+.frame(height: 200)
+.tabViewStyle(PageTabViewStyle())
+```
+
+<br>
+
+### `UserDefaults` & `@AppStorage`
+
+for small data
+
+Use@rDefaults
+
+```swift
+@State var cuurentUserName: String?
+
+// save 
+UserDefaults.standard.set(value: "Nick", forKey: "name" )
+
+// .onAppear() fetch
+name = UserDefaults.standard.string(forKey: "name")
+// name = "Nick"
+```
+
+@AppStorage
+
+```swift
+@AppStorage("name") var currentUserName: String?
+// will save automatically
+```
