@@ -54,6 +54,59 @@ const calculateTax = (amount, tax) => {
 }
 ```
 
+Custom Type
+```js
+/**
+ * A student
+ * @typeof {Object}
+ * @property {number} id - Student ID
+ * @property {string} name - Student name
+ * @property {string | number} [age] - Student age (optional)
+ * @property {boolean} isActive - Student is active
+ */
+
+/**
+ * @type {Student}
+ */
+
+const student = {
+	id: 1,
+	name: "John Doe",
+	age: 20,
+	isActive: true
+}
+```
+
+Class
+```js
+/**
+ * Class to create a person object
+ */
+
+class Person {
+	/**
+	 * @param {Object} personInfo Infomation about the person
+	 */
+	constructor() {
+		/**
+		 * @Property {string} name Persons name
+		 */
+		this.name = personInfo.name;
+		/**
+		 * @Property {number} age Persons age
+		 */
+		this.age = personInfo.age;
+	}
+	/**
+	 * @Property {Function} greet A greeting with the name and age
+	 * @return {void}
+	 */
+	 greet() {
+		 console.log(`Hello, my name is ${this.name} and I am ${this.age}`);
+	 }
+}
+```
+
 
 
 type check

@@ -116,11 +116,12 @@ MY_LOCATION_TO=/my/location/to
 # move
 mv 
 
-# copy
+# copy, only directory
 cp /my/location/from /my/location/to
 cp $MY_LOCATION_FROM $MY_LOCATION_TO
 
-cp 
+# -R recursive, copy every files
+cp -R ie_js/docs/api docs_scripting/
 ```
 
 ```shell
@@ -152,8 +153,8 @@ cd .. # parent directory (Back directory)
 cd ~ # home user directory
 cd - # to pre directory
 
-pushd
-popd
+pushd # pushd ie_js cd to ie_js
+popd # return to pre dir
 
 touch test_file.txt # CG creat test_file.txt or replace if the file already exis
 nano test_file.txt # text editor

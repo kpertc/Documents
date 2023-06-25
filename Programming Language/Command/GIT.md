@@ -353,6 +353,9 @@ git lfs pull
 git submodule add https://github.com/chaconinc/DbConnector
 # add .gitmodules & git-submodule file
 
+git submodule add -b develop https://github.com/chaconinc/DbConnector
+# develop branch
+
 # check submodule status
 git submodule status
 
@@ -370,3 +373,5 @@ git submodule update --remote
 .git/ 
 
 javascript -> husky
+
+git submodule add https://code.byted.org/ies/ie_js
