@@ -9,6 +9,10 @@ Recommend|Resources
 
 ---
 
+[[Swift UI Logic]]
+
+---
+
 UIKit → 2008
 Swift UI → 2019
 
@@ -17,70 +21,6 @@ Declarative Ul
 - Lifetime
 - Dependencies
 
----
-
-Views are `struct`, only require `body`
-
-```swift
-// state changed -> View update
-// @State -> only in struct : View
-@state var zoomed = false 
-@state private var zoomed = false
-...
-.aspectRatio(contentMode: zoomed ? .fill : .fit)
-.onTapGesture { 
-	withAnimation { // animation
-		zoomed.toggled()
-	}
-}  
-// onLongPressGesture
-// onLongTouchGesture
-/** tap vs button: 
-	no state, no button animation
-*/
-```
-
-![[date-flow-primitives.png]]
-
-### @Binding
-Parent ← connect @state ← Child 
-```swift
-struct MainView; View {
-	@State var backgroundColor: Color = Color.green
-	@State var title: String = "Title"
-
-	var body: some View {
-		ChildView(backgroundColor: $backgroundColor)
-	}
-}
-
-struct ChildView: View {
-	@Binding var backgroundColor: Color
-	@Binding var title: String
-
-	var body: some View {
-		Button(action: {
-			backgroundColor = Color.orange
-			title = "New Title"
-		}, label: {
-			Text("Button")
-		})		
-	}
-}
-```
-
-### Environment Variable
-``` swift
-// Environment Variable
-@Environment(\.presentationMode) var presentationMode
-
-```
-
-### 
-NVVM Architecture
-- Model - data point
-- View UI
-- View Model - manages Model for View
 
 ---
 ### Shortcut
@@ -732,43 +672,6 @@ Rectangle()
 
 <br>
 
-### Extract Code
-
-Views are lightweight
-> extracting a subview has virtually no runtime overhead
-
-```swift
-// Extract Code as function
-Button(action: {
-	buttonPressed()
-}, label: {})
-
-func buttonPressed() {
-	...
-}
-
-// Extract View as variable
-// no custom init → static
-_view
-
-var _view: some View {
-	VStack {
-		...
-	}
-}
-
-// Extract View as Struct
-// struct → custom init()
-struct _view: View {
-	var body: some View {
-		VStack {
-			...
-		}
-}
-```
-
-<br>
-
 ### Animation & Transition
 
 ##### Animation
@@ -873,6 +776,9 @@ Do not add conditional logic in sheet / fullScreencover
 ### `NavigationView()` & `NavigationLink()`
 
 NavigationView -> container include navigation title & bar
+`NavigationView` is deprecated now use `NavigationStack`
+- `NavigationView` is lazy
+- `NavigationStack` not lazy
 
 Do not nest a NavigationView inside a NavigationView
 
@@ -953,26 +859,33 @@ TabView {
 
 <br>
 
-### `UserDefaults` & `@AppStorage`
+### ActionSheet
 
-for small data
-
-Use@rDefaults
+![[actionSheet.gif]]|![[actionSheet-2.gif]]
+---|---
 
 ```swift
-@State var cuurentUserName: String?
-
-// save 
-UserDefaults.standard.set(value: "Nick", forKey: "name" )
-
-// .onAppear() fetch
-name = UserDefaults.standard.string(forKey: "name")
-// name = "Nick"
+Button("Click") {
+	showActionSheet.toggle()
+}
+.actionSheet(isPresented: $showActionSheet) {
+	ActionSheet(
+		title: Text("title"),
+		message: Text("message"),
+		buttons: [
+			.default(Text("default")),
+			.destructive(Text("destructive")),
+			.cancel()
+		]
+	)
+}
 ```
 
-@AppStorage
-
+### Group
+apply modifiers
+no change to layout
 ```swift
-@AppStorage("name") var currentUserName: String?
-// will save automatically
+Group {
+   ...
+}
 ```
