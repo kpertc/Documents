@@ -130,3 +130,13 @@ fs.readFile("./file.txt", (error, data) => {
 
 // internal buffer
 ```
+
+run shell command
+```js
+const { exec } = require("child_process");
+
+exec("pwd", (err, data) => {
+	if (err) { console.log(eer) }
+	else { console.log(data) }
+})
+```

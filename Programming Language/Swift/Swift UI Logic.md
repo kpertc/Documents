@@ -95,6 +95,54 @@ struct SecondView: View {
 
 ```
 
+
+### @EnvironmentObject
+
+`.environmentObject` similar to `useContext()` in React
+
+```swift
+var viewModel: ViewModelObject = ViewModelObject()
+
+View: View {
+	SecondView { ... }
+		.environmentObject(viewModel)
+}
+
+SecondView: View {
+	@EnvironmentObject var viewModel: ViewModelObject
+}
+```
+
+<br>
+
+### PlayAudio and Singleton
+
+```swift
+import AVKit
+
+class SoundManager { // singleton
+	static let instance = SoundManager() 
+
+	var player: AVAudioPlayer?
+
+	func playSound() {
+
+		guard let url = Bundle.main.url(forResources: "", withExtension: ".mp3") else {return}
+
+		do {
+			player = try AVAudioPlayer(contentsOf: url )
+			player?.play()
+		} catch let error {
+			print("Error\\(error.localizedDescription)")
+		}
+	}
+}
+```
+
+```swift
+SoundManager.instance.playSound()
+```
+
 <br>
 
 ### `UserDefaults` & `@AppStorage`
@@ -123,37 +171,62 @@ name = UserDefaults.standard.string(forKey: "name")
 
 <br>
 
-### Extract Code
+### Identifiable & Hashable
 
-Views are lightweight
-> extracting a subview has virtually no runtime overhead
+|Identifiable|Hashable|
+|---|---|
+|explicit ID|no explicit ID|
+|ForEach(_array)|ForEach(_array, id: \.self)|
+
+##### Identifiable
 
 ```swift
-// Extract Code as function
-Button(action: {
-	buttonPressed()
-}, label: {})
-
-func buttonPressed() {
+struct MyCustomModel: Identifiable {
+	let id = UUID.uuidString
 	...
 }
 
-// Extract View as variable
-// no custom init → static
-_view
+let _array: [MyCustomModel] = [ ... ]
 
-var _view: some View {
-	VStack {
-		...
+// Identifiable use array
+ForEach(_array) {
+	
+}
+```
+
+##### Hashable
+
+similar to C# `IEnumerable`?
+
+```swift
+// stirng conforms hashable
+let _array [String] = ["ONE", "TWO", ... ]
+
+ForEach(_array, id: \\.self) { item in 
+	item.hashValue.description 
+}
+```
+
+```swift
+struct MyCustomModel: Hashable {
+	let title: String
+
+	func hash(into hasher: inout Hasher) {
+		hasher.combine(title)
 	}
 }
+```
 
-// Extract View as Struct
-// struct → custom init()
-struct _view: View {
-	var body: some View {
-		VStack {
-			...
-		}
+<br>
+
+### Typealias
+
+```swift
+struct MovieModel {
+	let title: String
+	let director: String
+	let count: Int
 }
+
+typealias TVModel = MovieModel
 ```

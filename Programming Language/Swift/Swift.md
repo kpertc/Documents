@@ -47,10 +47,69 @@ let count: Int = 5
 Text("\(count)")
 ```
 
+### Array
+
 ```swift
 array.append(  )
+array.append(contentsOf: [ ... items ])
+
 ```
 
+##### Sorted
+``` swift
+// sort
+let sortedArray = dataArray.sorted { (user1, user2) -> Bool in 
+	return user1.points > user2.points
+} 
+// sortedArray user with greater points have lower index of array 
+// short version
+let sortedArray = dataArray.sorted(by: { $0.points > $1.points })
+```
+
+##### Filter
+
+```swift
+let filteredArray = dataArray.filter({ (user) -> Bool in 
+	return user.points > 50 // only points > 50
+	return user.name.contains("i")
+})
+
+// short version
+filteredArray = dataArray.filter({ $0.isVerified })
+```
+
+##### Map
+
+```swift
+// convert to other type, for example, convert to String
+mappedArray = dataArray.map({ (user) -> String in
+	return user.name
+	return user.name ?? "default name" // user.name optional
+})
+
+// short version
+mappedArray = dataArray.map({ $0.name })
+
+/* 
+for optional property use compactMap,
+if the item does not have the property it will not be included into the array
+*/
+mappedArray = dataArray.compactMap({ (user) -> String? in
+	return user.name
+})
+
+// short version
+mappedArray = dataArray.compactMap({ $0.name })
+```
+
+##### mix use
+
+```swift
+mappedArray = dataArray
+	.sorted(by: { $0.points > $1.points })
+	.filter({$0.isVerified})
+	.compactMap({$0.name})
+```
 <br>
 
 ### Struct
@@ -156,6 +215,75 @@ text! // force to wrap value
 @State var value: String? 
 Text(value!) // may crash 
 Text(value ?? "default Value" ) // default value
+```
+
+
+### do { … } catch { … } throw
+
+```swift
+func getTitle() -> (title: String?, error: Error?) {
+	if isActive {
+		return ("New Text!", nil)
+	} else {
+		return (nil, URLError(.badURL))
+	}
+}
+
+let returnedValue = manager.getTitle()
+if let newTitle = returnedValue.title {
+	self.text = newTitle
+} else if let error = returnedValue.error {
+	self.text = error.localizedDescription
+}
+```
+
+##### Use `Result`
+
+```swift
+func getTitle2() -> Result<String, Error> {
+	if isActive {
+		return .success("Text")
+	} else {
+		return .failure(URLError(.badURL))	
+	}
+}
+
+let result = manager.getTitle2()
+switch result {
+	case .success(let newTitle):
+		self.text = newTitle
+	case .failure (let error)
+		self.text = error.localizedDescription
+}
+```
+
+##### throw
+
+```swift
+func getTitle3() throws -> String { // require try
+	if isActive {
+		return "Text"
+	} else {
+		throw URLError(.badURL)
+	}
+}
+
+do { // put can throw error in do
+	let newTitle = try manager.getTitle3() // if failed, immediately to error
+	let newTitle = try manager.getTitle3() 
+	... // can put multiple
+} catch { // or let customeErrorName
+	print(error.localizedDescription)
+}
+```
+
+##### Optional `try`?
+if failed, `text = nil`, and no error back
+program can continue to run
+no need to place in `do {} catch {}`
+
+```swift
+let text = try? ...
 ```
 
 <br>

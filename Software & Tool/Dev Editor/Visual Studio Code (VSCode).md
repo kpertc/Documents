@@ -2,6 +2,11 @@
 
 Command Palette `⌘` + `Shft` + `P`
 
+Editor Shortcut
+Selects the word at the cursor `⌘` + `D`
+multi-cursor Alt+Click ⌥⌘↓ ⌥⌘↑
+Shift+Alt
+
 <br>
 
 ### Markdown

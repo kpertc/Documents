@@ -243,6 +243,8 @@ fruits.length //return the length of the array
 var fruits = new Array("Apples", "Oranges", "Peaches");
 fruits = fruits.split(",") //convert string to array, split by ","
 document.write(fruits[0]);
+
+array.unshift(object) // add object the position of first, index 0
 ```
 
 ##### [Array/Object Destructuring](https://www.youtube.com/watch?v=NIq3qLaHCIs)
@@ -682,6 +684,8 @@ console.error("Error")
 // For live view
 console.log({ ...object }) // clone object: will show log time object info
 console.log(JSON.parse(JSON.stringify(object)))
+
+JSON.stringify(api, null, 4); // formatting
 
 // Apply CSS Style
 console.log("Normal, %cGreen", "color: green") // %c begin CSS
