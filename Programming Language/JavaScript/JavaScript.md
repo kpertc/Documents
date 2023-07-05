@@ -250,7 +250,6 @@ array.unshift(object) // add object the position of first, index 0
 ##### [Array/Object Destructuring](https://www.youtube.com/watch?v=NIq3qLaHCIs)
 
 Array
-
 ```JavaScript
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F']
 const numbers = ['1', '2', '3', '4', '5', '6']
@@ -267,8 +266,76 @@ const newArray = alphabet.concat(numbers)
 // ['A', 'B', 'C', 'D', 'E', 'F', '1', '2', '3', '4', '5', '6']
 ```
 
-Object
+```jsx
+const items = [
+	{ name: 'Bike', price : 100 },
+	{ name: 'TV', price : 200 },
+	{ name: 'Album', price : 10 },
+	{ name: 'Book', price : 5 },
+	{ name: 'Phone', price : 500 },
+	{ name: 'Computer', price : 1000 },
+	{ name: 'Keyboard', price : 25 },
+]
+```
 
+##### filter
+```jsx
+const filteredItems = items.filter((item) => {
+	// return Bool	
+	return item.price <= 100
+})
+```
+
+##### map
+```jsx
+// convert to a new type of array
+const itemsNames = items.map((item) => {
+	return item.price
+})
+
+// { 100, 200, 10, 5, ... }
+```
+
+##### find
+```jsx
+const foundItem = items.find((item) => {
+	return item.name === "Book"
+})
+
+// return the first item found in array
+```
+
+##### forEach, no return
+
+##### some
+```jsx
+// check entire array if one item meets the condition 
+const hasInexpensiveItems = items.some((item) => {
+	return item.price <= 100 // Bool
+})
+
+// hasInexpensiveItems -> true
+```
+
+##### every
+```jsx
+// check entire array if every items meet the condition
+const hasInexpensiveItems = items.every((item) => {
+	return item.price <= 1000 // Bool
+})
+
+// hasInexpensiveItems -> true
+```
+
+##### reduce
+```jsx
+// calculate total
+const total = items.reduce((currentTotal, item) => {
+	return item.price + currentTotal
+}, 0) // 0 -> initial value
+```
+
+Object
 ```JavaScript
 function sumAndMultuply(a, b) { return [a+b, a*b] }
 

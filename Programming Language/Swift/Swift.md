@@ -182,6 +182,52 @@ func _funcname() -> Bool {
 }
 ```
 
+##### internal & external name
+```swift
+func doSomething (externalName InternalName: String) {
+	print(InternalName)
+}
+
+doSomething(externalName: "Hello")
+```
+
+<br>
+
+### @escaping - Async function return
+
+```swift
+@Published var text: String = ""
+
+// sync
+func downloadData(completionHandler: (_ data: String) -> Void) {
+	completionHandler("New Data") // return String: "NewData"
+}
+
+downloadData{ (returnData) in 
+	print(returnData)
+}
+```
+
+``` swift
+// async
+func downloadDataAsync(completionHandler: @escaping (_ data: String) -> ()) {
+	// some async logic
+	DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+		completionhandler("New Data")
+	}
+}
+
+downloadDataAsync{ (returnData) in 
+	self.text = returnedData // strong reference
+}
+```
+
+``` swift
+downloadDataAsync{ [weak self] (returnData) in 
+	self?.text = returnedData // weak reference, ok to de-initialize
+}
+```
+
 <br>
 
 ### `if-let` and `guard`
@@ -217,6 +263,22 @@ Text(value!) // may crash
 Text(value ?? "default Value" ) // default value
 ```
 
+Swift does execute the body of the IF only if all the optional bindings are properly completed.
+
+```swift
+if let a = optA, let b = optB, let c = optC {
+    
+}
+
+// or
+
+if 
+	let a = optA, 
+	let b = optB, 
+	let c = optC {
+    
+}
+```
 
 ### do { … } catch { … } throw
 
@@ -286,6 +348,35 @@ no need to place in `do {} catch {}`
 let text = try? ...
 ```
 
+<br>
+### File
+
+![[xcassets.png]]
+
+``` swift
+Image("steve-jobs")
+```
+
+##### FileManager
+
+```swift
+// image.jpegData(compressionQuality: 1.0)
+
+let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+let directory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
+let directory = FileManager.default.temporaryDirectory
+
+let path = directory?.appendingPathComponent("\\(name).jpg").first //array.first → [0] 
+
+// save data
+data.write(to: path)
+
+// check exists
+FileManager.default.fileExists(atPath: path), 
+	
+// remove	
+FileManager.default.removeItem(at: )
+```
 <br>
 
 ### Documentation

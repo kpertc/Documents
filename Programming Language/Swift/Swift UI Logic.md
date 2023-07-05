@@ -230,3 +230,35 @@ struct MovieModel {
 
 typealias TVModel = MovieModel
 ```
+
+<br>
+
+<br>
+
+### Detect app lifecycle
+[https://prafullkumar77.medium.com/swiftui-how-to-detect-if-the-application-in-background-or-foreground-20bc4c8d18a](https://prafullkumar77.medium.com/swiftui-how-to-detect-if-the-application-in-background-or-foreground-20bc4c8d18a)
+
+```swift
+@main
+struct testApp: App {
+    @Environment(\\.scenePhase) var scenePhase
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }.onChange(of: scenePhase) { phase in
+            print("changed")
+            switch phase {
+            case .background:
+                print("App is in background")
+            case .active:
+                print("App is Active")
+            case .inactive:
+                print("App is Inactive")
+            @unknown default:
+                print("New App state not yet introduced")
+            }
+        }
+    }
+}
+```

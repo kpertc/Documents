@@ -68,8 +68,21 @@ chmod u+x xxx.sh
 
 
 <br>
-
+### Arguments
+Each space is new argument
 Positional argument `$1` `$2` `$3` ...
+
+```shell
+echo "First arg: $1"
+echo "Second arg: $2"
+
+# all argument, exclude the first
+$@
+$*
+
+# number of argument
+$#
+```
 
 ```bash
 if [ $2 - lt 21 ]; then # -lt less than
@@ -83,6 +96,34 @@ else
 fi
 
 #-eq # equal
+```
+
+
+### Flags
+Flag opt - option
+
+```shell
+#!/bin/bash
+
+a_flag=''
+b_flag=''
+files=''
+verbose='false'
+
+print_usage() {
+	printf "Usage: ..."
+}
+
+while getopts 'abf:v' flag; do
+	case "${flag}" in
+		a) a_flag='true' ;;
+		b) b_flag='true' ;;
+		f) files="${OPTARG}" ;;
+		v) verbose='true' ;;
+		*) print_usage
+			exit 1 ;;
+	esac
+done
 ```
 
 ```bash

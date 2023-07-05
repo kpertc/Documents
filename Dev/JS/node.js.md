@@ -79,8 +79,7 @@ npm install ... --save-dev # save to package.json devDependencies
 ```
 
 - dependencies : Packages required by your application in production. 
-- devDependencies: Packages that are only needed for local development and testing.
-
+- devDependencies: Packages that are only needed for local development and testing. (tools to assist dev)
 <br>
 
 ##### NVM Node Version Manager

@@ -121,3 +121,23 @@ namespace name {
     ...
 }
 ```
+
+<br>
+
+### `.d.ts` file
+can only store type, normally for package does not have type 
+```ts
+// types.d.ts
+
+export type a = {
+	b: number
+	c:number
+}
+
+function multiplyNumbers(x: number, y: number): number
+```
+
+```ts
+// other files
+import { a } from './types'
+```
