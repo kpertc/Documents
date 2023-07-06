@@ -241,7 +241,7 @@ typealias TVModel = MovieModel
 ```swift
 @main
 struct testApp: App {
-    @Environment(\\.scenePhase) var scenePhase
+    @Environment(\.scenePhase) var scenePhase
 
     var body: some Scene {
         WindowGroup {

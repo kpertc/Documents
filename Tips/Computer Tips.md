@@ -3,6 +3,11 @@
 
 ![[chrome-fullscreen-shot.png]]
 
+Switch Tabs
+Option + Command = Arrow
+
+![[switch-tabs.gif]]
+
 Mac 截图软件 iShot
 - 截图
 - 录屏

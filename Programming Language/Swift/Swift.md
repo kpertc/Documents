@@ -374,8 +374,12 @@ data.write(to: path)
 // check exists
 FileManager.default.fileExists(atPath: path), 
 	
-// remove	
+// remove file or path
 FileManager.default.removeItem(at: )
+
+// create path (Folder)
+FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+
 ```
 <br>
 
