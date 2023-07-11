@@ -232,7 +232,75 @@ typealias TVModel = MovieModel
 ```
 
 <br>
+# Custom
 
+### Custom view modifier
+
+take current content and return new view
+
+re-usable
+
+```swift
+struct DefaultButtonViewModifier: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			// add some modifiers
+			.font(.headline)
+			.foregroundColor(.white)
+			...
+	}
+}
+```
+
+```swift
+Text("Hello")
+	.modifier(DefaultButtonViewModifier())
+```
+
+without modifier
+
+```swift
+extension View {
+	func withDefaultButtonFormatting() -> some View {
+		// self.modifier(DefaultButtonViewModifier())
+		modifier(DefaultButtonViewModifier())
+	}
+}
+```
+
+```swift
+Text("Hello")
+	.withDefaultButtonFormatting()
+```
+
+
+### Custom Button Style
+
+```swift
+struct CustomButtonStyle: ButtonStyle {
+
+	let scaleAmount: CGFloat // custom input optional
+
+	func makeBody(configuration: Configuration) -> some View {
+		configuration.label
+			.scaleEffect(configuration.isPressed ? scaleAmount : 1.0)
+			.brightness(configuration.isPressed ? 0.05 : 0)
+			.opacity(configuration.isPressed ? 0.8 : 1.0) // opacity to 0.8 when pressed
+	}
+}
+
+extension View {
+	func _CustomButtonStyle() -> some View {
+		buttonStyle(CustomButtonStyle())
+	}
+}
+
+// view
+Button(action: { ... }, label: { ... })
+	.buttonStyle(CustomButtonStyle())
+	.buttonStyle(CustomButtonStyle(scaleAmount: 0.5))
+	._CustomButtonStyle() // use with extension part
+```
 <br>
 
 ### Detect app lifecycle
