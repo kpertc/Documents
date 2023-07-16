@@ -23,6 +23,11 @@ Declarative Ul
 
 
 ---
+
+
+---
+
+
 ### Shortcut
 ![[Xcode#SwiftUI]]
 
@@ -116,7 +121,6 @@ RoundedRectangle(cornerRadius: 50)
 .frame(width: 200, height: 100)
 .cornerRadius(8)
 
-.overlay()
 
 // shadow
 .shadow(radius: 10)
@@ -132,6 +136,17 @@ RoundedRectangle(cornerRadius: 50)
 <br>
 
 # UI Elements
+
+### Background & Overlay
+a element can have multiple background and overlay
+```swift
+.background()
+
+.overlay()
+.overlay(view, alignment: .center) // .topLeading ...
+```
+
+<br>
 
 ### Color
 
@@ -252,6 +267,82 @@ Toggle(isOn: $_bool, label: {
 	Text("Label")
 })
 .toggleStyle(SwitchToggleStyle(tint: .red))
+```
+
+<br>
+
+### Gesture
+
+##### TapGesture
+```swift
+/** tap vs button: 
+	no state, no button animation
+*/
+
+.onTapGesture { 
+	withAnimation { // animation
+		zoomed.toggled()
+	}
+} 
+```
+
+##### `.onLongPressGesture()`
+```swift
+// onLongPressGesture
+// onLongTouchGesture
+
+.onLongPressGesture {
+	isComplete.toggle()
+}
+
+.onLongPressGesture (
+	minimumDuration: 5.0,
+	maxmiumDistance: 50 // distance for touching while moving
+) { 
+	isComplete.toggle()
+}
+```
+
+##### DragGesture
+```swift
+@State var offset: CGSize = .zero // CGSize(width: 0, height: 0)
+
+RoundedRectangle(cornerRadius: 20)
+	.offset(offset)
+	.gesture(
+		DragGesture()
+			.onChange {value in 
+				withAnimation(.spring()) {
+					offset = value.translation
+				}
+			}
+			.onEnded { value in
+				withAnimation(.spring()) {
+					offset = .zero // 
+				}
+			}
+	)
+```
+
+##### MagnificationGesture
+```swift
+// zoom gesture
+
+@State var currentAmount: CGFloat = 0
+
+...
+.scaleEffect(1 + currentAmount)
+.gesture(
+	MagnificationGesture()
+		.onChanged{ value in
+			currentAmount = value - 1
+		}
+		.onEnded { value in
+			withAnimation(.spring()) { 
+				currentAmount = 0
+			}
+		}
+)
 ```
 
 <br>
@@ -555,6 +646,7 @@ DatePicker("title",
 ```swift
 var dataFormatter: DateFormatter{
     let formatter = DateFormatter()
+    // formatter.timeStyle = .medium
     formatter.dateStyle = .medium // short | long
     return formatter
 }
@@ -564,6 +656,19 @@ Text(dataFormatter.string(from: date))
 ```
 
 ![[dateFormatter.png]]
+
+```swift
+// adding 1 day
+Calendar.current.date(byAdding: .day, value: 1, to: Date() )
+```
+
+```swift
+let remaining = Calendar.current.dateComponents([.hour, .minute, .second], from: Date(), to: futureDate)
+
+let hour = remaining.hour ?? 0
+let minute = remaining.minute ?? 0
+let second = remaining.second ?? 0
+```
 
 <br>
 
@@ -608,11 +713,7 @@ Button ("Click") { ... }
 .onAppear(perform: {
 	myText = "New Text"
 })
-.onAppear(perform: {
-	DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // delay 5 seconds
-	myText = "New Text"
-	}	
-})
+
 .onDisappear()
 ```
 
@@ -875,6 +976,10 @@ Group {
 - View UI
 - View Model - manages Model for View
 
+Struct → Class → View
+Model → ModelView → View
+
+
 Views are `struct`, only require `body`
 
 ```swift
@@ -884,17 +989,15 @@ Views are `struct`, only require `body`
 @state private var zoomed = false
 ...
 .aspectRatio(contentMode: zoomed ? .fill : .fit)
+
 .onTapGesture { 
 	withAnimation { // animation
 		zoomed.toggled()
 	}
-}  
-// onLongPressGesture
-// onLongTouchGesture
-/** tap vs button: 
-	no state, no button animation
-*/
+} 
 ```
+
+
 
 ![[date-flow-primitives.png]]
 
@@ -911,6 +1014,35 @@ init(backgroundColor: Color, count: Int, title: String) {
 	self.backgroundColor = backgroundColor
 
 	// ... custom here
+}
+```
+
+<br>
+
+### `deinit`
+```swift
+deinit { 
+	...
+}
+```
+
+<br>
+
+### `weak self`
+strong reference → will not `deinit()`
+
+```swift
+DispatchQueue.main.asyncAfter(deadline: .now() + 500) {
+	self.data = "New Data"
+}
+```
+
+`weak self`
+weak reference → will `deinit()` → more efficient
+
+```swift
+DispatchQueue.main.asyncAfter(deadline: .now() + 500) { [weak self] in
+	self?.data = "New Data"
 }
 ```
 
@@ -1183,6 +1315,139 @@ struct MovieModel {
 }
 
 typealias TVModel = MovieModel
+```
+
+<br>
+
+### Timer & `.onReceive`
+
+timer → Publisher
+
+```swift
+// on -> thread
+// autoconnected -> start
+let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnected()
+
+Timer
+	.publish(every: 1.0, on: .main, in: .common)
+	.autoconnected()
+
+// view
+view {
+	...
+}
+.onReceive(timer, perform: { value in
+	// value -> Date()
+})
+```
+
+<br>
+
+### Multi-threading
+
+```swift
+DispatchQueue.global().async { // to background thread
+DispatchQueue.global(qos: .background).async { // select a qos
+
+	let newData = self.dataFunc() // strong	
+
+	DispatchQueue.main.async { // back to main thread
+		self.dataArray = newData
+	}
+}
+
+Thread.isMainThread // Bool
+Thread.current // Thread
+
+// CPU page
+```
+
+<br>
+
+### DispatchQueue
+
+```swift
+DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // delay 5 seconds
+	myText = "New Text"
+}	
+```
+
+<br>
+
+### UIViewRepresentable
+
+UIKit → SwiftUI
+UIViewRepresentable: A wrapper for a UIKit view that you use to integrate that view into your SwiftUI view hierarchy
+
+```swift
+// example of using UIKit Textfield
+
+struct WebView: UIViewRepresentable {
+  
+    // 2 -> init
+    func makeUIView(context: Context) -> WKWebView {
+			let view = UIView() // basic UI View
+			view.backgroundColor = .red
+			return view
+    }
+    
+    // From SwiftUI to UIKit
+    func updateUIView(_ webView: WKWebView, context: Context) {
+
+    }
+
+	// from UIKit to SwiftUI
+	// Creates the custom instance that you use to communicate changes from your view to other parts of your SwiftUI interface
+	func makeCoordinator () {
+		return Coordinator()
+	}
+
+	class Coordinator: NSObject, UITextField {
+		func textFieldDidChangeSelection() {
+		
+		}
+	}
+}
+```
+
+##### WebView to SwiftUI
+[https://sarunw.com/posts/swiftui-webview/](https://sarunw.com/posts/swiftui-webview/)
+
+```swift
+import WebKit
+```
+
+View
+```swift
+let website : String = "<https://www.youtube.com/>"
+
+// open the link in Safari
+Link("Sarunw", destination: URL(string: "<https://sarunw.com>")!)
+
+// open the link in view
+if let websiteURL = URL(string: website) {
+	WebView(url: websiteURL)
+}
+```
+
+```swift
+// open  
+struct WebView: UIViewRepresentable {
+    // 1
+    let url: URL
+    
+    // 2
+    func makeUIView(context: Context) -> WKWebView {
+        return WKWebView()
+    }
+    
+    // 3
+    func updateUIView(_ webView: WKWebView, context: Context) {
+
+        let request = URLRequest(url: url)
+        webView.load(request)
+    }
+}
 ```
 
 <br>
