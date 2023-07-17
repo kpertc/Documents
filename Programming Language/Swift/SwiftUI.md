@@ -1490,6 +1490,97 @@ struct WebView: UIViewRepresentable {
 
 <br>
 
+### Parsing JSON Data
+
+##### Swift object → (JSON) data
+```swift
+data // swift object 
+let jsonData = try? JSONSerialization.data(with: data, options: [])
+```
+Encodable
+```swift
+let customer = CustomerModel(id: "", name: "", points: 100, isPremium: false)
+let jsonData = try? JSONEncoder().encode(customer) ↓
+```
+
+
+##### data → JSON Object
+
+Manual
+```swift
+data
+if // make sure both jsonObject & result is ok
+	let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []),
+	let result = jsonObject as? [String: Any] { // try to convert to a type
+		... 
+		let id = result["id"] as? String 
+		// try to get a value with default value 
+		let _var = dictionary["_category"] as? String ?? "default value"
+		...
+	}
+```
+
+`Decodable`
+```swift
+data
+self.customer = try ? JSONDecoder().decode(CustomerModel.self, from: data) 
+
+do { 
+	self.customer = try JSONDecoder().decode(CustomerModel.self, from: data) 
+} catch let error { 
+	print("\(error)") 
+}
+```
+
+```swift
+// Decodable -> data to swift object
+// Encodable -> swift object to data
+// Codable -> Decodable & Encodable
+// no need to explicitly write 
+
+struct CustomerModel: Codable { 	
+	let id: String
+	let name: String
+	let points: Int
+	let isPremium: Bool
+}
+
+struct CustomerModel: Decodable, Encodable { 
+	
+	// 2 add CodingKeys, parse data to keys
+	enum CodingKeys: String, CodingKeys {
+		case id
+		case name
+		case points
+		case isPremium = "is_premium" // if property name is differ from json
+	}
+
+	// 1 add custom init
+	init(from decoder: Decoder) throws {
+		let container = try decoder.container(keyedBy: CodingKeys.self)
+		
+		// get value from keys
+		self.id = try container.decode(String.self, forKey: .id)
+		...
+	}
+
+	// for Encodable
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.container(keyedBy: CodingKeys.self)
+		try container.encode(id, forKey: .id)
+		...
+	}
+}
+```
+
+##### Preview data 
+```swift
+let jsonString = String(data: _data, encoding: .utf8) 
+print(jsonString)
+```
+
+
+
 # Custom
 
 ### Custom view modifier

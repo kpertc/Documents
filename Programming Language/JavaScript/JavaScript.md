@@ -127,13 +127,82 @@ element.style.backgroundColor = "red"; // background-color in HTML
 
 [[Require vs Import]]
 
-### Variables & Data Types
 
 ```JavaScript
  var
  let // in the scope, can be redeclared value
  const // can not be redeclared value
 ```
+
+### `var` `let` `const`
+[https://www.freecodecamp.org/news/var-let-and-const-whats-the-difference/](https://www.freecodecamp.org/news/var-let-and-const-whats-the-difference/)
+
+`let` & `const` -> ES6
+
+`var` declarations are globally scoped or function/locally scoped.
+`var` can be redeclared, can be reassigned, even function scope can overwrite global scope
+
+```js
+// can be redeclared & reassigned
+var greeter = "hey hi";
+var greeter = "say Hello";
+greeter = "say Hello instead";
+```
+
+```js
+var greeter = "hey hi";
+
+if (true) {
+	var greeter = "say Hello";
+}
+
+console.log(greeter); // "say Hello" ← May cause problem
+```
+
+`let` can not be redeclared, can be reassigned
+
+can not overwrite, function scope can not overwrite global scope
+
+```js
+// can not be redeclared
+let greeter = "hey hi";
+let greeter = "say Hello"; // error
+
+greeter = "say Hello"; // can be reassigned
+```
+
+```js
+let greeter = "hey hi"
+
+if (true) {
+	// different greeter
+	let greeter = "say Hello";
+}
+
+console.log(greeter); // "hey hi"
+```
+
+`const`
+can not be redeclared & reassigned
+
+##### **Hoisting**
+
+Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their scope before code execution. This means that if we do this
+
+`var`
+```js
+console.log(greeter); // undefined
+var greeter = "hey hi";
+```
+
+`let` & `const`
+```js
+console.log(greeter); // error
+let greeter = "hey hi";
+```
+
+<br>
+### Variables & Data Types
 
 ```JavaScript
 var phrase = "To be or not to be"; //string can use both single or double quotation marks
@@ -157,7 +226,6 @@ function app() {
 console.log(l); // print out 'local' at global scope
 ```
 
-Hoisting 提升 for variable and function
 
 Get type
 
@@ -371,6 +439,35 @@ const personThree = { ...personOne, ...personTwo }
 ```JavaScript
 function printUser ({ name, age, favoriteFood = 'Watermelon' }) { ... }
 ```
+
+<br>
+
+### Getter & Setter
+
+getter → access like property
+
+```jsx
+const person = {
+	firstName: 'Mosh',
+	lastName: 'Hamedani',
+	get fullName(){
+		return `${person.firstName} ${person.lastName}`
+	},
+	set fullName(value){
+		const parts = value.split(' ');
+		this.firstName = parts[0];
+		this.lastName = parts[1];
+	}
+};
+
+console.log(person.fullName); // get
+person.fullName = "John Smith"; // set
+```
+
+Overwritten by getter
+![[overwritten-by-getter.png]]
+
+<br>
 
 ### Function
 
@@ -687,19 +784,32 @@ class Motorcycle extends Vehicle {
 }
 ```
 
-Prototype
+##### Prototype
 
 ```JavaScript
 array.sort()
 array.__proto__.sort
-
-__proto__: person ;
-// instead of use "__proto__" directly
-Object.setPrototypeOf(musician, person); // child, parent
-console.log(Object.getPrototypeOf(musician)); 
 ```
 
-Proto chain musician -> person -> JavaScript Object
+```JavaScript
+const person = { alive: true } 
+const musician = { plays: true } 
+
+musician.__proto__ = person;
+
+// instead of use "__proto__" directly
+Object.setPrototypeOf(musician, person); // child, parent
+Object.getPrototypeOf(musician)
+console.log(Object.getPrototypeOf(musician)); // {alive: true}
+
+const guitarist = { 
+	strings: 6, 
+	__proto__: musician 
+}
+```
+
+If can not find the properties, JavaScript will find through proto chain
+proto chain musician -> person -> JavaScript Object
 
 ![[proto-chain.png | 300]]
 
@@ -844,6 +954,8 @@ var stringJSON = '{ "name":"Beau", "kids":2,"state":"Michigan"}';
 var myParse = JSON.parse(stringJSON);
 console.log(myParse);
 ```
+
+<br>
 
 ### Decorator
 
