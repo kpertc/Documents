@@ -216,6 +216,16 @@ var flaws = null; //null, no value
 var description = undefined; //variable does not have a value yet, open to possibility to have a value
 ```
 
+symbol (ES6): new primitive data type in ES6
+
+immutable, unique, will not equal
+```JavaScript
+let symbol1 = Symbol('symbol1')
+
+// to string
+symbol1.toString()
+```
+
 Assign undeclared variable -> automatically global variable
 
 ```JavaScript
@@ -784,7 +794,7 @@ class Motorcycle extends Vehicle {
 }
 ```
 
-##### Prototype
+##### `__proto__`
 
 ```JavaScript
 array.sort()
