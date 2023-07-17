@@ -969,6 +969,32 @@ Group {
 
 <br>
 
+### MatchedGeometryEffect
+
+Animate object, for geometry shapes
+
+```swift
+@Namespace private var namespace
+
+// view
+if !Clicked {
+	Rectangle()
+		.matchedGeometryEffect(id: "rectangle", in: namespace)
+		.frame(width: 100, height: 200)
+}
+
+Spacer()
+
+if !Clicked {
+	Rectangle()
+		.matchedGeometryEffect(id: "rectangle", in: namespace)
+		.frame(width: 300, height: 200)
+}
+```
+
+![[matchedGeometryEffect_bar_from_SwitfulThinking.gif]]
+<br>
+
 # Swift UI Logic
 
 ### NVVM Architecture
@@ -1062,8 +1088,14 @@ if sandwich.isSpicy {
 
 <br>
 
-### ForEach
+###  for & ForEach
 ```swift
+// for can not use in view? 
+for x in 0...<10 {
+  ...
+}
+
+
 ForEach(0..<10, { index in 
 	print("\\(index)")
 })
@@ -1072,8 +1104,14 @@ ForEach(0..<10, { index in
 // ForEach create Text base on String[]
 let data: [String] = ["Hi"]
 
+// index
 ForEach(data.indices) { index in 
 	Text("\\(data[index])")
+}
+
+
+ForEach(data, id: \.self) { item in 
+	... item
 }
 ```
 
