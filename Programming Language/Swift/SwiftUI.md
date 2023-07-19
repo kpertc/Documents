@@ -70,20 +70,6 @@ ScrollView(.horizontal)
 
 <br>
 
-### Enum
-```swift
-enum Fruit {
-	case apple
-	case orange
-}
-
-fruit: Fruit
-fruit = .apple
-fruit = .orange
-```
-
-<br>
-
 ### 
 
 ``` swift
@@ -1266,6 +1252,13 @@ class SoundManager { // singleton
 ```swift
 SoundManager.instance.playSound()
 ```
+
+```swift
+private init() {
+	
+}
+```
+
 
 <br>
 

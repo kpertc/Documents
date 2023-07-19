@@ -110,6 +110,25 @@ mappedArray = dataArray
 	.filter({$0.isVerified})
 	.compactMap({$0.name})
 ```
+
+<br>
+
+### Enum
+```swift
+enum Fruit {
+	case apple
+	case orange
+}
+
+enum Fruit {
+	case apple, orange, ...
+}
+
+fruit: Fruit
+fruit = .apple
+fruit = .orange
+```
+
 <br>
 
 ### Struct
