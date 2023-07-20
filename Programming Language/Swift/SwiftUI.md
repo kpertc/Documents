@@ -1074,35 +1074,6 @@ if sandwich.isSpicy {
 
 <br>
 
-###  for & ForEach
-```swift
-// for can not use in view? 
-for x in 0...<10 {
-  ...
-}
-
-
-ForEach(0..<10, { index in 
-	print("\\(index)")
-})
-// 0, 1, 2, 3 ... 9
-
-// ForEach create Text base on String[]
-let data: [String] = ["Hi"]
-
-// index
-ForEach(data.indices) { index in 
-	Text("\\(data[index])")
-}
-
-
-ForEach(data, id: \.self) { item in 
-	... item
-}
-```
-
-<br>
-
 ### ![[Swift#Condition]]
 <br>
 

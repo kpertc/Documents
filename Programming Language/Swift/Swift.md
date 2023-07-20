@@ -11,6 +11,26 @@ https://www.youtube.com/watch?v=comQ1-x2a1Q
 ### Documentation
 
 
+### Stack & Heap
+
+https://github.com/SwiftfulThinking/Swift-Basics/blob/main/SwiftfulThinkingBasicsBootcamp.playground/Pages/ObjectOrientedProgramming.xcplaygroundpage/Contents.swift
+
+##### Objects in the Stack
+Most basic types: String, Bool, Int, Struct, Enum, Array
+Objects in the Stack are ==Value== types. When you edit a Value type, you create a copy of it with new data.
+ 
+\+ Each threads has a Stack, Stack is faster, lower memory footprint, preferable
+
+##### Objects in the Heap 
+FunctionsNEW: Class, Actors
+
+Objects in the Heap are ==Reference== types.
+When you edit a Reference type, you edit the object that you are referencing. This "reference" is called "pointer" because it "points" to an object in the Heap (in memory).
+
+\- There is only 1 Heap for all threads, Heap is slower, higher memory footprint, risk of threading issues
+
+<br>
+
 ### Hello World
 
 ```Swift
@@ -127,11 +147,96 @@ enum Fruit {
 fruit: Fruit
 fruit = .apple
 fruit = .orange
+### Tuple
+
+```swift
+// tuple can combine multiple pieces of data
+func getUserInfo2() -> (String, Bool){
+	let name = getUserName()
+	let isPremium = getUserIsPremium()
+
+	return (name, isPremium)
+}
+
+var userData1: String = userName
+var userData2: (String, Bool, Bool) = (userName, userIsPremium, userIsNew)
+var userData2: (name: String, isPremium: Bool) = ...
+
+let name = getUserInfo2().0 // access tuple by index
+```
+
+```swift
+// use name instead of index
+func getUserInfo2() -> (name: String, isPremium: Bool){
+	...
+}
+
+let name = getUserInfo2().name
+```
+
+Recommend to create custom type → struct / class if too long
+
+<br>
+
+
+###  for & ForEach Loops
+
+```swift
+while (condition) {
+	...
+}
+
+repeat {
+		
+} while
+```
+
+```swift
+// for can not use in view? 
+for item in 0...<10 {
+  ...
+}
+
+for item in _array {
+	... 
+}
+
+for (index, item) in array.enumerated() {
+	...
+}
+```
+
+```swift
+break // exit loop
+
+continue // next loop
+```
+
+```swift
+ForEach(0..<10, { index in 
+	print("\\(index)")
+})
+// 0, 1, 2, 3 ... 9
+
+// ForEach create Text base on String[]
+let data: [String] = ["Hi"]
+
+// index
+ForEach(data.indices) { index in 
+	Text("\\(data[index])")
+}
+
+
+ForEach(data, id: \.self) { item in 
+	... item
+}
 ```
 
 <br>
 
 ### Struct
+
+Value types are copied & mutated
 
 ```swift
 struct User {
@@ -140,14 +245,62 @@ struct User {
 	let followerCount: Int
 }
 
+User(displayName: "Nick", userName: "nick123", followerCount: 300)
+// Structs have an implicit init -> no need to write init() manually
+```
+
+change struct value = recreate & reassign object
+
+"Immutable struct" = all "let" constants = NOT mutable = "cannot mutate it!"
+```swift
+struct UserModel {
+    let name: String
+    let isPremium: Bool
+}
+
+var user1: UserModel = UserModel(name: "Nick", isPremium: false)
+user1 = UserModel(name: user1.name, isPremium: true)
+
+```
+
+"mutable struct"
+```swift
+struct UserModel2 {
+    let name: String
+    var isPremium: Bool
+}
+
+var user2 = UserModel2(name: "Nick", isPremium: false)
+user2.isPremium = true
+```
+
+```swift
+struct UserModel4 {
+    let name: String
+    private(set) var isPremium: Bool
+    
+    mutating func markUserAsPremium() {
+        isPremium = true
+    }
+    
+    mutating func updateIsPremium(newValue: Bool) {
+        isPremium = newValue
+    }
+}
+
+var user4 = UserModel4(name: "Nick", isPremium: false)
+user4.markUserAsPremium()
+user4.updateIsPremium(newValue: true)
+```
+
+
+```swift
 struct User : Identifiable {
 	let id: String = UUID().uuidString // make identifiable
 	let displayName: String
 	let userName: String
 	let followerCount: Int
 }
-
-User(displayName: "Nick", userName: "nick123", followerCount: 300)
 ```
 
 <br>
@@ -359,6 +512,9 @@ do { // put can throw error in do
 ```
 
 ##### Optional `try`?
+
+optional → value or `nil`
+
 if failed, `text = nil`, and no error back
 program can continue to run
 no need to place in `do {} catch {}`
@@ -368,6 +524,23 @@ let text = try? ...
 ```
 
 <br>
+
+### Protocol
+
+```swift
+// object must have name:String to conform
+struct EmployeeModel: EmployeeHasAName {
+	let title:String
+	let name: String
+}
+
+protocol EmployeeHasAName {
+	let name: String
+}
+```
+
+<br>
+
 ### File
 
 ![[xcassets.png]]
