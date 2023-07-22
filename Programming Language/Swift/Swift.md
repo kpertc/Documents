@@ -70,10 +70,34 @@ Text("\(count)")
 ### Array
 
 ```swift
-array.append(  )
-array.append(contentsOf: [ ... items ])
+// Generic 
+let fruit: Array<String> = ["apple", "orange"]
 
+array.count
+array.indices // range 0,1,2,3
+array.indices.first // 0
+array.indices.last // last index
+
+array.first
+array.last
+
+array.append("apple") // append an item
+array.append(contentsOf: ["apple", "Mango"]) // append a list
+
+array.insert("Watermelon", at: 2) // insert item to at index 2
+array.insert(contentsOf: ["Watermelon", "Tangerine"], at: 2) // insert a list
+
+array.remove(at: 3) // remove item
+array.removeAll()
 ```
+
+##### Set
+```swift
+// Set can not have the same item
+// Set does not have order
+var fruitsSet: Set<String> = ["apple", "orange"]
+```
+
 
 ##### Sorted
 ``` swift

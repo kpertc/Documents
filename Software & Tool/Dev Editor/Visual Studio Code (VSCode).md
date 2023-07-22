@@ -1,13 +1,56 @@
 #editor #web-dev 
 
-Command Palette `⌘` + `Shft` + `P`
+### Shortcuts
 
-Editor Shortcut
-Selects the word at the cursor `⌘` + `D`
-multi-cursor Alt+Click ⌥⌘↓ ⌥⌘↑
+![](https://code.visualstudio.com/assets/docs/getstarted/tips-and-tricks/KeyboardReferenceSheet.png)
+
+Editor Shortcut| 
+---|---
+Command Palette|⌘ ⇧ P
+Toggle Terminal|Ctrl \`
+Sidebar|⌘ B
+New Tab|⌘ N
+New Window|⌘ ⇧ N
+Tab Bar Toggle|⌘ ⇧ E
+Open & Fold UnFold| ⌘ ↓
+Split Editor|⌘ \
+Duplicate Line|⇧ Option ↑ / ↓
+Select Entire Line<br>Select Multiple Lines if Multiple Times |⌘ L
+Delete Line|⌘ ⇧ K
+Insert Line|⌘ Enter
+Matching Bracket|⌘ ⇧ \
+Multiline Comment|⇧ Option A
+Highlight(Select)|Shift ↑/↓/←/→
+Select Next Match|⌘ D
+Tab|Ctrl + tab#
+Close All Tabs|⌘ K W
+
+
+Same as Chrome| 
+---|---
+Right Tab|⌘ ⇧ \[
+Left Tab|⌘ ⇧ ]
+Settings| ⌘ , (MacOS) <br> Ctrl , (Win)
+Open last closed Tab|⌘ ⇧ T
+
+
+Selects the word at the cursor|`⌘` + `D`
+multi-cursor|Alt+Click ⌥⌘↓ ⌥⌘↑
+
 Shift+Alt
 
-<br>
+Ctrl Tab![[ctrl-tab.gif]]
+
+Ctrl Enter
+![[ctrl-enter.gif]]
+
+Shift Option ↑ / ↓
+![[shift-option.gif]]<br>
+
+
+Terminal Up / Down
+Ctrl ⌘ ↑/↓
+![[terminal-up-down.gif]]
 
 ### Markdown
 https://code.visualstudio.com/docs/languages/markdown
@@ -15,15 +58,120 @@ https://code.visualstudio.com/docs/languages/markdown
 Preview markdown `⇧⌘V`
 Preview markdown side by side
 ![[md-dynamic-preview.gif]]
+
+<br>
+
+### Snippets
+
+![[snippet-JavaScript.gif]]
+
+Basic
+```json
+	"Console Log" : {
+		"prefix": "clg",
+		"body": "console.log($1)",
+		"description": "Create console.log()"
+	}
+```
+
+`$#` cursor start point
+`Tab` → next `$#`
+$0 → last point
+
+```json
+	"Console Log" : {
+		"prefix": "clg",
+		"body": [
+			"console.log($1);",
+			"$2"
+		],
+		"description": "Create console.log();"
+		},
+	
+	"Console Log Template String" : {
+		"prefix": "clgt",
+		"body": [
+			"console.log(`${$1}`);",
+			"$2"
+		],
+		"description": "Create console.log(); with Template String"
+	}
+```
+
+$variable type at same time, `Tab` type next $variable
+```json
+"For Loop for Array" : {
+	"prefix": "forarr",
+	"body": [
+		"for (let $index = 0; $index < $array.length; $index++) {",
+		"\\tconst element = $array[$index];",
+		"\\t",
+		"}"
+	],
+	"description": "This will create a for loop through an array"
+}
+```
+
+Settings Sync is on → VS Code Settings automatically sync
+![[Settings-Sync-Configure.png]]
+
+Sync Extension: Settings Sync
+
+<br>
+
+### [Emmet](https://code.visualstudio.com/docs/editor/emmet)
+
+Builtin
+
+![[Emmet.gif]]
+
+```html
+div.container
+<div class="container"></div>
+
+div#container
+<div id="container"></div>
+
+div.className#idName
+<div class="className" id="idName"></div>
+
+li*3
+<li></li>
+<li></li>
+<li></li>
+
+input:text
+<input type="text" name="" id="">
+```
+
+![[Emmet-css.gif]]
+```css
+p10
+padding: 10px;
+
+m10
+margin: 10px;
+```
 <br>
 
 ### Open Setting.json
 ![[vscode-open-settingjson.gif]]
 
-Builtin bracket pair colorizer
+##### Bracket pair colorizer
 1. `editor.guides.bracketPairs": true,`
 2. restart VS Code
 ![[builtin-bracket-pair-colorizer.png| 200]]
+
+##### Font Ligatures
+
+```json
+{
+  "editor.fontFamily": "*** Your ligature enabled font ***",
+  "editor.fontLigatures": true,
+}
+```
+
+![[font-ligatures.png]]
 
 <br>
 
@@ -46,7 +194,7 @@ https://github.com/microsoft/vscode-docs/blob/vnext/release-notes/v1_66.md#local
 
 <br>
 
-### `code`
+### `code` Command
 
 ### [How to Open Visual Studio Code From Your Terminal](https://www.freecodecamp.org/news/how-to-open-visual-studio-code-from-your-terminal/)
 
@@ -68,14 +216,14 @@ code src/Plugin/
 
 
 
-### Plugin
+### Extension
+
 Plugin|Function
 ---|---
 Quokka.js|display JavaScript result in editor
 
+##### Command Runner
 
-
-### Command Runner
 ![[vscode-command-runner.gif]]
 
 ```JSON
@@ -86,9 +234,14 @@ Quokka.js|display JavaScript result in editor
 },
 ```
 
+
+##### Better Comments
+Can add and be customized
+![[Better-Comments.png]]
+
 <br>
 
-### Extension
+##### Extension Development
 
 [https://code.visualstudio.com/api/get-started/your-first-extension](https://code.visualstudio.com/api/get-started/your-first-extension)
 

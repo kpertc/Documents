@@ -50,3 +50,7 @@ Advanced JS -> backward JS
 
 [[Webpack]]
 [[Vite]]
+
+
+Run JavaScript in Chrome console
+or in node.js

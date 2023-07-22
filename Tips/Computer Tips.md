@@ -8,12 +8,18 @@ Option + Command = Arrow
 
 ![[switch-tabs.gif]]
 
-Mac 截图软件 iShot
-- 截图
-- 录屏
-- OCR
+Mac 截图软件 
 
-LICEcap
+- iShot
+	- 截图
+	- 录屏 Gif
+	- OCR
+- LICEcap
+
+
+[Mac Character Viewer](https://support.apple.com/guide/mac-help/use-emoji-and-symbols-on-mac-mchlp1560/mac)
+Ctrl-Command-Space or  Edit > Emoji & Symbols.
+![[mac-character-viewer.gif]]
 
 <br>
 
