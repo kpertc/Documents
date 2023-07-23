@@ -17,13 +17,13 @@ https://github.com/SwiftfulThinking/Swift-Basics/blob/main/SwiftfulThinkingBasic
 
 ##### Objects in the Stack
 Most basic types: String, Bool, Int, Struct, Enum, Array
-Objects in the Stack are ==Value== types. When you edit a Value type, you create a copy of it with new data.
+Objects in the Stack are ==Value== types. 
+When you edit a Value type, you create a copy of it with new data.
  
 \+ Each threads has a Stack, Stack is faster, lower memory footprint, preferable
 
 ##### Objects in the Heap 
-FunctionsNEW: Class, Actors
-
+Functions, Class, Actors
 Objects in the Heap are ==Reference== types.
 When you edit a Reference type, you edit the object that you are referencing. This "reference" is called "pointer" because it "points" to an object in the Heap (in memory).
 
@@ -66,6 +66,45 @@ round() //
 let count: Int = 5 
 Text("\(count)")
 ```
+
+<br>
+
+### String
+
+##### Multiline String
+
+```swift
+let lorem = """
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Integer nec odio.
+Praesent libero.
+Sed cursus ante dapibus diam.
+Sed nisi.
+Nulla quis sem at nibh elementum imperdiet.
+Duis sagittis ipsum.
+Praesent mauris.
+"""
+```
+
+```swift
+let multilineString = """
+Start
+
+End
+"""
+```
+
+Use a backslash (\\) to omits the following line break.
+```swift
+let softWrapped = """
+This is just \\
+one wrong sentence.
+
+This is another one\\
+.
+"""
+```
+
 
 ### Array
 
@@ -261,6 +300,7 @@ ForEach(data, id: \.self) { item in
 ### Struct
 
 Value types are copied & mutated
+Create a new
 
 ```swift
 struct User {
