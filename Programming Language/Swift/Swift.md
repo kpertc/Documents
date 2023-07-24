@@ -105,6 +105,25 @@ This is another one\\
 """
 ```
 
+### Tuple
+
+```swift
+// tuple can combine multiple pieces of data
+func getUserInfo2() -> (String, Bool){
+	let name = getUserName()
+	let isPremium = getUserIsPremium()
+
+	return (name, isPremium)
+}
+
+var userData1: String = userName
+var userData2: (String, Bool, Bool) = (userName, userIsPremium, userIsNew)
+var userData2: (name: String, isPremium: Bool) = ...
+
+let name = getUserInfo2().0 // access tuple by index
+```
+
+<br>
 
 ### Array
 
@@ -128,6 +147,8 @@ array.insert(contentsOf: ["Watermelon", "Tangerine"], at: 2) // insert a list
 
 array.remove(at: 3) // remove item
 array.removeAll()
+array.append(  )
+array.append(contentsOf: [ ... items ])
 ```
 
 ##### Set
@@ -205,27 +226,16 @@ enum Fruit {
 
 enum Fruit {
 	case apple, orange, ...
+
+	var title: String = {
+		self // enum value 
+		return
+	}
 }
 
 fruit: Fruit
 fruit = .apple
 fruit = .orange
-### Tuple
-
-```swift
-// tuple can combine multiple pieces of data
-func getUserInfo2() -> (String, Bool){
-	let name = getUserName()
-	let isPremium = getUserIsPremium()
-
-	return (name, isPremium)
-}
-
-var userData1: String = userName
-var userData2: (String, Bool, Bool) = (userName, userIsPremium, userIsNew)
-var userData2: (name: String, isPremium: Bool) = ...
-
-let name = getUserInfo2().0 // access tuple by index
 ```
 
 ```swift
@@ -238,6 +248,7 @@ let name = getUserInfo2().name
 ```
 
 Recommend to create custom type → struct / class if too long
+can not mutate later
 
 <br>
 
@@ -303,6 +314,11 @@ Value types are copied & mutated
 Create a new
 
 ```swift
+let user // can not change
+var user 
+```
+
+```swift
 struct User {
 	let displayName: String
 	let userName: String
@@ -342,6 +358,8 @@ user2.isPremium = true
 struct UserModel4 {
     let name: String
     private(set) var isPremium: Bool
+    // private(set) can only set from inside
+    // can not e.g. user.isPremium = true
     
     mutating func markUserAsPremium() {
         isPremium = true
@@ -357,6 +375,7 @@ user4.markUserAsPremium()
 user4.updateIsPremium(newValue: true)
 ```
 
+struct do not have `deinit()`
 
 ```swift
 struct User : Identifiable {
@@ -366,8 +385,41 @@ struct User : Identifiable {
 	let followerCount: Int
 }
 ```
-
 <br>
+
+### Class
+
+```swift
+init()
+```
+
+##### `deinit`
+```swift
+deinit { 
+	...
+}
+```
+
+```swift
+let user = User()
+User.name = "new name"
+/**
+	class can be changed even on let, because class is reference, 
+	object itself is not changing
+	data inside object is changing
+*/
+```
+
+
+### Access Control
+```swift
+public
+
+private
+
+private(set) // read is public, set is private
+```
+
 
 ### ![[SwiftUI#Enum]]
 
@@ -415,6 +467,11 @@ Rectangle()
 ```swift
 func _funcname() -> Bool {
 	
+}
+
+// calculated variable
+func calculatedNumber: Int {
+	return number1 + number2
 }
 ```
 

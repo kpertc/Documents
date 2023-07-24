@@ -1031,15 +1031,6 @@ init(backgroundColor: Color, count: Int, title: String) {
 
 <br>
 
-### `deinit`
-```swift
-deinit { 
-	...
-}
-```
-
-<br>
-
 ### `weak self`
 strong reference → will not `deinit()`
 
@@ -1237,7 +1228,7 @@ private init() {
 
 for small data
 
-Use@rDefaults
+UserDefaults
 
 ```swift
 @State var cuurentUserName: String?
@@ -1256,6 +1247,44 @@ name = UserDefaults.standard.string(forKey: "name")
 @AppStorage("name") var currentUserName: String?
 // will save automatically
 ```
+
+
+### Download
+
+##### Original
+```swift
+func downloadData(fromURL url: URL, completionHandler: @escaping (_ data: Data?) -> ()) {
+
+	URLSession.shared.dataTask(with: url){ (data, response, error)in
+	guard
+		let data = data,
+		error == nil,
+		let response = response as? HTTPURLResponse
+		response.statusCode >= 200 & response.statusCode < 300 else {
+			print("Error downloading data.")
+			completionHandler(nil)
+			return
+		}
+		completionHandler(data)
+		}.resume()
+}
+```
+
+```swift
+downloadData(fromURL: url) { (returnedData) in
+	if let data = returnedData {
+		guard let newPosts = try? JSONDecoder().decode([PostModel].self, from: data) else { return }
+		DispatchQueue.main.async { [weak self] in
+		self?.posts=newPosts
+	}else{
+		print("No data returned.")
+	}
+}
+```
+
+##### Combine
+require \>= iOS 13
+
 
 <br>
 
