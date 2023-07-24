@@ -1,6 +1,8 @@
 
 ### Chrome full screenshot
 
+Search bar ⌘ L 
+
 ![[chrome-fullscreen-shot.png]]
 
 Switch Tabs
@@ -37,3 +39,5 @@ Paste without formatting
 
 在预览中用鼠标拖动
 `⌥ + space`
+
+Minimize window ⌘ M

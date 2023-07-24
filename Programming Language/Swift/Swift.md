@@ -648,6 +648,8 @@ let text = try? ...
 
 ### Protocol
 
+Protocol → set of requirements
+
 ```swift
 // object must have name:String to conform
 struct EmployeeModel: EmployeeHasAName {
@@ -656,8 +658,59 @@ struct EmployeeModel: EmployeeHasAName {
 }
 
 protocol EmployeeHasAName {
-	let name: String
+	?? let name: String
 }
+```
+
+only var in protocol, no `let`
+will get error if not conform to the protocol
+After comfort to a protocol, only protocol part can be used
+
+```swift
+protocol ColorThemeProtocol {
+	var primary: Color { get } // read only
+	var secondary: Color { get }
+	var tertiary: Color { get }
+
+	func someFunc () { }
+}
+
+// a struct conform to ColorThemeProtocol
+struct ColorTheme: ColorThemeProtocol {
+	let primary: Color = .red
+	let secondary: Color = .white
+	let tertiary: Color = .green
+}
+
+// initial a ColorTheme conform ColorThemeProtocol
+let colorTheme: ColorThemeProtocol = ColorTheme()
+```
+
+##### Combine Protocol
+```swift
+protocol ButtonTextProtocol { // text only
+	var buttonText: String { get }
+}
+
+protocol ButtonPressedProtocol { // func only
+	func buttonPressed()
+}
+
+// text & func
+class CombinedClass: ButtonTextProtocol, ButtonPressedProtocol {
+	var buttonText: String = "Protocol are awesome!"
+
+	func buttonPressed () {
+		print ("Button Pressed")
+	}
+}
+
+// or create a combined protocol
+protocol CombinedProtocol: ButtonTextProtocol, ButtonPressedProtocol {
+	// can leave blank
+}
+
+class CombinedClass: CombinedProtocol { ... } 
 ```
 
 <br>
