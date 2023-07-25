@@ -831,6 +831,22 @@ Add function outside a class by prototype
 
 ![[add-function-outside-a-class-by-prototype.png]]
 
+`Object.keys` to get keys
+```JavaScript
+Object.keys(luxuryCar)
+
+// loop through each object key
+Object.keys(luxuryCar).forEach(key => {
+	console.log(key);
+}};
+
+// But a for..in loop includes inherited props
+for (let key in luxuryCar) {
+	console.log(key);
+}
+```
+
+
 ### Async
 
 ### Promises

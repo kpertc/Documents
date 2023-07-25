@@ -15,8 +15,17 @@ https://www.youtube.com/watch?v=comQ1-x2a1Q
 
 https://github.com/SwiftfulThinking/Swift-Basics/blob/main/SwiftfulThinkingBasicsBootcamp.playground/Pages/ObjectOrientedProgramming.xcplaygroundpage/Contents.swift
 
+https://youtu.be/-JLenSTKEcA
+
 ##### Objects in the Stack
-Most basic types: String, Bool, Int, Struct, Enum, Array
+Most basic types: 
+- String
+- Bool
+- Int
+- Struct
+- Enum
+- Array
+
 Objects in the Stack are ==Value== types. 
 When you edit a Value type, you create a copy of it with new data.
  
@@ -28,6 +37,31 @@ Objects in the Heap are ==Reference== types.
 When you edit a Reference type, you edit the object that you are referencing. This "reference" is called "pointer" because it "points" to an object in the Heap (in memory).
 
 \- There is only 1 Heap for all threads, Heap is slower, higher memory footprint, risk of threading issues
+
+Memory need to create a reference is almost the same as the object
+
+##### ==Automatic Reference Counting (ARC)==
+is **a memory management attribute used to monitor and manage an application's memory usage**
+
+Not affect value type
+
+`ARC` is used ()[https://stackoverflow.com/questions/24217586/structure-vs-class-in-swift-language]
+
+- When you assign or pass `reference type` a **new reference** to original instance will be created(the address of instance is copied).
+
+- When you **modify** an instance it has a **global** effect because the instance is shared and accessible by any reference that points on it.
+
+- Usually The **Heap Memory** is used
+
+https://medium.com/doyeona/automatic-reference-counting-in-swift-arc-weak-strong-unowned-925f802c1b99
+**Automatic Reference Counting (ARC)** ==is to track and== ==_manage the app’s memory usage_====. ==ARC== ==**automatically frees up the memory**== used by class instances **when those instances are** ==**no longer needed.**==
+
+**So how is it going to keep track of the instances?**
+
+==Every instance of a class has a property called== ==**_reference count_**== so if reference count is ==greater than== ==**0, the instance is still kept in memory**== otherwise, **_it will be removed from the memory._**
+
+Strong / weak reference
+Is the class still there after async function？
 
 <br>
 
@@ -105,6 +139,27 @@ This is another one\\
 """
 ```
 
+<br>
+
+### Tuple
+
+```swift
+// tuple can combine multiple pieces of data
+func getUserInfo2() -> (String, Bool){
+	let name = getUserName()
+	let isPremium = getUserIsPremium()
+
+	return (name, isPremium)
+}
+
+var userData1: String = userName
+var userData2: (String, Bool, Bool) = (userName, userIsPremium, userIsNew)
+var userData2: (name: String, isPremium: Bool) = ...
+
+let name = getUserInfo2().0 // access tuple by index
+```
+
+<br>
 
 ### Array
 
@@ -128,6 +183,8 @@ array.insert(contentsOf: ["Watermelon", "Tangerine"], at: 2) // insert a list
 
 array.remove(at: 3) // remove item
 array.removeAll()
+array.append(  )
+array.append(contentsOf: [ ... items ])
 ```
 
 ##### Set
@@ -205,27 +262,16 @@ enum Fruit {
 
 enum Fruit {
 	case apple, orange, ...
+
+	var title: String = {
+		self // enum value 
+		return
+	}
 }
 
 fruit: Fruit
 fruit = .apple
 fruit = .orange
-### Tuple
-
-```swift
-// tuple can combine multiple pieces of data
-func getUserInfo2() -> (String, Bool){
-	let name = getUserName()
-	let isPremium = getUserIsPremium()
-
-	return (name, isPremium)
-}
-
-var userData1: String = userName
-var userData2: (String, Bool, Bool) = (userName, userIsPremium, userIsNew)
-var userData2: (name: String, isPremium: Bool) = ...
-
-let name = getUserInfo2().0 // access tuple by index
 ```
 
 ```swift
@@ -238,6 +284,7 @@ let name = getUserInfo2().name
 ```
 
 Recommend to create custom type → struct / class if too long
+can not mutate later
 
 <br>
 
@@ -303,6 +350,11 @@ Value types are copied & mutated
 Create a new
 
 ```swift
+let user // can not change
+var user 
+```
+
+```swift
 struct User {
 	let displayName: String
 	let userName: String
@@ -342,6 +394,8 @@ user2.isPremium = true
 struct UserModel4 {
     let name: String
     private(set) var isPremium: Bool
+    // private(set) can only set from inside
+    // can not e.g. user.isPremium = true
     
     mutating func markUserAsPremium() {
         isPremium = true
@@ -357,6 +411,7 @@ user4.markUserAsPremium()
 user4.updateIsPremium(newValue: true)
 ```
 
+struct do not have `deinit()`
 
 ```swift
 struct User : Identifiable {
@@ -366,8 +421,41 @@ struct User : Identifiable {
 	let followerCount: Int
 }
 ```
-
 <br>
+
+### Class
+
+```swift
+init()
+```
+
+##### `deinit`
+```swift
+deinit { 
+	...
+}
+```
+
+```swift
+let user = User()
+User.name = "new name"
+/**
+	class can be changed even on let, because class is reference, 
+	object itself is not changing
+	data inside object is changing
+*/
+```
+
+
+### Access Control
+```swift
+public
+
+private
+
+private(set) // read is public, set is private
+```
+
 
 ### ![[SwiftUI#Enum]]
 
@@ -415,6 +503,11 @@ Rectangle()
 ```swift
 func _funcname() -> Bool {
 	
+}
+
+// calculated variable
+func calculatedNumber: Int {
+	return number1 + number2
 }
 ```
 
@@ -591,6 +684,8 @@ let text = try? ...
 
 ### Protocol
 
+Protocol → set of requirements
+
 ```swift
 // object must have name:String to conform
 struct EmployeeModel: EmployeeHasAName {
@@ -599,8 +694,59 @@ struct EmployeeModel: EmployeeHasAName {
 }
 
 protocol EmployeeHasAName {
-	let name: String
+	?? let name: String
 }
+```
+
+only var in protocol, no `let`
+will get error if not conform to the protocol
+After comfort to a protocol, only protocol part can be used
+
+```swift
+protocol ColorThemeProtocol {
+	var primary: Color { get } // read only
+	var secondary: Color { get }
+	var tertiary: Color { get }
+
+	func someFunc () { }
+}
+
+// a struct conform to ColorThemeProtocol
+struct ColorTheme: ColorThemeProtocol {
+	let primary: Color = .red
+	let secondary: Color = .white
+	let tertiary: Color = .green
+}
+
+// initial a ColorTheme conform ColorThemeProtocol
+let colorTheme: ColorThemeProtocol = ColorTheme()
+```
+
+##### Combine Protocol
+```swift
+protocol ButtonTextProtocol { // text only
+	var buttonText: String { get }
+}
+
+protocol ButtonPressedProtocol { // func only
+	func buttonPressed()
+}
+
+// text & func
+class CombinedClass: ButtonTextProtocol, ButtonPressedProtocol {
+	var buttonText: String = "Protocol are awesome!"
+
+	func buttonPressed () {
+		print ("Button Pressed")
+	}
+}
+
+// or create a combined protocol
+protocol CombinedProtocol: ButtonTextProtocol, ButtonPressedProtocol {
+	// can leave blank
+}
+
+class CombinedClass: CombinedProtocol { ... } 
 ```
 
 <br>

@@ -1,10 +1,17 @@
 
 ### Chrome full screenshot
 
+Search bar ⌘ L 
+
 ![[chrome-fullscreen-shot.png]]
 
 Switch Tabs
-Option + Command = Arrow
+Option + ⌘ +  ↑ / ↓
+
+
+Finder ⌘ + ↑ / ↓
+上层目录 / 下层目录
+
 
 ![[switch-tabs.gif]]
 
@@ -37,3 +44,5 @@ Paste without formatting
 
 在预览中用鼠标拖动
 `⌥ + space`
+
+Minimize window ⌘ M
