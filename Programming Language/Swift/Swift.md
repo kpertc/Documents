@@ -749,6 +749,11 @@ protocol CombinedProtocol: ButtonTextProtocol, ButtonPressedProtocol {
 class CombinedClass: CombinedProtocol { ... } 
 ```
 
+```swift
+protocol DataServiceProtocol {
+	func getData() -> AnyPublisher<[PostsModel], Error>
+}
+```
 <br>
 
 ### File

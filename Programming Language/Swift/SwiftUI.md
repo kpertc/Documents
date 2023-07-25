@@ -1289,6 +1289,13 @@ downloadData(fromURL: url) { (returnedData) in
 }
 ```
 
+```swift
+// "_" just mean that when you call, you don't pass the label.
+
+// call the function without name
+(completionHandler(image, nil))
+```
+
 ##### Combine
 require \>= iOS 13
 

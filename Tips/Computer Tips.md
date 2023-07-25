@@ -9,19 +9,20 @@ Switch Tabs
 Option + ⌘ +  ↑ / ↓
 
 
-Finder ⌘ + ↑ / ↓
-上层目录 / 下层目录
-
 
 ![[switch-tabs.gif]]
 
 Mac 截图软件 
 
-- iShot
-	- 截图
-	- 录屏 Gif
-	- OCR
-- LICEcap
+Gif
+	- iShot
+		- 截图
+		- 录屏 Gif
+		- OCR
+	- LICEcap
+
+Float Pin
+- Snap Screenshot
 
 
 [Mac Character Viewer](https://support.apple.com/guide/mac-help/use-emoji-and-symbols-on-mac-mchlp1560/mac)
@@ -46,3 +47,17 @@ Paste without formatting
 `⌥ + space`
 
 Minimize window ⌘ M
+
+
+Chrome / Safari
+Previous Page / Next page
+⌘ + ← / → 
+
+
+## MacOS
+##### Finder
+上层目录 / 下层目录 | ⌘ + ↑ / ↓
+
+
+### MacOS Stickies
+变成list | option + Tab
