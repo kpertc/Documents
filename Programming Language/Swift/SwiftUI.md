@@ -1163,6 +1163,14 @@ struct SecondView: View {
 }
 ```
 
+init @StateObject
+```swift
+@StateObject private var object: MyObject
+
+init(id: Int = 1) {
+    _object = StateObject(wrappedValue: MyObject(id: id))
+}
+```
 <br>
 
 ### Environment Variable

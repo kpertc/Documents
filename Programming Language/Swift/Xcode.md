@@ -16,6 +16,8 @@ Turn on / off Minimap
 Switch light & dark mode
 ⌘ + Shift + A
 
+Format code
+Ctrl i 
 <br>
 
 ### SwiftUI
