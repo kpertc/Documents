@@ -1032,8 +1032,8 @@ init(backgroundColor: Color, count: Int, title: String) {
 <br>
 
 ### `weak self`
-strong reference → will not `deinit()`
 
+strong reference → will not `deinit()`
 ```swift
 DispatchQueue.main.asyncAfter(deadline: .now() + 500) {
 	self.data = "New Data"
@@ -1042,13 +1042,12 @@ DispatchQueue.main.asyncAfter(deadline: .now() + 500) {
 
 `weak self`
 weak reference → will `deinit()` → more efficient
-
+Its ok for the class (self) to `deinit()`
 ```swift
 DispatchQueue.main.asyncAfter(deadline: .now() + 500) { [weak self] in
-	self?.data = "New Data"
+	self?.data = "New Data" // weak is optional
 }
 ```
-
 <br>
 
 ### If

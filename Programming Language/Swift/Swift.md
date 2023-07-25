@@ -15,8 +15,17 @@ https://www.youtube.com/watch?v=comQ1-x2a1Q
 
 https://github.com/SwiftfulThinking/Swift-Basics/blob/main/SwiftfulThinkingBasicsBootcamp.playground/Pages/ObjectOrientedProgramming.xcplaygroundpage/Contents.swift
 
+https://youtu.be/-JLenSTKEcA
+
 ##### Objects in the Stack
-Most basic types: String, Bool, Int, Struct, Enum, Array
+Most basic types: 
+- String
+- Bool
+- Int
+- Struct
+- Enum
+- Array
+
 Objects in the Stack are ==Value== types. 
 When you edit a Value type, you create a copy of it with new data.
  
@@ -28,6 +37,31 @@ Objects in the Heap are ==Reference== types.
 When you edit a Reference type, you edit the object that you are referencing. This "reference" is called "pointer" because it "points" to an object in the Heap (in memory).
 
 \- There is only 1 Heap for all threads, Heap is slower, higher memory footprint, risk of threading issues
+
+Memory need to create a reference is almost the same as the object
+
+##### ==Automatic Reference Counting (ARC)==
+is **a memory management attribute used to monitor and manage an application's memory usage**
+
+Not affect value type
+
+`ARC` is used ()[https://stackoverflow.com/questions/24217586/structure-vs-class-in-swift-language]
+
+- When you assign or pass `reference type` a **new reference** to original instance will be created(the address of instance is copied).
+
+- When you **modify** an instance it has a **global** effect because the instance is shared and accessible by any reference that points on it.
+
+- Usually The **Heap Memory** is used
+
+https://medium.com/doyeona/automatic-reference-counting-in-swift-arc-weak-strong-unowned-925f802c1b99
+**Automatic Reference Counting (ARC)** ==is to track and== ==_manage the app’s memory usage_====. ==ARC== ==**automatically frees up the memory**== used by class instances **when those instances are** ==**no longer needed.**==
+
+**So how is it going to keep track of the instances?**
+
+==Every instance of a class has a property called== ==**_reference count_**== so if reference count is ==greater than== ==**0, the instance is still kept in memory**== otherwise, **_it will be removed from the memory._**
+
+Strong / weak reference
+Is the class still there after async function？
 
 <br>
 
@@ -104,6 +138,8 @@ This is another one\\
 .
 """
 ```
+
+<br>
 
 ### Tuple
 

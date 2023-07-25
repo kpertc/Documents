@@ -11,7 +11,8 @@ Toggle Terminal|Ctrl \`
 Sidebar|⌘ B
 New Tab|⌘ N
 New Window|⌘ ⇧ N
-Tab Bar Toggle|⌘ ⇧ E
+Tab Bar Explore (File)|⌘ ⇧ E
+Tab Bar Search|⌘ ⇧ F
 Open & Fold UnFold| ⌘ ↓
 Split Editor|⌘ \
 Duplicate Line|⇧ Option ↑ / ↓
