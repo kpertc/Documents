@@ -846,6 +846,27 @@ for (let key in luxuryCar) {
 }
 ```
 
+prototype
+
+`prototype` → object
+`__proto__` → instance ?
+
+```js
+function Animal() { ... }
+
+// add a function to Animal by prototype
+Animal.prototype.walks = function () { return 'walk' }
+
+const Bear = new Animal()
+console.log(Bear.walks()) // walk
+
+console.log(Bear.__proto__ === Animal.prototype) // true
+// Proved: Bear is inherited from Animal
+```
+
+in ES6, a modern way to create inherit is to use Class & Class extends & constructor { super() } 
+
+<br>
 
 ### Async
 
