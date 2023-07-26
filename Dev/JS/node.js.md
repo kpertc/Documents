@@ -14,18 +14,18 @@
 
 <br>
 
-###  Execute JavaScript
+### Execute JavaScript
 
 Execute JS code
 `node`
 ![[node.png | 200]]
 
-Execute JS file
+Execute JS file in terminal thru node
 ![[run_JavaScript_VSCode.gif]]
 
 <br>
 
-```shell
+```JavaScript
 console.log(process)
 ```
 
@@ -39,10 +39,13 @@ process.env // webpack
 
 <br>
 
-### NPM (Node Package manager) (download something)
+### NPM 
+Node Package manager
 Acquired by Microsoft
 
--   is an online repository for open- source node.js projects
+https://www.npmjs.com
+
+-   is an online repository for open-source node.js projects
 -   CLI tool that helps with installation, version and dependency management.
 
 Local & Global install
@@ -50,19 +53,14 @@ Local & Global install
 -   Global installs have links created from global `/bin` directory
 
 ```shell
-npm init # create package.json
-npm init -y # default settings
-```
+npm -v # show version
 
-```shell
+# help page
+npm
+npm help
+
 npm run # list all commands
 # command script defined in package.json
-
-npm uninstall + package name # Uninstall package:
-
-npm config set registry=http://xxxxxxx # Set registry
-
-npm init + xxx # start a project with settings
 ```
 
 ```bash
@@ -70,16 +68,115 @@ npm init + xxx # start a project with settings
 rm -rf node_modules yarn.lock package-lock.json
 ```
 
-<br>
-
 ```shell
-npm install ... # save to package.json dependencies 
+# install pacakges
+npm install packagename1 # install one package
+npm install packagename1 packagename2 ... # install multiple at once
+
+npm instal -g packagename # install globally 
+
+npm install packagename@4.17.3 # install specific version
+
+npm install ... # ? install but will not add to package.json
 npm install ... --save # save to package.json dependencies 
 npm install ... --save-dev # save to package.json devDependencies 
+
+npm install # all dependencies (include devDependencies)
+npm install --production # only install dependencies (not devDependencies)
+
+# Uninstall package:
+npm uninstall packagename
+npm remove packagename # alias
+npm rm packagename # alias
 ```
 
 - dependencies : Packages required by your application in production. 
 - devDependencies: Packages that are only needed for local development and testing. (tools to assist dev)
+
+`node_modules` will also includes dependencies' dependencies
+
+```shell
+# list all packages
+npm list
+
+npm list --depth 0 # only show top level packages
+npm list --depth 1 # only show secondary level packages
+```
+
+##### `package.json`
+
+Manifest file with app info
+- ==Lists dependencies== (name & version)
+- Specify if versions should be updated
+- Create NPM scripts
+- Easily create with `npm init`
+
+```shell
+npm init # create package.json
+npm init -y # default settings
+npm init --yes
+npm init ...  # start a project with settings
+
+# change package.json settings
+npm set ...
+npm config set ...
+
+# get package.json setting
+npm get ...
+npm config get ...
+
+# delete package.json setting
+npm delete ...
+
+# Set registry
+npm config set registry=http://xxxxxxx 
+
+```
+
+![[semantic_versioning.png | 350]]
+
+
+install to latest minor version
+`"^2.20.1"`
+> install to 2.22.1
+
+install to latest patch version
+`"~2.20.1"`
+> install to 2.20.4
+
+install exact version
+`"2.20.1"`
+> install to 2.20.1
+
+install latest version (Not a good idea)
+"\*"
+> install to 5.0.0
+
+
+##### Scripts
+
+```shell
+npm start
+
+# other name need add "run"
+npm + run + scripts name
+
+# e.g.
+npm run start
+```
+
+
+##### Global Packages
+``` shell
+npm instal -g packagename # install globally
+
+npm remove/uninstall -g packagename
+
+# where global packages are installed to
+npm root -g
+# /usr/local/lib/node_modules
+```
+
 <br>
 
 ##### NVM Node Version Manager
