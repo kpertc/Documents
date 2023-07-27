@@ -61,3 +61,8 @@ Previous Page / Next page
 
 ### MacOS Stickies
 变成list | option + Tab
+
+
+Lastest
+SOFTWARE UPDATE CHECKER
+https://max.codes/latest/
