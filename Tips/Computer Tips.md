@@ -66,3 +66,9 @@ Previous Page / Next page
 Lastest
 SOFTWARE UPDATE CHECKER
 https://max.codes/latest/
+
+AppCleaner
+https://freemacsoft.net/appcleaner/
+
+
+https://aptonic.com/
