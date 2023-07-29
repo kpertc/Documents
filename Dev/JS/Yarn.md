@@ -1,5 +1,7 @@
 #web-dev #JavaScript 
 
+https://www.youtube.com/watch?v=g9_6KmiBISk
+
 Yarn (Yet Another Resources Negotiator) 
 A JavaScript Package Manager developed by Facebook
 Any thing can be installed by NPM can be installed by Yarn
@@ -30,9 +32,8 @@ yarn
 ```shell
 yarn help
 
-yarn run 
-
-yarn remove packagename 
+yarn cache list
+yarn cache list --parten packagename
 
 yarn cache clean
 ```
@@ -50,6 +51,67 @@ yarn install
 yarn add packagename
 yarn add packagename@4.17.3 # add specific version
 
+# add as devdependency
+yarn add packagename -D
+yarn add packagename --dev
+
 # remove package
 yarn remove packagename
+
+# install globally 
+yarn global add packagename
+
+# remove globally 
+yarn global remove packagename
+
+# where global install
+yarn global bin
+# /usr/local/bin
+
+# upgrade
+yarn upgrade
+yarn upgrade@4.1.1 #specific version
 ```
+
+``` shell
+# list all packages
+yarn list
+
+# list only "packagename" 's dependency
+yarn list --parttern packagename
+
+yarn list --depth=0 # only list top layer packages
+```
+
+```shell
+# check outdated packages
+yarn outdated 
+
+# check specific packages
+yarn outdated packagename
+```
+
+![[yarn-outdated.png]]
+
+##### lock file
+
+Install exact version cross different computes
+
+```shell
+# check if yarn.lock match package.json
+yarn check
+
+# generate yarn.lock base on existing node_module
+yarn import
+```
+
+##### Script
+```shell
+yarn run 
+```
+
+```shell
+# Creates a compressed gzip archive of package dependencies.
+yarn pack
+```
+
