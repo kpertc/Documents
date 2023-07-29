@@ -21,7 +21,8 @@ Gif
 		- OCR
 	- LICEcap
 
-Float Pin
+Pin supoort
+- shottr
 - Snap Screenshot
 
 

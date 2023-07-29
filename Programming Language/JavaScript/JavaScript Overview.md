@@ -2,14 +2,13 @@
 
 >Any application that can be written in JavaScript, will eventually be written in JavaScript. - Jeff Atwood
 
-JavaScript is Single-Threaded language
+- JavaScript is Single-Threaded language
+- JavaScript is **synchronous language** with asynchronous capabilities
 
 <br>
 
 [State of JS](https://stateofjs.com/en-us/)
-
 [[TypeScript]]
-
 [[JavaScript API]]
 
 <br>
@@ -54,3 +53,6 @@ Advanced JS -> backward JS
 
 Run JavaScript in Chrome console
 or in node.js
+
+
+### The Call Stack

@@ -1,20 +1,43 @@
 #JavaScript #TypeScript #programming-language #web-dev 
 
 TypeScript, by Microsoft.
+Created by Anders Hejlsberg, also the creator of C#
 
 -   JavaScript -> Dynamic
 -   TypeScript -> Static
 
 TypeScript needs to be complied to JavaScript
 
-Check TypeScript installed: `tsc --version`
-Install TypeScript `npm install -g typescript`
-Convert TypeScript to JavaScript `tsc name.tx`
-  
+```shell
+# install TypeScript
+npm install -g typescript
+# permission add sudo
 
-`tsc --init` to create a `tsconfig.json`  
+tsc --version # check TypeScript version
+```
 
-Watch -> complier will automatically compile after file changed
+``` shell
+tsc script.ts #compile to js
+tsc script.ts -w #watch - complier will automatically compile after file changed 
+
+tsc -w # all files, no specified file
+```
+
+```shell
+tsc --init # to create a tsconfig.json 
+```
+
+```json
+// source of ts script
+"rootDir": "./src"
+
+// out
+"outDir": "./build/js"
+```
+``` shell
+
+```
+
 
 Problem
 https://blog.csdn.net/dujyong/article/details/106359483

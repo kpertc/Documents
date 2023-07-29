@@ -160,7 +160,9 @@ Web server request
 
 <br>
 
-### Stack
+### Stack (栈)
+
+First In Last Out (FILO) 
 
 **When and where is a Stack used?**
 

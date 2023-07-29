@@ -40,7 +40,7 @@ const todo = {id: 1, text: 'Hello'}
 const todo = {id: "string", text: 'Hello'}
 ```
 
-Function
+### Function
 ```js
 /**
  * Calculate tax
@@ -54,7 +54,7 @@ const calculateTax = (amount, tax) => {
 }
 ```
 
-Custom Type
+### Custom Type
 ```js
 /**
  * A student
@@ -77,7 +77,7 @@ const student = {
 }
 ```
 
-Class
+### Class
 ```js
 /**
  * Class to create a person object
@@ -109,7 +109,7 @@ class Person {
 
 
 
-type check
+### type check
  ![[vscode-checking.png | 200]]
 ``` js
 // @ts-check

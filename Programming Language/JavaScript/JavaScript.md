@@ -33,6 +33,20 @@ alert("This is an alert");
 
 ![[image-3.png]]
 
+### `use strict`
+
+Strict Mode
+Safer code
+```JavaScript
+'use strict' // at first line
+
+// Inside a function
+function strict_function() {
+  'use strict'; // rest of the function
+}
+
+```
+
 ### Comments
 
 ```JavaScript
