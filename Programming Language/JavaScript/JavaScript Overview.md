@@ -55,4 +55,29 @@ Run JavaScript in Chrome console
 or in node.js
 
 
-### The Call Stack
+Chrome dev-tool check Call Stack
+
+![[chrome dev-tool debug.gif]]
+
+
+
+[JavaScript Under The Hood [2] - Execution Context](https://youtu.be/Fd9VaW0M7K4)
+
+##### Execution context (Execution Phase)
+
+When you run any JavaScript, a special environment is created to handle the transformation & execution of code. This is called the execution context. It contains the currently running code and everything that aids in its execution
+
+There is a global execution context as well as a function execution context for every function invoked
+
+##### Memory Creation Phase (Creation Phase)
+
+1. Create the global object (browser = `window`, Node.js = `global`)
+2. Create the "this’ object and bind it to the global object
+3. Setup memory heap for storing variables and function references
+    1. objects will be inited as `undefined`
+4. Store functions and variables in global execution context and set to `undefined`
+
+Execution Phase:
+
+1. Execute code line by line
+2. Create a new execution context for each function call
