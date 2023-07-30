@@ -199,9 +199,11 @@ console.log(greeter); // "hey hi"
 `const`
 can not be redeclared & reassigned
 
-##### **Hoisting**
+##### Hoisting
 
-Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their scope before code execution. This means that if we do this
+Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their scope before code execution. 
+
+This means that if we do this:
 
 `var`
 ```js
@@ -215,7 +217,14 @@ console.log(greeter); // error
 let greeter = "hey hi";
 ```
 
+`let` & `const` are actually `undefined` but scope is not accessible, in "Temporal Dead Zone"
+
+![[var-let-lifecycle.png]]
+
+Related to: [[JavaScript Overview#Memory Creation Phase (Creation Phase)]]
+
 <br>
+
 ### Variables & Data Types
 
 ```JavaScript

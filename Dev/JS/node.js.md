@@ -10,9 +10,31 @@
 
 **NPM** is a package manager for Node.js
 
-`node -v` nodejs version to check if nodejs is installed
+```shell
+node -v #nodejs version to check if nodejs is installed
+```
 
-<br>
+### Why use node
+- Fast, efficient and highly scalable
+- Event driven, non-blocking 1/0 model
+- Popular in the industry
+- Same language on the front and back e nd (JS)
+
+- Single threaded
+- Supports concurrency via events & callbacks
+- EventEmitter class is used to bind events and listeners
+
+![[event-emitters.png| 200]]
+
+Good to use Node.js
+- REST API & Microservices
+- Real Time Services (Chat, Live Updates)
+- CRUD Apps - Blogs, Shopping Carts, Social Networks
+- Tools & Utilities
+
+Short Answer: Anything that is not CPU intensive
+
+
 
 ### Execute JavaScript
 
