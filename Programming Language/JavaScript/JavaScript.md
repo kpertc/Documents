@@ -1072,3 +1072,16 @@ decodeURIComponent(document.URL)
 // 
 encodeURIComponent(document.URL)
 ```
+
+
+### Add a Object in Global
+```JavaScript
+global.effect = {
+	Ama: "abc"
+};
+```
+
+```JavaScript
+// at another script file
+const Ama = effect.Ama; // will not be undefined
+```

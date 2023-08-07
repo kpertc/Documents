@@ -375,3 +375,13 @@ git submodule update --remote
 javascript -> husky
 
 git submodule add https://code.byted.org/ies/ie_js
+
+
+
+### Git Archive
+```shell
+git archive --remote=git@code.org:DocView.git develop jdoc2mdx_modification/generate.js --output generate.zip --format=zip
+
+# unzip
+unzip generate.zip
+```
