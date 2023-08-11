@@ -90,3 +90,11 @@ v_1 \\ \vdots \\ v_n
 rv_1 \\ \vdots \\ rv_n
 \end{pmatrix}
 $$
+
+
+
+ | 
+---|---|---
+Linear Combination|线性组合|add multiple vectors
+Span||The span of a set of vectors is **the set of all linear combinations of the vectors**
+
