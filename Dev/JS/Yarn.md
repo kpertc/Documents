@@ -115,3 +115,10 @@ yarn run
 yarn pack
 ```
 
+```shell
+# 在home directory
+
+yarn set version stable # 升到3
+
+yarn set version 1.22.19 #  使用1**
+```

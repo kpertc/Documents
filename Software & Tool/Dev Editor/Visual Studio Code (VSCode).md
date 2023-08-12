@@ -215,6 +215,9 @@ code src/Data.ts
 code src/Plugin/
 ```
 
+### C++
+
+![[cmake-run-c++.png]]
 
 
 ### Extension
@@ -239,6 +242,11 @@ Quokka.js|display JavaScript result in editor
 ##### Better Comments
 Can add and be customized
 ![[Better-Comments.png]]
+
+
+##### Code runner 
+run C++
+![[vscode-coderunner-run.gif]]
 
 <br>
 

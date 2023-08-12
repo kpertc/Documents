@@ -1074,4 +1074,15 @@ const foo = (n) => {
 	if(n<=1)return;
 	foo(n-1);
 };
+
+### Add a Object in Global
+```JavaScript
+global.effect = {
+	Ama: "abc"
+};
+```
+
+```JavaScript
+// at another script file
+const Ama = effect.Ama; // will not be undefined
 ```
