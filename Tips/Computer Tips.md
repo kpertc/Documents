@@ -73,3 +73,8 @@ https://freemacsoft.net/appcleaner/
 
 
 https://aptonic.com/
+
+
+MOS
+Mouse smooth scroll
+https://mos.caldis.me/
