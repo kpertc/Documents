@@ -3,8 +3,8 @@
 TypeScript, by Microsoft.
 Created by Anders Hejlsberg, also the creator of C#
 
--   JavaScript -> Dynamic
--   TypeScript -> Static
+-   JavaScript → Dynamic → types are checked at run time.
+-   TypeScript → Static → types are checked at compile time.
 
 TypeScript needs to be complied to JavaScript
 
@@ -21,6 +21,8 @@ tsc script.ts #compile to js
 tsc script.ts -w #watch - complier will automatically compile after file changed 
 
 tsc -w # all files, no specified file
+
+tsc --noEmitOnError -w # not compile ts file when there are ts errors
 ```
 
 ```shell
@@ -33,7 +35,19 @@ tsc --init # to create a tsconfig.json
 
 // out
 "outDir": "./build/js"
+
+// compile to target version
+"target": ""
+
+// compile even there are ts errors
+"noEmitOnError": false
 ```
+
+```json
+// only compiled paths in the list
+"include": [ "src" ]
+```
+
 ``` shell
 
 ```

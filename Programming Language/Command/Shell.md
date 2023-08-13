@@ -5,6 +5,7 @@ Bash Shell
 
 [[GIT]]
 [[Regular Expression]]
+[[Terminal]]
 
 `CLI` Command Line Interface
 - Reliable, easy for automation
@@ -33,6 +34,12 @@ date
 echo $PATH
 ```
 ![[date.png]]
+
+`man` command in Linux is used to display the user manual of any command that we can run on the terminal
+``` shell
+man git
+```
+
 
 <br>
 
@@ -312,3 +319,5 @@ add usr/local/bin to PATH if is not in:
 `sh` Bourne Shell *⤷ Steve Bourne*
 `Bash` Bourne-again shell
 Csh, Zsh
+
+<br>

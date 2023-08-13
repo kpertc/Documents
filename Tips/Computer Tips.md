@@ -49,6 +49,10 @@ Paste without formatting
 
 Minimize window ⌘ M
 
+Next window
+⌘ \` 
+![[next-window.gif]]
+
 
 Chrome / Safari
 Previous Page / Next page

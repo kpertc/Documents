@@ -995,11 +995,8 @@ console.profileEnd("Name")
 ### [JSON](https://youtu.be/B-k76DMOj2k)
 
 -   JavaScript Object Notation
-    
 -   Data Representation Format
-    
 -   Lightweight and easy to Read/Write
-    
 
 JSON can store types: `String`, `Number`, `Boolean`, `Null`, `Array`, `Object`
 
@@ -1050,11 +1047,8 @@ Type Encode actual content
 64 -> 2^6
 
 Because American Standard Code for Information Interchange (ASCII) only supports 2^7
-
 -   Sending binary data over text-based protocol (such as HTTP)
-    
 -   Ensures text not get corrupted
-    
 -   Does not conceal data
   
 
@@ -1071,4 +1065,24 @@ decodeURIComponent(document.URL)
 
 // 
 encodeURIComponent(document.URL)
+```
+
+### Recursive
+
+```JavaScript
+const foo = (n) => {
+	if(n<=1)return;
+	foo(n-1);
+};
+
+### Add a Object in Global
+```JavaScript
+global.effect = {
+	Ama: "abc"
+};
+```
+
+```JavaScript
+// at another script file
+const Ama = effect.Ama; // will not be undefined
 ```
