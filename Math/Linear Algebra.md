@@ -98,3 +98,32 @@ $$
 Linear Combination|线性组合|add multiple vectors
 Span||The span of a set of vectors is **the set of all linear combinations of the vectors**
 
+
+<br>
+
+### Dot product
+
+满足交换率(commutative)和结合律(Associative property)
+
+Length by 勾股定理
+Length to product
+
+$\lVert \vec a \rVert = \sqrt{ a ^ 2 _1 + a ^ 2 _2 + ... + a ^ 2 _n}$
+
+$\lVert \vec a \rVert = \sqrt{ \vec a \cdot \vec a}$
+
+$\lVert \vec a \rVert ^2 = \vec a \cdot \vec a$
+
+<br>
+
+Cauchy-Schwarz Inequality (柯西-施瓦茨不等式)
+
+$\vec x$, $\vec y \in ℝ^n$,
+$\vec x$, $\vec y$ non zero
+
+dot product of x y is ≤ to product of length x and length y
+
+$|\vec x \cdot \vec y| \le \lVert \vec x \rVert \lVert \vec y \rVert$
+
+
+when $\vec x = c \vec y$, $|\vec x \cdot \vec y| = \lVert \vec x \rVert \lVert \vec y \rVert$
