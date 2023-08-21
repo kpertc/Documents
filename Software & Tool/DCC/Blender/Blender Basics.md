@@ -13,11 +13,9 @@
 
 Dutch animation studio NeoGeo
 1998 first public release
-[upbge.org](https://upbge.org/#/)
+Blender based Game Engine → [upbge.org](https://upbge.org/#/)
+
 ---
-
-  
-
 ### Window Layout
 
 Drag corner to start a new window|Tool Bar -> Press `T`|Sidebar Press `N`
@@ -26,17 +24,25 @@ Drag corner to start a new window|Tool Bar -> Press `T`|Sidebar Press `N`
 `Ctrl` + `Space` Full window
 
 ---
-
 ### Selection
 
-Last selected object -> Active Object
+Last selected object → Active Object
+Other selected object → Selected objects
 
-Other selected object -> Selected objects
+![[img/Blender Basics/activeObject.gif]]
 
-![[img/Blender Basics/activeObject.gif]]|
+`A` Select all  
+`A` + `A` De-selected All
+`L` Select parts
 
 `Ctrl` + `L` copy attribute from active object to selected objects
 ![[img/Blender Basics/copy-modifier.png | 300]]
+
+Ctrl + (Numpad) +/-
+![[ctrl-num+-.gif]]
+
+`Shift G` select similar
+![[select-similar.gif]]
 
 ---
 
@@ -72,15 +78,14 @@ RMB > Assign Shortcut
 		<code>Alt</code> + <code>G</code> Clear Translation
 	</div> 
 	<div>
-		Select<br>
-		<code>A</code> Select all<br>
-		<code>A</code> + <code>A</code> De-selected All<br>
 		<code>Shift</code> + <code>D</code> Duplicate<br>
 		<br>
 		<code>F12</code> Render<br>
 		<code>Ctrl</code> + <code>F12</code> Animation Render
 	</div> 
 	</div>
+
+[Blender Common Shortcuts](https://docs.blender.org/manual/en/latest/interface/keymap/introduction.html)
 
 Extra
 
@@ -113,7 +118,7 @@ Quick Favorites `Q`|Preferences > Save Preferences to save
 
 `Shift` + `A` -> Add|`Shift` + `Space`|SideBar -> View -> Lock Camera to View
 --|--|--
-![[img/Blender Basics/add.png]]|![[img/Blender Basics/cursor-menu.png]]|![[img/Blender Basics/camera-to-view.png]]
+![[img/Blender Basics/add.png]]|![[cursor-menu.png]]|![[img/Blender Basics/camera-to-view.png]]
   
 
 Redo Panel will show when added
@@ -138,29 +143,49 @@ Hold `Shift` + `1` `2` `3` select multiple
 Faces loop selected that runs perpendicular to the edge selected
 ![[img/Blender Basics/SelectFaceLoop.gif]]
 
-
+###### Extrude
 `E` Extrude
+`Alt + E` Extrude along normal
+![[extrude-along-normal.gif]]
 
+###### Separate
 `P` Separate
 ![[img/Blender Basics/Separate.png]]
-  
+
+###### Loop Cut
+`⌘ + R` Loop Cut
+Scroll wheel to change cuts #
+![[loopcut.gif]]
+
+###### Insert
+`i` insert
+`i` twice insert individual
+![[i-twice.gif]]
+
+###### Bevel
+Ctrl B Bevel
+Ctrl ⇧ B Bevel vertex
+
+###### Knife
+`K`
 
 ##### 3D Cursor / Pivot Point
-
 -   The 3D Cursor is used as the origin for any added object
-    
 -   Pivot point or reference pos
 
-  
 
 Select 3D Cursor Icon
 
-`Shift` + 🖱️`Left` move cursor|`Shift` + `S` Selection to Cursor
+`Shift` + `RMB` move cursor|`Shift` + `S` Selection to Cursor
 ---|---
 ![[img/Blender Basics/cursor.png]]|![[img/Blender Basics/Selection to Cursor.png]]
 
-  
+Manually move 3D Cursor
+Panel > View > 3D Cursor
+![[3dcursor-manual.gif]]
+
 <br>
+
 Pivot Point Editing
 
 Change object pivot point by 3D cursor|Manual Edit Tool > Options > Transform > Affect Only Origins
@@ -173,6 +198,11 @@ Show Statistic|Show Measurement (Edit Mode)
 ---|---|---
 ![[img/Blender Basics/showStatistic.gif]]|![[img/Blender Basics/Show Measurement (Edit Mode).png]]|![[img/Blender Basics/viewport-overlay.png \| 100]]
 
+##### Camera
+align camera to view
+`Ctrl Alt Numpad0`
+![[align-camera-to-viewport.png]]
+
 
 ---
 
@@ -184,9 +214,7 @@ Object Property > Relations
 ![[img/Blender Basics/Relations.png | 500]]
 
 Select object `RMB` > Parent
-
   Parent: 1. Select Object 2 select Amature `Ctrl` + `P`
-
   Unparent: Select object `Alt` + `P` unparent
   
 
@@ -198,7 +226,7 @@ Hold `Shift` in Outliner to change parenting|Use Add > Empty as parent for easy 
 ### Learn more about [[Blender Rigging]]
 ---
 
-##### Extra Tips
+### View Tips
 
 `L` Selecting all connected vs `A` select all|Select Mirror
 ---|---
@@ -208,18 +236,25 @@ Proportional Editing (Smooth Selection)|Mouse Scrolling / `Page Up` / `Page Down
 ---|---
 ![[img/Blender Basics/porpotionalEditing.gif]]|![[img/Blender Basics/influence.gif]]
 
-Edge Slide `Shift` + `V`
+####Edge Slide `Shift` + `V`
 
   
 
 `Ctrl` + `Tab` Change Mode
 ![[img/Blender Basics/mode.gif]]
 
-  
+##### [Duplicate Linked](https://docs.blender.org/manual/en/latest/scene_layout/object/editing/duplicate_linked.html) (Instance)
+![[duplicate-linked.gif]]
 
-Display as wireframe in viewport
+##### Display as wireframe in viewport
 ![[img/Blender Basics/viewportDisplay.gif]]
 
+##### Snap to Face
+![[snap-to-face.gif]]
+
+
+---
+### [[Blender Curve]]
 ---
 
 ### Normal
@@ -236,6 +271,9 @@ Show Normal (in Edit Mode)|Show Face Orientation
 
 (Edit Mode) > Mesh > Normals > Flip
 ![[img/Blender Basics/FlipNormal 1.gif]]
+
+
+
 
 ---
 
@@ -293,13 +331,10 @@ Choose a suitable Unwrap Method
 ![[img/Blender Basics/Unwrap Method-1.png]]|![[img/Blender Basics/U.gif]]|![[img/Blender Basics/Unwrap Method-3.png]]
 --|--|--
 
-
-![](https://bytedance.feishu.cn/space/api/box/stream/download/asynccode/?code=MWUyN2U1MmU3YzQ4NWRjMmQ3ZjBjYjU0YjQ4MjY4ZjRfcXVrNENwV2JZeHhwMDg2RENoa3hXNEZCME5yNmh1NUVfVG9rZW46Ym94Y25CVks1cEdlREtRenhxdUFDbFpMWDNkXzE2NzgwMTkxODA6MTY3ODAyMjc4MF9WNA)
+![[unwrap.png|200]]
 
 UV >
-
 Pack Islands = Maya Layout
-
 Average Islands Scale = uniform UV scale
 
 ![[img/Blender Basics/UV Menu.png | 200]]
@@ -388,7 +423,6 @@ Animation Clips in Engine (Unity)
 ### Anotation
 
 `D` + `Left Mouse`
-
 `D` + `Right Mouse`
 
 Manage annotation / delete all -> SideBar -> View -> Anotations
@@ -403,20 +437,32 @@ Slot for storing multiple render images
 
 ![[img/Blender Basics/render-slots.png]]
 
+###### Render Background
+
 Background Lighting
 ![[img/Blender Basics/background-lighting.png | 500]]
 
-Composition Guides
+HDRI
+
+only for viewport|actual render background
+---|---
+![[viewport-background.png]]|![[render-HDRI-background.png]]|
+
+Hide HDRI background Render > Film > Transparent
+See screenshot at [[Blender Basics#Shadow Catcher]]
+
+###### Composition Guides
 
 ![[img/Blender Basics/composition-guides.png \| 300]]|![[img/Blender Basics/composition-guides-preview.png]]
 ---|---
   
 
-Shadow Catcher
+###### Shadow Catcher
 
 Enable Shadow Catcher on the object to be the shadow catcher|Check Film > Transparent
 ---|---
 ![[img/Blender Basics/enable-shadow-catcher.png]]|![[img/Blender Basics/turnon-transparent.png]]
+
 
 
 Holdout
@@ -428,6 +474,10 @@ Turn on Hold out in Filter
 
 Light Visibility
 ![[img/Blender Basics/ray-visibility.png | 300]]
+
+###### Pass
+Depth Map → Mist Pass
+![[depth-map.png]]
 
 ### [[Blender Compositing]]
 
@@ -473,7 +523,5 @@ Blender|Houdini
 ### 踩坑
 
 -   导入骨骼方向不对-> Amature > Automatic Bone Orient
-    
 -   MegaScan Bridge Blender Plugin需要手动zip一下文件夹才能安装。Plugin位置在Bridge的资源文件夹。
-    
 -   Mixamo的Control Rig只能在Mixamo的骨骼上生效
