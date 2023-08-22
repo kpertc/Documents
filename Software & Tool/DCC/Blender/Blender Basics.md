@@ -23,6 +23,22 @@ Drag corner to start a new window|Tool Bar -> Press `T`|Sidebar Press `N`
 ![[img/Blender Basics/blenderDragCorner.gif]]|![[img/Blender Basics/T.gif]]|![[img/Blender Basics/N.gif \| 100]]
 `Ctrl` + `Space` Full window
 
+`Ctrl` + `MMB` UI Scale
+![[control-MMB-scale.gif]]
+
+---
+### Editing Values
+##### Edit Multiple Values
+Drag|Type
+---|---
+![[edit-multiple-values.gif]]|![[edit-multiple-values-2.gif]]
+
+##### Perform Calculation
+![[calculate.gif]]
+
+##### Hold `Shift` to slow
+![[shift-to-slow.gif]]
+
 ---
 ### Selection
 
@@ -56,17 +72,31 @@ RMB > Assign Shortcut
 		<code>1</code>Vertex<br>
 		<code>2</code>Edge<br>
 		<code>3</code>Face <br>
-		<code>Shift</code>Multi-select<br>
+		<code>Shift</code> Multi-select<br>
 		<br>
 		<code>X</code>Delete<br>
 		<code>H</code>Hide<br>
 		<code>Alt</code>+<code>H</code>unHide
+		<br>
+		<br>
+		<code>F2</code> Rename<br>
+		<code>F3</code> Search<br>
+		<br>
+		Edit Mode<br>
+		<code>Ctrl F</code> Face Menu<br>
+		<code>Ctrl E</code> Edge Menu<br>
+		<code>Ctrl V</code> Vertex Menu<br>
 	</div> 
 	<div> 
-		<code>G</code>Move (Grab, Translate)<br>
-		<code>R</code>Rotate<br>
+		<code>G</code> Move (Grab, Translation)<br>
+		<code>R</code> Rotate<br>
+		<code>S</code> Scale<br>
 		then X Y Z to constrain Axis
 		<br>
+		<br>
+		<code>Alt G</code> Clear Translation<br>
+		<code>Alt R</code> Clear Rotation<br>
+		<code>Alt S</code> Clear Scale<br>
 		<br>
 		 <code>Shift</code> +  <code>Space</code> then  <code>G</code> /  <code>R</code> /  <code>S</code> will show the gizmo
 		<hr>
@@ -86,12 +116,12 @@ RMB > Assign Shortcut
 	</div>
 
 [Blender Common Shortcuts](https://docs.blender.org/manual/en/latest/interface/keymap/introduction.html)
+https://www.dummies.com/article/technology/software/animation-software/blender/blender-for-dummies-cheat-sheet-208646/
 
-Extra
-
-![[img/Blender Basics/color-cubes.png]]|![[img/Blender Basics/random-shading.png \| 300]]
----|---
-
+Alt + G: move to world origin
+Alt + G / R / S
+Clear Translation Rotation Scale
+![[clear-translation-rotation-scale.gif]]
 
 ##### Outliner
 
@@ -147,6 +177,7 @@ Faces loop selected that runs perpendicular to the edge selected
 `E` Extrude
 `Alt + E` Extrude along normal
 ![[extrude-along-normal.gif]]
+Spin Tool -> 3D Cursor as pivot point
 
 ###### Separate
 `P` Separate
@@ -168,6 +199,14 @@ Ctrl ⇧ B Bevel vertex
 
 ###### Knife
 `K`
+
+###### Merge
+`M`
+![[merge-to-single-vertex.gif]]
+
+###### Create Face
+`F`
+![[create-face.gif]]
 
 ##### 3D Cursor / Pivot Point
 -   The 3D Cursor is used as the origin for any added object
@@ -252,6 +291,22 @@ Proportional Editing (Smooth Selection)|Mouse Scrolling / `Page Up` / `Page Down
 ##### Snap to Face
 ![[snap-to-face.gif]]
 
+##### viewport cavity
+
+> Highlight ridges and valleys in the scene geometry.
+
+![[viewport-cavity.gif]]
+
+##### viewport color
+
+![[img/Blender Basics/color-cubes.png]]|![[img/Blender Basics/random-shading.png \| 300]]
+---|---
+
+##### Hold `Alt` for Orthographic
+![[alt-snap-orthoview.gif]]
+
+##### `Ctrl C \ V` Copy cross blender instance
+![[copy-cross-blender.gif]]
 
 ---
 ### [[Blender Curve]]
@@ -291,6 +346,9 @@ Show Normal (in Edit Mode)|Show Face Orientation
 Change World / Object|Assign Material
 ---|---
 ![[img/Blender Basics/world.png]]|![[img/Blender Basics/assignMat.gif]]
+
+`Ctrl H`
+![[iShot_2023-08-22_19.45.10.gif]]
 
 ---
 
@@ -425,7 +483,7 @@ Animation Clips in Engine (Unity)
 `D` + `Left Mouse`
 `D` + `Right Mouse`
 
-Manage annotation / delete all -> SideBar -> View -> Anotations
+Manage annotation / delete all -> SideBar -> View -> Annotations
 
 ---
 
@@ -435,7 +493,8 @@ Manage annotation / delete all -> SideBar -> View -> Anotations
 
 Slot for storing multiple render images
 
-![[img/Blender Basics/render-slots.png]]
+![[img/Blender Basics/render-slots.png\|400]]|![[render-slot.png]] 
+---|---
 
 ###### Render Background
 

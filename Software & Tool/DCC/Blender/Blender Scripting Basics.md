@@ -7,7 +7,6 @@ Blender is written in C/C++/Python, learn more about: [Reference/FAQ - Blender D
 [[Blender Scripting Operator & Add-on]]
 
 ---
-
 ### Shortcuts
 
 `Alt` / `Option` + `P` Run Script
