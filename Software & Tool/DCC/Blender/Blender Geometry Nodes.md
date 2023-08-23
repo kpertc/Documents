@@ -74,6 +74,8 @@ Geometry Nodes is a modifier [[Blender Modifier]]
 </div>
 
 <br>
+Transform
+Distribute Points on Faces
 
 ### Custom Inputs
 
@@ -94,17 +96,19 @@ Frame<br>Shift + P Frame (Node Wrangler)<br>Select node `delete` delete frame|To
 
 
 
+### Best Practice
+
+##### Instance Objects
+![[instance-objects.png]]
+
+
 <br>
 
-### Node wrangler (Add-on)
 
-https://www.youtube.com/watch?v=1Vg8yAlJwjo
-
-
-![[img/Blender Geometry Nodes/nodewangler-addon.png]]|`Shift` + `=` Align![[img/Blender Geometry Nodes/alignNode.gif]]
----|---
-  
 Edit node name|Ctrl Shift add a viewer node
 ---|---
 ![[img/Blender Geometry Nodes/Edit node name.png]]|
+
+
+
 

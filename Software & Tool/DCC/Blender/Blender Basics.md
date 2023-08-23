@@ -1,14 +1,27 @@
 
-[[Blender Modifier]]
-
-
 ### Tutorial
 [[YouTube] Complete Beginners Guide by Grant Abbitt](https://www.youtube.com/watch?v=jnj2BL4chaQ&list=PLn3ukorJv4vuU3ILv3g3xnUyEGOQR-D8J&index=1)
-
-##### Screen Cast Keys addon → [[Screen Cast Keys addon]]
   
 ---
+### Important
 
+##### Screen Cast Keys add-on → [[Screen Cast Keys addon]]
+##### Online Manual
+`RMB` to Blender online manual
+![[online-manual.gif]]
+
+##### Undo Steps
+System > Memory & Limits
+![[undo-steps.png]]
+
+Find recovery files
+![[recover-saves.png]]
+
+##### `.blend1` file
+backup file before save, open `.blend1` in Blender ↓
+![[open-blend1.png|300]]
+
+---
 ### History
 
 Dutch animation studio NeoGeo
@@ -67,6 +80,10 @@ Ctrl + (Numpad) +/-
 RMB > Assign Shortcut
 ![[img/Blender Basics/assign-shortcut.png | 200]]
 
+Fly/Walk Navigation
+`Shift ~` 
+![[Fly-Walk-Navigation.gif]]
+
 <div style="display: grid; grid-template-columns: repeat(3, 2fr); grid-gap: 10px;">
 	<div>
 		<code>1</code>Vertex<br>
@@ -109,6 +126,8 @@ RMB > Assign Shortcut
 	</div> 
 	<div>
 		<code>Shift</code> + <code>D</code> Duplicate<br>
+		<code>Ctrl M</code> Mirror<br>
+		<code>Ctrl L</code> Link<br>
 		<br>
 		<code>F12</code> Render<br>
 		<code>Ctrl</code> + <code>F12</code> Animation Render
@@ -219,6 +238,9 @@ Select 3D Cursor Icon
 ---|---
 ![[img/Blender Basics/cursor.png]]|![[img/Blender Basics/Selection to Cursor.png]]
 
+`Shift RMB` Move 3D Cursor
+`Shift C` Center 3D Cursor
+
 Manually move 3D Cursor
 Panel > View > 3D Cursor
 ![[3dcursor-manual.gif]]
@@ -267,6 +289,10 @@ Hold `Shift` in Outliner to change parenting|Use Add > Empty as parent for easy 
 
 ### View Tips
 
+##### Isolate view
+`/`
+![[isolate-view.gif]]
+
 `L` Selecting all connected vs `A` select all|Select Mirror
 ---|---
 ![[img/Blender Basics/selectAll.gif]]|![[img/Blender Basics/selectMirror.gif]]
@@ -275,7 +301,7 @@ Proportional Editing (Smooth Selection)|Mouse Scrolling / `Page Up` / `Page Down
 ---|---
 ![[img/Blender Basics/porpotionalEditing.gif]]|![[img/Blender Basics/influence.gif]]
 
-####Edge Slide `Shift` + `V`
+##### Edge Slide `Shift` + `V`
 
   
 
@@ -285,7 +311,7 @@ Proportional Editing (Smooth Selection)|Mouse Scrolling / `Page Up` / `Page Down
 ##### [Duplicate Linked](https://docs.blender.org/manual/en/latest/scene_layout/object/editing/duplicate_linked.html) (Instance)
 ![[duplicate-linked.gif]]
 
-##### Display as wireframe in viewport
+#####  viewport Display as wireframe
 ![[img/Blender Basics/viewportDisplay.gif]]
 
 ##### Snap to Face
@@ -328,7 +354,8 @@ Show Normal (in Edit Mode)|Show Face Orientation
 ![[img/Blender Basics/FlipNormal 1.gif]]
 
 
-
+---
+### [[Blender Modifier]]
 
 ---
 
@@ -343,12 +370,29 @@ Show Normal (in Edit Mode)|Show Face Orientation
 
 ### Shader Editor
 
-Change World / Object|Assign Material
----|---
-![[img/Blender Basics/world.png]]|![[img/Blender Basics/assignMat.gif]]
+Change World / Object|Assign Material|Drag to apply Material
+---|---|---
+![[img/Blender Basics/world.png]]|![[img/Blender Basics/assignMat.gif]]|![[drag-applyMaterial.gif]]
+
+
 
 `Ctrl H`
 ![[iShot_2023-08-22_19.45.10.gif]]
+
+Find nodes
+`Ctrl F`
+![[find-nodes.gif]]
+
+Perlin Noise Texture
+[Musgrave Texture Node](https://docs.blender.org/manual/en/latest/render/shader_nodes/textures/musgrave.html)
+
+(UV Control)
+Texture Coordinate → Mapping → Texture
+
+- Mix (Color) Blending Mode
+- Color Ramp
+
+Math 
 
 ---
 
@@ -362,7 +406,17 @@ Change World / Object|Assign Material
 Delete Images Outliner > Blender File|Unpack all media file
 ---|---
 ![[img/Blender Basics/deleteResource.gif]]|![[img/Blender Basics/unpack-resource.png]]
-  
+
+---
+
+### Clean
+
+To clean un-used texture …
+![[clean-up.png]]
+
+Remove unused slots (material)
+![[remove-unused-slots.gif]]
+
 
 ---
 
@@ -538,8 +592,31 @@ Light Visibility
 Depth Map → Mist Pass
 ![[depth-map.png]]
 
+
+Render Checklist
+
+> [50+ Blender Tips and Tricks (that take even OG blender users by surprise!) by stache](https://www.youtube.com/watch?v=_hqCXI2vUa0)
+Lens Distortion?
+Blur the Final Render
+Match White Point and Black Point
+Flip Image for New Perspective
+Draw Compositional Lines to check where the viewer's attention might go
+Lens Dirt
+Lens Flares
+Bloom
+Volumetric Cube
+Break the Silhouette of Boring straight Lines in the render
+Is the Camera at an angle where a real camera can actually be placed?
+Squint Eye to Check Render's Focal Point
+Try Textured Lights/Gobos/ES Lights
+Normal map Decals on any model?
+Triangle Composition where the Eye is dragged to the Pointed part of the triangle
+People Like Being Rewarded when they Zoom in
+
+---
 ### [[Blender Compositing]]
 
+---
 
 Export file format
 
