@@ -116,14 +116,20 @@ $\lVert \vec a \rVert ^2 = \vec a \cdot \vec a$
 
 <br>
 
-Cauchy-Schwarz Inequality (柯西-施瓦茨不等式)
-
+##### Cauchy-Schwarz Inequality (柯西-施瓦茨不等式)
 $\vec x$, $\vec y \in ℝ^n$,
 $\vec x$, $\vec y$ non zero
 
 dot product of x y is ≤ to product of length x and length y
 
 $|\vec x \cdot \vec y| \le \lVert \vec x \rVert \lVert \vec y \rVert$
-
-
 when $\vec x = c \vec y$, $|\vec x \cdot \vec y| = \lVert \vec x \rVert \lVert \vec y \rVert$
+
+$$ \vec x \cdot \vec y \le |\vec x \cdot \vec y| $$
+
+$\vec x \cdot \vec y < |\vec x \cdot \vec y|$ could be negative, → less than
+
+##### Triangle Inequality
+由Cauchy-Schwarz Inequality推导出来
+
+$||\vec x + \vec y|| \le ||\vec x|| + ||\vec y||$

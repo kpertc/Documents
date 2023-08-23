@@ -41,8 +41,8 @@ Homogeneous coordinates||齐次坐标|
 Linear Transformation||线性变换|Rotation, Scale, Orthographic Projection, Reflection, Shearing<li>All lines remains on line</li><li>Origin -> fixed</li><br>Paralleled & Even space<br>Transform is not linear transformation
 [Affine Transformation](https://www.youtube.com/watch?v=E3Phj6J287o)||仿射变换|平移 + 线性变换
 Upright Space||直立空间|World Space ⇌ Upright Space ⇌ Object Space<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp平移 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp旋转
-Eigenvector||特征向量| only scale not rotate
-Eigenvalue||特征值|
+Eigenvector||特征向量|only scale not rotate ![[eigenvector.png\|200]]
+Eigenvalue||特征值|Scale factor → Eigenvalue
 Polar coordinates||极坐标系|(r,θ)
 
 <br>
