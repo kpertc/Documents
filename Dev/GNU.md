@@ -15,3 +15,5 @@ Unix - proprietary Linux - free
 
 ![[grep-BSD.png|500]]
 
+
+Mac → BSD version, can install GNU version by Homebrew

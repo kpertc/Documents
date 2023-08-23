@@ -106,6 +106,18 @@ Transposed Matrix|T<br>$$m^\intercal$$|转置矩阵|$$\begin{bmatrix}1&2&3\\4&5&
 Orthogonal Matrix||正交矩阵|
 
 
+
+Matrix x Vector
+matrix column # match vector #
+
+$$ 
+A = \begin{bmatrix} a_{11}&a_{22}&\dots&a_{1n}\\ a_{21}&a_{22}&\dots&a_{2n}\\ \vdots&\vdots&\vdots&\vdots\\ a_{m1}&a_{m2}&\dots&a_{mn}\\ \end{bmatrix}
+\begin{bmatrix} x_1\\ x_2\\ \vdots\\ x_m\\ \end{bmatrix}
+=
+\begin{bmatrix} a_{11}x_1&a_{22}x_2&\dots&a_{1n}x_n\\ a_{21}x_1&a_{22}x_2&\dots&a_{2n}x_n\\ \vdots&\vdots&\vdots&\vdots\\ a_{m1}x_1&a_{m2}x_2&\dots&a_{mn}x_n\\ \end{bmatrix} 
+$$
+
+
 2x2 square matrix
 $$
 \begin{bmatrix}

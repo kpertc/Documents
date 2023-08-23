@@ -17,6 +17,7 @@ Cmd + K|clear
 Up / Down Arrow Key|History
 q|quit
 
+[Common Terminal Commands by bradtraversy](https://gist.github.com/bradtraversy/cc180de0edee05075a6139e42d5f28ce)
 
 ```bash
 # for comment 
@@ -30,16 +31,18 @@ q|quit
 files=$(ls) #sub shell?
 
 env # show all environment variable
-date
 echo $PATH
-```
-![[date.png]]
 
-`man` command in Linux is used to display the user manual of any command that we can run on the terminal
-``` shell
+whoami # show current user
+
+date # show data
+
+history # show command history
+
+man #  show the user manual of any command 
 man git
 ```
-
+![[date.png]]
 
 <br>
 

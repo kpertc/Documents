@@ -3,8 +3,6 @@
 
 Search bar ⌘ L 
 
-![[chrome-fullscreen-shot.png]]
-
 Switch Tabs
 Option + ⌘ +  ↑ / ↓
 

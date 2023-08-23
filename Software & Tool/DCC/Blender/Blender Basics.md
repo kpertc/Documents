@@ -1,23 +1,34 @@
 
-[[Blender Modifier]]
-
-
 ### Tutorial
 [[YouTube] Complete Beginners Guide by Grant Abbitt](https://www.youtube.com/watch?v=jnj2BL4chaQ&list=PLn3ukorJv4vuU3ILv3g3xnUyEGOQR-D8J&index=1)
-
-##### Screen Cast Keys addon → [[Screen Cast Keys addon]]
   
 ---
+### Important
 
+##### Screen Cast Keys add-on → [[Screen Cast Keys addon]]
+##### Online Manual
+`RMB` to Blender online manual
+![[online-manual.gif]]
+
+##### Undo Steps
+System > Memory & Limits
+![[undo-steps.png]]
+
+Find recovery files
+![[recover-saves.png]]
+
+##### `.blend1` file
+backup file before save, open `.blend1` in Blender ↓
+![[open-blend1.png|300]]
+
+---
 ### History
 
 Dutch animation studio NeoGeo
 1998 first public release
-[upbge.org](https://upbge.org/#/)
+Blender based Game Engine → [upbge.org](https://upbge.org/#/)
+
 ---
-
-  
-
 ### Window Layout
 
 Drag corner to start a new window|Tool Bar -> Press `T`|Sidebar Press `N`
@@ -25,18 +36,42 @@ Drag corner to start a new window|Tool Bar -> Press `T`|Sidebar Press `N`
 ![[img/Blender Basics/blenderDragCorner.gif]]|![[img/Blender Basics/T.gif]]|![[img/Blender Basics/N.gif \| 100]]
 `Ctrl` + `Space` Full window
 
----
+`Ctrl` + `MMB` UI Scale
+![[control-MMB-scale.gif]]
 
+---
+### Editing Values
+##### Edit Multiple Values
+Drag|Type
+---|---
+![[edit-multiple-values.gif]]|![[edit-multiple-values-2.gif]]
+
+##### Perform Calculation
+![[calculate.gif]]
+
+##### Hold `Shift` to slow
+![[shift-to-slow.gif]]
+
+---
 ### Selection
 
-Last selected object -> Active Object
+Last selected object → Active Object
+Other selected object → Selected objects
 
-Other selected object -> Selected objects
+![[img/Blender Basics/activeObject.gif]]
 
-![[img/Blender Basics/activeObject.gif]]|
+`A` Select all  
+`A` + `A` De-selected All
+`L` Select parts
 
 `Ctrl` + `L` copy attribute from active object to selected objects
 ![[img/Blender Basics/copy-modifier.png | 300]]
+
+Ctrl + (Numpad) +/-
+![[ctrl-num+-.gif]]
+
+`Shift G` select similar
+![[select-similar.gif]]
 
 ---
 
@@ -45,22 +80,40 @@ Other selected object -> Selected objects
 RMB > Assign Shortcut
 ![[img/Blender Basics/assign-shortcut.png | 200]]
 
+Fly/Walk Navigation
+`Shift ~` 
+![[Fly-Walk-Navigation.gif]]
+
 <div style="display: grid; grid-template-columns: repeat(3, 2fr); grid-gap: 10px;">
 	<div>
 		<code>1</code>Vertex<br>
 		<code>2</code>Edge<br>
 		<code>3</code>Face <br>
-		<code>Shift</code>Multi-select<br>
+		<code>Shift</code> Multi-select<br>
 		<br>
 		<code>X</code>Delete<br>
 		<code>H</code>Hide<br>
 		<code>Alt</code>+<code>H</code>unHide
+		<br>
+		<br>
+		<code>F2</code> Rename<br>
+		<code>F3</code> Search<br>
+		<br>
+		Edit Mode<br>
+		<code>Ctrl F</code> Face Menu<br>
+		<code>Ctrl E</code> Edge Menu<br>
+		<code>Ctrl V</code> Vertex Menu<br>
 	</div> 
 	<div> 
-		<code>G</code>Move (Grab, Translate)<br>
-		<code>R</code>Rotate<br>
+		<code>G</code> Move (Grab, Translation)<br>
+		<code>R</code> Rotate<br>
+		<code>S</code> Scale<br>
 		then X Y Z to constrain Axis
 		<br>
+		<br>
+		<code>Alt G</code> Clear Translation<br>
+		<code>Alt R</code> Clear Rotation<br>
+		<code>Alt S</code> Clear Scale<br>
 		<br>
 		 <code>Shift</code> +  <code>Space</code> then  <code>G</code> /  <code>R</code> /  <code>S</code> will show the gizmo
 		<hr>
@@ -72,21 +125,22 @@ RMB > Assign Shortcut
 		<code>Alt</code> + <code>G</code> Clear Translation
 	</div> 
 	<div>
-		Select<br>
-		<code>A</code> Select all<br>
-		<code>A</code> + <code>A</code> De-selected All<br>
 		<code>Shift</code> + <code>D</code> Duplicate<br>
+		<code>Ctrl M</code> Mirror<br>
+		<code>Ctrl L</code> Link<br>
 		<br>
 		<code>F12</code> Render<br>
 		<code>Ctrl</code> + <code>F12</code> Animation Render
 	</div> 
 	</div>
 
-Extra
+[Blender Common Shortcuts](https://docs.blender.org/manual/en/latest/interface/keymap/introduction.html)
+https://www.dummies.com/article/technology/software/animation-software/blender/blender-for-dummies-cheat-sheet-208646/
 
-![[img/Blender Basics/color-cubes.png]]|![[img/Blender Basics/random-shading.png \| 300]]
----|---
-
+Alt + G: move to world origin
+Alt + G / R / S
+Clear Translation Rotation Scale
+![[clear-translation-rotation-scale.gif]]
 
 ##### Outliner
 
@@ -113,7 +167,7 @@ Quick Favorites `Q`|Preferences > Save Preferences to save
 
 `Shift` + `A` -> Add|`Shift` + `Space`|SideBar -> View -> Lock Camera to View
 --|--|--
-![[img/Blender Basics/add.png]]|![[img/Blender Basics/cursor-menu.png]]|![[img/Blender Basics/camera-to-view.png]]
+![[img/Blender Basics/add.png]]|![[cursor-menu.png]]|![[img/Blender Basics/camera-to-view.png]]
   
 
 Redo Panel will show when added
@@ -138,29 +192,61 @@ Hold `Shift` + `1` `2` `3` select multiple
 Faces loop selected that runs perpendicular to the edge selected
 ![[img/Blender Basics/SelectFaceLoop.gif]]
 
-
+###### Extrude
 `E` Extrude
+`Alt + E` Extrude along normal
+![[extrude-along-normal.gif]]
+Spin Tool -> 3D Cursor as pivot point
 
+###### Separate
 `P` Separate
 ![[img/Blender Basics/Separate.png]]
-  
+
+###### Loop Cut
+`⌘ + R` Loop Cut
+Scroll wheel to change cuts #
+![[loopcut.gif]]
+
+###### Insert
+`i` insert
+`i` twice insert individual
+![[i-twice.gif]]
+
+###### Bevel
+Ctrl B Bevel
+Ctrl ⇧ B Bevel vertex
+
+###### Knife
+`K`
+
+###### Merge
+`M`
+![[merge-to-single-vertex.gif]]
+
+###### Create Face
+`F`
+![[create-face.gif]]
 
 ##### 3D Cursor / Pivot Point
-
 -   The 3D Cursor is used as the origin for any added object
-    
 -   Pivot point or reference pos
 
-  
 
 Select 3D Cursor Icon
 
-`Shift` + 🖱️`Left` move cursor|`Shift` + `S` Selection to Cursor
+`Shift` + `RMB` move cursor|`Shift` + `S` Selection to Cursor
 ---|---
 ![[img/Blender Basics/cursor.png]]|![[img/Blender Basics/Selection to Cursor.png]]
 
-  
+`Shift RMB` Move 3D Cursor
+`Shift C` Center 3D Cursor
+
+Manually move 3D Cursor
+Panel > View > 3D Cursor
+![[3dcursor-manual.gif]]
+
 <br>
+
 Pivot Point Editing
 
 Change object pivot point by 3D cursor|Manual Edit Tool > Options > Transform > Affect Only Origins
@@ -173,6 +259,11 @@ Show Statistic|Show Measurement (Edit Mode)
 ---|---|---
 ![[img/Blender Basics/showStatistic.gif]]|![[img/Blender Basics/Show Measurement (Edit Mode).png]]|![[img/Blender Basics/viewport-overlay.png \| 100]]
 
+##### Camera
+align camera to view
+`Ctrl Alt Numpad0`
+![[align-camera-to-viewport.png]]
+
 
 ---
 
@@ -184,9 +275,7 @@ Object Property > Relations
 ![[img/Blender Basics/Relations.png | 500]]
 
 Select object `RMB` > Parent
-
   Parent: 1. Select Object 2 select Amature `Ctrl` + `P`
-
   Unparent: Select object `Alt` + `P` unparent
   
 
@@ -198,7 +287,11 @@ Hold `Shift` in Outliner to change parenting|Use Add > Empty as parent for easy 
 ### Learn more about [[Blender Rigging]]
 ---
 
-##### Extra Tips
+### View Tips
+
+##### Isolate view
+`/`
+![[isolate-view.gif]]
 
 `L` Selecting all connected vs `A` select all|Select Mirror
 ---|---
@@ -208,18 +301,41 @@ Proportional Editing (Smooth Selection)|Mouse Scrolling / `Page Up` / `Page Down
 ---|---
 ![[img/Blender Basics/porpotionalEditing.gif]]|![[img/Blender Basics/influence.gif]]
 
-Edge Slide `Shift` + `V`
+##### Edge Slide `Shift` + `V`
 
   
 
 `Ctrl` + `Tab` Change Mode
 ![[img/Blender Basics/mode.gif]]
 
-  
+##### [Duplicate Linked](https://docs.blender.org/manual/en/latest/scene_layout/object/editing/duplicate_linked.html) (Instance)
+![[duplicate-linked.gif]]
 
-Display as wireframe in viewport
+#####  viewport Display as wireframe
 ![[img/Blender Basics/viewportDisplay.gif]]
 
+##### Snap to Face
+![[snap-to-face.gif]]
+
+##### viewport cavity
+
+> Highlight ridges and valleys in the scene geometry.
+
+![[viewport-cavity.gif]]
+
+##### viewport color
+
+![[img/Blender Basics/color-cubes.png]]|![[img/Blender Basics/random-shading.png \| 300]]
+---|---
+
+##### Hold `Alt` for Orthographic
+![[alt-snap-orthoview.gif]]
+
+##### `Ctrl C \ V` Copy cross blender instance
+![[copy-cross-blender.gif]]
+
+---
+### [[Blender Curve]]
 ---
 
 ### Normal
@@ -237,6 +353,10 @@ Show Normal (in Edit Mode)|Show Face Orientation
 (Edit Mode) > Mesh > Normals > Flip
 ![[img/Blender Basics/FlipNormal 1.gif]]
 
+
+---
+### [[Blender Modifier]]
+
 ---
 
 ### Outliner
@@ -250,9 +370,29 @@ Show Normal (in Edit Mode)|Show Face Orientation
 
 ### Shader Editor
 
-Change World / Object|Assign Material
----|---
-![[img/Blender Basics/world.png]]|![[img/Blender Basics/assignMat.gif]]
+Change World / Object|Assign Material|Drag to apply Material
+---|---|---
+![[img/Blender Basics/world.png]]|![[img/Blender Basics/assignMat.gif]]|![[drag-applyMaterial.gif]]
+
+
+
+`Ctrl H`
+![[iShot_2023-08-22_19.45.10.gif]]
+
+Find nodes
+`Ctrl F`
+![[find-nodes.gif]]
+
+Perlin Noise Texture
+[Musgrave Texture Node](https://docs.blender.org/manual/en/latest/render/shader_nodes/textures/musgrave.html)
+
+(UV Control)
+Texture Coordinate → Mapping → Texture
+
+- Mix (Color) Blending Mode
+- Color Ramp
+
+Math 
 
 ---
 
@@ -266,7 +406,17 @@ Change World / Object|Assign Material
 Delete Images Outliner > Blender File|Unpack all media file
 ---|---
 ![[img/Blender Basics/deleteResource.gif]]|![[img/Blender Basics/unpack-resource.png]]
-  
+
+---
+
+### Clean
+
+To clean un-used texture …
+![[clean-up.png]]
+
+Remove unused slots (material)
+![[remove-unused-slots.gif]]
+
 
 ---
 
@@ -293,13 +443,10 @@ Choose a suitable Unwrap Method
 ![[img/Blender Basics/Unwrap Method-1.png]]|![[img/Blender Basics/U.gif]]|![[img/Blender Basics/Unwrap Method-3.png]]
 --|--|--
 
-
-![](https://bytedance.feishu.cn/space/api/box/stream/download/asynccode/?code=MWUyN2U1MmU3YzQ4NWRjMmQ3ZjBjYjU0YjQ4MjY4ZjRfcXVrNENwV2JZeHhwMDg2RENoa3hXNEZCME5yNmh1NUVfVG9rZW46Ym94Y25CVks1cEdlREtRenhxdUFDbFpMWDNkXzE2NzgwMTkxODA6MTY3ODAyMjc4MF9WNA)
+![[unwrap.png|200]]
 
 UV >
-
 Pack Islands = Maya Layout
-
 Average Islands Scale = uniform UV scale
 
 ![[img/Blender Basics/UV Menu.png | 200]]
@@ -388,10 +535,9 @@ Animation Clips in Engine (Unity)
 ### Anotation
 
 `D` + `Left Mouse`
-
 `D` + `Right Mouse`
 
-Manage annotation / delete all -> SideBar -> View -> Anotations
+Manage annotation / delete all -> SideBar -> View -> Annotations
 
 ---
 
@@ -401,22 +547,35 @@ Manage annotation / delete all -> SideBar -> View -> Anotations
 
 Slot for storing multiple render images
 
-![[img/Blender Basics/render-slots.png]]
+![[img/Blender Basics/render-slots.png\|400]]|![[render-slot.png]] 
+---|---
+
+###### Render Background
 
 Background Lighting
 ![[img/Blender Basics/background-lighting.png | 500]]
 
-Composition Guides
+HDRI
+
+only for viewport|actual render background
+---|---
+![[viewport-background.png]]|![[render-HDRI-background.png]]|
+
+Hide HDRI background Render > Film > Transparent
+See screenshot at [[Blender Basics#Shadow Catcher]]
+
+###### Composition Guides
 
 ![[img/Blender Basics/composition-guides.png \| 300]]|![[img/Blender Basics/composition-guides-preview.png]]
 ---|---
   
 
-Shadow Catcher
+###### Shadow Catcher
 
 Enable Shadow Catcher on the object to be the shadow catcher|Check Film > Transparent
 ---|---
 ![[img/Blender Basics/enable-shadow-catcher.png]]|![[img/Blender Basics/turnon-transparent.png]]
+
 
 
 Holdout
@@ -429,8 +588,35 @@ Turn on Hold out in Filter
 Light Visibility
 ![[img/Blender Basics/ray-visibility.png | 300]]
 
+###### Pass
+Depth Map → Mist Pass
+![[depth-map.png]]
+
+
+Render Checklist
+
+> [50+ Blender Tips and Tricks (that take even OG blender users by surprise!) by stache](https://www.youtube.com/watch?v=_hqCXI2vUa0)
+Lens Distortion?
+Blur the Final Render
+Match White Point and Black Point
+Flip Image for New Perspective
+Draw Compositional Lines to check where the viewer's attention might go
+Lens Dirt
+Lens Flares
+Bloom
+Volumetric Cube
+Break the Silhouette of Boring straight Lines in the render
+Is the Camera at an angle where a real camera can actually be placed?
+Squint Eye to Check Render's Focal Point
+Try Textured Lights/Gobos/ES Lights
+Normal map Decals on any model?
+Triangle Composition where the Eye is dragged to the Pointed part of the triangle
+People Like Being Rewarded when they Zoom in
+
+---
 ### [[Blender Compositing]]
 
+---
 
 Export file format
 
@@ -473,7 +659,5 @@ Blender|Houdini
 ### 踩坑
 
 -   导入骨骼方向不对-> Amature > Automatic Bone Orient
-    
 -   MegaScan Bridge Blender Plugin需要手动zip一下文件夹才能安装。Plugin位置在Bridge的资源文件夹。
-    
 -   Mixamo的Control Rig只能在Mixamo的骨骼上生效
