@@ -88,14 +88,6 @@ Connect empty dot to create new input
 <br>
   
 
-### Tips for increasing productivity
-
-Frame<br>Shift + P Frame (Node Wrangler)<br>Select node `delete` delete frame|Toggle Node Mute|Hold Alt move
---|--|--
-![[img/Blender Geometry Nodes/frame.png]]|![[img/Blender Geometry Nodes/toggleNodeMute.gif]]|![[img/Blender Geometry Nodes/holdAlt.gif]]
-
-
-
 ### Best Practice
 
 ##### Instance Objects

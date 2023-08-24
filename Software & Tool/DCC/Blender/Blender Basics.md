@@ -21,6 +21,9 @@ Find recovery files
 backup file before save, open `.blend1` in Blender ↓
 ![[open-blend1.png|300]]
 
+##### Save preferences
+![[preferences.png]]
+
 ---
 ### History
 
@@ -83,6 +86,25 @@ RMB > Assign Shortcut
 Fly/Walk Navigation
 `Shift ~` 
 ![[Fly-Walk-Navigation.gif]]
+
+##### Rotation
+
+[Everything You NEED to Know About How to Rotate Objects in Blender by Brandon's Drawings](https://youtu.be/8DbqvMOo_3s?si=-kk-_hjFGiO6aBlb)
+
+`RX20`  rotate 20 degree along X-Axis|Axis(X, Y, Z) to toggle world/object space<br>Z (Global) Z (Local) Z (Unrestricted Axis)
+---|---
+![[RX20.gif]]|![[rotation-space.gif]]
+
+`-`Reverse 45 degree
+`RR` Free Rotation (3D)
+`RMB` to cancel
+
+Pivot Point Comparison
+![[rotation-pivotpoint-comparison.gif]]
+
+Active Object → yellow outline object
+
+---
 
 <div style="display: grid; grid-template-columns: repeat(3, 2fr); grid-gap: 10px;">
 	<div>
@@ -400,12 +422,33 @@ Math
 
 ### Fake User - 保存没有使用的资源
 
--   0-No User
--   F-Fake user
+Data Block
 
-Delete Images Outliner > Blender File|Unpack all media file
+https://brandonsdrawings.com/blender-data/
+
+##### 0-No User
+	- will be deleted if no user
+
+Orphan Data
+> When a data block is not being used in a Blender file at all, it is referred to as “Orphan Data.”
+
+> `Purge` button will purge all orphan data that does not have a fake user assigned. This is how we delete unused data in Blender.
+
+Blender will purge orphan data every time when close Blender
+
+![[orphandata.gif]] | ![[orphandata-purge.jpeg]]
 ---|---
-![[img/Blender Basics/deleteResource.gif]]|![[img/Blender Basics/unpack-resource.png]]
+
+##### F-Fake user
+	-  save for later
+
+Delete Images Outliner > Blender File|Unpack all media file|Set Fake User at Outliner
+---|---|---
+![[img/Blender Basics/deleteResource.gif]]|![[img/Blender Basics/unpack-resource.png]]|![[add-fakeuser-outliner.png]]
+
+1. Set Fake User 
+2. Save Startup File
+3. Faker User Data will show at new file
 
 ---
 
@@ -634,6 +677,12 @@ Bake Normal texture -> Color Space: Non-Color
 ---
 
 ### [[Blender Scripting Basics]]
+
+---
+
+### Assets Libraries
+
+Preferences > File Paths > Asset Libraries
 
 ---
 
