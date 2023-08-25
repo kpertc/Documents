@@ -45,6 +45,7 @@ Geometry Nodes is a modifier [[Blender Modifier]]
 	</div>
 	<div>
 		Mesh to point<br>
+		Curve to point<br>
 		Instance on point
 	</div>
 </div>
@@ -55,7 +56,8 @@ Geometry Nodes is a modifier [[Blender Modifier]]
 	<div>
 		 Scene Time<br>
 		 Transform mode<br>
-		 Extrude
+		 Extrude<br>
+		 Subdivide Mesh
 	</div>
 	<div>
 		Create Primitive
@@ -74,7 +76,13 @@ Geometry Nodes is a modifier [[Blender Modifier]]
 </div>
 
 <br>
-Transform
+Transform (? Object Mode)
+Set Position (? Edit Mode)
+Mix
+
+Index
+Noise Texture
+
 Distribute Points on Faces
 
 ### Custom Inputs
@@ -93,6 +101,13 @@ Connect empty dot to create new input
 ##### Instance Objects
 ![[instance-objects.png]]
 
+
+##### Mesh to Points
+![[mesh-to-point.png]]
+
+##### Cube to Sphere by Normalize
+Normalize (Math node)
+![[cube-to-sphere-normalize.png]]
 
 <br>
 
