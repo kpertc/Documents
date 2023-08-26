@@ -55,6 +55,9 @@ Drag|Type
 ##### Hold `Shift` to slow
 ![[shift-to-slow.gif]]
 
+##### Hold `Alt` to edit multiple object
+![[hold-alt-edit-multiple-value.gif]]
+
 ---
 ### Selection
 
@@ -365,7 +368,6 @@ Proportional Editing (Smooth Selection)|Mouse Scrolling / `Page Up` / `Page Down
 Shading Smooth / Flat|AutoSmooth (when smooth shading)
 ---|---
 ![[img/Blender Basics/ShadingFlatSmooth.gif]]|![[img/Blender Basics/autoSmooth.gif]]
-
   
 Show Normal (in Edit Mode)|Show Face Orientation
 ---|---
@@ -390,16 +392,24 @@ Show Normal (in Edit Mode)|Show Face Orientation
 
 ---
 
-### Shader Editor
+### Material / Shader Editor
 
 rename material
 ![[rename-material.png|200]]
 
-Change World / Object|Assign Material|Drag to apply Material
----|---|---
-![[img/Blender Basics/world.png]]|![[img/Blender Basics/assignMat.gif]]|![[drag-applyMaterial.gif]]
+Change World / Object|Assign Material
+---|---|
+![[img/Blender Basics/world.png]]|![[img/Blender Basics/assignMat.gif]]|
 
+Create a duplicated material
+![[duplicate-material.png|300]]
 
+Drag to apply Material|Select / Deselect Material
+---|---
+![[drag-applyMaterial.gif]]|![[select-deselect-material.gif]]
+
+Select different Material Output Node to view different output
+![[select-view-different-materialoutput.gif]]
 
 `Ctrl H`
 ![[iShot_2023-08-22_19.45.10.gif]]
