@@ -93,8 +93,10 @@ Connect empty dot to create new input
 ##### Instance Objects
 ![[instance-objects.png]]
 
+##### Select by Normal
+![[geometrynode-selectByNormal.png]]
 
-<br>
+
 
 
 Edit node name|Ctrl Shift add a viewer node

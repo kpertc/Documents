@@ -392,6 +392,9 @@ Show Normal (in Edit Mode)|Show Face Orientation
 
 ### Shader Editor
 
+rename material
+![[rename-material.png|200]]
+
 Change World / Object|Assign Material|Drag to apply Material
 ---|---|---
 ![[img/Blender Basics/world.png]]|![[img/Blender Basics/assignMat.gif]]|![[drag-applyMaterial.gif]]
