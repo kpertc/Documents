@@ -412,7 +412,7 @@ Select different Material Output Node to view different output
 ![[select-view-different-materialoutput.gif]]
 
 `Ctrl H`
-![[iShot_2023-08-22_19.45.10.gif]]
+![[collpase node.gif]]
 
 Find nodes
 `Ctrl F`
