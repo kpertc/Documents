@@ -16,6 +16,24 @@ Negative prompt
 
 Easy negative
 
+Install on MAC
+
+1. Install dependency
+`brew install cmake protobuf rust python@3.10 git wget`
+
+2. Clone the git repo
+
+3. Copy models to model/stable diffusion folder
+`.ckpt`
+
+4. run `webui.sh` at repo
+
+5. config for performance, `webui-user.sh`
+
+```sh
+export COMMANDLINE_ARGS=“—medvram”
+```
+
 
 ## Diffusers 
 
