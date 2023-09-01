@@ -205,6 +205,18 @@ Redo Panel will show when added
 Local View `/` - Hide other object
 
 ![[img/Blender Basics/localView.gif]]
+
+
+##### Collection
+
+`C` Create Collection at outliner
+
+###### Move to Collection
+![[move-to-collection.gif]]
+
+###### Collection Instance
+will not add too much memory (optimization!)
+![[collection-instance.gif]]
   
 
 ##### Edit Mode
