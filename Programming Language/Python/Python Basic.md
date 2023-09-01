@@ -15,38 +15,6 @@ Related Package
 
 [[PyCharm]]
 
-### Install Packages
-
-```bash
-# Check version or installed
-python --version
-python3 --version
-Python 3.10.2
-
-# return path
-which python3
-```
-
-```
-Requests
-python -m pip install requests
-```
-
-
-
-> [!NOTE] `python` instead of `python3` in terminal
-> `python` instead of `python3` in terminal
->
-> https://stackoverflow.com/posts/43354447/timeline
->
->The simplest way would be to add an alias to `python3` to always point to the native `python` installed. Add this line to the `.bash_profile` file in your `$HOME` directory at the last,
->
->```bash
->alias python="python3"
->```
-
-
-
 # Basics
 
 ### Python Built-in Functions

@@ -171,6 +171,8 @@ Clear Translation Rotation Scale
 
 `C` New Collection
 
+`Numpad -` /` Numpad +` 
+Fold/Unfold outliner
   
 
 Turn on Emulate 3 Button Mouse
@@ -280,10 +282,23 @@ Change object pivot point by 3D cursor|Manual Edit Tool > Options > Transform > 
 
 ---
 
+### Show Statistics
+
+Statistic → show face count
+
 Show Statistic|Show Measurement (Edit Mode)
 ---|---|---
 ![[img/Blender Basics/showStatistic.gif]]|![[img/Blender Basics/Show Measurement (Edit Mode).png]]|![[img/Blender Basics/viewport-overlay.png \| 100]]
 
+Show Statistic & Status bar
+- Show global info in Object Mode
+- Show object info in Edit Mode
+
+![[status-bar.gif]]
+
+Default status can be set at `Preferences > Interface > status Bar` and save the Preferences
+
+---
 ##### Camera
 align camera to view
 `Ctrl Alt Numpad0`

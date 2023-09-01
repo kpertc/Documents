@@ -1,5 +1,24 @@
 #python 
 
+```shell
+pip --help
+
+pip help install # show help for install command
+
+pip search 
+
+pip list # list all installed packages
+
+# check packages need upgrade
+pip list --outdated
+pip list -o
+pip install -u packageName # upgrade the package
+
+pip install packageName
+pip uninstall packageName
+```
+
+
 ### VENV (Virtual Environment)
 
 ```shell
@@ -31,10 +50,12 @@ rm rf project_env/
 
 `which python` will show current python is at the venv path
 ![[which-python.png|400]]
-
+  
 Output exact version
 ```shell
 pip freeze
+pip freeze --local # (venv local packages)
+
 pip freeze > requirement.txt
 
 # install the same pip install by requirement.txt
