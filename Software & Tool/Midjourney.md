@@ -8,7 +8,7 @@ Light UpScale Redo, redo make it less variation
 ```
 
 / settings
-![[-:settings.png]]
+![[midjourney-settings.png]]
 
 Parameters
 
