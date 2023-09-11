@@ -725,7 +725,13 @@ Bake Normal texture -> Color Space: Non-Color
 Preferences > File Paths > Asset Libraries
 
 ---
+### Unreal Engine
 
+Export, Smoothing → Face
+
+[[Unreal Engine Blender Addons]]
+
+---
 ### Houdini
 
 Scale down
