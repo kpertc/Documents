@@ -24,6 +24,11 @@ Play Sound at Location
 
 - Delay (`D` + LMB)
 	- can not be added in function
+	- Calling again while it is counting down will be ignored.
+- Retriggerable Delay
+
+- Set Timer by Event
+- Set Timer by Function Name
 
 <br>
 

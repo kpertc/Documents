@@ -8,6 +8,7 @@ Project Setting
 ### Post Process
 firefly
 post process > max path exposure → 1.0 - 3.0
+Translucency > Ray Tracing
 
 ### HDRI Backdrop
 .HDR format, not .EXR
@@ -18,6 +19,8 @@ cube map resolution
 Plugins to enable:
 - Movie Render Queue
 - Movie Render Queue Additional Render Passes
+
+Window > Cinematics > Movie Render Queue
 
 ### Variant Manager
 Plugins to enable:
@@ -30,3 +33,17 @@ Switch Actor
 ### Volume 
 ExponentialHeightFog
 - Check Volumetric Fog
+
+
+### Light Channel
+Light Channel
+Every object has default Channel 0
+set Cube Channel 1
+
+![[lightchannel-pointlight.png]]|![[lightchannel-cube.png]]
+---|---
+
+### Color Calibrator
+1. Show Engine Content
+2. Engine > Content > EditorMeshes > Color Calibrator
+![[color-calibrator.png]]
