@@ -214,6 +214,8 @@ Double `Left Mouse Button` / hold `Alt` Select loop
 Hold `Shift` + `1` `2` `3` select multiple
 ![[img/Blender Basics/Activate Selection Mode.gif]]
 
+`G` `G` / `Shift V` move vertex along edge
+
 Faces loop selected that runs perpendicular to the edge selected
 ![[img/Blender Basics/SelectFaceLoop.gif]]
 
@@ -698,6 +700,19 @@ Bake Normal texture -> Color Space: Non-Color
 Preferences > File Paths > Asset Libraries
 
 ---
+
+### Driver Expression
+
+add `#` before expression
+![[expression.gif]]
+```
+
+frame
+
+sin(frame)
+
+radian(frame)
+```
 
 ### Houdini
 

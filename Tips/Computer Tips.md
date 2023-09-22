@@ -84,3 +84,8 @@ https://mos.caldis.me/
 
 压缩
 https://www.keka.io/en/
+
+
+自动切换输入法
+https://apps.apple.com/cn/app/自动切换输入法/id1470350547?mt=12
+

@@ -112,6 +112,13 @@ Connect empty dot to create new input
 Normalize (Math node)
 ![[cube-to-sphere-normalize.png]]
 
+##### Distribute Random Instance
+
+Collection|Distribute Random Instance
+---|---
+![[collection.png]]|![[random-distribute-instance.png]]
+
+
 <br>
 
 
