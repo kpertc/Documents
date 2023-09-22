@@ -8,7 +8,7 @@
 
 `import bpy`
 
-##### Add-on Metal Data (Add-on Only)
+##### Add-on Meta Data (Add-on Only)
 
 ```Python
 bl_info = {
@@ -54,7 +54,7 @@ class HelloWorldOperator(bpy.types.Operator):
         return {'FINISHED'} # Tell Blender
 ```
 
-Operator needs, Add-on doesnt **↓**
+Operator needs, Add-on doesn't **↓**
 
 ```Python
 if __name__ == '__main__':

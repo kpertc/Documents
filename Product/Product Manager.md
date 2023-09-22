@@ -49,7 +49,7 @@ SWOT
 Internal|Strengths|Weaknesses
 External|Opportunities|Threats
 
-![[feature-table.png]]
+![[Product/product-manager-img/feature-table.png]]
 
 
 ### Interview

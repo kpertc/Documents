@@ -15,23 +15,6 @@ Related Package
 
 [[PyCharm]]
 
-### Install Packages
-
-```bash
-# Check version or installed
-python --version
-python3 --version
-Python 3.10.2
-
-# return path
-which python3
-```
-
-```
-Requests
-python -m pip install requests
-```
-
 # Basics
 
 ### Python Built-in Functions
@@ -345,7 +328,14 @@ for i, BSname in enumerate(GAN_BS):
     print (i)
 ```
 
-List Comprehension
+https://www.w3schools.com/python/python_for_loops.asp
+
+##### Comprehensions (List, Set, Dict)
+[[YouTube] Python Tutorial: Comprehensions - How they work and why you should be using them by Corey Schafer](https://www.youtube.com/watch?v=3dt4OGnU5sM)
+```python
+nums = [1,2,3,4,5,6,7,8,9,10] # basic comprehension 
+my_list = [n for n in nums]
+```
 
 ```python
 thislist = ["apple", "banana", "cherry"]
@@ -354,8 +344,46 @@ thislist = ["apple", "banana", "cherry"]
 [math.degrees(x) for x in xform_mat.rotation().asVector()]
 ```
 
-https://www.w3schools.com/python/python_for_loops.asp
+List
+```python
+# traditional way
+my_list = []
+for n in nums:
+	my_list.append(n*n)
 
+# comprehension
+my_list = [n*n for n in nums]
+my_list = [n for n in nums if n%2 == 0] # comprehensions with condition
+
+# nested
+for letter in 'abcd':
+	for num in range(4):
+		my_list.append((letter, num))
+
+# comprehension - nested 
+my_list = [(letter, num) for letter in 'abcd' for num in range(4)]
+```
+
+Dict
+```python
+# comprehension - return dictionary
+my_dict = {name: hero for name, hero in zip (name, heros)}
+{"Bruce": "Batman", "Wade": "Deadpool"}
+```
+
+Set
+```python
+nums = [1,1,1,1,2,3,3,3,4,4,5,6,7,8,8,9]
+my_set = {n for n in nums} # {1, 2, 3, 4, 5, 6, 7, 8, 9}
+```
+
+generator??
+```python
+my_gen = (n*n for n in nums)
+
+for i in my_gen:
+	print(i)
+```
 ### 2D Lists & Nested Loops
 
 ```python
@@ -389,6 +417,49 @@ def translate(phrase):
 print(translate(input("Enter a phrase: ")))
 ```
 
+### Sets
+> Set is one of 4 built-in data types in Python
+> unordered , _unchangeable*_, and _unindexed_.
+
+```python
+
+my_set = set() # create an empty set
+
+numebrs = [1, 1, 2, 3, 4] 
+_set = set(numebrs)
+
+print(_set) # {1, 2, 3, 4}
+
+_set.add(5)
+_set.remove(5)
+len(_set)
+
+# check value exist in the set
+if 1 in numebrs:
+	print("yes")
+```
+
+Math operation 
+```python
+first = {1, 2, 3, 4}
+second = {1, 5}
+
+# union
+print(first | second) # {1, 2, 3, 4, 5}
+
+# intersection
+print(first & second) # {1}
+
+# different
+print(first - second) # {2, 3, 4}
+
+# symmetric_difference
+print(first ^ second) # {2, 3, 4, 5}
+
+```
+[Mathematical Set Operations in Python by Indhumathy Chelliah](https://betterprogramming.pub/mathematical-set-operations-in-python-e065aac07413)
+
+![[Mathematical Set Operations in Python.webp]]
 ### Try & Except
 
 ```python
@@ -645,8 +716,95 @@ def myFunc (array: List, device: str) -> List:
     print(array)
 ```
 
+### zip command
+return paired tuples
+https://www.w3schools.com/python/ref_func_zip.asp
+```python
+a = ("John", "Charles", "Mike")  
+b = ("Jenny", "Christy", "Monica")  
+  
+x = zip(a, b) 
+# [("John","Jenny"), ("Charles","Christy"), ("Mike", "Monica")]
+```
+
 # Intermediate & Advanced
 
 ### First Class Functions
 
 ### [Lambda](https://www.w3schools.com/python/python_lambda.asp)
+
+
+### Iterators and Iterables
+object has `__iter__ ` → Iterables → return Iterators
+has a state that remember where it is, what is next value
+
+```python
+nums = [1,2,3]
+i_nums = nums.__iter__() # get list_iterator object
+
+# iter(nums)
+
+print(i_nums) # iterator object
+print(dir(i_nums)) # its functions
+
+# i_nums.__next__() #
+# i_nums.__iter__() # return self
+
+# manually next test
+print(i_nums.__next__()) # 1
+print(i_nums.__next__()) # 2
+print(i_nums.__next__()) # 3
+print(i_nums.__next__()) # StopIteration exception
+```
+
+custom iterator by custom define `__iter__` and `__next__`
+```python
+class MyRange:
+
+	def __init__(self, start, end):
+		self.value = start
+		self.end = end
+	
+	def __iter__(self):
+		return self
+	
+	def __next__(self):
+		if self.value >= self.end:
+		raise StopIteration
+	
+	current = self.value
+	self.value += 1
+	return current
+
+nums = MyRange(1, 10)
+
+# MyRange is iterable, can be used in for-loop
+for num in nums:
+	print(num)
+```
+##### Generator
+Generator → iterator → PY 3+ new syntax
+```python
+def my_range(start, end):
+	current = start
+	while current < end:
+		yield current
+		current += 1
+
+nums = my_range(1, 10)
+
+for num in nums:
+	print(num)
+
+# 1 2 3 4 5 6 7 8 9
+
+# infinite loop
+def my_range(start):
+	current = start
+	while True:
+		yield current
+		current += 1
+```
+
+### [[Python Threading]]
+

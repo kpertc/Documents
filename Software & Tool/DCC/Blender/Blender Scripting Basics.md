@@ -1,5 +1,7 @@
 #python 
 
+Check out templates
+![[templates.png|300]]
 ### Some readings:
 
 Blender is written in C/C++/Python, learn more about: [Reference/FAQ - Blender Developer Wiki](https://wiki.blender.org/wiki/Reference/FAQ)
@@ -10,12 +12,13 @@ Blender is written in C/C++/Python, learn more about: [Reference/FAQ - Blender D
 ### Shortcuts
 
 `Alt` / `Option` + `P` Run Script
-
 `F3` Search Bar
-
 Run Blender thru terminal `/Applications/Blender.app/Contents/MacOS/Blender`
-
 Also allow open multiple Blender on MacOS
+
+---
+Python Version
+![[Blender-Python-version.png]]
 
 ---
 
@@ -41,9 +44,35 @@ Windows
 
 [Mac](https://www.youtube.com/watch?v=25yvAUhFIoI)
 
-`bpy.app.binary_path`
+1. `bpy.app.binary_path` to show current Blender path
+2. Make alias (快捷方式, 替身) for future use
 
 ![[img/Blender Scripting Basics/Blender Module.png]]
+
+---
+
+### VSCode Setup
+
+[5 Steps to setup VSCode for Blender Python (on macOS)](https://youtu.be/_0srGXAzBZE?si=rRnpWQ_B4qzoQlnF)
+
+[fake-bpy-module](https://github.com/nutti/fake-bpy-module)
+
+```shell
+pip install fake-bpy-module-latest
+```
+
+![[fake-bpy-vscode.gif]]
+
+VSCode Plugin: Blender Development by Jacques Lucke
+
+VSCode Blender command
+![[blender-commands.png]]
+
+Blender: Start
+Blender: Run
+![[Blender-start-run.gif]]
+
+Support VSCode Debug breakpoint
 
 ---
 
@@ -56,7 +85,6 @@ Windows
   
 
 -   `bpy.data` - all data in your blend file.
-    
 -   `bpy.context` - data in the current active view. (useful for getting current selecting / active objects)
 
 
@@ -101,24 +129,75 @@ bpy.context.active_object.location[0] = 5
 bpy.context.active_object.rotation_euler[0] += radians(45)
 ```
 
-##### Degree to Radians
+Hide & UnHide objects
 
 ```Python
-from math import radians
-print (radians(45)) # 0.7853981633974483
+# hide in Viewport globally
+bpy.data.objects['Cube'].hide_set(True) # For Eye icon
+bpy.data.objects['Cube'].hide_viewport = True # For monitor icon
+
+bpy.data.objects['Cube'].hide_render = True # hide in Render
+```
+
+Texture
+```python
+# Create Texture (distortd noise) 
+new_texture = bpy.data.textures.new("My Texture", "DISTORTED_NOISE")
+
+# Edit texture property
+new_texture.noise_scale = 2.0
+```
+
+Material
+```python
+_material = bpy.data.materials['materialName']
+
+# Create Material
+_material = bpy.data.materials.new(name = "My Material")
+
+_obj.active_material = _material
+
+# add & append material to object
+_obj.data.materials.append(_material)
+```
+
+Material - node
+```python
+# material node
+_material.use_nodes = true
+nodes = _material.node_tree.nodes
+
+# get node
+material_output = nodes.get("Material Ouput") # get node name
+
+# create a node
+node_emission = nodes.new(type="ShaderNodeEmission") # Create a emission node
+
+# Edit Node value
+# node → array
+node_emission.input[0].default_value = ( 0.0, 0.3, 1.0, 1.0 ) # color
+node_emission.input[1].default_value = 500.0
+
+#
+links = _material.node_tree.links
+
+# create a link
+links.new(node_emssion.output[0], material_ouput.input[0]) 
 ```
 
 ##### Add Modifier
 
 ```Python
 # Add Subdivision Surface Modifier named 'My Modifier' 
-bpy.context.active_object.modifiers.new("My Modifier", "SUBSURF")
+_obj.modifiers.new("My Modifier", "SUBSURF")
+
+_obj.modifiers.new("My Modifier", "DISPLACE") # displacement modifier
 
 # change Levels Viewport
 # Require Searching-> inefficient
-bpy.context.active_object.modifiers['My Modifier'].levels = 3
+_obj.modifiers['My Modifier'].levels = 3
 ```
-![[img/Blender Scripting Basics/Add-Modifier.png]]
+![[img/Blender Scripting Basics/Add-Modifier.png|200]]
 
 
 ##### Shade Smooth
@@ -160,7 +239,6 @@ C.scene.collection.children.link(collectionVar) # Img-2 1
 # Parent link to the child
 ```
 
-  
 
 ##### Export
 
@@ -171,7 +249,7 @@ bpy.ops.export_scene.fbx(filepath = '/Users/bytedance/Desktop/test.fbx')
 
   
 
-##### Render
+### Render
 
 ```Python
 # Change current frame
@@ -179,30 +257,8 @@ bpy.context.scene.frame_current = 0
 
 # Switch Camera
 bpy.context.scene.camera = cam
-
-# Change Material
-_material = bpy.data.materials['materialName']
-_object.active_material = _material
 ```
-
-Hide & UnHide objects
-
-```Python
-# hide in Viewport globally
-bpy.data.objects['Cube'].hide_set(True) # For Eye icon
-bpy.data.objects['Cube'].hide_viewport = True # For monitor icon
-
-bpy.data.objects['Cube'].hide_render = True # hide in Render
-```
-
   
-
-Material
-
-Checking log
-
-  
-
 Render settings and save to file
 
 ```Python
@@ -225,13 +281,23 @@ bpy.context.scene.render.resolution_y = 2048
 bpy.context.scene.cycles.samples = 1024
 ```
 
-  
+
+### Math
+##### Degree to Radians
+
+```Python
+from math import radians
+print (radians(45)) # 0.7853981633974483
+```
+
 
 ---
 
 ### Custom Properties
-
+```python
 bpy.types.Scene.mass_import = bpy.props.StringProperty() # Create a new attribute
+```
+
 
   
 

@@ -171,6 +171,8 @@ Clear Translation Rotation Scale
 
 `C` New Collection
 
+`Numpad -` /` Numpad +` 
+Fold/Unfold outliner
   
 
 Turn on Emulate 3 Button Mouse
@@ -203,6 +205,18 @@ Redo Panel will show when added
 Local View `/` - Hide other object
 
 ![[img/Blender Basics/localView.gif]]
+
+
+##### Collection
+
+`C` Create Collection at outliner
+
+###### Move to Collection
+![[move-to-collection.gif]]
+
+###### Collection Instance
+will not add too much memory (optimization!)
+![[collection-instance.gif]]
   
 
 ##### Edit Mode
@@ -282,10 +296,23 @@ Change object pivot point by 3D cursor|Manual Edit Tool > Options > Transform > 
 
 ---
 
+### Show Statistics
+
+Statistic → show face count
+
 Show Statistic|Show Measurement (Edit Mode)
 ---|---|---
 ![[img/Blender Basics/showStatistic.gif]]|![[img/Blender Basics/Show Measurement (Edit Mode).png]]|![[img/Blender Basics/viewport-overlay.png \| 100]]
 
+Show Statistic & Status bar
+- Show global info in Object Mode
+- Show object info in Edit Mode
+
+![[status-bar.gif]]
+
+Default status can be set at `Preferences > Interface > status Bar` and save the Preferences
+
+---
 ##### Camera
 align camera to view
 `Ctrl Alt Numpad0`
@@ -414,7 +441,7 @@ Select different Material Output Node to view different output
 ![[select-view-different-materialoutput.gif]]
 
 `Ctrl H`
-![[iShot_2023-08-22_19.45.10.gif]]
+![[collpase node.gif]]
 
 Find nodes
 `Ctrl F`
@@ -700,6 +727,7 @@ Bake Normal texture -> Color Space: Non-Color
 Preferences > File Paths > Asset Libraries
 
 ---
+### Unreal Engine
 
 ### Driver Expression
 
@@ -714,6 +742,11 @@ sin(frame)
 radian(frame)
 ```
 
+Export, Smoothing → Face
+
+[[Unreal Engine Blender Addons]]
+
+---
 ### Houdini
 
 Scale down

@@ -28,6 +28,10 @@ Pin supoort
 Ctrl-Command-Space or  Edit > Emoji & Symbols.
 ![[mac-character-viewer.gif]]
 
+Windows
+https://support.microsoft.com/en-us/windows/windows-keyboard-tips-and-tricks-588e0b72-0fff-6d3f-aeee-6e5116097942#:~:text=Insert%20emojis%2C%20GIFs%2C%20and%20symbols%20with%20the%20emoji%20panel&text=To%20use%20it%3A,emojis%20for%20one%20you%20like.
+⊞ + . (period)
+
 <br>
 
 Show hidden file on Mac
@@ -89,3 +93,6 @@ https://www.keka.io/en/
 自动切换输入法
 https://apps.apple.com/cn/app/自动切换输入法/id1470350547?mt=12
 
+pureref
+mood board 创意看板
+https://www.pureref.com/

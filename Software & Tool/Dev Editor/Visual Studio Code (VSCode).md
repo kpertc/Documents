@@ -220,6 +220,10 @@ code src/Plugin/
 ![[cmake-run-c++.png]]
 
 
+### Python
+![[switch-python-interpreter-vscode.gif]]
+
+
 ### Extension
 
 Plugin|Function

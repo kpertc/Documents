@@ -46,3 +46,14 @@ Adjust Performance ↔ Quality
 ### Default Maps
 Maps & Modes → Default Maps
 The map show up when the UE open
+
+
+### Enable Nanite
+DX12 enabled required
+
+Method 1|Method 2
+---|---
+![[nanite-method-1.png]]|![[nanite-method-2.png]]
+
+Nanite View
+![[nanite-view.png|300]]
