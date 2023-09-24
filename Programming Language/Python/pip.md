@@ -26,6 +26,8 @@ pip list
 pip3 list
 ```
 
+> [!info]
+use VSCode to create venv
 
 ```shell
 # create a venv and also create a folder
