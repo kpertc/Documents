@@ -25,3 +25,8 @@ g|Game Mode
 
 ### Place Actor
 ↳ lights
+
+
+Switch Tab
+Ctrl Tab
+![[Software & Tool/Game Engine/Unreal Engine/img/Unreal Engine Windows/switch-tabs.gif]]
