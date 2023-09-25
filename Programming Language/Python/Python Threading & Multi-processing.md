@@ -1,7 +1,6 @@
 #python 
 
-multi-processing
-
+# Threading
 ### Basic Threading
 ```python
 import threading
@@ -32,9 +31,8 @@ for _ in range(10):
 for thread in threads:
 	thread.join()
 ```
-
+### thread pool executor
 python 3.2
-thread pool executor
 
 ```python
 import concurrent.futures
@@ -74,3 +72,59 @@ with concurrent.futures.ThreadPoolExecutor() as executor:
 ```
 
 
+---
+
+# Multi-processing
+
+```python
+import multiprocessing
+```
+
+```python
+import time
+
+def do_something():
+	print("start")
+	time.sleep(1)
+	print("end")
+
+if __name__ == '__main__':
+	p1 = multiprocessing.Process(target=do_something)
+	
+	# arguments
+	p1 = multiprocessing.Process(target=do_something, args=[arg1, arg2])
+	
+	p1.start()
+	# p1.join() # wait p1 to end, then execute next command
+	print('do something later')
+```
+
+```python
+processes = []
+
+for _ in range(10):
+	p = multiprocessing.Process(target=do_something)
+	p.start()
+	processes.append(p)
+
+for process in processes:
+	process.join()
+```
+
+
+### Process Pool Executor
+
+```python
+import concurrent.futures
+# no need to import multiprocessing
+```
+
+``` python
+# context manager
+with concurrent.futures.ProcessPoolExecutor() as executor:
+	f1 = executor.submit(do_something, 1) # argument
+	print(f1.result())
+
+
+
+```
