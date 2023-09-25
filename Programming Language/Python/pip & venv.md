@@ -18,7 +18,6 @@ pip install packageName
 pip uninstall packageName
 ```
 
-
 ### VENV (Virtual Environment)
 
 ```shell
@@ -27,7 +26,9 @@ pip3 list
 ```
 
 > [!info]
-use VSCode to create venv
+> use VSCode to create venv
+> ![[python-create-venv-VSCode.gif]]
+
 
 ```shell
 # create a venv and also create a folder

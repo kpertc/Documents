@@ -8,9 +8,13 @@
 OpenCV reads in images in BGR format because **when OpenCV was first being developed, BGR color format was popular among camera manufacturers and image software providers**. The main difference between RGB versus BGR is the arrangement of the subpixels for Red, Green, and Blue.
 
 ### Installation
+``` shell
+# Complete Package
+pip install opencv-contrib-python
 
-Complete Package → `opencv-contrib-python`
-Main module → `opencv-python`
+# Main module
+pip install opencv-python
+```
 
 > [!NOTE] 
 > Install 4.5.5 - version if auto-complete is not working.
@@ -85,6 +89,8 @@ import numpy as np
 blank = np.zeros((500, 500), dtype='uint8')
 blank = np.zeros((500, 500, 3), dtype='uint8') # 3 → set 3 color channel
 
+blank = np.zeros(img.shape, dtype='uint8') # create a blank with same width & height as img
+
 blank[:] = 0, 0, 255 # set all pixel to red
 blank[200:300, 300:400] = 0, 0, 255 # set ranges of pixel to red
 
@@ -134,6 +140,103 @@ Circle|Line|putText
 ![[python-cv-circle.png]]|![[python-cv-line.png]]|![[python-cv-putText.png]]
 
 
+### 
 ```python
+img = cv.imread('sd.png')
 
+# Greyscale image
+gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+
+# Blur image
+blur = cv.GaussianBlur(img, (9, 9), cv.BORDER_DEFAULT)
+# kernel size
+
+canny = cv.Canny(img, 125, 125)
+
+# dilating the image
+dilated = cv.dilate(canny, (7,7), iterations=3)
+
+cv.imshow('Show', gray)
+cv.waitKey(0)
 ```
+
+greyscale|blur|canny(Edge)|canny + dilate
+---|---|---|---
+![[gray.png]]|![[blur.png]]|![[canny.png]]|![[dilated.png]]
+
+Resize
+```python
+resized = cv.resize(img, (100, 200))
+# des size → (100, 200)
+
+resized = cv.resize(img, (100, 200), interpolation=cv.INTER_CUBIC)
+# default interpolation cv.INTER_AREA 
+# linear, cubic (slow, best)
+```
+
+Crop
+```python
+cropped = img[50:200, 200:400]
+```
+
+### Image Transformation
+
+translation
+```python
+def translate(_img, x, y):
+	transMat = np.float32([[1,0,x], [0,1,y]])
+	dimensions = (_img.shape[1], _img.shape[0])
+	return cv.warpAffine(_img, transMat, dimensions)
+  
+translated = translate(img, 100, 100)
+cv.imshow('translation', translated)
+```
+
+rotation
+```python
+def rotate(img, angle, rotPoint=None):
+	(height, width) = img.shape[:2]
+	if rotPoint is None:
+		rotPoint = (width//2, height//2)
+
+	rotMat = cv.getRotationMatrix2D(rotPoint, angle, 1.0) # rotation point, angle, scale
+	dimensions = (width,height)
+
+	return cv.warpAffine(img, rotMat, dimensions)
+
+rotated = rotate(img, 30)
+cv.imshow('rotated', rotated)
+```
+
+flip
+```python
+fliped = cv.flip(img, 0) # vertical
+fliped = cv.flip(img, 1) # horizontal
+fliped = cv.flip(img, -1) # vertical & horizontal
+
+cv.imshow('fliped', fliped)
+```
+
+threshold & contour
+
+contour ≠ edge
+
+```python
+ret, thresh = cv.threshold(img, 128, 255, cv.THRESH_BINARY)
+
+cv.imshow('threshold', thresh)
+
+contours, hierarachies = cv.findContours(thresh, cv.RETR_LIST, cv.CHAIN_APPROX_SIMPLE)
+print(len(contours)) 
+
+cv.drawContours(blank, contours, -1, (0,0,255), 3)
+cv.imshow("contour", blank)
+```
+
+threshold|contour
+---|---
+![[python-cv-threshhold.png]]|![[python-cv-contour.png]]
+
+
+
+
