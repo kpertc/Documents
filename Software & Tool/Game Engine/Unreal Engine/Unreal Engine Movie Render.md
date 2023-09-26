@@ -47,3 +47,67 @@ set Cube Channel 1
 1. Show Engine Content
 2. Engine > Content > EditorMeshes > Color Calibrator
 ![[color-calibrator.png]]
+
+---
+### OCIO Settings
+
+[Unreal to Davinci Resolve Workflow - ACES & sRGB by William Faucher](https://youtu.be/Bo3BvhGdaUo?si=s84bbiCbsnwq9P-a)
+
+> [!NOTE] Workflow
+> Unreal Engine Movie Render Queue → Davinci Resolve color grading
+
+> [!info]
+OCIO, OpenColorIO → Color Dictionary 
+Repo: [https://github.com/colour-science/OpenColorIO-Configs/tree/feature/aces-1.2-config](https://github.com/colour-science/OpenColorIO-Configs/tree/feature/aces-1.2-config)
+
+##### Unreal Engine
+
+Create a ==OpenColor Configuration== in content browser
+
+RMB > Miscellaneous > OpenColor Configuration
+
+- set config file
+- color space
+    - Utility - Linear - sRGB
+    - ACEScg
+
+Movie Render Queue
+
+- Color Output
+    - OCIO Configuration
+        
+        - is Enable ✓
+        - ==Configuration file==
+        - Source Color Space - Utility - Linear - sRGB
+        - Destination Color Space ACES - ACEScg
+    - Disable Tone Curve (To get full range image data)
+
+##### DaVinci Resolve
+
+Project Settings
+Set ACES
+File > Project Settings > Color Management > 
+- Color science > ACEScct
+- ACES version > ACES 1.2
+- ACES Output Transform > Rec.709
+
+RMB on image sequence media
+ACES Input Transform > Color Space Conversion > ACEScct - CSC 
+sRGB Linear if not set to ACES in unreal
+
+---
+
+Alt-s Create New Corrector Node
+Ctrl D Disable/Enable Node
+
+Lift: Mainly Shadows/Blacks
+Gamma: Midtones/Exposure
+Gain: Highlights/Whites
+Offsets: Shifts the values evenly
+
+Effects > Glow
+Aperture Diffraction (Paid)
+
+Mask
+
+
