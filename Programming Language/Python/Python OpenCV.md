@@ -221,6 +221,9 @@ threshold & contour
 
 contour ≠ edge
 
+1. canny + blur
+2. threshold + contour
+
 ```python
 ret, thresh = cv.threshold(img, 128, 255, cv.THRESH_BINARY)
 
@@ -238,5 +241,102 @@ threshold|contour
 ![[python-cv-threshhold.png]]|![[python-cv-contour.png]]
 
 
+### Color Space Conversion
 
+```python
+# rgb
+# bgr to rgb
+rgb = cv.cvtColor(img, cv.COLOR_BGR2RGB)
+cv.imshow('RGB', rgb)
 
+# hsv
+# bgr to hsv
+hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
+cv.imshow('HSV', hsv)
+
+# bgr to lab
+lab = cv.cvtColor(img, cv.COLOR_BGR2LAB)
+cv.imshow('LAB', lab)
+```
+
+### Channel
+
+```python
+# split channel
+b,g,r = cv.split(img)
+
+# img.shape → (height, width, 3) 3 channels
+# b.shape → (height, width) 1 channel
+
+# merge channel
+merged = cv.merge([b,g,r])
+```
+
+### Blur
+
+```python
+# linear filter → blur all
+
+average = cv.blur(img, (7,7))
+
+gaussianBlur = cv.GaussianBlur(img, (9, 9), cv.BORDER_DEFAULT)
+
+# non-linear filter → Blur noise not content (noise reduce)
+
+medium = cv.medianBlur(img, 3)
+
+bilateralFilter = cv.bilateralFilter(img, 15, )
+
+```
+
+![[median-filter.png]]
+
+### bitewise
+``` python
+blank = np.zeros((400, 400), dtype="uint8")
+rectangle = cv.rectangle(blank.copy(), (30, 30), (370, 370), 255, -1)
+circle = cv.circle(blank.copy(), (200, 200), 200, 255, -1)
+```
+
+rectangle|circle
+---|---
+![[bitwise_rectangle.png]]|![[bitwise_circle.png]]
+
+```python
+# bitewise AND → intersection
+bitwise_and = cv.bitwise_and(rectangle, circle)
+
+# bitewise or → both
+bitwise_or = cv.bitwise_or(rectangle, circle)
+
+# bitewise xor → not intersection
+bitwise_xor = cv.bitwise_xor(rectangle, circle)
+
+# bitewise not
+bitwise_not = cv.bitwise_not(rectangle, circle)
+```
+
+and|or|xor|not
+---|---|---|---
+![[bitwise_and.png]]|![[bitwise_or.png]]|![[bitwise_xor.png]]|![[bitwise_not.png]]
+
+### Mask
+
+image and mask image dimension must be same
+
+```python
+# create the same size blank image
+img_size_blank = np.zeros(img.shape[:2], dtype="uint8")
+
+# draw a center circle
+circle = cv.circle(img_size_blank, (img_size_blank.shape[1]//2, img_size_blank.shape[0]//2), 200, 255, -1)
+
+masked = cv.bitwise_and(img, img, mask=circle)
+cv.imshow("masked", masked)
+```
+
+![[python-cv-circle-masked.png|300]]
+
+```python
+
+```
