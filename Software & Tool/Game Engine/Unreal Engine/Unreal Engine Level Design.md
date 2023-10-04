@@ -6,7 +6,7 @@
 
 ### Create a Level
 - RMB > Create a level
-- File > Create a level
+- File > Create a level (Options to choose template with skylight)
 
 Add Sky Light, Directional Light, Exponential Height Fog, Sky Atmosphere...
 
