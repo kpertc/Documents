@@ -174,6 +174,12 @@ margin: 10px;
 
 ![[font-ligatures.png]]
 
+
+### show space as dot
+```json
+"editor.renderWhitespace": "all", 
+```
+![[vscode-renderWhitespace.png]]
 <br>
 
 ### Compare with Selected
