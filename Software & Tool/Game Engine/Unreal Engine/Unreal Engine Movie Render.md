@@ -49,7 +49,8 @@ set Cube Channel 1
 ![[color-calibrator.png]]
 
 ---
-### OCIO Settings
+### OCIO Settings 
+Color pipeline
 
 [Unreal to Davinci Resolve Workflow - ACES & sRGB by William Faucher](https://youtu.be/Bo3BvhGdaUo?si=s84bbiCbsnwq9P-a)
 
@@ -105,9 +106,24 @@ Gamma: Midtones/Exposure
 Gain: Highlights/Whites
 Offsets: Shifts the values evenly
 
-Effects > Glow
-Aperture Diffraction (Paid)
+Effects:
+- Curve
+- Glow (Bloom)
+- Aperture Diffraction (Paid)
+- Mask
+- Chrome Aberration (Layer mixer)
+	- Only in high contrast area
+- film grain (Paid)
+- Vignetting
+- Lens Flare
 
-Mask
+### Cinematic
+- Framerate
+- 24 fps → Motion Blur 18 Shutter
 
+##### FOV
+Filmback → Sensor size
+↑ (Bigger) Film back  ↑ (Wider) FOV
+↑ (Closer) to the object ↑ More Blur of the background
 
+Aperture
