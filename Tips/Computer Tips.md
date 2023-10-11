@@ -6,7 +6,7 @@ Search bar ⌘ L
 
 Switch Tabs
 Option + ⌘ +  ↑ / ↓
-![[switch-tabs.gif]]
+![[Tips/img/switch-tabs.gif]]
 
 Chrome / Safari
 Previous Page / Next page
@@ -30,7 +30,7 @@ Previous Page / Next page
 
 系统自带 ⊞ Shift s
 
-- [ShareX](https://getsharex.com/)
+- [ShareX](https://getsharex.com/) available at Windows Store
 - [ScreenToGif](https://www.screentogif.com/)
 
 
@@ -100,3 +100,9 @@ https://apps.apple.com/cn/app/自动切换输入法/id1470350547?mt=12
 pureref
 mood board 创意看板
 https://www.pureref.com/
+
+
+### Windows
+
+Switch Desktops
+Ctrl ⊞ ← / → 
