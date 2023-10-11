@@ -337,6 +337,11 @@ cv.imshow("masked", masked)
 
 ![[python-cv-circle-masked.png|300]]
 
+Histogram 
 ```python
+hist = cv.calcHist([img], [0], None, [256], [0, 256])
+# img, channel, mask, histSize,
 
+plt.plot(hist)
+plt.show()
 ```
