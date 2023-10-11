@@ -12,6 +12,7 @@ Hold option to check distance
 
 Components
 
+`⌘ R` Rename
   
 
 Detach instance
