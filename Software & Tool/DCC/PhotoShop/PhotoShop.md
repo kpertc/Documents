@@ -18,3 +18,17 @@ Invert Mask Ctrl I
 
 Mask Property Feather
 ![[ps-mask-property-feather.gif]]
+
+##### Exposure vs Brightness
+1 stop exposure = 50% brightness ??
+150% brightness = 3 stops exposure
+
+brightness → affect equally
+Exposure → affect more highlight
+
+##### Curve
+
+S形 提高亮度 压低暗部 → 增加对比度
+反 减少对比度
+
+![[ps-curve.png]]
