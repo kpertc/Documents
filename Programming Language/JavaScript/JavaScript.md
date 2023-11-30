@@ -1,4 +1,4 @@
-#JavaScript #programming-language #web-dev 
+w#JavaScript #programming-language #web-dev 
 
 JavaScript Background knowledge: [[JavaScript Overview]]
 
@@ -222,9 +222,50 @@ let greeter = "hey hi";
 ![[var-let-lifecycle.png]]
 
 Related to: [[JavaScript Overview#Memory Creation Phase (Creation Phase)]]
-
 <br>
 
+### `Null` & `undefined`
+
+
+undefined 不是 undeclared
+undeclared 是指变量从未在代码中出现.使用未声明的变量就会报错：”ReferenceError: cat is not defined“。
+undefined 则是声明了但是值是 undefined 或者值并不存在。
+
+---
+
+nullish coalescing operator → the double question mark `??`
+
+```jsx
+const foo = null ?? 'default value';
+console.log(foo); // Output: 'default value'
+```
+
+`??` checks for `null` or `undefined` values
+
+`||` accepts for falsy values (`null`, `undefined`, `false`, `0`, `''`, or `NaN`).
+
+```jsx
+const bar = '' || 'default value'; // 'default value'
+const baz = '' ?? 'default value'; // ''
+```
+
+`??=`
+ Assign a default value to a variable if it is `null` or `undefined`.
+``` Javascript
+let firstName = null;
+firstName ??= 'yangyang'
+console.log(firstName); // 'yangyang'
+
+let lastName = 'name';
+lastName ??= 'yangyang'
+console.log(lastName); // 'name'
+```
+
+---
+
+`null` 是基本数据类型 但是`typeof null` 是 `object` → bug 是 JavaScript 第一版的遗留物
+
+<br>
 ### Variables & Data Types
 
 ```JavaScript
@@ -310,6 +351,26 @@ Math.sqrt(36) //square root → 6
 
 Math.random()
 ```
+
+##### BigInt
+
+**`BigInt`** values represent numeric values which are [too large](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER) to be represented by the `number` [primitive](https://developer.mozilla.org/en-US/docs/Glossary/Primitive). from [Mozilla BigInt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
+
+```js
+const _bigint = 1234n; // A bigint is created by appending n 
+console.log(typeof _bigint); // bigint
+
+// math
+console.log(1n + 2n); // 3
+```
+
+> [!NOTE]
+> ```
+> 0.1 + 0.2 === 0.3; // false -> 0.30000000000000004
+> ```
+> 这是和 JavaScript 采用“遵循 IEEE 754 标准的双精度 64 位格式”有关。
+
+typeof NaN 返回 'number'
 
 ### Getting User Input
 
@@ -1086,3 +1147,14 @@ global.effect = {
 // at another script file
 const Ama = effect.Ama; // will not be undefined
 ```
+
+
+
+
+---
+### Credits
+
+作者：LeetCode
+链接：https://leetcode.cn/leetbook/read/javascript-interview-2/7m2yq6/
+来源：力扣（LeetCode）
+著作权归作者所有。

@@ -120,9 +120,12 @@ function getSum(n1, n2) {
 > Primitive Types: Stored directly in the ==stack==, where it is accessed from
 > String | Number | Boolean | Null | Undefined | Symbol | Bigint
 
+Symbol →用于唯一的标识符。
+
 > [!info] Reference Types
 > Reference Types: Stored in the ==heap== and accessed by reference
 > Arrays | Functions | Objects
+> Date | RegExp
 
 ![[js-stack-heap.png]]
 
