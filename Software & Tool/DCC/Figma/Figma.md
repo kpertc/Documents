@@ -23,3 +23,17 @@ Variants
 
 
 [[Figma Plugin]]
+
+
+Clip Content
+![[figma-clip-content.gif]]
+
+
+### Prototype
+
+prototype tab
+
+Starting point (blur right arrow)
+![[figma-starting-point.png]]
+
+play show hotspot

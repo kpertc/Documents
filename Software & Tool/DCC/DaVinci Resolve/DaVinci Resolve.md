@@ -180,7 +180,19 @@ Preferences  Command ,
 响度单位
 - LUFS 绝对响度
 - LU 相对响度
-- dB Decibel 分贝
+- dB Decibel 分贝 (对音量)
+
+
+互联网节目
+Target loudness level → -16
+BS.1770-4
+
+绝对比例
+人声 → mono 单声道
+1.0 单声道
+2.0 立体声
+
+效果器
 
 ### Fusion
 合成软件
