@@ -826,7 +826,15 @@ document.write(localStorage.name);
 
 <br>
 
-### Bind
+##### Optional chaining (?.)
+```js
+_object.property?.property
+```
+
+
+### bind & call & apply
+> `call()`、`apply()`、`bind()` 三个方法都可以根据指定的 `this` 值调用。
+##### bind
 [Bind Explained in JavaScript](https://www.youtube.com/watch?v=g2WcckBB_q0)
 ```js
 // 组合函数到object上
@@ -842,6 +850,45 @@ function printCoordinates () {
 let c1_func = printCoordinates.bind(c1);
 
 c1_func(); // output 5,10
+```
+
+##### call
+call can not set argument array
+```js
+let foo = {
+    value: 1
+};
+
+function bar() {
+    console.log(this.value); 
+}
+
+bar.call(foo); // 1
+```
+
+##### apply
+The **apply() method** is used to write methods, which can be used on different objects. [https://www.geeksforgeeks.org/javascript-apply-function/](https://www.geeksforgeeks.org/javascript-apply-function/)
+
+```js
+function sum(a, b) {
+    return a + b;
+}
+
+console.log(sum.apply(null, [3, 5])) // 8
+```
+
+```js
+const student = {
+    grade: 5
+}
+
+function sum(a, b) {
+    return this.grade + a + b;
+    // this -> object
+}
+
+// object + arguments (any length)
+console.log(sum.apply(student, [3, 5])) // 13
 ```
 
 <br>
