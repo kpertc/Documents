@@ -90,6 +90,17 @@ type StringOrNum = string | number;
 const variable: StringOrNum;
 ```
 
+### Type Assertion - Type casting
+
+```ts
+document.getElementById(“main_canvas”) as HTMLCanvasElement
+
+// One is a type
+Let d = <One>’world’
+// Bracket type can not be used in tsx file
+
+```
+
 ### Function
 
 ```TypeScript
@@ -157,6 +168,37 @@ Namespace
 namespace name {
     ...
 }
+```
+
+<br>
+### Interface
+define the structure of an object to be complied
+
+```ts
+interface IsPerson {
+	name: string;
+	age: number;
+	speak(a: string): void;
+	spend(a: number): number;
+}
+
+// example object
+const me: IsPerson = {
+	name: 'shuan',
+	age: 30,
+	speak(text: string): void { console.log('...') },
+	spend(amount: number): number { console.log('...') }
+	// can not add other variable ? 
+	// will raise alert if object is not matched with interface
+};
+
+let someone: IsPerson; // set interface when define the object
+
+// use interface in
+class myClass implements myInterface {
+	...
+} 
+
 ```
 
 <br>

@@ -1,11 +1,18 @@
 #programming-language
 
-> Stroustrup加入了OOP特性和对C的泛型编程支持，C++ 是C语言的超集，这意味着任何有效的C程序都是有效的C++程序。
+C++ can natively run on machine → fast
+compare to C#, Java → run on virtual machine
+
+Stroustrup加入了OOP特性和对C的泛型编程支持，C++ 是C语言的超集，这意味着任何有效的C程序都是有效的C++程序。
 
 ### Tutorial
 <iframe width="560" height="315" src="https://www.youtube.com/embed/vLnPwxZdW4Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
+[C++ series by The Cherno](https://youtu.be/SfGuIVzE_Os?si=A1NhihRyKfJTlnJW)
+
 ### Windows Installation
+
+use Visual Studio
 
 ### Mac Installation
 
@@ -16,7 +23,6 @@ gcc -v
 ```
 
 Install Command Line Tool:[[Env Tools]]
-
 
 ```
 
@@ -33,6 +39,57 @@ endl -> End line
 ```c++
 cout << "Hello World!" << endl;
 ```
+
+### `int main()`
+`int main()` → default entry point
+	 entry point can be customized other than named `main()` in setting
+- special case, don’t have to return a int
+- no return will `return 0`
+
+### Compile
+code to binary executable
+
+##### **Configuration** (a set of rules)
+- Release → Optimization for max-speed 
+- Debug → Not optimization for max-speed, have extra code for debugging
+- ...
+
+##### **Target** (Platform → x86/x64/android)
+- Application `.exe`
+- Library `.dll`
+
+##### `declaration`
+	will not show error in editor but may not exist
+	if can not find → linker error: `unresolved external symbol ...`
+
+##### `definition`
+	the actual content
+
+##### 1. Compilation (compile)
+1. pre-process
+	Get evaluated before compile
+	preprocess statement begin with `#` 
+	`# define if ifdef`
+	`#` include (header files)
+		↳ header file does not compiled, literally copy the content of header file to the file where is `# include ...`
+
+1. Generate Abstract Syntax Tree (AST) → Machine Code
+	Optimization: redebug
+		- constant folding → 5 * 2 will be optimized to 10
+		- function signature
+##### 2. Linking
+Linker stitch object files to one .exe by finding symbol and function
+
+
+##### compile error vs linking error
+Compile error, C → compile
+`error C2143: syntax errorL missing ‘;’ before ‘}’`
+
+linking error
+`fatel error LINK1561: entry point must be defined`
+
+
+FAQ: at compiling stage: check declaration but not promise definition, if definition is not correct will resolve linking error
 
 ### Variables
 

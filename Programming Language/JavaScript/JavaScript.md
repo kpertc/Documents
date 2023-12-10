@@ -199,6 +199,8 @@ console.log(greeter); // "hey hi"
 `const`
 can not be redeclared & reassigned
 
+`const`所保证的应该是变量指向的内存地址不能够被改变，也就是保存的指针, 并不是保证变量的值不可以被改变。实际上是可以被改变的。如果需要保证原本的对象本身不被改变，我们可以使用`Object.freeze()`来冻结所声明的对象变量。
+
 ##### Hoisting
 
 Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their scope before code execution. 
@@ -1001,8 +1003,20 @@ in ES6, a modern way to create inherit is to use Class & Class extends & constru
 
 ### Async
 
-### Promises
+[Async JS Crash Course - Callbacks, Promises, Async Await](https://youtu.be/PoRJizFvM7s?si=igRChHXkcGcd9JLT)
 
+Old fashion way
+##### callback 
+```js
+// callback
+function createPost( _arguments, callback) {
+	// ... do something 
+	callback() // execute the function
+}
+```
+
+
+##### Promise
 ```JavaScript
 let p = new Promise((resolve, reject) => { 
     if () {resolve('message')}
@@ -1013,15 +1027,49 @@ p.then((message) => {console.log(message)}) // successful case
 p.catch((message) => {console.log(message)}) // error case
 ```
 
-### Async
+```js
+// Promise
+function createPost() {
+	// ... do something
+	return new Promise((resolve, reject) => {
+		// ... do something
+		if () {
+			resolve()
+		} else {
+			reject()
+		}
+	})
+}
+
+createPost()
+.then( // success from resolve()
+	// ... do something
+)
+.catch( // error from reject()
+	err => {
+		// ... do something
+	}	
+)
+
+// Promise.all -> process multiple Promises
+Promise.all([promise1, promise2, promise3]).then(
+	values => console.log(values)
+)
+```
+
+##### async / await
+```js
+async function init() {
+	await ... // some 
+
+	// wait the previous processed ↓ then execute next line
+
+	getPost();
+}
+```
 
 ![[async.png]]
 
-```javascript
-async () => {
-    await 
-}
-```
 
 ### [Console](https://www.youtube.com/watch?v=UUoZ_U2_4tA)
 

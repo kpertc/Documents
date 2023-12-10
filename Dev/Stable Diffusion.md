@@ -73,3 +73,7 @@ Train a LoRA “Patch to checkpoint model” [https://civitai.com/models/22530](
 > You can train a mediocre Lora with a bare minimum of 5 images, but I recommend 20 or more, and up to 1000.
 
 can use multiple LoRAs
+
+
+
+ComfyUI
