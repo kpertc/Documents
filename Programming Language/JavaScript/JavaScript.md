@@ -47,6 +47,13 @@ function strict_function() {
 
 ```
 
+
+``` js
+// this[] 任意类型
+// this.property
+this.aabb = this[aabb]
+```
+
 ### Comments
 
 ```JavaScript

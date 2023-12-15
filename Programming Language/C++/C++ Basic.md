@@ -40,12 +40,6 @@ endl -> End line
 cout << "Hello World!" << endl;
 ```
 
-### `int main()`
-`int main()` → default entry point
-	 entry point can be customized other than named `main()` in setting
-- special case, don’t have to return a int
-- no return will `return 0`
-
 ### Compile
 code to binary executable
 
@@ -96,14 +90,59 @@ FAQ: at compiling stage: check declaration but not promise definition, if defini
 ```c++
 string name = "John";
 char grade = 'A';
+char a = 50; // if char is number, will be convert to character code
 
 int age = 50;
+short
+long
+long long
 
-float gpa1 = 4.0;
+float gpa1 = 4.0f; // f lower case, double case doesnt matter
+float _double = 4.0; // without ending with f -> is a double
+// float 4 bits, double 8 bits
+
 double gpa2 = 4.0;
+
 bool isMale = true;
+// 0 -> false; anything number, default 1 -> true
+
+// int range +- 2 billion
+// unsigned int range + 4 billion by not storaging the sign (+ -)
+unsigned int = 4;
 
 cout<<"My Name is "<<name<<"I am "<<age<<" years old."<<endl;
+
+// memory can not address bits, only address bytes
+```
+
+```c++
+// check variable size
+sizeof(_variable)
+```
+
+pointer
+```c++
+bool* // pointer
+bool& // reference
+```
+
+### Header
+```c++
+#include “file.h”
+
+#pragma once
+// prevent declare multiple times, in different files
+
+#ifndef // if not define
+#define …
+
+#include "../_header.h" relative path
+"" for everything
+#include <iostream> in directory
+
+c library usually has extension .h
+c++ library usually no extension
+e.g. <iostream> has no extension
 ```
 
 ### String
@@ -210,8 +249,13 @@ cout << luckyNums[2]; //read
 luckyNums[2] = 20; //set
 ```
 
-### Function
+### `int main()`
+`int main()` → default entry point
+	 entry point can be customized other than named `main()` in setting
+- special case, don’t have to return a int
+- no return will `return 0`
 
+### Function
 ```c++
 void // <= No return Type Function
 //C ++ function need to be on Top
@@ -234,6 +278,7 @@ sayHi();
 sayHi("Mike", 60);
 ```
 
+Debug must have a return, 
 ### Return
 
 ```c++
@@ -297,6 +342,8 @@ else
     cout<<"You are not male and not tall";
 }
 ```
+
+If (variable) // check variable is 0
 
 ### Switch
 
