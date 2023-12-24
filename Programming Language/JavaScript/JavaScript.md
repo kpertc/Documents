@@ -591,13 +591,10 @@ function addition(num1, num2){
 ```
 
 Functions are objects in JavaScript
-
 Anonymous Function
-
 `function () {...}`
 
 Arrow Function (ES6 later)
-
 `() => {...}`
 
 ```JavaScript
@@ -616,7 +613,6 @@ let randomNumber = () => Math.random // no parameter ()
 ``` javascript
 	const parentFunction = () => {
 		// local
-	
 	}
 ```
 

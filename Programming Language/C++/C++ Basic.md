@@ -115,12 +115,66 @@ cout<<"My Name is "<<name<<"I am "<<age<<" years old."<<endl;
 // memory can not address bits, only address bytes
 ```
 
+##### size
+
+1 byte = 8 bits
+4 byte = 32 bits
+1 int → 4 bits
+empty Class → 1 byte
+
 ```c++
 // check variable size
 sizeof(_variable)
+
+// can also check size of a object
+class Entity {
+public:
+    int x, y;
+};
+
+Entity e;
+sizeof(e) // 8
+```
+<br>
+
+### pointer
+
+pointer is int store memory address address of 1 byte(8 bits) memory
+
+```cpp
+void* ptr = 0; // 0 is not a valid address, will crash
+void* ptr = NULL;
+void* ptr = nullptr; // nullptr is introduced at C++ v11
 ```
 
-pointer
+```cpp
+int _var = 8; // create a variable
+void* ptr = &_var; // use &
+// ptr  void *  0x16fdff1ec  0x000000016fdff1ec
+```
+
+type does not matter, `int`, `double`, `void` can represent pointer
+
+access/read the pointer 
+```c++
+int* ptr = &var; 
+*ptr = 10; // edit int pointer by int 
+// *ptr -> 10 now
+```
+
+Edit Memory and check in memory view in Xcode
+```cpp
+char* buffer = new char[8]; // create a 8-bits memory
+memset(buffer, 1, 8); // set value of the address of memory to 1
+```
+![[cpp_memory_xcode.png]]
+
+release memory
+```cpp
+delete ptr; 
+delete[] buffer; // release array memory
+```
+
 ```c++
 bool* // pointer
 bool& // reference
@@ -188,6 +242,8 @@ floor(4.6); //4, always round down
 fmax(3, 10); //10, bigger one
 fmin(3, 10); //3, smaller one
 ```
+
+
 
 ### Get User Input
 
@@ -485,7 +541,22 @@ book2.pages = 700;
 cout << book1.pages << endl;
 ```
 
-### Constructor Function
+### Constructor
+
+C++ need to be manually init (memory)
+without manual init -> un-inited value is what memory left to
+```c++
+class Entity { 
+	public: float X, Y; 
+}; 
+
+Entity e;
+
+// X -> float -1.43127687E-34
+// Y -> float -6.43330269E+20
+```
+
+Other languages, such as Java can automatically init and set the value to 0 / clear the memory
 
 ```c++
 class Book {
@@ -515,6 +586,42 @@ class Book {
 //Main
 Book book1("Harry Potter", "JK Rowling", 500);
 cout << book1.title << endl;
+```
+
+No constructor:
+Hide constructor ? -> private
+
+```c++
+class Entity { 
+	Entity() = delete
+}; 
+
+Entity e;
+```
+
+
+### Destructor
+
+will be called when the obj destroy, not call to destroy the obj
+```c++
+// destructor
+~Entity() {
+	// do something
+}
+
+// manually call destructor
+e.~Entity();
+```
+
+```c++
+void test () {
+    Entity e;
+    // object e will be destroy when get out the scope
+}
+
+int main(int argc, const char * argv[]) {
+    test();
+}
 ```
 
 ### Object Function
@@ -603,6 +710,29 @@ int main(int argc, const char * argv[]) {
 ```
 
 ### Inheritance
+inherit public variable and method
+```c++
+class Entity {
+public:
+    int x, y;
+    
+    Entity () {
+        x = 10;
+        y = 10;
+    }
+};
+
+class Player : Entity {
+public:
+    void logout () {
+        std::cout << x << std::endl;
+    }
+};
+
+Player p;
+p.logout(); // Player has attrubute x and logout -> 10
+
+```
 
 ### Comment
 

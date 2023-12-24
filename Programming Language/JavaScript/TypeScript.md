@@ -57,6 +57,11 @@ Problem
 https://blog.csdn.net/dujyong/article/details/106359483
 
 
+---
+Run TypeScript directly in node.js `npx ts-node test.ts`
+
+---
+
 ### Type
 
 Variables
@@ -71,6 +76,27 @@ var variable: (string | number | boolean )  = "s";
 variable = 1;
 variable = true;
 ```
+
+`unknown` vs `any`
+  
+`any` → can use directly
+`unknown` → have to cast type before using (safer any)
+
+``` ts
+var _var: any = 1;
+_val++; // ok
+
+var _var: unknown = 1;
+_val++; // error
+```
+
+``` ts
+var _var: unknown = 1;
+// have unwrap type before use
+if (typeof _var === 'number') _var++;
+```
+
+
 
 Object
 
@@ -101,6 +127,29 @@ Let d = <One>’world’
 
 ```
 
+
+### `&` intersect type
+``` ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+interface Employee {
+  companyId: number;
+  department: string;
+}
+
+type EmployeePerson = Person & Employee;
+
+const employee: EmployeePerson = {
+  name: "John Doe",
+  age: 30,
+  companyId: 12345,
+  department: "Engineering"
+};
+```
+
 ### Function
 
 ```TypeScript
@@ -119,6 +168,10 @@ function functionName (): void {};
 type person = {name: string, id: number};
 var FuncVariable : (obj: person) => void;
 ```
+
+Function overloading 函数重载
+allows you to define ==multiple functions== with the ==same name== but ==different parameters or argument types==.
+
 
 ### Optional / default parameter
 
@@ -171,6 +224,20 @@ namespace name {
 ```
 
 <br>
+### Tuples
+(JavaScript ?)
+a typed array with a pre-defined length and types for each index
+
+```ts
+type coord = [x: number, y: number, z:number];
+```
+
+```ts 
+// state -> tuple
+const [count, setCount] = useState(0);
+```
+
+<br>
 ### Interface
 define the structure of an object to be complied
 
@@ -199,6 +266,75 @@ class myClass implements myInterface {
 	...
 } 
 
+```
+
+<br>
+### Generics
+
+```ts
+function _func<T>(arg: T): T { // T -> any type
+	return arg;
+}
+
+// declare generic types in < >, type name can be separated by , 
+// <type1, type2>
+```
+
+work with interface
+
+``` ts
+
+```
+
+##### keyof
+key of the generic type
+[No BS TS #8 - Generics with keyof in Typescript by Jack Herrington](https://youtu.be/4XTj6sIGTdc?si=jIOWJjZOVUpcCb0u)
+``` ts
+function pluck<DataType, KeyType extends keyof DataType>(
+	item: DataType[],
+	key: KeyType
+): DataType[KeyType][] {
+	return item.map(item => item[key]);
+}
+
+const dogs = [
+	{ name: "Mimi", age: 12 },
+	{ name: "LG", age: 13 }
+]
+
+console.log(pluck(dogs, "name")); // [ 'Mimi', 'LG' ]
+```
+
+ <br>
+
+### Abstract Class
+
+[# No BS TS #16 - Abstract Classes in Typescript](https://youtu.be/iFEOdoHp19U?si=mCZOypw2QO8kVkc8)
+
+can not instantiate directly,  act as a template.
+Other class inherit from the abstract class
+
+``` ts
+abstract class StreetFighter {
+	constructor() { }
+	move() { }
+	fight() { }
+	
+	abstract getSpecialAttack(): string;
+}
+
+// const _fighter = new StreetFighter(); // can not instantiate directly
+
+class Ryu extends StreetFighter { // StreetFighter Class act as a template  
+	// abstract method need to be implemented
+	getSpecialAttack(): string {
+		return "Hello";
+	}
+}
+
+const _fighter = new Ryu();
+const msg = _fighter.getSpecialAttack();
+console.log(msg); // "Hello"
 ```
 
 <br>
