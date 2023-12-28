@@ -205,6 +205,48 @@ class Invoice {
 }
 ```
 
+### Class
+``` ts
+class dog {
+    public readonly name: string;
+    readonly id: number;
+    age: number;
+
+    constructor(){}
+}
+
+class dog {
+    constructor(
+	    // can declare public / readonly in constructor
+        public readonly name: string,
+        readonly id: number,
+        age: number
+    ){}
+}
+```
+
+##### Singleton
+``` ts
+// one way to create singleton
+class DogManager {
+    public _num: number = 1;
+    static instance: DogManager = new DogManager();
+
+    // make constructor private to prevent create instance
+    private constructor() { };
+
+    public add() {
+        this._num++;
+    }
+}
+
+const manager = DogManager.instance;
+manager.add();
+
+const fake_manager = DogManager.instance;
+console.log(fake_manager._num); // 2 -> same instance as manager
+```
+
 ### Enum
 
 ```TypeScript
@@ -339,6 +381,111 @@ console.log(msg); // "Hello"
 
 <br>
 
+### Utility Types
+
+> [Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html)
+
+``` ts
+interface MyUser {
+	name: string,
+	id: string,
+	email?: string;
+}
+```
+
+##### Partial
+> Constructs a type with all properties of `Type` set to ==optional==
+``` ts
+type MyUserOptionals = Partial<MyUser>;
+
+/*
+MyUserOptionals => {
+	name?: string,
+	id?: string,
+	email?: string;
+}
+*/
+```
+
+##### Required
+> RequiredConstructs a type consisting of all properties of `Type` set to ==required==. The opposite of ==Partial==.
+``` ts
+type RequiredMyUser = Required<MyUser>;
+
+/*
+RequiredMyUser => {
+	name: string,
+	id: string,
+	email: string;
+}
+*/
+```
+
+##### Pick
+> Constructs a type by picking the set of properties `Keys`.
+
+create a type by selecting some properties from a type. 
+``` ts
+type JustEmailAndName = Pick<MyUser, "email" | "name">;
+
+/*
+JustEmailAndName => {
+	name: string,
+	email?: string;
+}
+*/
+```
+
+##### Omit
+> Constructs a type by picking all properties from `Type` and then ==removing `Keys`==
+
+``` ts
+type removeEmail = Omit<MyUser, "email">;
+/*
+removeEmail => {
+	name: string,
+	id: string,
+}
+*/
+
+type removeEmailandID = Omit<MyUser, "email" | "id">;
+/*
+removeEmailandID => {
+	name: string,
+}
+*/
+```
+
+##### Record
+从两个type创建一个新type的object
+
+``` ts
+// use the type of MyUser.id -> more dynamic
+const _obj : MyUser["id"] = "1111";
+```
+
+##### Readonly
+``` ts
+type ReadOnlyUser = Readonly<MyUser>;
+/*
+ReadOnlyUser => {
+	Readonly name: string,
+	Readonly id: string,
+	Readonly email: string;
+}
+*/
+```
+
+``` ts
+// set immutable array
+const reallyConst = [1,2,3] as const;
+// or
+const reallyConst: readonly [number, number, number] = [1, 2, 3];
+
+// try to modify
+reallyConst[0] = 50; // error
+```
+<br>
 ### `.d.ts` file
 can only store type, normally for package does not have type 
 ```ts
