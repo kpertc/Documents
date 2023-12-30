@@ -413,6 +413,12 @@ Book book1("Harry Potter", "JK Rowling", 500);
 cout << book1.title << endl;
 ```
 
+### Struct
+`struct` for backward compatibility
+C does not have `class`, only have `struct`
+
+```c++
+```
 ### Object Function
 
 ```c++

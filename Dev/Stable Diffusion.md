@@ -35,6 +35,14 @@ export COMMANDLINE_ARGS=“—medvram”
 ```
 
 
+## ComfyUI
+
+Mac 安装 [https://youtu.be/I8g8rf1LAvI?si=B1FJIx2Q5YvPNQgp](https://youtu.be/I8g8rf1LAvI?si=B1FJIx2Q5YvPNQgp)
+
+
+
+
+
 ## Diffusers 
 
 by Hugging Face
@@ -73,3 +81,13 @@ Train a LoRA “Patch to checkpoint model” [https://civitai.com/models/22530](
 > You can train a mediocre Lora with a bare minimum of 5 images, but I recommend 20 or more, and up to 1000.
 
 can use multiple LoRAs
+
+
+
+
+CLIP - 语义理解　描述词汇
+LDM - 图像理解　噪声种子　随机噪声　潜空间
+VAE - 性能友好　图像生成
+
+
+【秋葉aaaki的个人空间-哔哩哔哩】 [https://b23.tv/aFec6JT](https://b23.tv/aFec6JT)
