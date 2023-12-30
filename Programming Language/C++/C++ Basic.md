@@ -1,11 +1,18 @@
 #programming-language
 
-> Stroustrup加入了OOP特性和对C的泛型编程支持，C++ 是C语言的超集，这意味着任何有效的C程序都是有效的C++程序。
+C++ can natively run on machine → fast
+compare to C#, Java → run on virtual machine
+
+Stroustrup加入了OOP特性和对C的泛型编程支持，C++ 是C语言的超集，这意味着任何有效的C程序都是有效的C++程序。
 
 ### Tutorial
 <iframe width="560" height="315" src="https://www.youtube.com/embed/vLnPwxZdW4Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
+[C++ series by The Cherno](https://youtu.be/SfGuIVzE_Os?si=A1NhihRyKfJTlnJW)
+
 ### Windows Installation
+
+use Visual Studio
 
 ### Mac Installation
 
@@ -16,7 +23,6 @@ gcc -v
 ```
 
 Install Command Line Tool:[[Env Tools]]
-
 
 ```
 
@@ -34,19 +40,163 @@ endl -> End line
 cout << "Hello World!" << endl;
 ```
 
+### Compile
+code to binary executable
+
+##### **Configuration** (a set of rules)
+- Release → Optimization for max-speed 
+- Debug → Not optimization for max-speed, have extra code for debugging
+- ...
+
+##### **Target** (Platform → x86/x64/android)
+- Application `.exe`
+- Library `.dll`
+
+##### `declaration`
+	will not show error in editor but may not exist
+	if can not find → linker error: `unresolved external symbol ...`
+
+##### `definition`
+	the actual content
+
+##### 1. Compilation (compile)
+1. pre-process
+	Get evaluated before compile
+	preprocess statement begin with `#` 
+	`# define if ifdef`
+	`#` include (header files)
+		↳ header file does not compiled, literally copy the content of header file to the file where is `# include ...`
+
+1. Generate Abstract Syntax Tree (AST) → Machine Code
+	Optimization: redebug
+		- constant folding → 5 * 2 will be optimized to 10
+		- function signature
+##### 2. Linking
+Linker stitch object files to one .exe by finding symbol and function
+
+
+##### compile error vs linking error
+Compile error, C → compile
+`error C2143: syntax errorL missing ‘;’ before ‘}’`
+
+linking error
+`fatel error LINK1561: entry point must be defined`
+
+
+FAQ: at compiling stage: check declaration but not promise definition, if definition is not correct will resolve linking error
+
 ### Variables
 
 ```c++
 string name = "John";
 char grade = 'A';
+char a = 50; // if char is number, will be convert to character code
 
 int age = 50;
+short
+long
+long long
 
-float gpa1 = 4.0;
+float gpa1 = 4.0f; // f lower case, double case doesnt matter
+float _double = 4.0; // without ending with f -> is a double
+// float 4 bits, double 8 bits
+
 double gpa2 = 4.0;
+
 bool isMale = true;
+// 0 -> false; anything number, default 1 -> true
+
+// int range +- 2 billion
+// unsigned int range + 4 billion by not storaging the sign (+ -)
+unsigned int = 4;
 
 cout<<"My Name is "<<name<<"I am "<<age<<" years old."<<endl;
+
+// memory can not address bits, only address bytes
+```
+
+##### size
+
+1 byte = 8 bits
+4 byte = 32 bits
+1 int → 4 bits
+empty Class → 1 byte
+
+```c++
+// check variable size
+sizeof(_variable)
+
+// can also check size of a object
+class Entity {
+public:
+    int x, y;
+};
+
+Entity e;
+sizeof(e) // 8
+```
+<br>
+
+### pointer
+
+pointer is int store memory address address of 1 byte(8 bits) memory
+
+```cpp
+void* ptr = 0; // 0 is not a valid address, will crash
+void* ptr = NULL;
+void* ptr = nullptr; // nullptr is introduced at C++ v11
+```
+
+```cpp
+int _var = 8; // create a variable
+void* ptr = &_var; // use &
+// ptr  void *  0x16fdff1ec  0x000000016fdff1ec
+```
+
+type does not matter, `int`, `double`, `void` can represent pointer
+
+access/read the pointer 
+```c++
+int* ptr = &var; 
+*ptr = 10; // edit int pointer by int 
+// *ptr -> 10 now
+```
+
+Edit Memory and check in memory view in Xcode
+```cpp
+char* buffer = new char[8]; // create a 8-bits memory
+memset(buffer, 1, 8); // set value of the address of memory to 1
+```
+![[cpp_memory_xcode.png]]
+
+release memory
+```cpp
+delete ptr; 
+delete[] buffer; // release array memory
+```
+
+```c++
+bool* // pointer
+bool& // reference
+```
+
+### Header
+```c++
+#include “file.h”
+
+#pragma once
+// prevent declare multiple times, in different files
+
+#ifndef // if not define
+#define …
+
+#include "../_header.h" relative path
+"" for everything
+#include <iostream> in directory
+
+c library usually has extension .h
+c++ library usually no extension
+e.g. <iostream> has no extension
 ```
 
 ### String
@@ -92,6 +242,8 @@ floor(4.6); //4, always round down
 fmax(3, 10); //10, bigger one
 fmin(3, 10); //3, smaller one
 ```
+
+
 
 ### Get User Input
 
@@ -153,8 +305,13 @@ cout << luckyNums[2]; //read
 luckyNums[2] = 20; //set
 ```
 
-### Function
+### `int main()`
+`int main()` → default entry point
+	 entry point can be customized other than named `main()` in setting
+- special case, don’t have to return a int
+- no return will `return 0`
 
+### Function
 ```c++
 void // <= No return Type Function
 //C ++ function need to be on Top
@@ -177,6 +334,7 @@ sayHi();
 sayHi("Mike", 60);
 ```
 
+Debug must have a return, 
 ### Return
 
 ```c++
@@ -240,6 +398,8 @@ else
     cout<<"You are not male and not tall";
 }
 ```
+
+If (variable) // check variable is 0
 
 ### Switch
 
@@ -381,7 +541,22 @@ book2.pages = 700;
 cout << book1.pages << endl;
 ```
 
-### Constructor Function
+### Constructor
+
+C++ need to be manually init (memory)
+without manual init -> un-inited value is what memory left to
+```c++
+class Entity { 
+	public: float X, Y; 
+}; 
+
+Entity e;
+
+// X -> float -1.43127687E-34
+// Y -> float -6.43330269E+20
+```
+
+Other languages, such as Java can automatically init and set the value to 0 / clear the memory
 
 ```c++
 class Book {
@@ -413,12 +588,48 @@ Book book1("Harry Potter", "JK Rowling", 500);
 cout << book1.title << endl;
 ```
 
+```c++
+```
+No constructor:
+Hide constructor ? -> private
+
+```c++
+class Entity { 
+	Entity() = delete
+}; 
+
+Entity e;
+```
+
 ### Struct
 `struct` for backward compatibility
 C does not have `class`, only have `struct`
 
+
+### Destructor
+
+will be called when the obj destroy, not call to destroy the obj
 ```c++
+// destructor
+~Entity() {
+	// do something
+}
+
+// manually call destructor
+e.~Entity();
 ```
+
+```c++
+void test () {
+    Entity e;
+    // object e will be destroy when get out the scope
+}
+
+int main(int argc, const char * argv[]) {
+    test();
+}
+```
+
 ### Object Function
 
 ```c++
@@ -505,6 +716,29 @@ int main(int argc, const char * argv[]) {
 ```
 
 ### Inheritance
+inherit public variable and method
+```c++
+class Entity {
+public:
+    int x, y;
+    
+    Entity () {
+        x = 10;
+        y = 10;
+    }
+};
+
+class Player : Entity {
+public:
+    void logout () {
+        std::cout << x << std::endl;
+    }
+};
+
+Player p;
+p.logout(); // Player has attrubute x and logout -> 10
+
+```
 
 ### Comment
 

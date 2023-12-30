@@ -5,7 +5,9 @@ Install Webpack
 npm i -D webpack webpack-cli
 ```
 
-package.json
+
+### package.json
+set command to run webpack
 ```json
 "scripts": { 
 	"build": "webpack --mode production" 
@@ -14,16 +16,17 @@ package.json
 
 
 
-``` json
+``` js
+const path = require('path'); // use path module
+
 module.exports = {
 	mode: 'development', 
-	entry:{
-
-	}
-
-	output:{
-	
-	}
+	// entry: './src/index.jsx',
+	entry: path.resolve(__dirname, 'src/index.js'),
+	output: {
+		path: path.resolve(__dirname, 'dist'), // `__dirname` returns the the directory name
+		filename: 'index.js',
+	},
 
 	// loader scss
 	module: {
@@ -36,3 +39,14 @@ module.exports = {
 	]
 }
 ```
+
+
+```js
+entry: './src/index.jsx',
+output: {
+	path: path.resolve(__dirname, 'dist'), // `__dirname` returns the the directory name
+	filename: 'index.js',
+},
+```
+
+specify dependencies that should not be resolved and bundled by Webpack.
