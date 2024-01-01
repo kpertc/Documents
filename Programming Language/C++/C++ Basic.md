@@ -655,6 +655,8 @@ Book book1("Harry Potter", "JK Rowling", 500);
 cout << book1.title << endl;
 ```
 
+```c++
+```
 No constructor:
 Hide constructor ? -> private
 
@@ -665,6 +667,10 @@ class Entity {
 
 Entity e;
 ```
+
+### Struct
+`struct` for backward compatibility
+C does not have `class`, only have `struct`
 
 
 ### Destructor
