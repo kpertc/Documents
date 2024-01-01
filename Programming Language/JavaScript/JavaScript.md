@@ -1073,7 +1073,36 @@ async function init() {
 
 ![[async.png]]
 
+##### Mixins
 
+a function to create a function
+``` js
+function myFunc() {
+    return () => { console.log("hello") };
+}
+
+const logger = myFunc();
+logger();
+```
+
+a function to create a class
+``` js
+function createLoggerClass() {
+    return class MyLoggerClass {
+        private msg = "Hello";
+        log() {
+            console.log(this.msg);
+        }
+    }
+}
+
+const logClass = createLoggerClass();
+const logClassInstance = new logClass();
+
+logClassInstance.log();
+```
+
+<br>
 ### [Console](https://www.youtube.com/watch?v=UUoZ_U2_4tA)
 
 ```javascript
@@ -1180,9 +1209,7 @@ var stringJSON = '{ "name":"Beau", "kids":2,"state":"Michigan"}';
 var myParse = JSON.parse(stringJSON);
 console.log(myParse);
 ```
-
 <br>
-
 ### Decorator
 
 Decorators wrap a function in another function
