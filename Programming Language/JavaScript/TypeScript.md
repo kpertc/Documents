@@ -60,6 +60,9 @@ https://blog.csdn.net/dujyong/article/details/106359483
 ---
 Run TypeScript directly in node.js `npx ts-node test.ts`
 
+Run `npm link` if can not find typescript (on Windows)
+![[node.js#`npm link`]]
+
 ---
 
 ### Type

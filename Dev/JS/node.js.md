@@ -199,6 +199,13 @@ npm root -g
 # /usr/local/lib/node_modules
 ```
 
+##### `npm link`
+```shell
+npm link typescript
+```
+link between a globally installed package and a local project. Allows you to work on a package locally while using it as a dependency in another project without the need to publish it to the npm registry.
+
+
 <br>
 
 ##### NVM Node Version Manager
