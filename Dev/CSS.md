@@ -77,6 +77,8 @@ justify-content: flex-start; /* flex-start, center, space-between, space-around 
 align: 
 ```
 
+
+
 Grid
 
 ```CSS
@@ -91,7 +93,86 @@ Grid cross section
 ![[grid-cross-section.gif]]
 
 <br>
+### Scroll
+```css
+animation: animationName ...;
 
+animation-timeline: scroll()
+animation-timeline: scroll(x) // for check horizontal percentage
+
+animation-timeline: view()
+animation-timeline: view(250px) // offset
+
+animation-range-start: 500px; // start animation 500px away
+animation-range-end: 700px; // end animation 700px away
+```
+
+<br>
+
+### Attribute selector
+
+```html
+<a href="..."> ... </a>
+<button data-tooltip="Tooltip">Submit form</button>
+```
+
+```css
+a[href] {
+
+}
+
+a[target="_blank"] {
+
+}
+
+[data-tooltip]::after {
+	content: 
+}
+```
+ 
+<br>
+
+### Attribute Function
+```css
+attr()
+```
+
+<br>
+
+[Pseudo-classes_and_pseudo-elements](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Pseudo-classes_and_pseudo-elements)
+
+### Pseudo Classes
+state
+```css
+:first-child
+:last-child
+:only-child
+:invalid
+
+:hover
+:focus
+```
+
+### Pseudo Elements
+actual part
+
+< css3 `:` single colon
+\> css3 `::` double colon
+
+```css
+::before
+::after
+
+::selection
+```
+
+`::before` ☞ red
+`::after` ☞ blue
+
+![[PseudoElements-before-after.png]]
+> [Learn CSS Pseudo Elements In 8 Minutes by Web Dev Simplified](https://youtu.be/OtBpgtqrjyo?si=c2Zo524sbyPGlbjO)
+
+<br>
 ### Dark Mode
 
 https://lukelowrey.com/css-variable-theme-switcher/
@@ -149,3 +230,7 @@ export default function Container({ children }) {
 <br>
 
 ### [[SCSS]]
+
+
+### IntersectionObserver
+![[Web APIs#IntersectionObserver]]

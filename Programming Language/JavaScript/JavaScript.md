@@ -597,6 +597,9 @@ Anonymous Function
 Arrow Function (ES6 later)
 `() => {...}`
 
+arrow function -> variable must be declared before use
+`function` can be hoisted
+
 ```JavaScript
 function sum(a, b) {
     return a + b
@@ -608,7 +611,6 @@ let isPositive = number => number >= 0 // only one parameter, no need parenthese
 
 let randomNumber = () => Math.random // no parameter ()
 ```
-
 ##### [Arrow Function Scope](https://blog.webdevsimplified.com/2020-09/arrow-functions/)
 ``` javascript
 	const parentFunction = () => {

@@ -220,11 +220,11 @@ nvm use [version] # use a version of node js
 ```
 
 NPX (run something)
+run local package
 
 ![[image-2.png]]
 
 check if NPX is installed `which npx`
-
 Install NPX `npm install -g npx`
 
 

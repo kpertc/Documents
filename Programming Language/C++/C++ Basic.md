@@ -337,17 +337,46 @@ cout <<"I love "<<celebrity<<endl;
 ```
 
 ### Arrays
-
+raw array
+raw array is faster than standard array
+array → save the data continuously in memory
 ```c++
+int luckyNums[20] // create 20 array
+// first index is 0, last index is 19
+
 int luckyNums[] = {4, 8, 15, 16, 23, 42};
 int luckyNums[20] = {4, 8, 15, 16, 23, 42};
             //create 20 length array
-int luckyNums[20]
 
 cout << luckyNums[2]; //read
 luckyNums[2] = 20; //set
 ```
 
+```cpp
+// create on stack
+int example[5];
+int* ptr = example; // array is pointer
+
+// create on heap
+int* another = new int[5];
+```
+
+have to maintain the size of length
+not reliable
+```cpp
+int a[5]
+int count = sizeof(a) / sizeof(int); // get size of array
+// or
+int count = sizeof(arr) / sizeof(arr[0]);
+```
+
+C++ 11 standard array
+```cpp
+#include <array>
+
+std::array<int, 5> _newArray;
+_newArray.size(); // standard array has size
+```
 ### `int main()`
 `int main()` → default entry point
 	 entry point can be customized other than named `main()` in setting

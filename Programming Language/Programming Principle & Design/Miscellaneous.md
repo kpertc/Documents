@@ -15,3 +15,23 @@ The term "==managed language==" generally refers to a programming language that 
 ##### Memory Management in Objective C and C++
 Objective C → Automatic Reference Counting (ARC)
 C++ → smart pointers and RAII (Resource Acquisition Is Initialization)
+
+##### Declarative Programming (声明式)
+↳ SQL Regex CSS
+##### Imperative Declarative (命令式)
+↳ C Java Python
+
+##### Event Driven Architecture (EDA)
+
+##### Serverless
+> IBM
+> Serverless is a cloud computing application development and execution model that enables developers to build and run application code without provisioning or managing servers or backend infrastructure.
+   VM → Container → Serverless
+
+
+##### SPAs (Single Page Applications)
+##### SSR (Server-Side Rendering)
+
+
+##### Single sign-on (SSO)
+##### JSON Web Token (JWT)
