@@ -597,6 +597,9 @@ Anonymous Function
 Arrow Function (ES6 later)
 `() => {...}`
 
+arrow function -> variable must be declared before use
+`function` can be hoisted
+
 ```JavaScript
 function sum(a, b) {
     return a + b
@@ -608,7 +611,6 @@ let isPositive = number => number >= 0 // only one parameter, no need parenthese
 
 let randomNumber = () => Math.random // no parameter ()
 ```
-
 ##### [Arrow Function Scope](https://blog.webdevsimplified.com/2020-09/arrow-functions/)
 ``` javascript
 	const parentFunction = () => {
@@ -1073,7 +1075,36 @@ async function init() {
 
 ![[async.png]]
 
+##### Mixins
 
+a function to create a function
+``` js
+function myFunc() {
+    return () => { console.log("hello") };
+}
+
+const logger = myFunc();
+logger();
+```
+
+a function to create a class
+``` js
+function createLoggerClass() {
+    return class MyLoggerClass {
+        private msg = "Hello";
+        log() {
+            console.log(this.msg);
+        }
+    }
+}
+
+const logClass = createLoggerClass();
+const logClassInstance = new logClass();
+
+logClassInstance.log();
+```
+
+<br>
 ### [Console](https://www.youtube.com/watch?v=UUoZ_U2_4tA)
 
 ```javascript
@@ -1180,9 +1211,7 @@ var stringJSON = '{ "name":"Beau", "kids":2,"state":"Michigan"}';
 var myParse = JSON.parse(stringJSON);
 console.log(myParse);
 ```
-
 <br>
-
 ### Decorator
 
 Decorators wrap a function in another function

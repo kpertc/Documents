@@ -16,6 +16,10 @@ Related C# Docs
 [[Advanced C＃]]
 
 
+Common Language Runtime (CLR)
+> .NET provides a run-time environment called the common language runtime that runs the code and provides services that make the development process easier.
+> https://learn.microsoft.com/en-us/dotnet/standard/clr
+
 ### Hello World
 
 ```c#

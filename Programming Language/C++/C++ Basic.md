@@ -85,6 +85,16 @@ linking error
 
 FAQ: at compiling stage: check declaration but not promise definition, if definition is not correct will resolve linking error
 
+### Comment
+
+```c++
+//blablablabla
+
+/*
+    blablablabla
+*/
+```
+
 ### Variables
 
 ```c++
@@ -168,17 +178,50 @@ char* buffer = new char[8]; // create a 8-bits memory
 memset(buffer, 1, 8); // set value of the address of memory to 1
 ```
 ![[cpp_memory_xcode.png]]
+##### Reference
+```c++
+bool* // pointer
+bool& // reference
 
-release memory
+int x = 42;
+int& ref = x;  // ref is a reference to x
+```
+##### Release memory
 ```cpp
 delete ptr; 
 delete[] buffer; // release array memory
 ```
+##### Smart Pointer
+Pointer wrap to provides automatic memory management. Like stack, deallocation when reach the scope.
 
-```c++
-bool* // pointer
-bool& // reference
+1. unique pointer
+	can not be shared
+```cpp
+#include <memory>
+std::unique_ptr<Entity> _entity(new Entity());
+
+// prefer way, safer
+std::unique_ptr<Entity> _entity = std::make_unique<Entity>();
+
+std::cout << _entity->x << std::endl;
 ```
+2. shared pointer
+```cpp
+
+```
+
+
+need to de-reference before using pointer as variable
+```cpp
+(*pointer)
+```
+##### Arrow operator (->)
+```cpp
+pointer →
+pointer → Print()
+```
+
+
 
 ### Header
 ```c++
@@ -294,17 +337,46 @@ cout <<"I love "<<celebrity<<endl;
 ```
 
 ### Arrays
-
+raw array
+raw array is faster than standard array
+array → save the data continuously in memory
 ```c++
+int luckyNums[20] // create 20 array
+// first index is 0, last index is 19
+
 int luckyNums[] = {4, 8, 15, 16, 23, 42};
 int luckyNums[20] = {4, 8, 15, 16, 23, 42};
             //create 20 length array
-int luckyNums[20]
 
 cout << luckyNums[2]; //read
 luckyNums[2] = 20; //set
 ```
 
+```cpp
+// create on stack
+int example[5];
+int* ptr = example; // array is pointer
+
+// create on heap
+int* another = new int[5];
+```
+
+have to maintain the size of length
+not reliable
+```cpp
+int a[5]
+int count = sizeof(a) / sizeof(int); // get size of array
+// or
+int count = sizeof(arr) / sizeof(arr[0]);
+```
+
+C++ 11 standard array
+```cpp
+#include <array>
+
+std::array<int, 5> _newArray;
+_newArray.size(); // standard array has size
+```
 ### `int main()`
 `int main()` → default entry point
 	 entry point can be customized other than named `main()` in setting
@@ -515,8 +587,10 @@ cout << &pName << endl;
 
 cout << *pAge << endl; //de-referencing the pointer, get the value
 ```
-
+<br>
 ### Classes & Objects
+
+property default is private
 
 ```c++
 class Book {
@@ -540,6 +614,28 @@ book2.pages = 700;
 
 cout << book1.pages << endl;
 ```
+
+can have multiple sections `public` / `private`
+```c++
+class Log {
+	public:
+		...
+	private:
+		int logLevel;
+	public:
+		void SetLevel() {
+			...
+		}
+		...
+}
+```
+
+### Struct
+class → private by default
+struct → public by default
+
+==struct in C# and C++ is different==
+![[C＃ Fundamental#Struct vs Class]]
 
 ### Constructor
 
@@ -665,6 +761,66 @@ Student student2("Pam", "Art", 3.6);
 cout << student1.hasHonors() << endl;
 cout << student2.hasHonors() << endl;
 ```
+<br>
+### Virtual Function and Interfaces
+
+##### Virtual Function
+> In C++, a vtable (virtual table) and virtual functions are mechanisms used to implement polymorphism and dynamic dispatch in object-oriented programming. -GPT
+
+Virtual Function have slightly additional memory (for vtable) and performance cost
+
+Base `print()` is overrided by Derived ↓
+`virtual` and `override` keyword, `override` is not mandatory, but is recomended
+```cpp
+class Base {
+public:
+    virtual void print() {
+        cout << "Base class print() called" << endl;
+    }
+};
+
+class Derived : public Base {
+public:
+    void print() override {
+        cout << "Derived class print() called" << endl;
+    }
+};
+```
+
+##### Interfaces
+C++ does not have a built-in Interface. However, C++ provides a way to achieve similar functionality through ==pure virtual functions==.
+
+`virtual ... = 0` → Pure virtual function: no implement in the base class, need to implement in the sub-class. 
+- Can not instantiate the class with pure virtual function, become "abstract class".
+- Can not instantiate when sub-class not implement the function.
+
+```cpp
+class Interface {
+public:
+    virtual void doSomething() = 0;  // Pure virtual function
+    virtual int calculate(int a, int b) = 0;  // Pure virtual function
+    virtual ~Interface() {}  // Virtual destructor (for proper cleanup)
+
+    // Non-virtual member function
+    void commonFunction() {
+        // Implementation shared by derived classes
+    }
+};
+
+class ConcreteClass : public Interface {
+public:
+    void doSomething() override {
+        // Implementation of doSomething in ConcreteClass
+    }
+
+    int calculate(int a, int b) override {
+        // Implementation of calculate in ConcreteClass
+        return a + b;
+    }
+};
+```
+
+<br>
 
 ### Getters & Setters
 
@@ -714,7 +870,53 @@ int main(int argc, const char * argv[]) {
     cout << avengers.getRating() << endl; //getter
 }
 ```
+<br>
 
+### Stack and Heap
+
+[How to CREATE/INSTANTIATE OBJECTS in C++ by Cherno](https://youtu.be/Ks97R1knQDY?si=M2c5TaE8pL4nAu4T)
+
+##### Two way to create object in C++:
+
+```cpp
+// stack way to create object
+// use this by default, fast way in C++
+Entity entity;
+
+// heap way to create object
+new Entity(); // return a pointer
+// need to manually free the object, and slower
+Entity* entity = new Entity();
+delete entity;
+```
+
+##### Stack & Heap
+
+stack and the heap are two regions of memory, ultimately in RAM
+- stack → automatic (faster)
+- heap → dynamic (slower, memory allocation in slow)
+
+main usage different between stack / heap is ==lifetime==
+- stack → controlled by scope
+```cpp
+function () { ... } // function scope
+
+if (...) { ... } // if scope
+
+{ ... } // empty scope
+```
+
+- heap → will remain after created
+
+Reason to use heap:
+1. Control lifetime: cross the scope
+2. Size: stack is small 1~2MB, when you have a large object, need to use heap
+
+![[Miscellaneous#Memory Management in Objective C and C++]]
+
+
+
+<br>
 ### Inheritance
 inherit public variable and method
 ```c++
@@ -740,12 +942,12 @@ p.logout(); // Player has attrubute x and logout -> 10
 
 ```
 
-### Comment
+### `Static`
 
-```c++
-//blablablabla
+- inside the `class` / `struct`
+	- Properties / method belong the class / struct
+- outside the `class` / `struct`
+    - only link in the translation unit (like private in class)
 
-/*
-    blablablabla
-*/
-```
+Use `extern` keyword for looking definition at external translation unit
+`extern int ...`

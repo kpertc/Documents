@@ -50,3 +50,10 @@ if (typeof window !== 'undefined') {
 const base_url = window.location.origin; // http://localhost:3000
 const host = window.location.host; // localhost:3000
 ```
+
+
+```
+function setScrollVar() {
+
+}
+```

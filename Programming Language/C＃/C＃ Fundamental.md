@@ -30,7 +30,6 @@ is a fixed length location in memory. Fixed length value types are stored one on
 ##### Heap
 
 is a location in memory that is not constrained by a fixed length. Data is stored in a more haphazard way on the heap when compared to the orderly way that data is stored on the stack. As a result, memory management applied to the heap is more complex and therefore less efficient than memory management applied to the stack. The size of the object data stored on the heap is only constrained by the physical resources of the computer.
-
   
 ### Variables
 
@@ -47,26 +46,21 @@ Main object-oriented principles: Encapsulation, Polymorphism, Inheritance, Abstr
   
 
 ### Struct vs Class
-
 struct -> value type
-
 class -> reference type
 
-  
-
-MyStruct myStruct;
+`MyStruct myStruct;`
 
 The new keyword is constructor, stuct can be instantiated with new keyword or without
-
 Struct can implement interface
 
-  
-
 Instantiate class needs new keyword
+`MyClass myclass = new MyClass();`
 
-MyClass myclass = new MyClass ();
 
-<br>
+> [!NOTE] Class and Struct is different in C# than C++
+> Struct → stack
+> Class → heap
 
 Default Values
 ![[Default Values.png]]

@@ -5,12 +5,14 @@ https://reactjs.org/docs/hello-world.html
 ### Tutorials
 
 [[YouTube] React JS Crash Course](https://www.youtube.com/watch?v=w7ejDZ8SWv8)
-
 [[YouTube] React TypeScript Tutorial](https://www.youtube.com/watch?v=TiSGujM22OI&list=PLC3y8-rFHvwi1AXijGTKM0BKtHzVC-LSK&index=1)
-
 Build IOS, Android, Web APP with React → [[React Native]]
 
 <br>
+React
+  ↳ Runtime virtual dom
+Svelt 
+  ↳ declarative code → compiler JavaScript
 
 ### Installation
 
