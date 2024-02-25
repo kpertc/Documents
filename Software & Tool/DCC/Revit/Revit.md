@@ -1,3 +1,5 @@
+[[Revit-Dev]]
+
 `WA` wall
 直接输入数字 设置长度
 
@@ -7,8 +9,8 @@ Properties:
 Location Line
 
 选择
-左上 右下
-右下 左上
+左上 右下 (正选) 实线 完全覆盖选择
+右下 左上 (反选) 虚线 接触选择
 
 单位设置
 project unit
@@ -23,6 +25,8 @@ manage > snaps
 族 Family
 图元
 
+`TL` Thin Line
+
 ![[revit-option.png|400]]
 
 3D view
@@ -32,32 +36,18 @@ close Hidden Window
 
 ![[revit-property-projectBrowser.gif]]
 
-### Development
-[Revit API](https://aps.autodesk.com/developer/overview/revit)
+Level
+![[revit-level.gif]]
 
-##### add-in Manager
-RevitSDK includes add-in Manager [Revit SDK 及LookUp 各版本下载地址](https://blog.csdn.net/weixin_46433786/article/details/115633252)
-> Copy `AddInManager.dll` & `Autodesk.AddInManager.addin` to `%appdata%/autodesk/revit/addins`
-> [Install add-in Manager](https://tailoryourbim.com/revitexternalcommand/use-add-in-manager-from-autodesk/)
+Modify Tab
 
-##### Revit LookUp
-https://github.com/jeremytammik/RevitLookup/
-[Revit Lookup for 2018 and the Revit 2018 SDK](https://wrw.is/httpwhatrevitwants-blogspot-com201704revitlookup-for-2018-and-revit-2018-sdk-html/)
-[[compiled 2018]]
+| Copy                | Array               |
+| ------------------- | ------------------- |
+| ![[revit-copy.gif]] | ![[revit-copy.gif]] |
 
-https://www.youtube.com/watch?v=MSGSrk4kWgY
-
-Type of Revit Add-in
-- command
-- application
-
-VSCode reference:
-`RevitAPI.dll`
-`RevitAPIUI.dll`
+ungroup
+![[revit-ungroup.png]]
 
 
-addin file
-- .dll
-- .addin manifest
 
 

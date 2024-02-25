@@ -23,28 +23,18 @@ Relational database management systems -> This course -> MySQL
 **Any collection of related information**
 
 -   Phone Book
-    
 -   Shopping list
-    
 -   Todo list
-    
 -   Your 5 best friends
-    
 -   Facebook's User base
-    
 
 **Databases can be stored in different ways**
 
 -   On Paper
-    
 -   In your mind
-    
 -   On a computer
-    
 -   This powerpoint
-    
 -   Comments Section
-    
 
 Computers are great at keeping track of large amounts of information
 

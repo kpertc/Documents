@@ -6,7 +6,7 @@ npm i -D webpack webpack-cli
 ```
 
 
-### package.json
+### `package.json`
 set command to run webpack
 ```json
 "scripts": { 

@@ -11,7 +11,7 @@ Camera projection
 - Photoshop
 - Nuke
 - 3D
-    - Gaea
+    - Gaea [[Gaea]]
     - SpeedTree
     - VFX
         - Smoke
