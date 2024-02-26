@@ -9,6 +9,7 @@ prettier recommends install a exact version, using `—save-exact` in npm `-exac
 # formatting
 prettier --write index.html # format a file
 prettier --write . # format all files, need to use ignore node_modules, dist ...
+prettier --write \"{./src,./statics}/**/*.{js,ts,tsx}“ # file glob syntax
 
 # checking
 prettier --check index.html # check
@@ -28,9 +29,27 @@ node_modules
 ```
 
 ### Config
-`.prettierrc.json`
+`.prettierrc` /  `.prettierrc.json`
 ```json
-
+{
+	"semi" : true,
+	"overrides" : [
+		{
+			// override rules, specific to .ts files
+			"files" : ".ts",
+			"options" : {
+				"semi" : false
+			}
+		},
+		{
+			// override rules, specific to files in legacy path
+			"files" : "legacy/*",
+			"options" : {
+				"semi" : false
+			}
+		}
+	]
+}
 ```
 
 ---
