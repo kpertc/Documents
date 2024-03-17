@@ -18,9 +18,7 @@ React Native/React/Redux snippets
 ### Expo
 
 `sudo npm i -g expo-cli`
-
 `expo init projectname`
-
 `npm start`
 
 Expo Go App

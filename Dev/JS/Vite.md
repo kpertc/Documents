@@ -11,10 +11,9 @@ Webpack
 -   Bundles all JS modules, CSS, and other assets
 `create react app` → [[Webpack]]
 
+Hot Module Replacement (HMT) → Watch
 
 Speedy Web Compiler, SWC
-
-<br>
 
 ```shell
 npm create vite@latest projectname
@@ -28,8 +27,6 @@ No command
 ```shell
 npm install vite
 ```
-
-<br>
 
 ### vite.config.ts
 ```jsx

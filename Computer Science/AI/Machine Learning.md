@@ -72,3 +72,25 @@ Automated Visual Inspection
 [**Hugging Face**](https://huggingface.co/)
 - 一家主要刚开始致力于NLP的人工智能公司
 - 一套方便进行深度学习相关使用开发的工具集合
+
+
+
+Convolutional Neural Network, CNN 卷积神经网络
+> 是一种深度学习模型，它在图像处理、视频识别和自然语言处理等领域特别有效。CNN在视觉识别任务中特别流行，因为它们能够从图像数据中自动、有效地学习空间层级特征。
+
+
+
+---
+### Diffusion model
+扩散模型
+noise ↔︎ denoise
+creating images, audio, and other media, oppose to traditional - GAN / VAE
+Require large amount VRAM
+
+### Transformer model
+大语言模型
+Text / General
+- LLMs -GPT
+
+Have better understanding but slow to generate media
+Text, video, audio → Token →
