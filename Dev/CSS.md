@@ -54,9 +54,7 @@ background: var(--variable);
 ### Display
 
 Block: `<div>` occupy full line
-
 Inline: `<span>` minimum size,
-
 Inline-Block: `<img>` similar to inline, but can set width / height
 
 None:
@@ -64,19 +62,32 @@ None:
 Flex:
 ![[flex.png]]
 
-Flexbox
+##### Flexbox
+Flexible Box Model
 https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
+
+- Container
 ```CSS
 display: flex;
+
+flex-direction: row | column
 
 /* for Main Axis */ 
 justify-content: flex-start; /* flex-start, center, space-between, space-around */ 
 
 /* Cross Axis */ 
-align: 
+align-items:  ;
+
+flex-wrap: ;
 ```
 
+- Flex item (Children)
+```css
+flex-basis: ;
+
+order: ; /* customize order */
+```
 
 
 Grid

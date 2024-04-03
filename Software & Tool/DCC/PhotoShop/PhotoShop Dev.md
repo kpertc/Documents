@@ -1,3 +1,4 @@
+#JavaScript #TypeScript 
 
 ## CEP vs UXP
 CEP UXP 是开发框架, PhotoShop API才是具体给PhotoShop的指令

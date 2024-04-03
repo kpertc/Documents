@@ -17,17 +17,10 @@ Negative prompt
 Easy negative
 
 Install on MAC
-
-1. Install dependency
-`brew install cmake protobuf rust python@3.10 git wget`
-
+1. Install dependency `brew install cmake protobuf rust python@3.10 git wget`
 2. Clone the git repo
-
-3. Copy models to model/stable diffusion folder
-`.ckpt`
-
+3. Copy models to model/stable diffusion folder `.ckpt`
 4. run `webui.sh` at repo
-
 5. config for performance, `webui-user.sh`
 
 ```sh
@@ -91,3 +84,6 @@ VAE - 性能友好　图像生成
 
 
 【秋葉aaaki的个人空间-哔哩哔哩】 [https://b23.tv/aFec6JT](https://b23.tv/aFec6JT)
+
+
+Text Encoder → Noise Predictor → Variational Auto Encoder (VAE)

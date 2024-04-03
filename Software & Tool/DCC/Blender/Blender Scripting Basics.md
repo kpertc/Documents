@@ -6,36 +6,52 @@ Check out templates
 
 Blender is written in C/C++/Python, learn more about: [Reference/FAQ - Blender Developer Wiki](https://wiki.blender.org/wiki/Reference/FAQ)
 
-[[Blender Scripting Operator & Add-on]]
+[[Blender Scripting Operator & Panel & Add-on]]
 
 ---
 ### Shortcuts
 
 `Alt` / `Option` + `P` Run Script
 `F3` Search Bar
+
+---
+### Command line
+
 Run Blender thru terminal `/Applications/Blender.app/Contents/MacOS/Blender`
 Also allow open multiple Blender on MacOS
+
+[Blender Documentation - Command Line](https://docs.blender.org/manual/en/latest/advanced/command_line/index.html#)
+
+Video Tutorial: [YouTube - Running Blender from the Terminal on macOS by CG Python](https://youtu.be/eoQX_Q1IGzg?si=uylYo-c4WRQNvfDI)
+
+``` shell
+cd /Applications/Blender.app/Contents/MacOS
+
+./Blender # run Blender normally
+./Blender --help # Run Blender with commands
+```
+
+Close the terminal will also close the Blender
+
+``` shell
+
+```
 
 ---
 Python Version
 ![[Blender-Python-version.png]]
 
 ---
-
 ### Intro
 
-Enable Settings | Tooltips
----|---
-![[img/Blender Scripting Basics/Enable Settings.png]]|![[img/Blender Scripting Basics/Tooltips.png]]
+| Enable Settings                                       | Tooltips                                       |
+| ----------------------------------------------------- | ---------------------------------------------- |
+| ![[img/Blender Scripting Basics/Enable Settings.png]] | ![[img/Blender Scripting Basics/Tooltips.png]] |
 
-
-Modules are shown on console|`Tab` Auto-Complete| | 
----|---|---
-![[img/Blender Scripting Basics/Modules are shown on console.png]] | ![[img/Blender Scripting Basics/Auto-Complete-1.png]] | ![[img/Blender Scripting Basics/pythonConsoleAutoComplete.gif]]
-
+| Modules are shown on console                                       | `Tab` Auto-Complete                                   |                                                                 |     |
+| ------------------------------------------------------------------ | ----------------------------------------------------- | --------------------------------------------------------------- | --- |
+| ![[img/Blender Scripting Basics/Modules are shown on console.png]] | ![[img/Blender Scripting Basics/Auto-Complete-1.png]] | ![[img/Blender Scripting Basics/pythonConsoleAutoComplete.gif]] |     |
 Use Convenience Variable `C` & `D`
-
-  
 
 ##### Python console
 
@@ -50,48 +66,14 @@ Windows
 ![[img/Blender Scripting Basics/Blender Module.png]]
 
 ---
-
-### VSCode Setup
-
-[5 Steps to setup VSCode for Blender Python (on macOS)](https://youtu.be/_0srGXAzBZE?si=rRnpWQ_B4qzoQlnF)
-
-[fake-bpy-module](https://github.com/nutti/fake-bpy-module)
-
-```shell
-pip install fake-bpy-module-latest
-```
-
-![[fake-bpy-vscode.gif]]
-
-VSCode Plugin: Blender Development by Jacques Lucke
-
-VSCode Blender command
-![[blender-commands.png]]
-
-Blender: Start
-Blender: Run
-![[Blender-start-run.gif]]
-
-Support VSCode Debug breakpoint
-
----
-
 ### Common APIs
-
 `import bpy`
 
 ##### Access Objects
-
-  
-
 -   `bpy.data` - all data in your blend file.
 -   `bpy.context` - data in the current active view. (useful for getting current selecting / active objects)
 
-
-  
-
 bpy.context
-
 ```Python
 bpy.context.active_object
 bpy.context.selected_objects
@@ -106,13 +88,11 @@ for obj in bpy.context.selected_objects:
 ```
 
 bpy.data
-
 ```Python
 bpy.data.objects['objectName']
 ```
 
 Create Primitives
-
 ```Python
 # Add primitive object
 bpy.ops.mesh.primitive_cube_add()
@@ -120,7 +100,6 @@ bpy.ops.mesh.primitive_monkey_add(location=(0,0,0))
 ```
 
 Transform Object
-
 ```Python
 # Move X = 5
 bpy.context.active_object.location[0] = 5
@@ -130,7 +109,6 @@ bpy.context.active_object.rotation_euler[0] += radians(45)
 ```
 
 Hide & UnHide objects
-
 ```Python
 # hide in Viewport globally
 bpy.data.objects['Cube'].hide_set(True) # For Eye icon
@@ -184,9 +162,7 @@ links = _material.node_tree.links
 # create a link
 links.new(node_emssion.output[0], material_ouput.input[0]) 
 ```
-
 ##### Add Modifier
-
 ```Python
 # Add Subdivision Surface Modifier named 'My Modifier' 
 _obj.modifiers.new("My Modifier", "SUBSURF")
@@ -198,10 +174,7 @@ _obj.modifiers.new("My Modifier", "DISPLACE") # displacement modifier
 _obj.modifiers['My Modifier'].levels = 3
 ```
 ![[img/Blender Scripting Basics/Add-Modifier.png|200]]
-
-
 ##### Shade Smooth
-
 ```Python
 # 1
 bpy.ops.object.shade_smooth()
@@ -216,7 +189,6 @@ for face in mesh.polygons:
 Img-1 Blender default view layer | Img2 <br/>C.scene.collection -> <br/> Scene Collection # Img-2 2
 --|--
 ![[img/Blender Scripting Basics/img-1.png]] | ![[img/Blender Scripting Basics/img-2.png]]
-
 
 ```Python
 # list Scene Objects
@@ -239,7 +211,44 @@ C.scene.collection.children.link(collectionVar) # Img-2 1
 # Parent link to the child
 ```
 
+##### Mesh
+https://docs.blender.org/api/current/bpy.types.Mesh.html#bpy.types.Mesh
 
+```Python
+obj.name
+obj.data # mesh data
+
+obj.data.vertices
+obj.data.loops
+obj.data.polygons
+```
+
+```Python
+face_count = len(obj.data.polygons)
+triangle_count = len(obj.data.loop_triangles)
+
+print(f'name: {obj.name}, face:{face_count}, triangle: {triangle_count}')
+```
+###### BMesh
+https://docs.blender.org/api/current/bmesh.html
+
+``` python
+import bmesh
+
+# create a bmesh
+me = obj.data
+bm = bmesh.new()
+
+bm.from_mesh(me)
+
+
+for v in bm.verts:
+    v.link_edges
+    v.link_loops
+    v.link_faces
+    
+    v.index
+```
 ##### Export
 
 ```Python
@@ -247,10 +256,7 @@ C.scene.collection.children.link(collectionVar) # Img-2 1
 bpy.ops.export_scene.fbx(filepath = '/Users/bytedance/Desktop/test.fbx') 
 ```
 
-  
-
 ### Render
-
 ```Python
 # Change current frame
 bpy.context.scene.frame_current = 0
@@ -260,7 +266,6 @@ bpy.context.scene.camera = cam
 ```
   
 Render settings and save to file
-
 ```Python
 # save by render
 bpy.context.scene.render.image_settings.file_format = 'PNG' #'EXR'
@@ -274,7 +279,6 @@ bpy.data.images["Render Result"].save_render("C:/Users/Admin/Desktop/image.jpg")
 ```
 
 Output
-
 ```Python
 bpy.context.scene.render.resolution_x = 2048
 bpy.context.scene.render.resolution_y = 2048
@@ -284,15 +288,12 @@ bpy.context.scene.cycles.samples = 1024
 
 ### Math
 ##### Degree to Radians
-
 ```Python
 from math import radians
 print (radians(45)) # 0.7853981633974483
 ```
 
-
 ---
-
 ### Custom Properties
 ```python
 bpy.types.Scene.mass_import = bpy.props.StringProperty() # Create a new attribute
@@ -305,6 +306,9 @@ bpy.types.Scene.mass_import = bpy.props.StringProperty() # Create a new attribut
 
 C.scene.mass_import
 
-C.scene,mass_import = "1111"
+C.scene.mass_import = "1111"
 
 ![[img/Blender Scripting Basics/Custom Properties.png | 300]]
+
+### Command Line
+https://docs.blender.org/manual/en/latest/advanced/command_line/index.html#

@@ -35,3 +35,8 @@ C++ → smart pointers and RAII (Resource Acquisition Is Initialization)
 
 ##### Single sign-on (SSO)
 ##### JSON Web Token (JWT)
+
+### Metasyntactic Variable
+A metasyntactic variable is a specific word or set of words identified as a placeholder
+`foo`
+`bar`

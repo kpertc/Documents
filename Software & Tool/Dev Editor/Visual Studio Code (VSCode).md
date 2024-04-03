@@ -225,11 +225,8 @@ code src/Plugin/
 
 ![[cmake-run-c++.png]]
 
-
 ### Python
 ![[switch-python-interpreter-vscode.gif]]
-
-
 ### Extension
 
 Plugin|Function
@@ -248,18 +245,13 @@ Quokka.js|display JavaScript result in editor
 },
 ```
 
-
 ##### Better Comments
 Can add and be customized
 ![[Better-Comments.png]]
 
-
 ##### Code runner 
 run C++
 ![[vscode-coderunner-run.gif]]
-
-<br>
-
 ##### Extension Development
 
 [https://code.visualstudio.com/api/get-started/your-first-extension](https://code.visualstudio.com/api/get-started/your-first-extension)
@@ -267,3 +259,5 @@ run C++
 ```shell
 npm install -g yo generator-code yo code
 ```
+
+##### [[Blender VSCode Setup]]
