@@ -173,6 +173,7 @@ function App() {
 ```JavaScript
 useEffect( () => {...}, [] )
 // { ... } will execute when [] matched value changed
+// leave blank [], will run once when component start
 
 const 111
 useEffect( () => { console.log('') }, [111] )
