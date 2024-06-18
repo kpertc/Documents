@@ -23,3 +23,8 @@ Support VSCode Debug breakpoint
 > [!failure] Error
 PermissionError: [Errno 1] Operation not permitted
 Grant Full Disk Access permissions for the terminal or VSCode if terminal running in VSCode
+
+`__name__` is not `__main__` if run from Blender Development plugin
+```python
+if __name__ == "<run_path>":
+```
