@@ -280,3 +280,10 @@ export default class AppClass extends Component {
 	}
 }
 ```
+
+
+**React-route package**
+
+`react-router-dom`
+
+`<Switch />` use prior to React Router v6, Now it is replaced by `<Routes />`

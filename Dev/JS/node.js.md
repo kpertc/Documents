@@ -150,9 +150,16 @@ npm config get ...
 # delete package.json setting
 npm delete ...
 
-# Set registry
-npm config set registry=http://xxxxxxx 
+# get registry 
+npm get registry
 
+# set registry
+npm config set registry=http://xxxxxxx
+
+
+# clean cache
+# use when installatopm failed
+npm cache clean --force
 ```
 
 ![[semantic_versioning.png | 350]]
