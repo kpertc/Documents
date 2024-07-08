@@ -233,7 +233,16 @@ import { ThemeContext } from "path";
 
 const _sceneManager: SceneManager = useContext(ThemeContext)!;
 ```
+
 ### [useMemo](https://youtu.be/THL1OPn72vo) (Memo -> Memorization)
+
+```ts
+const doubleNumber = useMemo(()=>{
+		return slowFunction(number)
+	},
+	[number] // dependency
+)
+```
 
 ### Class
 

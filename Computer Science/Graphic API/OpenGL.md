@@ -55,7 +55,7 @@ void main() {
 
 ## Fragment Shader
 
-```GLSL
+```c++
 #ifdef GL_ES
 precision mediump float;
 #endif
@@ -66,7 +66,6 @@ const float PI = 3.1415926535897932384626433832795;
 
 void main() {
 	// texCoords do something
-	
 	gl_FragColor = vec4(1,1,0,1);
 }
 ```

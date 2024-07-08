@@ -62,6 +62,8 @@ Import: `import { GUI } from 'dat.gui'`
 ### Recommend:
 three.js Chrome extension: https://chrome.google.com/webstore/detail/threejs-developer-tools/ebpnegggocnnhleeicgljbedjkganaek
 
+## Tween [[Tween.js]]
+
 # Three.js
 
 ##### [Basic Setup](https://threejs.org/docs/#manual/en/introduction/Creating-a-scene)
@@ -127,7 +129,29 @@ function Update() {
 }
 ```
 
-##### Orbit OrbitControls
+### Texture
+
+##### Loader
+```ts
+static loadTexture(url: string): Promise<THREE.Texture> {
+	return new Promise((resolve, reject) => {
+		const loader = new THREE.TextureLoader();
+		loader.load(url, resolve, undefined, reject);
+	}
+);
+```
+
+##### settings
+```ts
+// set wrap mode
+_texture_.wrapS = THREE.RepeatWrapping;
+_texture_.wrapT = THREE.RepeatWrapping;
+
+// set repeat scale
+normalTextureRes.repeat.set(uvScale, uvScale);
+```
+
+### Orbit OrbitControls
 
 ```JavaScript
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -135,7 +159,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 const controls = new OrbitControls( camera, renderer.domElement );
 ```
 
-##### TransformControls
+### TransformControls
 
 ```JavaScript
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls.js';
@@ -144,24 +168,25 @@ const control = new TransformControls(camera, renderer.domElement)
 // control.attach(_mesh)
 ```
 
-##### [AxisHelper](https://threejs.org/docs/#api/en/helpers/AxesHelper)
+### [AxisHelper](https://threejs.org/docs/#api/en/helpers/AxesHelper)
 ![[axis-helper.png | 300]]
 ```JavaScript
 _mesh.add( new THREE.AxesHelper( 5 ) );
 ```
 
-##### [GridHelper](https://threejs.org/docs/#api/en/helpers/GridHelper)
+### [GridHelper](https://threejs.org/docs/#api/en/helpers/GridHelper)
 ![[grid-helper.png | 300]]
 ```JavaScript
 scene.add( new THREE.GridHelper( 10, 2) );
 ```
 
-##### [PolarGridHelper](https://threejs.org/docs/#api/en/helpers/PolarGridHelper)
+### [PolarGridHelper](https://threejs.org/docs/#api/en/helpers/PolarGridHelper)
 
-##### Scene Background - CubeMap
+### Scene Background - CubeMap
 [Convert equirectangular texture to cubemap](https://jaxry.github.io/panorama-to-cubemap/)
 
 ```JavaScript
+// load cubemap
 const CubeTextureLoader = new THREE.CubeTextureLoader();
 const Cubetexture = CubeTextureLoader.load([
   'px.png',
@@ -172,6 +197,21 @@ const Cubetexture = CubeTextureLoader.load([
   'nz.png',
 ]);
 scene.background = Cubetexture;
+
+// load Equirectangular .hdr file
+new RGBELoader().setPath("/").load("harvest_1k.hdr", (texture) => {
+	texture.mapping = THREE.EquirectangularReflectionMapping;
+	scene.environment = texture;
+});
+
+// "Realtime Reflection"
+cubeCamera.position.copy(
+	new THREE.vector3(
+		camera.position.x, 
+		- camera.position.y, 
+		camera.position.z
+	)
+);
 ```
 
 ##### Window Resize
@@ -189,88 +229,7 @@ function onWindowResize() {
 ##### Add vs Attach
 
 Attach: maintaining the object's world transform.
-
-##### Shader -> [[OpenGL]]
   
-
-### XR
-
-Use WebXR emulator to develop: https://chrome.google.com/webstore/detail/webxr-api-emulator/mjddjgeghkdijejnciaefnkjmkafnnje
-
-three.js VR setup: https://threejs.org/docs/#manual/en/introduction/How-to-create-VR-content
-
-
-# Web XR API (Web XR)
-[WebXR Device API](https://www.w3.org/TR/webxr/)
-[WebXR Device API - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API)
-
-[[udemy] Learn to create WebXR, VR and AR, experiences using Three.JS](https://www.udemy.com/course/learn-webxr/)
-[[YouTube] WebXR APIs and Examples](https://youtu.be/ypSkIYpJjE8)
-
-A groups standard for immersive hardware, a wide range of devices. (VR, AR, handset, headset)
-WebXR needs to work with WebGL based renderer, such as three.js
-
-##### XRSystem and XRSession
-Access WebXR API by XRmanager in renderer
-`navigator` object, to check if XR is supported, is the entry point to WebXR
-If WebXR is available, then it will have an xr property
-Navigator.xr is an XRSystem interface
-
-  
-
-##### Gamepad API
--   Detecting button presses
--   Detecting Touchpad/Joystick Movement
-
-[WebXR Gamepads Module - Level 1](https://www.w3.org/TR/webxr-gamepads-module-1/#xr-standard-heading)
-
-Gamepad
-```JavaScript
-for ( const source of session.inputSources ) {
-    if (source.gamepad) {
-        // use gamepad information
-    }
-}
-```
-
-Hand
-```undefined
-for ( const source of session.inputSources ) {
-    if (source.hand) {
-        // use hand information
-    }
-}
-```
-
-![[xr-standard-controller.png]]
-
-```JavaScript
-inputSources = renderer.xr.getSession().inputSources[0]
-
-// check button is pressed -> return true or false
-inputSources.gamepad.buttons[4].pressed
-inputSources.gamepad.buttons[5].pressed
-
-// return -1 - 1
-inputSources[0].gamepad.axes[3] // Left -1, right 1
-inputSources[0].gamepad.axes[3] // Up 1, down -1
-```
-
-![[controller-event.png | 300]]
-
-Events:
--   `connected`, `disconnect`
--   `selectedstart`, `selectedend`, `select` Tigger
--   `squeezestart`, `squeeze`, `squeeze` Grip Button
-
-Input profile library
-Library ?
-
-
-WebXR Dom Overlay
-Anchor
-Layer
-
 ### dat.gui / lil-gui
 
 Tutorial
@@ -313,3 +272,127 @@ stats.update();
 
 Module: a file that exports some code
 Treeshakable: import what you need shake off the rest
+
+### Using three.js with [[Web XR]]
+
+## Custom shader
+
+[ShaderMaterial](https://threejs.org/docs/#api/en/materials/ShaderMaterial)
+
+### File
+	↳ `vertex.glsl`
+	↳ `fragment.glsl`
+
+GLSL code in `glsl.js` file
+
+```js
+const vertex = /* glsl */ `
+    ...
+`;
+
+export default vertex;
+
+// import at other file
+import vertex from './shaders/vertex.js'
+```
+
+Include three.js header files
+
+```OpenGL
+#include <common>
+```
+
+### type
+``` ts
+declare module "*.glsl" {
+	const value: string;
+	export default value;
+}
+```
+
+### Vite setup
+``` js
+// install "vite-plugin-glsl"
+import glsl from "vite-plugin-glsl";
+...
+plugins: [glsl()],
+```
+
+### ShaderMaterial in three.js
+
+- ShaderMaterial
+- RawShaderMaterial - no built-in uniforms and attributes
+
+```ts
+// create
+import vertexShader from "../shaders/vertex.glsl";
+import fragmentShader from "../shaders/fragment.glsl";
+
+const customMaterial = new THREE.ShaderMaterial({
+	vertexShader: vertexShader,
+	fragmentShader: fragmentShader,
+	side: THREE.DoubleSide,
+	uniforms: {
+		uTime: { value: 1.0 },
+		uTexture: { value: texture },
+	},
+	transparent: true, // Enable transparency
+});
+
+// set uniform
+_mesh.material.uniforms.uTime.value += 0.1;
+```
+
+### Shader → [[OpenGL]]
+
+Write Shader
+
+Threejs shader uniform: https://threejs.org/docs/index.html#api/en/renderers/webgl/WebGLProgram
+
+Threejs shader path: `three.js/src/renderers/shaders/`
+
+> [!NOTE] VScode plugin `glsl-literal`
+> Using `.glsl.js` file, get syntax highlight
+Put `/* glsl */` to get syntax highlight
+
+Overwrite built-in shader
+[[YouTube] Customize ThreeJS Materials With Shaders](https://www.youtube.com/@visionary_3_d)
+```OpenGL
+const _material = new MeshStandardMaterial({
+    color: '#f69f1f',
+    metalness: 0.5,
+    roughness: 0.7,
+    
+    // get shader 
+    onBeforeCompile: (shader) => {         
+        // shader content
+        shader.vertexShader
+        shader.fragmentShader
+        
+        // edit fragment shader
+        shader.fragmentShader = shader.fragmentShader.replace(
+            /* glsl */`#include <color_fragment>`,
+            /* glsl */`#include <color_fragment>
+                
+                #ifdef NO_ANIMATION
+                    greenValue = 1.0;
+                #else
+                    greenValue = sin(uTime);
+                #endif
+                
+                diffuseColor = vec4(1, greenValue, 0, 1);
+            `
+        )
+        
+        // get & set shader uniform
+        shader.uniform
+        shader.uniform.uTime.value = 1.0;
+        
+        // save shader variable for later use
+        _material.userData.shader = shader
+    }
+}
+
+// define
+_material.defines.NO_ANIMATION = true; // or false
+```

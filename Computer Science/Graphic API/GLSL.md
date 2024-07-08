@@ -134,3 +134,21 @@ float computeSum(inout float a, inout float b) {
 	return a + b;
 }
 ```
+
+
+```
+step()
+smoothstep()
+remap()
+min()
+max()
+
+abs()
+mix()
+
+floor()
+
+plot() ?
+rect() ?
+```
+
