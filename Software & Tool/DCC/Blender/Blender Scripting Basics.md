@@ -31,6 +31,24 @@ cd /Applications/Blender.app/Contents/MacOS
 ./Blender --help # Run Blender with commands
 ```
 
+Run Blender & Delete default cube & load a `.glb` mode from terminal
+using typescript
+``` ts
+const blenderProcess = spawn(blenderPath, [
+"--python-expr",
+// keep python code unindented !!
+`
+import bpy
+bpy.ops.object.delete() # delete the default cube
+bpy.ops.import_scene.gltf(filepath='${modelPath}') # load glb model
+
+`,]);
+
+blenderProcess.stdout.on("data", (data) => {
+	console.log(`Blender STDOUT: ${data}`);
+});
+```
+
 Close the terminal will also close the Blender
 
 ``` shell

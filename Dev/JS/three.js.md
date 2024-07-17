@@ -165,9 +165,16 @@ const controls = new OrbitControls( camera, renderer.domElement );
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls.js';
 
 const control = new TransformControls(camera, renderer.domElement)
-// control.attach(_mesh)
-```
 
+// prevent orbitControl move
+control.addEventListener("dragging-changed", function (event) {
+	cameraControls.enabled = !event.value;
+});
+
+scene.add(control);
+// attach to an object
+control.attach(cube);
+```
 ### [AxisHelper](https://threejs.org/docs/#api/en/helpers/AxesHelper)
 ![[axis-helper.png | 300]]
 ```JavaScript
@@ -357,7 +364,7 @@ Put `/* glsl */` to get syntax highlight
 
 Overwrite built-in shader
 [[YouTube] Customize ThreeJS Materials With Shaders](https://www.youtube.com/@visionary_3_d)
-```OpenGL
+```ts
 const _material = new MeshStandardMaterial({
     color: '#f69f1f',
     metalness: 0.5,
@@ -395,4 +402,46 @@ const _material = new MeshStandardMaterial({
 
 // define
 _material.defines.NO_ANIMATION = true; // or false
+```
+
+
+##### A minimal texture shader
+```ts
+new TextureLoader().load("./texture.png", (texture) => {
+
+// Vertex shader
+const vertexShader = /* glsl */ `
+	varying vec2 vUv;
+	uniform sampler2D uTexture;
+	void main() {
+		vUv = uv;
+		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+	}
+`;
+
+// Fragment shader
+const fragmentShader = /* glsl */ `
+	varying vec2 vUv;
+	uniform sampler2D uTexture;
+	
+	void main() {
+		vec4 textureColor = texture2D(uTexture, vUv);
+		gl_FragColor = textureColor;
+	}
+`;
+
+const shaderMaterial = new ShaderMaterial({
+		vertexShader: vertexShader,
+		fragmentShader: fragmentShader,
+			uniforms: {
+				uTexture: { value: texture },
+			},
+		transparent: true, // Enable transparency
+	});
+
+	cube = new Mesh(cubeGeometry, shaderMaterial);
+	cube.castShadow = true;
+	cube.position.y = 0.5;
+	scene.add(cube);
+});
 ```

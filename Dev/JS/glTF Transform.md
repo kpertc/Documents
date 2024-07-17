@@ -1,5 +1,5 @@
-
-List Material
+#JavaScript #CG #web-dev #TypeScript 
+##### List Material
 ```ts
 doc
     .getRoot()
@@ -7,7 +7,7 @@ doc
     .forEach((material) => { }
 ```
 
-List object
+##### List object
 ```ts
 doc
     .listNodes()
@@ -19,3 +19,37 @@ doc
         const scale = node.getScale()
     })
 ```
+
+##### Check Type
+``` ts
+_node.propertyType // PropertyType.NODE
+```
+
+##### Load .`glb` and save as `.glb`
+```ts
+const io = new NodeIO(); 
+
+const document = await io.read(path);
+
+await io.write(path, document);
+```
+
+##### Copy nodes to a new document
+``` ts
+const _wheelDocument = new Document(); // create new document
+
+const wheelList: Node[] = [];
+
+document
+	.getRoot()
+	.listNodes()
+	.forEach((node: Node) => {
+		if (node.getName() === "Car_Wheel") {
+			wheelList.push(node);
+		}
+	});
+
+copyToDocument(_wheelDocument, document, wheelList);
+```
+
+Using Blender to automatically load the model → [[Blender Scripting Basics#Command line]]
