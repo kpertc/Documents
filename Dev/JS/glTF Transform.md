@@ -7,7 +7,7 @@ doc
     .forEach((material) => { }
 ```
 
-##### List object
+##### List objects
 ```ts
 doc
     .listNodes()
@@ -53,3 +53,4 @@ copyToDocument(_wheelDocument, document, wheelList);
 ```
 
 Using Blender to automatically load the model → [[Blender Scripting Basics#Command line]]
+
