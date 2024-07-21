@@ -54,3 +54,16 @@ copyToDocument(_wheelDocument, document, wheelList);
 
 Using Blender to automatically load the model → [[Blender Scripting Basics#Command line]]
 
+### Transform
+
+``` js
+doc.transform(
+	palette({ min: 5 }),
+	flatten(),
+	dequantize(),
+	join(),
+	reorder({ encoder: MeshoptEncoder, target: 'size' }),
+	dedup(),
+	prune()
+)
+```

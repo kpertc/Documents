@@ -7,6 +7,8 @@
 [[Unreal Engine C++ Game Framework]]
 [[Unreal Engine Console]]
 
+[[Unreal Engine Python]]
+
 <br>
 
 > [!tip]- C++ Install components via Visual Studio Installer
