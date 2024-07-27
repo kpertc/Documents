@@ -64,6 +64,55 @@ const material = new THREE.MeshBasicMaterial({color: 0x00ff00, side: THREE.doubl
 mesh.position.set(x, y, z);
 mesh.scale.set();
 ```
+
+manual create buffer geometry
+```js
+const bufferGeometry = new BufferGeometry()
+
+const positionArray = new Float32Array([
+	0.0, 0.0, 0.0, // 0
+	0.0, 0.0, 1.0, // 1
+	1.0, 0.0, 1.0, // 2
+	1.0, 0.0, 0.0, // 3
+])
+
+// clockwise
+const indices = [
+	0, 1, 2,
+	2, 3, 0,
+];
+
+bufferGeometry.setAttribute('position', new BufferAttribute(positionArray, 3))
+bufferGeometry.setIndex(indices)
+
+const _mesh = new Mesh(bufferGeometry, cubeMaterial)
+
+scene.add(_mesh)
+```
+
+Convert JS array to `Float32Array`
+```js
+const JSArray = [0, 1, 2, 3 ...]
+const float32Array = new Float32Array(JSArray);
+```
+##### Line
+![[threejs-line.png|200]]
+[threejs-Drawing lines](https://threejs.org/docs/index.html?q=line#manual/en/introduction/Drawing-lines)
+```js
+// line position data
+const linePositionArray: Vector3[] = [
+	new Vector3(-1, 0, 0),
+	new Vector3(0, 0, 1),
+	new Vector3(1, 0, 0)
+]
+
+// line mesh
+const lineGometry = new BufferGeometry().setFromPoints(linePositionArray);
+const lineMaterial = new LineBasicMaterial({ color: 0xffffff });
+const lineMesh = new Line(lineGometry, lineMaterial);
+scene.add(line);
+```
+
 ### Light
 
 Directional Light
@@ -257,3 +306,12 @@ scene.remove(_object)
 Treeshakable: import what you need shake off the rest
 
 ### Using three.js with [[Web XR]]
+
+### Math
+```js
+// clone to avoid modify original value
+direction.clone().cross(this.y);
+
+// vector substraction
+position.clone().sub(this.lastSeg.position)
+```
