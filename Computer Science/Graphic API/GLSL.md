@@ -114,6 +114,14 @@ mat3 identityMatrix = mat3(
 );
 ```
 
+### Loop
+```glsl
+for(float i = 1.0; i <= 3.0; i++) // 3 times
+{
+    ...
+}
+```
+
 ### Function
 ```glsl
 float computeSum(float a, float b) {

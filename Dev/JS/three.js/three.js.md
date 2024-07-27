@@ -9,6 +9,7 @@
 ### Related Topics:
 - [[three.js - Setup]]
 - [[three.js - Shader]]
+- [[three.js - Debug GUI]]
 - [[Tween.js]]
 
 ### [Basic Setup](https://threejs.org/docs/#manual/en/introduction/Creating-a-scene)
@@ -31,6 +32,23 @@ document -> content in the `<HTML>`
 
 [Color](https://threejs.org/docs/#api/en/math/Color), [MeshBasicMaterial – three.js docs](https://threejs.org/docs/?q=MeshBasicMaterial#api/en/materials/MeshBasicMaterial)
 
+### Renderer
+
+```js
+this.renderer = new THREE.WebGLRenderer({
+	canvas: this.canvas,
+	antialias: true, // MSAA mix the edge pixel, but not to fix shape inside
+});
+
+// set toneMapping
+this.renderer.toneMapping = THREE.ReinhardToneMapping;
+this.renderer.toneMappingExposure = 2.0;
+```
+
+```
+renderer.info
+```
+
 ### Mesh
 ```JavaScript
 // Create scene Object
@@ -46,11 +64,33 @@ const material = new THREE.MeshBasicMaterial({color: 0x00ff00, side: THREE.doubl
 mesh.position.set(x, y, z);
 mesh.scale.set();
 ```
-
 ### Light
+
+Directional Light
 ```JavaScript
 const light = new THREE.DirectionalLigh(0xffffff, 1)
 scene.add(light)
+```
+
+```JavaScript
+// set directional directional light target
+directionalLight.target.position.set(0, 4, 0)
+directionalLight.target.updateWorldMatrix() // directionalLight.target is not in the scene, so have to manual update its matrix
+
+// add camera helper for directional light shadow camera
+const directionalLightHelper = new THREE.CamaraHelper(directionalLight.shadow.camera)
+scene.add(directionalLightHelper)
+```
+
+Shadow
+```js
+// tweat shadow by tweating the shadow camera
+directionalLight.castShadow = true
+directionalLight.shadow.camera.far = 15 // manually set shadow distance
+
+// fight shadow acne
+directionalLight.shadow.bias
+directionalLight.shadow.normalBias
 ```
 
 ### Animation
@@ -156,6 +196,10 @@ new RGBELoader().setPath("/").load("harvest_1k.hdr", (texture) => {
 });
 ```
 
+> [!TIP] Add a directional light for environment light
+> add a directional light that roughly match the direction of light in environment light
+
+
 ##### Realtime Reflection
 ``` ts
 // hide -y axis blocking objects
@@ -189,50 +233,28 @@ function onWindowResize() {
 }
 ```
 
+### Time
+
+``` ts
+const elapsedTime = clock.getElapsedTime()
+```
+
 ### Add vs Attach
 
 Attach: maintaining the object's world transform.
-  
-### dat.gui / lil-gui
 
-Tutorial
+### Remove
 
--   [dat.GUI API](https://github.com/dataarts/dat.gui/blob/master/API.md)
-      https://lil-gui.georgealways.com
--   [手把手教你使用dat.gui](https://zhuanlan.zhihu.com/p/47752059)
--   [Dat.gui 使用教程 - 小牛仔太棒棒 - 博客园](https://www.cnblogs.com/xiaoniuzai/p/6685556.html)
-
-```JavaScript
-import { GUI } from 'dat.gui' // use dat,gui
-import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js' // use lil-gui
+clean the mesh
+``` js
+geometry.dispose()
+material.dispose()
+scene.remove(_object)
 ```
 
-```JavaScript
-const gui = new GUI()
-const folder = gui.addFolder('folderName')
+[three.js - How to dispose of objects](https://threejs.org/docs/#manual/en/introduction/How-to-dispose-of-objects)
 
-folder.open()
-```
 
-![[dat-gui.png | 300]]
-
-```JavaScript
-folder.add(mesh.position, 'x') // no min max will show float input
-folder.add(mesh.rotation, 'x', 0 ,10)
-folder.add(mesh.scale, 'x', 0 ,10)
-```
-
-### Stats
-```JavaScript
-import Stats from 'three/examples/jsm/libs/stats.module'
-
-const stats = Stats()
-document.body.appendChild(stats.dom)
-
-stats.update();
-```
-
-Module: a file that exports some code
 Treeshakable: import what you need shake off the rest
 
 ### Using three.js with [[Web XR]]
