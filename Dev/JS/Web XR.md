@@ -1,9 +1,9 @@
-### XR
+#VR 
 
+### XR
 Use WebXR emulator to develop: https://chrome.google.com/webstore/detail/webxr-api-emulator/mjddjgeghkdijejnciaefnkjmkafnnje
 
 three.js VR setup: https://threejs.org/docs/#manual/en/introduction/How-to-create-VR-content
-
 
 # Web XR API (Web XR)
 [WebXR Device API](https://www.w3.org/TR/webxr/)
@@ -20,8 +20,6 @@ Access WebXR API by XRmanager in renderer
 `navigator` object, to check if XR is supported, is the entry point to WebXR
 If WebXR is available, then it will have an xr property
 Navigator.xr is an XRSystem interface
-
-  
 
 ##### Gamepad API
 -   Detecting button presses

@@ -1,7 +1,7 @@
-#JavaScript #TypeScript #VR 
+#JavaScript #TypeScript
 
 ### Other WebGL based renderer
--   Babylon.js
+-   Babylon.js [[babylon.js]]
 -   A-Frame (three.js based)
 -   React - 360
 -   PlayCanvas (WebGL game engine)
@@ -45,7 +45,7 @@ this.renderer.toneMapping = THREE.ReinhardToneMapping;
 this.renderer.toneMappingExposure = 2.0;
 ```
 
-```
+``` js
 renderer.info
 ```
 
@@ -198,7 +198,6 @@ new RGBELoader().setPath("/").load("harvest_1k.hdr", (texture) => {
 
 > [!TIP] Add a directional light for environment light
 > add a directional light that roughly match the direction of light in environment light
-
 
 ##### Realtime Reflection
 ``` ts
