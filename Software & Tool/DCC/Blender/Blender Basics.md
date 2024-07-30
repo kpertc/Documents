@@ -598,9 +598,9 @@ BlendShape Symmetrize
 
 ### Animation
 
-Keyframe|Auto-Keyframe
----|---
-![[img/Blender Basics/keyframe.gif]]|![[img/Blender Basics/Auto-keyframe.gif]]
+| Keyframe                             | Auto-Keyframe                             |
+| ------------------------------------ | ----------------------------------------- |
+| ![[img/Blender Basics/keyframe.gif]] | ![[img/Blender Basics/Auto-keyframe.gif]] |
 
   
 
