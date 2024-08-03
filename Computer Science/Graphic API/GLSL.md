@@ -174,6 +174,14 @@ fract() // 0.xxxxx
 mod()
 ```
 
+  
+  Homogeneous translation vs not translation\
+
+| translate                          | not translate                      |
+| ---------------------------------- | ---------------------------------- |
+| ![[glsl-translate-normal.gif.gif]] | ![[glsl-not-translate-normal.gif]] |
+| `modelMatrix * vec4(normal, 1.0)`  | `modelMatrix * vec4(normal, 0.0)`  |
+
 ### Effects
 
 ###### Rotate2D
@@ -191,3 +199,36 @@ edgeMask = smoothstep(0.0, 0.1, vUv.x)
 edgeMask = smoothstep(0.9, 1.0, vUv.x)
 ```
 
+##### Fresnel
+
+![[glsl-fresnel.gif|300]]
+
+varying
+```
+varying vec3 vWorldNormal;
+varying vec3 vWorldPosition;
+```
+
+vs
+``` glsl
+vWorldNormal = (modelMatrix * vec4(normal, 0.0)).xyz; // 0.0 → not translation
+vWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;
+```
+
+fs
+``` glsl
+// normalize
+vec3 normalizedWorldNormal = normalize(vWorldNormal); // normal in fs maybe not length of 1, so need to be normalized
+vec3 viewDirection = normalize(cameraPosition - vWorldPosition);
+
+float fresnel = dot(viewDirection, normalizedWorldNormal);
+fresnel = 1.0 - fresnel;
+// fresnel = pow(fresnel, 2.0); // increase contrast
+// fresnel = smoothstep(0.2, 0.8, fresnel); // smooth
+gl_FragColor = vec4(vec3(1.0), fresnel);
+```
+
+``` js
+// material
+depthWrite: false,
+```

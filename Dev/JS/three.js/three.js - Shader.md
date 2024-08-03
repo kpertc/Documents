@@ -52,11 +52,45 @@ use `#include` with `vite-plugin-glsl` plugin
 - [[OpenGL]]
 - [[GLSL]]
 
+- Threejs shader built-in uniform: https://threejs.org/docs/index.html#api/en/renderers/webgl/WebGLProgram
+- Threejs shader path: `three.js/src/renderers/shaders/`
+
+> [!NOTE] VScode plugin `glsl-literal`
+> Using `.glsl.js` file, get syntax highlight
+Put `/* glsl */` to get syntax highlight
+
 ## ShaderMaterial
 
 - ShaderMaterial
 - RawShaderMaterial - no built-in uniforms and attributes
 
+##### A minimal shader Template
+```js
+const shaderMaterial = new ShaderMaterial({
+	vertexShader: /* glsl */ `
+	varying vec2 vUv;
+	
+	void main() {
+		vUv = uv;
+		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+	}
+	`,
+	fragmentShader: /* glsl */ `
+	varying vec2 vUv;
+	
+	void main() {
+		gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+	}
+	`,
+});
+```
+
+add `tonemapping_fragment` &  `colorspace_fragment` to the end of fragment shader
+```glsl
+#include <tonemapping_fragment> // optional, if use tonemapping feature
+#include <colorspace_fragment> // output color in sRGB color space
+```
+##### Uniforms & Properties
 ```ts
 // create
 import vertexShader from "../shaders/vertex.glsl";
@@ -82,15 +116,32 @@ const customMaterial = new THREE.ShaderMaterial({
 _mesh.material.uniforms.uTime.value += 0.1;
 ```
 
-Threejs shader uniform: https://threejs.org/docs/index.html#api/en/renderers/webgl/WebGLProgram
+##### Set Uniform value by reference - `Uniform` Class
 
-Threejs shader path: `three.js/src/renderers/shaders/`
+no need to set uniform in material like `_mesh.material.uniforms.uTime.value = ...`
+``` js
+// create uniform / create debugUI object
+const debugeObj = {
+	uniform: new Uniform(0)
+}
 
-> [!NOTE] VScode plugin `glsl-literal`
-> Using `.glsl.js` file, get syntax highlight
-Put `/* glsl */` to get syntax highlight
+...
 
-Overwrite built-in shader
+// add to shaderMaterial
+const shaderMaterial = new ShaderMaterial({\
+	uniforms: {
+		uUniform: debugeObj.uniform
+	},
+
+...
+// set by referencing class
+debugeObj.uniform.value = ...
+
+// set by debug object
+gui.add(debugeObj.uniform, "value").min(0).max(1)
+```
+
+##### Overwrite built-in shader
 [[YouTube] Customize ThreeJS Materials With Shaders](https://www.youtube.com/@visionary_3_d)
 ```ts
 const _material = new MeshStandardMaterial({
@@ -131,28 +182,6 @@ const _material = new MeshStandardMaterial({
 // define
 _material.defines.NO_ANIMATION = true; // or false
 ```
-
-##### A minimal shader Template
-```js
-const shaderMaterial = new ShaderMaterial({
-	vertexShader: /* glsl */ `
-	varying vec2 vUv;
-	
-	void main() {
-		vUv = uv;
-		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-	}
-	`,
-	fragmentShader: /* glsl */ `
-	varying vec2 vUv;
-	
-	void main() {
-		gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-	}
-	`,
-});
-```
-
 ##### A minimal texture shader
 ```ts
 new TextureLoader().load("./texture.png", (texture) => {
@@ -192,12 +221,6 @@ const shaderMaterial = new ShaderMaterial({
 	cube.position.y = 0.5;
 	scene.add(cube);
 });
-```
-
-add `tonemapping_fragment` &  `colorspace_fragment` to the end of fragment shader
-```glsl
-#include <tonemapping_fragment> // optional, if use tonemapping feature
-#include <colorspace_fragment> // output color in sRGB color space
 ```
 
 ##### Shader for Points / Particles

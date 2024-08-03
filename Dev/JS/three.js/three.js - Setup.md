@@ -6,6 +6,8 @@ Installation: https://threejs.org/docs/index.html#manual/en/introduction/Install
 
 ##### Tutorial
 [Three.js + Vite + TypeScript](https://www.youtube.com/watch?v=7xjHM5N7LGQ)
+##### Template
+Github - Vite TS Template https://github.com/pachoclo/vite-threejs-ts-template
 
 ##### Online playground
 [codepen.io](https://codepen.io/tompeham/pen/ZWomey)
