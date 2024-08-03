@@ -347,9 +347,9 @@ Hold `Shift` in Outliner to change parenting|Use Add > Empty as parent for easy 
 `/`
 ![[isolate-view.gif]]
 
-`L` Selecting all connected vs `A` select all|Select Mirror
----|---
-![[img/Blender Basics/selectAll.gif]]|![[img/Blender Basics/selectMirror.gif]]
+| `L` Selecting all connected vs `A` select all | Select Mirror                            |
+| --------------------------------------------- | ---------------------------------------- |
+| ![[img/Blender Basics/selectAll.gif]]         | ![[img/Blender Basics/selectMirror.gif]] |
 
 Proportional Editing (Smooth Selection)|Mouse Scrolling / `Page Up` / `Page Down`
 ---|---

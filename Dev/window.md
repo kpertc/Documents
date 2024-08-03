@@ -1,7 +1,5 @@
 #JavaScript 
-
 ### Mouse move
-
 ``` js
 window.addEventListener('mousemove', (e) => {
 	// mouse move
@@ -21,10 +19,14 @@ window.addEventListener('mousemove', (e) => {
 ```
 
 ### Scroll
-
 ``` js
 window.addEventListener('scroll', () => {
 	// is scrolling
 	window.scrollY
 })
+```
+
+### Get Device Pixel Ratio
+``` js
+window.devicePixelRatio
 ```

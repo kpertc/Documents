@@ -42,8 +42,6 @@ Syntax similar to C/C++
 bool
 sampler2D
 
-<br>
-
 ### Float
 
 ```glsl
@@ -143,20 +141,53 @@ float computeSum(inout float a, inout float b) {
 }
 ```
 
+Let `vec4` interact with `vec3`
+``` glsl
+vec4Variable.xyz += vec3Variable
+```
 
 ```
 step()
-smoothstep()
+
 remap()
+smoothstep()
+smoothstep(0.4, 1.0) 
+// 0-1 clamped value
+// let 0.4 → 0.0, 1.0 → 1.0
+
 min()
 max()
 
+pow() // let gradient fade faster
+
 abs()
 mix()
+
+clamp()
 
 floor()
 
 plot() ?
 rect() ?
+
+fract() // 0.xxxxx
+mod()
+```
+
+### Effects
+
+###### Rotate2D
+```glsl
+vec2 rotate2D(vec2 value, float angle) {
+    float s = sin(angle);
+    float c = cos(angle);
+    mat2 m = mat2(c, s, -s, c);
+    return m * value;
+}
+```
+##### Edge Fade Mask
+```glsl
+edgeMask = smoothstep(0.0, 0.1, vUv.x)
+edgeMask = smoothstep(0.9, 1.0, vUv.x)
 ```
 

@@ -12,6 +12,10 @@
 - [[three.js - Debug GUI]]
 - [[Tween.js]]
 - [[Web XR]]
+
+### Tutorial Recommandation: 
+- [threejs Journey](https://threejs-journey.com/)
+
 ### [Basic Setup](https://threejs.org/docs/#manual/en/introduction/Creating-a-scene)
 
 ```JavaScript
@@ -49,6 +53,8 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 this.renderer.toneMapping = THREE.ReinhardToneMapping;
 this.renderer.toneMappingExposure = 2.0;
 ```
+
+![[window#Get Device Pixel Ratio]]
 
 ``` js
 renderer.info

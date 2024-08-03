@@ -14,7 +14,6 @@ window.addEventListener('mousedown', () => { // mouse down
     .to({ value: 1 }, 2000)
     .easing(TWEEN.Easing.Quadratic.InOut)
     .start();
-
 })
 
 window.addEventListener('mouseup', () => { // mouse up

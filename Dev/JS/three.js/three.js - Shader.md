@@ -63,14 +63,19 @@ import vertexShader from "../shaders/vertex.glsl";
 import fragmentShader from "../shaders/fragment.glsl";
 
 const customMaterial = new THREE.ShaderMaterial({
+	// there is a default shader when vertexShader and fragmentShader are not provided
 	vertexShader: vertexShader,
 	fragmentShader: fragmentShader,
+	
 	side: THREE.DoubleSide,
 	uniforms: {
 		uTime: { value: 1.0 },
 		uTexture: { value: texture },
+		// setting uniforms by values or setting uniforms by new Uniform()
+		// https://threejs.org/docs/#api/en/core/Uniform
 	},
 	transparent: true, // Enable transparency
+	// wireframe: true // wireframe is always support, even when no vs and fs
 });
 
 // set uniform
@@ -127,6 +132,27 @@ const _material = new MeshStandardMaterial({
 _material.defines.NO_ANIMATION = true; // or false
 ```
 
+##### A minimal shader Template
+```js
+const shaderMaterial = new ShaderMaterial({
+	vertexShader: /* glsl */ `
+	varying vec2 vUv;
+	
+	void main() {
+		vUv = uv;
+		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+	}
+	`,
+	fragmentShader: /* glsl */ `
+	varying vec2 vUv;
+	
+	void main() {
+		gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+	}
+	`,
+});
+```
+
 ##### A minimal texture shader
 ```ts
 new TextureLoader().load("./texture.png", (texture) => {
@@ -168,7 +194,36 @@ const shaderMaterial = new ShaderMaterial({
 });
 ```
 
-use `#include <colorspace_fragment>` at the end of fragment shade to output color in sRGB color space
+add `tonemapping_fragment` &  `colorspace_fragment` to the end of fragment shader
+```glsl
+#include <tonemapping_fragment> // optional, if use tonemapping feature
+#include <colorspace_fragment> // output color in sRGB color space
+```
+
+##### Shader for Points / Particles
+
+Compensate the size of renderer pixel ratio
+```JavaScript
+uniforms: {
+	uSize: { value: 8 * renderer.getPixelRatio() }
+}
+```
+
+Size attenuation
+reference can be found at `points_vert.glsl.js`
+```js
+gl_PointSize *= (1.0 / - viewPosition.z);
+```
+
+`gl_PointCoord` is the UV in fragment shader
+```JavaScript
+gl_FragColor = vec4(gl_PointCoord, 1.0, 1.0)
+```
+
+draw circle, distance to center, `vec2(0.5) // center
+```JavaScript
+float circle = distance(gl_PointCoord, vec2(0.5))
+```
 
 ## Inject built-in material
 
@@ -261,7 +316,8 @@ export function customMeshPhysicalMaterial(shader: any, params: ShaderParams) {
   if (params.fsInsertEndOfMain) {
     shader.fragmentShader = shader.fragmentShader.replace(
       "#include <dithering_fragment>",
-      `#include <dithering_fragment>\n${params.fsInsertEndOfMain}`
+      `#include <dithering_fragment>\n
+      ${params.fsInsertEndOfMain}`
     );
   }
 
@@ -320,8 +376,10 @@ float blinkValue = abs(sin(u_Time));
 ```
 
 ##### Perlin 3D Noise
-```c++
 
+Perlin noise is bad for performance ☞ use simple perlin texture instead
+
+```glsl
 Classic Perlin 3D Noise 
 // by Stefan Gustavson
 //
@@ -407,3 +465,4 @@ float cnoise(vec3 P)
     return 2.2 * n_xyz;
 }
 ```
+
