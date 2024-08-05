@@ -4,10 +4,21 @@ https://gsap.com/docs/v3/Installation/
 gsap.to(
 	mesh.rotation,
 	{
-	  Duration: 1.5,
-	  Ease: 'power2.inOut',
+	  duration: 1.5,
+	  ease: 'power2.inOut',
 	  x: '+=6',
 	  y: '+=3'
+	}
+)
+```
+
+``` js
+gsap.to(
+	material.uniforms.uUniform,
+	{
+		duration: 3.0,
+		value: 1.0, 
+		onComplete: () => {}
 	}
 )
 ```

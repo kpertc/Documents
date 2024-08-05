@@ -191,6 +191,9 @@ _texture_.wrapT = THREE.RepeatWrapping;
 
 // set repeat scale
 normalTextureRes.repeat.set(uvScale, uvScale);
+
+// flipY
+_texture.flipY
 ```
 
 > [!TIP] For mipmap
@@ -422,6 +425,18 @@ direction.clone().cross(this.y);
 // vector substraction
 position.clone().sub(this.lastSeg.position)
 ```
+
+Spherical Coord
+```JavaScript
+const sphericalCoord = new THREE.Spherical(
+    radius,
+    Math.random() * Math.PI,
+    Math.random() * Math.PI
+)
+
+const position = new THREE.Vector3().setFromSpherical(sphericalCoord)
+```
+
 
 ### Control by Scrolling in Browser
 
