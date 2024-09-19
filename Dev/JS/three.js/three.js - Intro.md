@@ -5,17 +5,22 @@
 -   A-Frame (three.js based)
 -   React - 360
 -   PlayCanvas (WebGL game engine)
+
 ### Related Topics:
 - [[three.js - Setup]]
 - [[three.js - API]]
 - [[three.js - Shader]]
 - [[three.js - Debug GUI]]
+- [[three.js - DCC]]
+- [[react-three-fiber]]
 - [[Tween.js]]
 - [[GSAP]]
 - [[Web XR]]
 - [[cannon.js]]
+- [[Image Formats]]
 ### Tutorial Recommandation: 
 - [threejs Journey](https://threejs-journey.com/)
+- https://discoverthreejs.com/
 ### Example Websites
 - [react-three-fiber-examples](https://r3f.docs.pmnd.rs/getting-started/examples)
 - gamemcu
@@ -27,14 +32,17 @@
 	- https://bruno-simon.com/lab/experiments/
 	- https://github.com/brunoimbrizi/interactive-particles
 	- https://chartogne-taillet.com/en
-
+- https://tympanus.net/codrops/demos/
 - https://andersonmancini.dev/
 - https://www.igloo.inc/
 - https://particle-love.com/ 
+- https://github.com/spite/looper
+- https://lusion.co/
+
+Others
 ### Resources
 - [Particle pack](https://www.kenney.nl/assets/particle-pack)
 - [Noise Texture](http://kitfox.com/projects/perlinNoiseMaker/)
-
 
 Depth Texture
 - [Depth Textures and World Coordinates In Fragment Shaders](https://www.thefrontdev.co.uk/post-processing-in-react-three-fiber-depth-textures-and-world-coordinates-in-fragment-shaders)

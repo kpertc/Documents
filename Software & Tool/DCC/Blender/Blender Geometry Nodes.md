@@ -90,11 +90,8 @@ Distribute Points on Faces
 Use side panel group
 Connect empty dot to create new input
 
-![[img/Blender Geometry Nodes/group.png]]|![[img/Blender Geometry Nodes/custom-inputs.png]]
----|---
-
-<br>
-  
+| ![[img/Blender Geometry Nodes/group.png]] | ![[img/Blender Geometry Nodes/custom-inputs.png]] |
+| ----------------------------------------- | ------------------------------------------------- |
 
 ### Best Practice
 
@@ -127,5 +124,7 @@ Edit node name|Ctrl Shift add a viewer node
 ![[img/Blender Geometry Nodes/Edit node name.png]]|
 
 
+##### View Value
 
-
+| ![[enable-attribtue-text.png]] | ![[link-to-viewer.png]] | ![[toggle-view-node.gif]] |
+| ------------------------------ | ----------------------- | ------------------------- |

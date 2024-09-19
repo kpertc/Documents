@@ -315,7 +315,6 @@ Cumulative Frequency
 
 Ogive → Cumulative Frequency Graph
 ![[ogive-graph.png | 500]]
-![](https://placehold.co/300x200)
 
 Aways going one direction
 

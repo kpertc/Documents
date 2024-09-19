@@ -19,6 +19,11 @@ document -> content in the `<HTML>`
 
 [Color](https://threejs.org/docs/#api/en/math/Color), [MeshBasicMaterial – three.js docs](https://threejs.org/docs/?q=MeshBasicMaterial#api/en/materials/MeshBasicMaterial)
 
+### Find Object by name
+```JavaScript
+scene.children.find((child) => child.name === 'baked')
+```
+
 ### Renderer
 
 ```js
@@ -44,6 +49,37 @@ renderer.info
 ```
 
 use renderer to render render texture → [[three.js - API#Render Texture]]
+##### CSS background
+Turn on `alpha: true`
+```css
+canvas { 
+	height: 100%; 
+	width: 100%; 
+	outline: none; 
+
+	/* image */ 
+	background-image: url("background.png"); /* Replace with your image URL */ 
+	background-size: cover; 
+	background-position: center; 
+	background-repeat: no-repeat; 
+
+	/* gradient */ 
+	background: linear-gradient( 
+		0deg, 
+		rgb(8, 163, 166) 0%, 
+		rgba(79, 166, 167, 0.849) 8%, 
+		rgba(61, 79, 94, 0.885) 40%, 
+		rgb(17, 19, 23) 
+	); 
+}
+```
+
+### Color
+```js
+const color = new THREE.Color('red');
+
+```
+
 ### Mesh
 
 ```JavaScript

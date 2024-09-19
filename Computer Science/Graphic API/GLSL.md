@@ -231,6 +231,12 @@ float remap(float value, float originMin, float originMax, float destinationMin,
     return destinationMin + (value - originMin) * (destinationMax - destinationMin) / (originMax - originMin);
 }
 ```
+
+```
+// remap uTransition 0 - 1 to -4.0 - 4.0
+float transition = remap(uTransition, 0.0, 1.0, - 4.0, 4.0);
+float transition = remap(uTransition, 0.0, 1.0, 4.0, -4.0); // reversed
+```
 ##### 1d noise
 ``` gls
 float noise1d(float value) {
