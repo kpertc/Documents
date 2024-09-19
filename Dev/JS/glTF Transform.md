@@ -67,3 +67,21 @@ doc.transform(
 	prune()
 )
 ```
+
+### Calculate new local matrix after move to new hierarchy
+```JavaScript
+import { mat4 } from 'gl-matrix'
+
+function calculateLocalMatrix(node, parent) {
+  const nodeWorldMatrix = node.getWorldMatrix()
+  const parentWorldMatrix = parent.getWorldMatrix()
+
+  const parentWorldInverse = mat4.create()
+  mat4.invert(parentWorldInverse, parentWorldMatrix)
+
+  const localMatrix = mat4.create()
+  mat4.multiply(localMatrix, parentWorldInverse, nodeWorldMatrix)
+
+  return localMatrix
+}
+```

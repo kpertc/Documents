@@ -233,8 +233,9 @@ nvm install [verison] # install a node js
 nvm use [version] # use a version of node js
 ```
 
-NPX (run something)
-run local package
+##### `npx`
+installed with Node.js and NPM
+run packages without in a project packages and dependencies
 
 ![[image-2.png]]
 

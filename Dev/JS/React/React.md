@@ -234,14 +234,26 @@ import { ThemeContext } from "path";
 const _sceneManager: SceneManager = useContext(ThemeContext)!;
 ```
 
-### [useMemo](https://youtu.be/THL1OPn72vo) (Memo -> Memorization)
-
+### [useMemo](https://youtu.be/THL1OPn72vo) 
+Memo -> Memorization, will not re-process until dependencies change
 ```ts
 const doubleNumber = useMemo(()=>{
 		return slowFunction(number)
 	},
 	[number] // dependency
 )
+```
+
+use in react-three-fiber to store position heavy calculation
+```jsx
+const positions = useMemo(() => {
+    const positions = new Float32Array(verticesCount * 3)
+    
+    for(let i = 0; i < verticesCount * 3; i++)
+        positions[i] = (Math.random() - 0.5) * 3
+    
+    return positions
+}, [])
 ```
 
 ### Class

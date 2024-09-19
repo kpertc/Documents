@@ -1,7 +1,5 @@
 [[Shell]]
 
-[字节GitLab SourceTree设置](https://bytedance.feishu.cn/wiki/wikcntgeqxeRZ76S3wknA6CTZUc)
-
 ##### Official Docs
 
 ``` bash
@@ -13,26 +11,18 @@ git clone https://github.com/xxx/remote_repo.git . → website
 
 https://git-scm.com/docs
 
-<br>
-
 ##### Git Book
 https://git-scm.com/book/zh/v2
 
-<br>
-
 ##### Tutorials:
-
 [[YouTube] Git and GitHub for Beginners - Crash Course](https://www.youtube.com/watch?v=RGOj5yH7evk&t=1282s)
-
 [Git Tutorial for Beginners: Command-Line Fundamentals](https://youtu.be/HVsySz-h9r4)
 
-<br>
-
 ##### Installation
-
 https://www.atlassian.com/git/tutorials/install-git#windows
 
-<br>
+> [!NOTE] enter VSCode mode on web
+> `github.com` → `github.dev`
 
 ##### What is Version Control?
 
@@ -213,9 +203,6 @@ Force Push -> Replace the origin branch
 ```bash
 git push -f origin master
 ```
-
-<br>
-
 ##### Git Branching
 
 -   Master Branch
@@ -263,9 +250,6 @@ git log --oneline
 ```
 ![[git-log-oneline.png]]
 
-
-<br>
-
 ##### Stash → Save working files
 
 [Tutorial](https://www.youtube.com/watch?v=KLEDKgMmbBI)
@@ -304,8 +288,6 @@ Save changes as stash in one branch and apply the change to another branch
 https://www.youtube.com/watch?v=Uszj_k0DGsg&t=22s
 
 The Perfect Commit
-
-<br>
 
 ### Cherry Pick
 

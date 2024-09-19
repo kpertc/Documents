@@ -114,7 +114,7 @@ const debugeObj = {
 ...
 
 // add to shaderMaterial
-const shaderMaterial = new ShaderMaterial({\
+const shaderMaterial = new ShaderMaterial({ 
 	uniforms: {
 		uUniform: debugeObj.uniform
 	},
@@ -502,3 +502,20 @@ depthMaterial.onBeforeCompile = (shader) =>
 ```
 
 ### Normal
+
+
+### Test
+```js
+window.addEventListener('keydown', (e) => { 
+	if (e.key === 'o') { 
+		this.uniforms.uTransition.value -= 0.01 
+		this.poiEntity.uniforms.uTransition.value -= 0.01 console.log('-', 
+		this.uniforms.uTransition.value) 
+	} 
+	else if (e.key === 'p') { 
+		this.uniforms.uTransition.value += 0.01 
+		this.poiEntity.uniforms.uTransition.value += 0.01 console.log('+', 
+		this.uniforms.uTransition.value) 
+	} 
+})
+```

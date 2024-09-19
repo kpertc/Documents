@@ -5,7 +5,7 @@ gsap.to(
 	mesh.rotation,
 	{
 	  duration: 1.5,
-	  ease: 'power2.inOut',
+	  ease: 'power2.inOut', // ease ☞ https://gsap.com/docs/v3/Eases
 	  x: '+=6',
 	  y: '+=3'
 	}
@@ -21,7 +21,24 @@ gsap.to(
 		onComplete: () => {}
 	}
 )
+
+gsap.fromTo(
+	// from
+	{
+		value: 0,
+	},
+	// to
+	{
+		duration: 0.7,
+		ease: "power2.out",
+		value: 1,
+		onComplete: () => {
+			...
+		},
+}
+}
 ```
+
 
 Scroll Trigger
 

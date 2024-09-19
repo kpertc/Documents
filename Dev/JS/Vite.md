@@ -1,9 +1,10 @@
 #web-dev
 
--   `npm run` → dev server: directly serve ES module to the browser
--   `npm build` → Rollup bundle
+~~-   `npm run` → dev server: directly serve ES module to the browser
+`npm build` → Rollup bundle
 
 Hot module replace(HMR)
+update part of the code and re-instantiate, not reload the page
 
 .env file import.meta.env [Env Variables and Modes](https://vitejs.dev/guide/env-and-mode.html)
 

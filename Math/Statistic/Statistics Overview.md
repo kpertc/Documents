@@ -315,7 +315,6 @@ Cumulative Frequency
 
 Ogive → Cumulative Frequency Graph
 ![[ogive-graph.png | 500]]
-![](https://bytedance.feishu.cn/space/api/box/stream/download/asynccode/?code=NDNkMDU4MDc1NjE1NmVmM2NjMTlhZmY3MWYzYmVlNmZfWjI1dmY5ZUh2cW00UmlpcEoxQkZRS0RUUW5HdU9yNFpfVG9rZW46Ym94Y252d2ZFdXNOOEpkTjZkZm0yY0hFZEpmXzE2NzczMDI4NDE6MTY3NzMwNjQ0MV9WNA)
 
 Aways going one direction
 
