@@ -313,15 +313,28 @@ Show Statistic & Status bar
 Default status can be set at `Preferences > Interface > status Bar` and save the Preferences
 
 ---
-##### Camera
+### Camera
 align camera to view
 `Ctrl Alt Numpad0`
 ![[align-camera-to-viewport.png]]
 
+Camera viewport
+Look from camera: `View > Cameras > Active Camera`
+Select the camera object, then select camera `data > Viewport Display`
+![[camera-viewport.gif]]
+
+##### Camera Path Animation
+add to `Track To` constrain to "Look At" object
+![[blender-camera-trackto.png]]
+
+add `Follow Path` constrain, in order
+![[blender-camera-followPath-TrackTo.png]]
+
+Don't forget to make interpolation set to linear
 
 ---
 
-##### Parenting
+### Parenting
 
 The active (Yellow) object will be the parent; (red) objects are children
 
@@ -332,7 +345,6 @@ Select object `RMB` > Parent
   Parent: 1. Select Object 2 select Amature `Ctrl` + `P`
   Unparent: Select object `Alt` + `P` unparent
   
-
 Hold `Shift` in Outliner to change parenting|Use Add > Empty as parent for easy control
 ---|---
 ![[img/Blender Basics/moveInHierachy.gif]]|![[img/Blender Basics/modeling_empties_draw-types.png]]
@@ -733,8 +745,8 @@ Preferences > File Paths > Asset Libraries
 
 add `#` before expression
 ![[expression.gif]]
-```
 
+```
 frame
 
 sin(frame)

@@ -1,6 +1,7 @@
 w#JavaScript #programming-language #web-dev 
 
 JavaScript Background knowledge: [[JavaScript Overview]]
+JavaScript Browser Functions: [[JavaScript API]]
 
 ### HTML Template & Hello World
 
@@ -1218,43 +1219,6 @@ Decorators wrap a function in another function
 
 ---
 
-##### DataURL
-
-Typically for transferring image
-
-"data:image/jpeg;base64,I9J14RW..."
-
-Type Encode actual content
-
-  
-
-##### Base64 Encoding
-
-将任何二进制数据编码为ASCII的纯文本字符
-
-64 -> 2^6
-
-Because American Standard Code for Information Interchange (ASCII) only supports 2^7
--   Sending binary data over text-based protocol (such as HTTP)
--   Ensures text not get corrupted
--   Does not conceal data
-  
-
-```JavaScript
-btoa() // Encode to Base64
-atob() // decode
-```
-
-### URL Decode
-
-```js
-// 当不想网站自动转换成ASCII `%D1%88%D0%B5%D0%BB%D0%BB%D1%8B` 时用
-decodeURIComponent(document.URL)
-
-// 
-encodeURIComponent(document.URL)
-```
-
 ### Recursive
 
 ```JavaScript
@@ -1262,8 +1226,10 @@ const foo = (n) => {
 	if(n<=1)return;
 	foo(n-1);
 };
+```
 
 ### Add a Object in Global
+
 ```JavaScript
 global.effect = {
 	Ama: "abc"
@@ -1274,8 +1240,6 @@ global.effect = {
 // at another script file
 const Ama = effect.Ama; // will not be undefined
 ```
-
-
 
 
 ---

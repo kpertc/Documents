@@ -27,3 +27,7 @@ Set per-face attributes to vertexs
 ##### MeshBasicMaterial
 texture or color node connect to Material Output
 ![[DCC-blender-meshBasiicMaterial.jpeg]]
+
+### Camera Path
+- [[Blender Best Practice#Camera follow curve path]]
+- 

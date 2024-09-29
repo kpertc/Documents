@@ -256,6 +256,24 @@ const positions = useMemo(() => {
 }, [])
 ```
 
+### `<Suspense />`
+
+Lazy loading
+https://react.dev/reference/react/Suspense
+
+```JavaScript
+<Suspense
+    {/* fallback elements */}
+    fallback={ 
+        <> 
+        ...
+        </> 
+    }
+>
+    .... Long time e.g. Loading model
+</Suspense>
+```
+
 ### Class
 
 Previously, ONLY class based component could have STATE in a component. This is no longer the case since React Hooks. Functional Components to the Rescue!

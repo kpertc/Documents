@@ -18,6 +18,8 @@
 - [[Web XR]]
 - [[cannon.js]]
 - [[Image Formats]]
+- [kokomi.js](https://github.com/alphardex/kokomi.js)
+- [NodeToy](https://app.nodetoy.co/files) shader graph
 ### Tutorial Recommandation: 
 - [threejs Journey](https://threejs-journey.com/)
 - https://discoverthreejs.com/
@@ -28,6 +30,7 @@
 	- [leapmotor](https://c16-3d.leapmotor.cn/)
 - Bruno Simon
 	- https://bruno-simon.com/
+	- https://bruno-simon.com/#debug (Debug mode) 
 	- [threejs Journey](https://threejs-journey.com/)
 	- https://bruno-simon.com/lab/experiments/
 	- https://github.com/brunoimbrizi/interactive-particles
@@ -40,6 +43,9 @@
 - https://lusion.co/
 
 Others
+
+### Tools
+- https://gltf.pmnd.rs/
 ### Resources
 - [Particle pack](https://www.kenney.nl/assets/particle-pack)
 - [Noise Texture](http://kitfox.com/projects/perlinNoiseMaker/)
@@ -47,3 +53,11 @@ Others
 Depth Texture
 - [Depth Textures and World Coordinates In Fragment Shaders](https://www.thefrontdev.co.uk/post-processing-in-react-three-fiber-depth-textures-and-world-coordinates-in-fragment-shaders)
 - [Reconstruct world position in screen-space from depth buffer](https://discourse.threejs.org/t/reconstruct-world-position-in-screen-space-from-depth-buffer/5532)
+
+##### Post-Processing
+> Why postprocessing and not three/examples/jsm/postprocessing?
+> [Link](https://react-postprocessing.docs.pmnd.rs/introduction#why-postprocessing-and-not-three/examples/jsm/postprocessing?)
+- Git [postprocessing](https://github.com/pmndrs/postprocessing) by pmndrs
+- Documentation: [https://pmndrs.github.io/postprocessing/public/demo/](https://pmndrs.github.io/postprocessing/public/demo/)
+- Demo: [https://pmndrs.github.io/postprocessing/public/demo/](https://pmndrs.github.io/postprocessing/public/demo/)
+
