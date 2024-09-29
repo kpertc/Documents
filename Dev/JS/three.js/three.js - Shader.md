@@ -41,6 +41,8 @@ declare module "*.glsl" {
 - Threejs shader built-in uniform: https://threejs.org/docs/index.html#api/en/renderers/webgl/WebGLProgram
 - Threejs shader path: `three.js/src/renderers/shaders/`
 
+- Shader Library: [lygia](https://github.com/patriciogonzalezvivo/lygia)
+
 Dev Setup:
 
 ![[three.js - Setup#Shader]]

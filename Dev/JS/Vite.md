@@ -38,3 +38,8 @@ export default defineConfig({
   }
 })
 ```
+
+``` sh
+# host on public
+npm run dev -- --host
+```

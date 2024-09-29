@@ -8,13 +8,9 @@
 
 JScript -> Microsoft JavaScript
 
-<br>
-
 [State of JS](https://stateofjs.com/en-us/)
 [[TypeScript]]
 [[JavaScript API]]
-
-<br>
 
 ### [[node.js]]  NPM
 
@@ -30,11 +26,7 @@ JScript -> Microsoft JavaScript
 > `MOCHA` -> `LiveScript` -> `JavaScript`
 > `JScript` Microsoft version JavaScript
 
-<br>
-
 ### [[ECMA (ES)]]
-
-<br>
 
 Transpilers: 
 - Babel

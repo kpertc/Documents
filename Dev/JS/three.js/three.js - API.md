@@ -106,6 +106,7 @@ const mesh = new Mesh(geometry, material)
 ```
 ##### Geometry
 ##### Manually Create Buffer Geometry
+
 ```js
 const bufferGeometry = new BufferGeometry()
 
@@ -134,6 +135,12 @@ Convert JS array to `Float32Array`
 ```js
 const JSArray = [0, 1, 2, 3 ...]
 const float32Array = new Float32Array(JSArray);
+```
+
+Create an array fill with value
+``` js
+const array = new Array(count).fill(0)
+const array = new Float32Array(count).fill(0)
 ```
 #####  Camera Space Plane
 draw in front of camera
@@ -308,7 +315,6 @@ scene.add(control);
 // attach to an object
 control.attach(cube);
 ```
-
 ### Helpers
 ##### [AxisHelper](https://threejs.org/docs/#api/en/helpers/AxesHelper)
 ![[axis-helper.png | 300]]
