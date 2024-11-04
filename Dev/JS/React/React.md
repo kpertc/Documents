@@ -171,13 +171,16 @@ function App() {
  
 ### useEffect
 ```JavaScript
-useEffect( () => {...}, [] )
-// { ... } will execute when [] matched value changed
-// leave blank [], will run once when component start
 
-const 111
-useEffect( () => { console.log('') }, [111] )
-// if 111 changed, console.log('') will be executed
+// run every time when the component update
+useEffect( () => {...} )
+
+// blank [], will run once when component start
+useEffect( () => {...}, [] )
+
+// update, when variable changes
+const variable
+useEffect( () => { ... }, [variable] )
 ```
 
 Return -> clean up function
@@ -254,6 +257,12 @@ const positions = useMemo(() => {
     
     return positions
 }, [])
+```
+
+### useCallback
+store a function?
+``` js
+
 ```
 
 ### `<Suspense />`

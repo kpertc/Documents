@@ -578,16 +578,15 @@ Texture Paint Mode, set an image to paint|Change Brush
 
   
 
-Paint Mask (selecting in edit mode)|Texture stencil drawing
----|---
-![[img/Blender Basics/texturePaintMask.gif]]|![[img/Blender Basics/textureDrawStencil.gif]]
+| Paint Mask (selecting in edit mode)          | Texture stencil drawing                        |
+| -------------------------------------------- | ---------------------------------------------- |
+| ![[img/Blender Basics/texturePaintMask.gif]] | ![[img/Blender Basics/textureDrawStencil.gif]] |
 
 `Shift` + `RMB` Scale
 
 `Ctrl` / `Command` + `RMB` Rotation
 
 ---
-
 ### BlendShape
 
 Shape Keys
@@ -595,6 +594,9 @@ Shape Keys
 ![[img/Blender Basics/shapeKey.gif]]
 
 BlendShape Symmetrize
+
+Join BlendShape
+![[blender-joinBlendShape.gif]]
 
 ---
 
@@ -613,8 +615,6 @@ BlendShape Symmetrize
 | Keyframe                             | Auto-Keyframe                             |
 | ------------------------------------ | ----------------------------------------- |
 | ![[img/Blender Basics/keyframe.gif]] | ![[img/Blender Basics/Auto-keyframe.gif]] |
-
-  
 
 Animation Frame Rate
 
@@ -644,8 +644,8 @@ Manage annotation / delete all -> SideBar -> View -> Annotations
 
 Slot for storing multiple render images
 
-![[img/Blender Basics/render-slots.png\|400]]|![[render-slot.png]] 
----|---
+| ![[img/Blender Basics/render-slots.png\|400]] | ![[render-slot.png]] |
+| --------------------------------------------- | -------------------- |
 
 ###### Render Background
 
@@ -722,9 +722,9 @@ Export file format
 
 ### Texture Baking
 
-Create an image texture|Select the texture image node and click 'Bake'
----|---
-![[img/Blender Basics/texture-node.png]]|![[img/Blender Basics/bake.png]]
+| Create an image texture                  | Switch to Cycles                | Select the texture image node and click 'Bake' |
+| ---------------------------------------- | ------------------------------- | ---------------------------------------------- |
+| ![[img/Blender Basics/texture-node.png]] | ![[blender-switchToCycles.png]] | ![[img/Blender Basics/bake.png]]               |
 
 Bake Normal texture -> Color Space: Non-Color
 

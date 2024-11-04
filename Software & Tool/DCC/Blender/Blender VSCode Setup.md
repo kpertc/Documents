@@ -1,8 +1,13 @@
 [5 Steps to setup VSCode for Blender Python (on macOS)](https://youtu.be/_0srGXAzBZE?si=rRnpWQ_B4qzoQlnF)
 [fake-bpy-module](https://github.com/nutti/fake-bpy-module)
 
-```shell
+```sh
 pip install fake-bpy-module-latest
+```
+
+```
+# if no pip
+ python3 -m pip install fake-bpy-module-latest
 ```
 
 ![[fake-bpy-vscode.gif]]

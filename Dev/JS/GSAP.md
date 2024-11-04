@@ -1,5 +1,10 @@
 https://gsap.com/docs/v3/Installation/
 
+``` sh
+# Install the GSAP library  
+npm install gsap  
+```
+
 ``` js
 gsap.to(
 	mesh.rotation,
@@ -56,4 +61,76 @@ gasp.to(".className", {
     // when .className element come into the viewport
 	scrollTrigger: ".className"
 })
+```
+
+
+### React
+``` sh
+# Install the GSAP React package  
+npm install @gsap/react
+```
+
+```js
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP);
+
+// contextSafe outside useGSAP()
+const { contextSafe } = useGSAP();
+```
+
+```js
+useGSAP() => {}
+
+useGSAP((context, contextSafe) => {
+
+})
+
+useGSAP((context, contextSafe) => {
+	
+	context.kill() // kill previous animation
+	
+	if (state) {
+		gsap...
+	} else {
+		// clear first
+		context.kill(); // keep property
+		context.revert(); // not keep property
+		gsap...
+	}
+}. [state])
+
+```
+
+
+array 
+``` js
+// a list of element
+gsap.to(
+	refList.current.map((i) => i.rotation),
+	{
+		y: `+=${Math.PI / 2}`,	
+		repeat: -1,
+		ease: "back",
+		stagger: {
+			each: 0.1,
+		},
+		duration: 1,
+	}
+);
+
+// a list of meshes
+refList.current.forEach((mesh, index) => {
+	if (mesh) {
+		gsap.to(mesh.scale, {
+			x: 0.3,
+			z: 0.3,
+			delay: 0.25 * index,
+			repeat: -1,
+			yoyo: true,
+			ease: "sine.inOut",
+			duration: 1,
+		});
+	}
+});
 ```

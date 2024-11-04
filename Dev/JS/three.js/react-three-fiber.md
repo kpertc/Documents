@@ -83,6 +83,17 @@ useHelper()
  import { extend } from '@react-three/fiber'
 ```
 
+``` js
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+
+extend({ OrbitControls: OrbitControls })
+extend( { OrbitControls }) // if same name
+```
+
+``` jsx
+ <OrbitControls args={ [camera, gl.domElement] } /> // set argument
+```
+
 ### Hooks
 ##### useFrame
 ```jsx
@@ -185,6 +196,34 @@ useEffect(() => {
 
 // use levy to controll animation
 ```
+
+play camera track frame
+``` js
+const { actions } = useAnimations(animations, group);
+
+// levy ui to manual set animation value
+const { _time } = useControls("Experience-Test", {
+	_time: 0,
+});
+
+useEffect(() => {
+	console.log(actions["CameraAction"]);
+	actions["CameraAction"].play().paused = true;
+}, []);
+
+useFrame(() => {
+	actions["CameraAction"].time = THREE.MathUtils.lerp(
+		actions["CameraAction"].time,
+		actions["CameraAction"].getClip().duration * _time,
+		0.05
+	);
+});
+```
+
+blendshape / morph target
+```js
+morphTargetInfluences={[_time]}
+```
 ##### Pointer Events
 ```JavaScript
 // mouse -> right button click
@@ -214,6 +253,10 @@ onPointerMissed
 event => {
     event.stopPropagation()
 }
+```
+
+```
+visible={false} can be detected
 ```
 
 Change Cursor Style
@@ -261,7 +304,17 @@ import { OrbitControls } from "@react-three/drei";
 ```jsx
 <RandomizedLight />
 ```
+##### TransformControls
+``` jsx
+<TransformControls mode={"rotate"}>
+	...
+</TransformControls>
+```
 
+##### Load Texture
+``` js
+const texture = useTexture("./textures/key-decal.png");
+```
 ##### Load Model
 ```JavaScript
 import { useGLTF } from '@react-three/drei'
@@ -365,6 +418,64 @@ quickly setup environment, lighting, shadow ...
 ```
 
 useKeyboardControls
+##### Merge
+```js
+export const MergeModel = (props) => {
+	const { nodes, materials, scene } = useGLTF("./models/key.glb");
+	return (
+		<Merged
+			castShadow
+			receiveShadow
+			meshes={[nodes.keycap, nodes.Key_Variation_contact]}
+			{...props}
+        >		
+			{(Keycap, Key_Variation_contact) => (
+				<>
+					<Key_Variation_contact />
+					<Keycap />
+				</>
+			)}
+		</Merged>
+	);
+};
+```
+##### Instance
+``` jsx
+export const InstanceModel = () => {
+const { nodes, materials, scene } = useGLTF("./models/key.glb");
+	return (
+		<Instances
+			geometry={nodes.keycap.geometry}
+			material={nodes.keycap.material}
+     .  >				
+			<Instance position={[[0, 0, 0]]} />
+		</Instances>
+	);
+};
+```
+##### Decal
+``` jsx
+<mesh position={[0, 0, 0]}>
+	<boxGeometry args={[1, 1, 1]} />
+	<meshStandardMaterial color="lightgrey" />
+	<Decal
+		debug // debug mode
+		position={[0, 0, 0.5]} // Decal position on the surface
+		rotation={[0, 0, 0]} // Decal orientation
+		scale={[0.5, 0.5, 0.5]} // Decal size
+    >
+		<meshStandardMaterial
+			map={texture}
+			color="white"
+			polygonOffset
+			polygonOffsetFactor={-1}
+		/>
+	</Decal>
+</mesh>
+```
+
+### use Custom Shader Material
+![[three.js - Shader#R3F]]
 
 ### Post-Processing
 
@@ -477,3 +588,10 @@ applyImpulse
 gravityScale
 
 InstancedMesh arges
+
+
+
+
+
+
+使用 depth drawcall x2
