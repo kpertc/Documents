@@ -176,7 +176,6 @@ new TextureLoader().load("./texture.png", (texture) => {
 // Vertex shader
 const vertexShader = /* glsl */ `
 	varying vec2 vUv;
-	uniform sampler2D uTexture;
 	void main() {
 		vUv = uv;
 		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
@@ -195,11 +194,11 @@ const fragmentShader = /* glsl */ `
 `;
 
 const shaderMaterial = new ShaderMaterial({
+		uniforms: {
+			uTexture: { value: texture },
+		},
 		vertexShader: vertexShader,
 		fragmentShader: fragmentShader,
-			uniforms: {
-				uTexture: { value: texture },
-			},
 		transparent: true, // Enable transparency
 	});
 
@@ -280,6 +279,13 @@ _shaderPass.material.uniforms.${uniformName}.value = ...
 ##### Screen Space Plane
 ``` js
 
+```
+
+### Instance
+use Instance matrix when use instance
+> https://threejs.org/docs/#api/en/renderers/webgl/WebGLProgram
+```
+gl_Position = projectionMatrix * viewMatrix * modelMatrix * instanceMatrix * vec4(position, 1.0);
 ```
 
 ## Inject built-in material
@@ -443,6 +449,26 @@ const material = new CustomShaderMaterial({
 		}
 `,
 })
+```
+
+##### R3F
+``` js
+import CustomShaderMaterial from "three-custom-shader-material";
+```
+
+```jsx
+<mesh position={[0, 2, 0]}>
+	<boxGeometry />
+	<CustomShaderMaterial
+		baseMaterial={THREE.MeshPhysicalMaterial}
+		fragmentShader={ /* glsl */ `
+			void main()
+			{
+				csm_DiffuseColor = vec4(1.0, 0.0, 0.0, 1.0);
+			}
+		`}
+	/>
+</mesh>
 ```
 
 ### Attribute

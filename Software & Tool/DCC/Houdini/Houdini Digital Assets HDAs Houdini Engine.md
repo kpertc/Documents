@@ -39,7 +39,6 @@ Turning your node graph into one custom node called digital asset
 	</div>
 <div>    
 
-<br>
 
 Object Asset
 

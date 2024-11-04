@@ -199,6 +199,11 @@ console.log(_mesh.geometry,groups)
 mesh.geometry.clearGroups()
 ```
 
+
+```
+mesh.morphTargetInfluences[ 0 ]
+```
+
 ### Light
 
 Directional Light
@@ -536,4 +541,61 @@ Camera fov is vertical based ➝ Objects' vertical position always stay when win
 // to get sreen base size scrolling
 camera.position.y = - scrollY / window.innerHeight * objectDistance
 // vertical distance between each object
+```
+
+
+### Load object form website JSON
+
+``` js
+// Load JSON String to JSON data
+const sceneData = JSON.parse(content);
+
+// remove material map in JSON data 
+sceneData.materials.forEach((material) => {
+  console.log(material);
+  for (const key in material) {
+	// console.log(key)
+	if (key.toLowerCase().includes("map")) {
+	  delete material[key];
+	}
+  }
+});
+
+// Load JSON data to three scene
+const loader = new ObjectLoader();
+const loadedObject = loader.parse(sceneData);
+loadedObject.scale.set(0.1, 0.1, 0.1);
+scene.add(loadedObject);
+
+// export 3D model to .gltf
+
+function exportToGLTF(object) {
+  const exporter = new GLTFExporter();
+
+  exporter.parse(
+	object,
+	function (gltf) {
+	  const blob = new Blob([gltf], { type: "model/gltf+json" });
+	  const url = URL.createObjectURL(blob);
+
+	  // Create a link and trigger download
+	  const a = document.createElement("a");
+	  a.style.display = "none";
+	  a.href = url;
+	  a.download = "model.glb"; // Use .glb for binary files
+	  document.body.appendChild(a);
+	  a.click();
+
+	  // Clean up
+	  URL.revokeObjectURL(url);
+	  document.body.removeChild(a);
+	},
+	function (error) {
+	  console.error("An error occurred while exporting the model", error);
+	},
+	{ binary: true } // Use binary: false for .gltf format
+  );
+}
+
+exportToGLTF(loadedObject);
 ```

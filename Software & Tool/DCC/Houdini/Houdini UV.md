@@ -26,8 +26,9 @@ Delete UV
 UV transfer
 Labs UV Visualize
 ![[img/Houdini UV/Labs UV Visualize.png]]
+`5` key to switch to UV view
+![[houdini-uv-view.png]]
 
-<br>
 
 FIx boundary seam
 ![[img/Houdini UV/FIx boundary seam.png]]
