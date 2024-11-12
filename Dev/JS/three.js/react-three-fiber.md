@@ -175,8 +175,6 @@ const model = useLoader(
 	/>
 </mesh>
 
-
-
 // lights
 <directionalLight 
     position={ [1, 2, 3] }
@@ -471,6 +469,52 @@ const { nodes, materials, scene } = useGLTF("./models/key.glb");
 			polygonOffsetFactor={-1}
 		/>
 	</Decal>
+</mesh>
+```
+
+##### Html
+```jsx
+<mesh scale={1}>
+	<boxGeometry />
+	<meshStandardMaterial/>
+	<Html
+	// occlude
+	// distanceFactor={1.5}
+	// prepend
+	position={[0, 0.1, 0.8]}
+	transform
+	// sprite
+	material={
+		<meshPhysicalMaterial />
+	}
+	// 3D
+	occlude="blending" 
+>	
+	
+	// inline svg
+	<svg
+		width="100"
+		height="100"
+>	
+		<circle
+			cx="50"
+			cy="50"
+			r="40"
+			stroke="green"
+			stroke-width="4"
+			fill="yellow"
+		/>
+	</svg>
+	
+		// img
+		<img src="./textures/svg/Tiger.svg" alt="My Happy SVG" />
+		
+		// object
+		<object data="./textures/svg/Tiger.svg" width="300" height="300">
+		{" "}
+		</object> 
+	
+	</Html>
 </mesh>
 ```
 
