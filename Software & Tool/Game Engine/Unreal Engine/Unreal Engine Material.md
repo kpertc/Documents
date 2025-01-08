@@ -42,3 +42,5 @@ LMB + 1/2/3/4 to create Constant, Constant2Vector, Constant3Vector, Constant4Vec
 	- multiple → Scale
 	- add → Move
 	- use mask to separate X, Y , then append node to combine
+
+Todo Shader

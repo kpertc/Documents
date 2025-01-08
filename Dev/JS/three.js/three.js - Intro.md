@@ -12,6 +12,7 @@
 - [[three.js - Shader]]
 - [[three.js - Debug GUI]]
 - [[three.js - DCC]]
+- [[three.js - WebGPU]]
 - [[react-three-fiber]]
 - [[Tween.js]]
 - [[GSAP]]
@@ -20,6 +21,7 @@
 - [[Image Formats]]
 - [kokomi.js](https://github.com/alphardex/kokomi.js)
 - [NodeToy](https://app.nodetoy.co/files) shader graph
+- [[Math for 3D Development]]
 ### Tutorial Recommandation: 
 - [threejs Journey](https://threejs-journey.com/)
 - https://discoverthreejs.com/

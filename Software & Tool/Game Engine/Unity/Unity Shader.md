@@ -1,9 +1,12 @@
 #Unity #CG 
 
+- [Writing a custom shader in ShaderLab and HLSL](https://docs.unity3d.com/6000.0/Documentation/Manual/SL-landing.html)
 ### GitHub Repository
 [Shader Test](https://github.com/kpertc/ShaderTest)
 
 ### URP Unlit Shader Template
+
+Unity Shading Language CG → HLSL
 
 ``` HLSL
 Shader "Examples/ShaderSyntax"
@@ -25,6 +28,7 @@ Shader "Examples/ShaderSyntax"
         
     }
     SubShader //一个shader 至少一个Sub Shader，一个Pass
+    // 为了支持不同渲染管线，不同GPU等
     {
     
         ZWrite [_ZWrite]
@@ -40,7 +44,7 @@ Shader "Examples/ShaderSyntax"
         
         LOD 300
         
-        HLSLPROGRAM
+        HLSLPROGRAM // 如果是用HLSL语言写，或者CGPROGRAM ｜ GLSLPROGRAM
         
         //common URP libraries
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
@@ -73,8 +77,6 @@ Shader "Examples/ShaderSyntax"
             float4 _ExampleVector;
         CBUFFER_END
         
-        
-        
         ...
         ENDHLSL
 
@@ -105,7 +107,13 @@ Shader "Examples/ShaderSyntax"
 -   Medium precision `half`
 -   Low precision `fixed`
 
-### HLSL Functions
+### HLSL
+``` hlsl
+
+
+```
+
+### Functions
 [HSLS固有函数](http://www.cppblog.com/lai3d/archive/2008/10/23/64889.html)
 
 ```HLSL
@@ -212,9 +220,7 @@ Unity Editor 工具编写 [Unity Editor](https://bytedance.feishu.cn/docx/doxcnd
 ### Experience
 
 Flip UV
-
 ```hlsl
 (1 - i.uv.x) // Flip Horizontal
-
 (1 - i.uv.x) // Flip Vertical
 ```

@@ -74,22 +74,15 @@ A Coroutine is like a function that has the ability to pause execution and retur
 
 Return
 
-<br/>
-
 
 ### Async -> C#
 
 <br/>
 
 ### Logging
-
 -   Type of logging
-    
 -   Style of logging [rich text](https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html) formatting   
-
 ![[img/Unity-General-img/rich-text-log.png]]
-
-<br>
 
 ### Mesh Generation
 

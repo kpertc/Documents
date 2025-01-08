@@ -25,7 +25,6 @@ scene.children.find((child) => child.name === 'baked')
 ```
 
 ### Renderer
-
 ```js
 this.renderer = new THREE.WebGLRenderer({
 	canvas: this.canvas,
@@ -40,6 +39,24 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 // set toneMapping
 this.renderer.toneMapping = THREE.ReinhardToneMapping;
 this.renderer.toneMappingExposure = 2.0;
+```
+
+Render to different renderTarget (renderTexture)
+```js
+render () {
+    ...
+    // render first render target
+    hiddenObject.visible = false
+    renderer.setRenderTarget( tempRenderTarget )
+    renderer.render(this.scene, this.camera) // renderer.renderAsync() in WebGPU
+    hiddenObject.visible = true
+    
+    // render
+    hiddenObject.visible = true
+    renderer.setRenderTarget(null) // render to screen
+    renderer.render(this.scene, this.camera)
+    ...
+}
 ```
 
 ![[window#Get Device Pixel Ratio]]
@@ -78,6 +95,7 @@ canvas {
 ```js
 const color = new THREE.Color('red');
 
+const randomColor = new THREE.Color(Math.random() * 0xffffff)
 ```
 
 ### Mesh
@@ -142,7 +160,7 @@ Create an array fill with value
 const array = new Array(count).fill(0)
 const array = new Float32Array(count).fill(0)
 ```
-#####  Camera Space Plane
+##### Camera Space Plane
 draw in front of camera
 ``` js
 const overlayGeometry = new PlaneGeometry(2, 2, 1, 1); // -1 to +1 space, so is 2
@@ -199,9 +217,28 @@ console.log(_mesh.geometry,groups)
 mesh.geometry.clearGroups()
 ```
 
-
 ```
 mesh.morphTargetInfluences[ 0 ]
+```
+
+##### Clipping
+``` js
+const plane = new THREE.Plane( 
+	new THREE.Vector3(1, 0, 0),
+	0.2 // plane to origin
+)
+
+// local clippling
+material.clippingPlanes = [plane]; // can add multiple planes
+renderer.localClippingEnabled = true;
+material.clipShadows = true
+
+// world
+renderer.clipingPlanes = [plane]
+```
+##### ExtrudeGeometry
+```js
+
 ```
 
 ### Light
@@ -254,6 +291,13 @@ function Update() {
 ### Texture
 
 ##### Loader
+
+sync
+``` js
+const texture = new THREE.TextureLoader().load('path')
+```
+
+async
 ```ts
 static loadTexture(url: string): Promise<THREE.Texture> {
 	return new Promise((resolve, reject) => {
@@ -361,8 +405,15 @@ new RGBELoader().setPath("/").load("harvest_1k.hdr", (texture) => {
 scene.backgroundBlurriness = 0.2
 ```
 
+PMREM generator?
+```JavaScript
+const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+this.scene.environment = pmremGenerator.fromSceneAsync( ... )
+this.scene.environmentIntensity = 10
+```
+
 > [!TIP] Add a directional light for environment light
-> add a directional light that roughly match the direction of light in environment light
+> add a directional light that roughly match the direction of light in environment light, for shadow?
 
 ##### Realtime Reflection
 ``` ts
@@ -598,4 +649,88 @@ function exportToGLTF(object) {
 }
 
 exportToGLTF(loadedObject);
+```
+
+### GPGPU
+>  three.js Journey
+
+General-Purpose computing on Graphics Processing Units
+
+`GPUComputationRenderer`
+``` js
+import { GPUComputationRenderer } from "three/examples/jsm/Addons.js";
+```
+
+GPGPU internally use ping-pong texture technique
+
+``` js
+// create a texture that match the size of geometry
+const gpgpuTextureWidth = Math.ceil(Math.sqrt(verticesCount));
+
+_GPUComputationRenderer = new GPUComputationRenderer(
+	gpgpuTextureWidth,
+	gpgpuTextureWidth,
+	renderer
+);
+
+// create texture to work on for gpu renderer
+const baseTexture = _GPUComputationRenderer.createTexture(); // DataTexture -> create an empty (black) texture init
+
+for (let i = 0; i < verticesCount; i++) {
+	const i3 = i * 3; // index for position, 3
+	const i4 = i * 4; // index for
+	
+	baseTexture.image.data[i4 + 0] = sphere.attributes.position[i3 + 0];
+	baseTexture.image.data[i4 + 1] = sphere.attributes.position[i3 + 1];
+	baseTexture.image.data[i4 + 2] = sphere.attributes.position[i3 + 2];
+	baseTexture.image.data[i4 + 3] = 0;
+}
+
+const gpuShader = /* glsl */ `
+	void main () {
+	
+	}
+`;
+
+// put texture into shader
+const uParticle = _GPUComputationRenderer.addVariable(
+	"uParticle", // base texture will be named as "uParticle" in the shader
+	gpuShader,
+	baseTexture
+);
+
+// set dependencies ?
+_GPUComputationRenderer.setVariableDependencies(uParticle, [uParticle]);
+
+_GPUComputationRenderer.init();
+```
+
+``` js
+const particlesUvArray = new Float32Array(verticesCount * 2);
+
+const sizesArray = new Float32Array(verticesCount);
+
+for (let y = 0; y < gpgpuTextureWidth; y++) {
+	for (let x = 0; x < gpgpuTextureWidth; x++) {
+	const i = y * gpgpuTextureWidth + x;
+	const i2 = i * 2;
+	
+	// UV
+	const uvX = (x + 0.5) / gpgpuTextureWidth;
+	const uvY = (y + 0.5) / gpgpuTextureWidth;
+	
+	particlesUvArray[i2 + 0] = uvX;
+	particlesUvArray[i2 + 1] = uvY;
+	
+	// Size
+	sizesArray[i] = Math.random();
+	}
+
+}
+```
+
+
+``` js
+// get texture from gpuRenderer, could be used as debug texture?
+_GPUComputationRenderer.getCurrentRenderTarget(uParticle).texture,
 ```

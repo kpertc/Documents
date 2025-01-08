@@ -217,6 +217,12 @@ link between a globally installed package and a local project. Allows you to wor
 
 ##### NVM Node Version Manager
 
+create the path first, then install
+``` sh
+touch ~/.bashrc
+touch ~/.zshrc
+```
+
 Install at https://github.com/nvm-sh/nvm
 Windows version: https://github.com/coreybutler/nvm-windows
 

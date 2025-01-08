@@ -5,6 +5,9 @@ react-three-fiber → R3F
 - [[React]]
 - [[Zustand]] state management
 
+
+WebGPU version `<Canvas />` setup ☞ [[three.js - WebGPU#React-Three-Fiber Setup]]
+
 ```tsx
 import "./style.css";
 import { createRoot } from "react-dom/client";
@@ -120,6 +123,10 @@ return (
 const { camera, gl } = useThree() // get camera and renderer from useThree()
 ```
 
+```
+cosnt { scene } = useThree() // scene will casue re-render when window resize
+```
+
 ### Elements
 
 Load model
@@ -183,6 +190,24 @@ const model = useLoader(
     shadow-mapSize // deeper properties using "-"
 />
 ```
+
+##### bufferGeometry
+```tsx
+// from: https://blog.maximeheckel.com/posts/the-magical-world-of-particles-with-react-three-fiber-and-shaders/
+
+<mesh> // or <points>
+    <bufferGeometry>
+        <bufferAttribute
+            attach = 'attributes-position'
+            count = {position.length / 3}
+            array = {position}
+            itemSize = {3}
+        />
+    </bufferGeometry>
+    <material />
+</mesh>
+```
+
 ##### Animation
 ```JavaScript
 const animations = useAnimation(fox.animations, fox.scene)
