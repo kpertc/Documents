@@ -1,8 +1,5 @@
 #web-dev
 
-~~-   `npm run` → dev server: directly serve ES module to the browser
-`npm build` → Rollup bundle
-
 Hot module replace(HMR)
 update part of the code and re-instantiate, not reload the page
 
@@ -29,17 +26,27 @@ No command
 npm install vite
 ```
 
-### vite.config.ts
+``` sh
+# host on public
+npm run dev -- --host
+
+# not using cache
+npm run dev -- --force
+```
+
+### `vite.config.ts`
 ```jsx
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3000, // port
+	host: true,
+	port: 3000, // port
+  },
+  build: {
+	outDir: "../dist",
+	emptyOutDir: true, // Empty the folder first
+	sourcemap: true, // 
+	target: "esnext" // for morden browser, (may not be able to run on some old browser)
   }
 })
-```
-
-``` sh
-# host on public
-npm run dev -- --host
 ```

@@ -34,6 +34,8 @@ declare module "*.glsl" {
 }
 ```
 
+For three.js webgpu - [[three.js - WebGPU#TSL - Three.js Shading Language]]
+
 ### Write Shader
 - [[OpenGL]]
 - [[GLSL]]
@@ -288,6 +290,21 @@ use Instance matrix when use instance
 gl_Position = projectionMatrix * viewMatrix * modelMatrix * instanceMatrix * vec4(position, 1.0);
 ```
 
+instance color can be defined individually on each instance object
+
+to get instance color in new shader
+``` glsl
+attribute vec3 instanceColor;
+```
+
+in existing threejs shader, it named as `vColor`
+```glsl
+#ifdef USE_INSTANCING_COLOR
+vColor ...
+#endif
+```
+
+
 ## Inject built-in material
 
 | Variable name | Meaning | Type | File                      | Require                       |
@@ -451,6 +468,13 @@ const material = new CustomShaderMaterial({
 })
 ```
 
+Layer shader → baseMaterial
+
+``` js
+
+```
+
+
 ##### R3F
 ``` js
 import CustomShaderMaterial from "three-custom-shader-material";
@@ -547,3 +571,8 @@ window.addEventListener('keydown', (e) => {
 	} 
 })
 ```
+
+
+# Technics
+
+### Ray Marching

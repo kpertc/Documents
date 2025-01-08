@@ -59,8 +59,6 @@ The management of changes to documents, computer programs, large websites, and o
 >[!note]
 >Command + Shift + . Show hidden file
 
-<br>
-
 ##### SSH Key
 
 An SSH key is an access credential for the SSH (secure shell) network protocol.
@@ -103,7 +101,13 @@ git config --list
 ssh-keygen -t rsa -C 'xxx@xxx.com'
 ```
 
-<br>
+Linux case sensitive
+Mac case incentive
+code uploaded from Mac will cause pipeline runs into error
+```sh
+git config core.ignorecase false
+```
+
 
 ##### SSH
 https://www.cnblogs.com/hafiz/p/8146324.html

@@ -4,27 +4,27 @@
 
 ![](https://code.visualstudio.com/assets/docs/getstarted/tips-and-tricks/KeyboardReferenceSheet.png)
 
-Editor Shortcut| 
----|---
-Command Palette|⌘ ⇧ P
-Toggle Terminal|Ctrl \`
-Sidebar|⌘ B
-New Tab|⌘ N
-New Window|⌘ ⇧ N
-Tab Bar Explore (File)|⌘ ⇧ E
-Tab Bar Search|⌘ ⇧ F
-Open & Fold UnFold| ⌘ ↓
-Split Editor|⌘ \
-Duplicate Line|⇧ Option ↑ / ↓
-Select Entire Line<br>Select Multiple Lines if Multiple Times |⌘ L
-Delete Line|⌘ ⇧ K
-Insert Line|⌘ Enter
-Matching Bracket|⌘ ⇧ \
-Multiline Comment|⇧ Option A
-Highlight(Select)|Shift ↑/↓/←/→
-Select Next Match|⌘ D
-Tab|Ctrl + tab#
-Close All Tabs|⌘ K W
+| Editor Shortcut                                               |                |     |
+| ------------------------------------------------------------- | -------------- | --- |
+| Command Palette                                               | ⌘ ⇧ P          |     |
+| Toggle Terminal                                               | Ctrl \`        |     |
+| Sidebar                                                       | ⌘ B            |     |
+| New Tab                                                       | ⌘ N            |     |
+| New Window                                                    | ⌘ ⇧ N          |     |
+| Tab Bar Explore (File)                                        | ⌘ ⇧ E          |     |
+| Tab Bar Search                                                | ⌘ ⇧ F          |     |
+| Open & Fold UnFold                                            | ⌘ ↓            |     |
+| Split Editor                                                  | ⌘ \            |     |
+| Duplicate Line                                                | ⇧ Option ↑ / ↓ |     |
+| Select Entire Line<br>Select Multiple Lines if Multiple Times | ⌘ L            |     |
+| Delete Line                                                   | ⌘ ⇧ K          |     |
+| Insert Line                                                   | ⌘ Enter        |     |
+| Matching Bracket                                              | ⌘ ⇧ \          |     |
+| Multiline Comment                                             | ⇧ Option A     |     |
+| Highlight(Select)                                             | Shift ↑/↓/←/→  |     |
+| Select Next Match                                             | ⌘ D            |     |
+| Tab                                                           | Ctrl + tab#    |     |
+| Close All Tabs                                                | ⌘ K W          |     |
 
 
 Same as Chrome| 
@@ -59,8 +59,6 @@ https://code.visualstudio.com/docs/languages/markdown
 Preview markdown `⇧⌘V`
 Preview markdown side by side
 ![[md-dynamic-preview.gif]]
-
-<br>
 
 ### Snippets
 

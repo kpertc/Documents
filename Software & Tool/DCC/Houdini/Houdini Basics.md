@@ -170,7 +170,7 @@ SOPs
 	</div>
 	<div>
 		Modelling<br>
-		Divide (get Dual Mesh)<br>
+		Divide (get Dual Mesh or triangulate mesh) <br> 
 		Bevel<br>
 		Remesh<br>
 		Fuse<br>
