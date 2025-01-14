@@ -182,8 +182,9 @@ install latest version (Not a good idea)
 > install to 5.0.0
 
 
-##### Scripts
+`"three": "*"` → Latest version
 
+##### Scripts
 ```shell
 npm start
 
@@ -193,7 +194,6 @@ npm + run + scripts name
 # e.g.
 npm run start
 ```
-
 
 ##### Global Packages
 ``` shell
@@ -211,9 +211,6 @@ npm root -g
 npm link typescript
 ```
 link between a globally installed package and a local project. Allows you to work on a package locally while using it as a dependency in another project without the need to publish it to the npm registry.
-
-
-<br>
 
 ##### NVM Node Version Manager
 
