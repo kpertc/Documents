@@ -14,3 +14,10 @@
 Source: 
 - https://www.reddit.com/r/explainlikeimfive/comments/yp499/eli5_what_is_the_difference_between_bmp_jpg_png/
 - https://web.dev/learn/images/avif
+
+GLTF:
+Convert using gltf-transform
+https://github.com/KhronosGroup/KTX-Software/releases
+```
+
+```

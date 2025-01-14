@@ -160,6 +160,18 @@ Create an array fill with value
 const array = new Array(count).fill(0)
 const array = new Float32Array(count).fill(0)
 ```
+##### Geometry Material Group
+```JavaScript
+// Multiple materials on one mesh
+geometry.group
+{
+    0:  {start: 0, count: 120, materialIndex: 0 },
+    0:  {start: 120, count: 60, materialIndex: 1 }
+} 
+
+// clear material groups
+geometry.clearGroups()
+```
 ##### Camera Space Plane
 draw in front of camera
 ``` js

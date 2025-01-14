@@ -23,15 +23,19 @@ Correctness: no tolerance to (uncontrollable failure)
 World coordinates → Camera coordinates
 Camera coordinates → View Plane
 
-![[XYZ RGB.png \| 300]]|![[lefthand-righthand.png]]
----|---
+| ![[XYZ RGB.png \| 300]] | ![[lefthand-righthand.png]] |
+| ----------------------- | --------------------------- |
+|                         |                             |
+
+> **w** component affects the scale of the image with respect to the projection.
 
 Clip Space
 `ClipCoord.xyz / ClipCoord.w → x, y, z [-1, +1]`
 **NDC (Normalized Device Coordinates)**
+[Homogeneous Coordinates, Clip Space, and NDC | WebGPU](https://carmencincotti.com/2022-05-02/homogeneous-coordinates-clip-space-ndc/)
 
 FBO (Frame Buffer Object)
-**GPGPU** stands for **General-Purpose computing on Graphics Processing Units**.
+GPGPU stands for **General-Purpose computing on Graphics Processing Units**.
 
 ### PBR related Topics
 ![[PBR-topics.png]]
@@ -50,6 +54,25 @@ Object Space Normal vs Tangent Space Normal
 
 ### Shading
 ![[flat-gouraud-phong.png]]
+
+non-PBR shading
+Gouraud → in vertex shader
+Phong → in fragment shader
+
+```glsl
+vec3 light = vec3(0.0);
+
+// ambient light
+light += 
+ambient
+* ambientColor
+;
+```
+
+``` glsl
+
+```
+
 
 > [!NOTE] BXDF, Bidirectional XXX Distribution Function, 双向XX分布函数
 > 求积分 -> 蒙特卡洛积分

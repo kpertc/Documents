@@ -321,8 +321,7 @@ vColor ...
 // get worldPos
 varying vec3 vWorldPosition;
 
-vec4 worldPosition = modelMatrix * vec4(position, 1.0);
-vWorldPosition = worldPosition.xyz;
+
 ```
 
 ##### Custom Shader Helper Function
