@@ -74,6 +74,12 @@ material.colorNode = Fn(()=> {
 	return vec4(1,0,0,1)
 })()
 ```
+
+toVar()
+```
+toVar is important here so we can assign to this variable
+```
+
 ##### uv
 `uv()`, `uv().x`, `uv().y`
 ```ts
@@ -107,7 +113,6 @@ Varying
 const vNoise = varying(float());
 const vPosition = varying(vec3());
 
-
 const vertexFunc = Fn(() => {
 	vColor.assign(positionGeometry);
 });
@@ -117,6 +122,30 @@ const colorFunc = Fn(() => {
 });
 ```
 
+``` js
+// uv
+uv()
+viewPortUV
+screenUV
+
+// Depth
+linearDepth().oneMinus()
+viewportLinearDepth.sub(linearDepth()),
+
+// FBO
+const fbo = viewportTexture(); // 直接用 不用转屏幕空间的UV fbo 已经去除掉自身物体, todo 不清楚 shared的区别
+const fbo = viewportSharedTexture();
+```
+
+Depth
+perspective depth
+- `cameraPosition - positionWorld`
+- renderTexture depthTexture
+
+Linear depth / orthographic depth
+- `TSL.depth`
+- `TSL.linearDepth()`
+
 Node
 ``` ts
 material.positionNode // positionLocal
@@ -125,11 +154,17 @@ material.scaleNode
 material.geometryNode
 material.normalNode
 
-vertexNode
+vertexNode // need convert to viewsapce
 fragmentNode
 
-material.colorNode
+material.colorNode // 
 material.outputNode
+```
+
+``` js
+// for vertex Node
+const worldPosition = modelWorldMatrix.mul(positionLocal)
+return cameraProjectionMatrix.mul(cameraViewMatrix).mul(worldPosition);
 ```
 
 Fn
@@ -147,6 +182,15 @@ const norm = mix(normalGeometry, sphereNormal, deltaUniform);
 material.positionNode = spherize({
 	outputNormal: true
 });
+```
+
+Noise
+```js
+const noise = mx_noise_float();
+const noise3 = mx_noise_vec3();
+const cellNoise = mx_cell_noise_float(uv().mul(10)); // 每个单位值不同？
+const worleyNoise = mx_worley_noise_float(uv().mul(10), 1); // need set jitter to see effect
+const fractalNoise = mx_fractal_noise_float(uv().mul(10), 5); // 类似于fbm？
 ```
 
 ### React-Three-Fiber Setup
@@ -181,3 +225,12 @@ const [frameloop, setFrameloop] = useState("never");
 ### WebGPU Inspector
 https://chromewebstore.google.com/detail/webgpu-inspector/holcbbnljhkpkjkhgkagjkhhpeochfal?hl=en-US
 https://github.com/brendan-duncan/webgpu_inspector
+
+
+```
+// Good
+float c = (x < 0.5) ? a : b;
+
+// bad
+float c = mix(a, b, step(0.5, x));
+```

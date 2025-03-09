@@ -351,6 +351,30 @@ let uniforms = {
 renderer.setRenderTarget(renderTarget); // set renderer's output to renderTarget
 renderer.render(_scene, camera); // render
 ```
+##### Depth Texture
+``` js
+// init setup
+// from r3f viewport
+const viewportWidth = viewport.width * viewport.factor;
+const viewportHeight = viewport.height * viewport.factor;
+  
+
+const renderTarget = new THREE.RenderTarget(viewportWidth, viewportHeight);
+renderTarget.depthTexture = new THREE.DepthTexture(
+	viewportWidth,
+	viewportHeight,
+);
+
+// update per frame
+planeRef.current.visible = false; // need to hide itself for not writeFBO and read FBO for at same time
+// webGPURenderer.setRenderTarget(renderTarget);
+webGPURenderer.renderAsync(scene, camera); // renderAsync for WebGPU version
+
+// show here
+planeRef.current.visible = true;
+// reset for normal render
+webGPURenderer.setRenderTarget(null);
+```
 
 ### Orbit OrbitControls
 
