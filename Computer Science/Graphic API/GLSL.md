@@ -1,4 +1,5 @@
 [[OpenGL]]
+[[WGSL]]
 
 OpenGL Shading Language
 Syntax similar to C/C++
@@ -7,6 +8,7 @@ Syntax similar to C/C++
     -   OpenGL version
     -   GLSL version
 
+`st` stand for texture coordinates
 ### Comment
 ```glsl
 /* 
@@ -15,7 +17,6 @@ Syntax similar to C/C++
 
 // Single-line comment
 ```
-
 ### Variable
 
 <div style="display: grid; grid-template-columns: repeat(3, 2fr); grid-gap: 10px;">
@@ -146,7 +147,6 @@ Let `vec4` interact with `vec3`
 vec4Variable.xyz += vec3Variable
 ```
 ##### Overloading
-
 ``` glsl
 float blendDarken(float base, float blend) {
 	return min(blend, base);
@@ -177,7 +177,6 @@ else
 	float angle = 0.0; 
 }
 ```
-
 
 ```
 step()
@@ -220,10 +219,7 @@ float radius = 0.1;
 float dist = distance(vUv, uIntersect);
 float color = 1.0 - step(radius, dist);
 ```
-
 ##### non-glsl Functions
-
-
 
 ###### Rotate2D
 ```glsl
