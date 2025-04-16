@@ -90,6 +90,16 @@ material.colorNode = vec4(uv(), 0.0, 1.0); // equivalent to diffuse color
 const textureColor = texture(uTexture, uv());
 material.colorNode = vec4(textureColor);
 ```
+
+``` js
+const textureUniform = texture( _threeTexture ) // "uniform" for texture is texture
+
+// in TSL
+const textureColor = textureUniform
+const textureColor = textureUniform.sample( ... ) // use sample() to use another vec2 UV
+```
+
+
 ##### attribute
 ```ts
 attribute(``)
@@ -167,6 +177,12 @@ const worldPosition = modelWorldMatrix.mul(positionLocal)
 return cameraProjectionMatrix.mul(cameraViewMatrix).mul(worldPosition);
 ```
 
+Normal
+```
+normalFlat -> flat shading normal
+normalView -> output of normal
+```
+
 Fn
 > https://codepen.io/nik-lever/pen/MYgwXMJ?editors=0010
 ```ts
@@ -234,3 +250,7 @@ float c = (x < 0.5) ? a : b;
 // bad
 float c = mix(a, b, step(0.5, x));
 ```
+
+- 代码可复用性提升
+- 可以直接改已有材质的colorNode
+- 

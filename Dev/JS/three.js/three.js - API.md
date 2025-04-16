@@ -335,6 +335,44 @@ _texture.flipY
 > [!TIP] For mipmap
 > Keep resolution of texture size of a power of 2
 
+##### Data Texture
+``` js
+function colorTo255(color: THREE.Color) {
+	return {
+		r: Math.round(color.r * 255),
+		g: Math.round(color.g * 255),
+		b: Math.round(color.b * 255),
+		a: Math.round(color.a * 255),
+	};
+}
+
+// use 0-255 value, need covert 0-1 color
+const data = new Uint8Array([
+	convertedColor.r,
+	convertedColor.g,
+	convertedColor.b,
+	convertedColor.a,
+]);
+
+const data = new Uint8Array([
+	255,
+	0,
+	0, 
+	255
+]);
+
+// creata a 1x1 full color texture
+const texture = new THREE.DataTexture(
+	data,
+	1,
+	1, // width, height
+	THREE.RGBAFormat, // format
+);
+```
+
+- for dataTexture in custom shader, make sure set proper alpha color
+- dataTexture in material map will handle the alpha
+
 ##### Render Texture
 https://threejs.org/docs/#api/en/renderers/WebGLRenderTarget
 

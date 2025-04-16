@@ -575,3 +575,10 @@ window.addEventListener('keydown', (e) => {
 # Technics
 
 ### Ray Marching
+
+
+### Manual Normal Map
+``` glsl
+normal = texture2D( normalMap, vNormalMapUv ).xyz * 2.0 - 1.0;
+normal = normalize( normalMatrix * normal );
+```
