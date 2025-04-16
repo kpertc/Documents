@@ -72,14 +72,21 @@ ambient
 ``` glsl
 
 ```
+ 
+##### Cubemap
+shortcut for performance for realtime rendering
+to bake cubemap, set 6 90 degree FOV cameras, and aspect ratio to `1:1`
+`.dds` format for UE
 
+##### Reflection & Refraction
+![[reflection-refraction-vector.jpg]]
 
-> [!NOTE] BXDF, Bidirectional XXX Distribution Function, 双向XX分布函数
-> 求积分 -> 蒙特卡洛积分
->-   BRDF，Reflection，双向反射分布函数
->-   BSSDF，Subsurface Scattering，次表面散射
->-   BTDF
->-   BSDF
+##### BXDF, Bidirectional XXX Distribution Function, 双向XX分布函数
+求积分 -> 蒙特卡洛积分
+-   BRDF，Reflection，双向反射分布函数
+-   BSSDF，Subsurface Scattering，次表面散射
+-   BTDF
+-   BSDF
 
 [[Unity Shader]]
 
