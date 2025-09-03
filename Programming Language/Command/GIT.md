@@ -358,3 +358,7 @@ git archive --remote=`link`:DocView.git develop jdoc2mdx_modification/generate.j
 # unzip
 unzip generate.zip
 ```
+
+
+### Fork App
+in terminal `open -a Fork .` will have the inherited environment

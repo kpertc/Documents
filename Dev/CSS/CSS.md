@@ -26,16 +26,18 @@ background: var(--variable);
 ### Todo React
 
 
-<br>
-
 ### Units
 
 `%` relative to parent
-`vw` `vh`: view-width / view-height, relative to entire viewport
+`vw` `vh`: view-width / view-height, relative to entire ==viewport==
+	1 viewport unit is 1% of viewport length, can be used for font
 `rem`, `em`: both relative to font size, rem -> always root font size; em -> relative to parent's font size. Useful when scaling font with elements.
 `fr`: use in flex and grid
 
-<br>
+``` css
+font-size: clamp(min, current, upper)
+font-size: clamp(50px, 8vw, 100px) // 8vw font, low to 50px, up tp 100px
+```
 
 ### Position
 
