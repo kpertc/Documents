@@ -85,3 +85,22 @@ function calculateLocalMatrix(node, parent) {
   return localMatrix
 }
 ```
+
+### KTX
+
+- [[KTX Format]]
+
+Convert gltf model's texture tp ktx2 within gltf model
+``` bash
+gltf-transform uastc /Users/xxx/Downloads/xxx.glb /Users/xxx/Downloads/xxx-uastc.glb --verbose
+
+gltf-transform etc1s /Users/xxx/Downloads/xxx.glb /Users/xxx/Downloads/xxx-etc1s.glb --verbose
+
+# verbose will list the detail
+```
+
+Tutorial: https://www.youtube.com/watch?v=Wt3iEenj_Xw&t=2s
+
+online tools
+online convert glb model texture to ktx2
+- https://glb.babylonpress.org/

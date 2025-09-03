@@ -53,3 +53,9 @@
 *Edge Computing* 边缘计算
 
 *CMS* Content management system
+
+---
+
+ARR Annual recurring revenue
+
+MRR Monthly Recurring Revenue

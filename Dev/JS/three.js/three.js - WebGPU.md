@@ -209,6 +209,19 @@ const worleyNoise = mx_worley_noise_float(uv().mul(10), 1); // need set jitter t
 const fractalNoise = mx_fractal_noise_float(uv().mul(10), 5); // 类似于fbm？
 ```
 
+Generate random Number
+``` ts
+// random 0-1 float
+const randomValue = hash(Math.random() * 0xffffff);
+
+// random value base on instanceIndex
+hash( instanceIndex.add( uint( Math.random() * 0xffffff ) ) 
+```
+
+``` ts
+ range( new THREE.Color( 0x000000 ), new THREE.Color( 0xFFFFFF ) );
+```
+
 ### React-Three-Fiber Setup
 - https://github.com/verekia/r3f-webgpu/
 renderAsync work around 

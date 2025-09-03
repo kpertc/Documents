@@ -67,3 +67,10 @@ Bring your own dataset of and retrain the model by tuning every weight in the LL
 LangChain 
 LLM Framework -> Python / JavaScript
 Document -> Document Chunks -> VectorStore (Vector database)
+
+
+
+
+---
+LLM JSON Output -> Validate Schema 
+Valid ->

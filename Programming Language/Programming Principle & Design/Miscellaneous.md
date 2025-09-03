@@ -31,7 +31,11 @@ C++ → smart pointers and RAII (Resource Acquisition Is Initialization)
 
 ##### SPAs (Single Page Applications)
 ##### SSR (Server-Side Rendering)
-
+- Better for SEO
+- Mostly static content
+-  Faster
+##### Client Side Rendering
+- more dynamic
 
 ##### Single sign-on (SSO)
 ##### JSON Web Token (JWT)
