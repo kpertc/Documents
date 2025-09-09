@@ -65,3 +65,17 @@ style = {{
 }}
 ```
 
+Scroll triggered
+``` tsx
+<motion.div>
+	whileInView = {}
+	viewport ={{
+	 once: true,
+	 amount: "some" | "all" | 0.8
+	 // some -> play animation when partial appear
+	 // all -> play animation when fully appear
+	 // value
+	 margin: "-200px" // offset
+	}}
+</motion.div>
+```
