@@ -74,3 +74,49 @@ Document -> Document Chunks -> VectorStore (Vector database)
 ---
 LLM JSON Output -> Validate Schema 
 Valid ->
+
+---
+### Retrieval-Augmented Generation (RAG)
+
+LLM challenges:
+- no source
+- out of date
+- 
+Retrieve data from Internet / database?
+
+Reduce hallucination
+
+Vector Database
+Semantic Gap that traditional database can not
+
+Vector Embedding
+thru embedding models
+Vector indexing -> Methods: HNSW, IVF
+
+RAG use vector database
+
+
+RAG vs Finetune
+
+
+### Model Context Protocol MCP 
+"API" for LLM?
+like REST API / GraphQL
+
+MCP Host (LLM)
+
+MCP Clients
+|
+MCP Protocol (API / “USB-C”)
+|
+MCP Servers (functions)
+
+Server
+- Tools
+- Resource
+- Prompts
+- Samplings
+
+---
+### Implement
+[[Vercel AI SDK]]

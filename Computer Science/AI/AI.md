@@ -128,3 +128,8 @@ AI Product Manager
 Strategy
 Data acquisition: launch free services to collect data
 Unified data warehouse
+
+
+
+
+[[Large Language Models (LLMs)]]
