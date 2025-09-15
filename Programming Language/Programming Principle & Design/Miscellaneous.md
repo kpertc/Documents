@@ -33,7 +33,8 @@ C++ → smart pointers and RAII (Resource Acquisition Is Initialization)
 ##### SSR (Server-Side Rendering)
 - Better for SEO
 - Mostly static content
--  Faster
+- Faster
+- SSR Render -> [[Next.js]]
 ##### Client Side Rendering
 - more dynamic
 

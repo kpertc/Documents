@@ -1,3 +1,4 @@
+#JavaScript #TypeScript 
 ### Related Topics:
 - [[Zod]]
 ### Tutorials
@@ -51,6 +52,10 @@ async function main () {
 }
 
 console.log(result.txt)
+
+result.steps // for debug?
+result.steps[0]?.toolCalls
+result.steps[0]?.toolResults
 ```
 
 ``` ts
@@ -95,7 +100,7 @@ tools: {
 	addNumbers: tool({
 		description: "Add two numbers together",
 		parameters: z.object({
-			num1: z.number(),
+			num1: z.number(), // .describe()
 			num2: z.number()
 		}),
 		execute: async ({num1, num2}) => {
@@ -209,4 +214,11 @@ const result = await generateText(
 		]
 	}
 )
+```
+
+### Embedding
+vector data base
+
+``` ts
+import { embedMany, embed, cosineSimilarity } from 'ai'
 ```
