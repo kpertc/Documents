@@ -2,14 +2,19 @@ Large Language Models (LLMs) are a subset of Deep Learning
 LLMs can be pre-trained and then fine-tuned for specific purposes
 
 > [Deep Dive into LLMs like ChatGPT](https://youtu.be/7xTGNNLPyMI?si=-zVK05j1ZUyNo76U)
-### 1. Pre-Training
+### 1. Pre-Training (预训练)
+
+ GPT, Generative Pre-trained ==Transformer==
+
 	Data set such as [FineWeb](https://huggingface.co/spaces/HuggingFaceFW/blogpost-fineweb-v1)
 	then filtering and deduplicate data
 
  - Tokenization 
-	bytes -> token (symbol)
+	bytes -> token (symbol), world or subword
 	GPT4 ~100,277 tokens
-	See token: https://tiktokenizer.vercel.app/
+	See token:
+	- https://github.com/openai/tiktoken tiktoken by OpenAI
+	- https://tiktokenizer.vercel.app/
 
 - Neural network
 	sequence of Token to neural network
@@ -38,11 +43,13 @@ text in context window → direct access working memory
 
 Model need more tokens to think, try to spread thinking process on more token, better than give just one token answer
 
-SFT Model
+Supervised Fine-Tuning, SFT
+Expert response
+监督微调：从自动补全到遵循人类指令回答问题
 
 Reasoning: 
 Reinforcement Learning (RF)
-Answer question, check with answer, good answer will get rewarded and betrained for further cycles
+Answer question, check with answer, good answer will get rewarded and be trained for further cycles
 
 RL tend to find trick to win
 
@@ -68,55 +75,29 @@ LangChain 
 LLM Framework -> Python / JavaScript
 Document -> Document Chunks -> VectorStore (Vector database)
 
-
-
-
 ---
 LLM JSON Output -> Validate Schema 
 Valid ->
 
 ---
-### Retrieval-Augmented Generation (RAG)
+- [[Improve the performance of LLMs]]
+- [[Retrieval-Augmented Generation (RAG)]]
+- [[Model Context Protocol MCP]]
 
-LLM challenges:
-- no source
-- out of date
-- 
-Retrieve data from Internet / database?
+JS Framework
+- [[Vercel AI SDK]]
 
-Reduce hallucination
+Constrained vs unConstrained Flows
+- Constrained: route -> if-else
+- UnConstrained: Agent Orchestrator -> tools (ReAct)
+	- ReAct / Dynamic Planning + Execution
+	- Less reliable, more expensive
 
-Vector Database
-Semantic Gap that traditional database can not
+模式：
+ReAct Reasoning and Acting
+- Thought
+- Action
+- Observation
+- Final Answer
 
-Vector Embedding
-thru embedding models
-Vector indexing -> Methods: HNSW, IVF
-
-RAG use vector database
-
-
-RAG vs Finetune
-
-
-### Model Context Protocol MCP 
-"API" for LLM?
-like REST API / GraphQL
-
-MCP Host (LLM)
-
-MCP Clients
-|
-MCP Protocol (API / “USB-C”)
-|
-MCP Servers (functions)
-
-Server
-- Tools
-- Resource
-- Prompts
-- Samplings
-
----
-### Implement
-[[Vercel AI SDK]]
+Plan-And-Execute
