@@ -14,6 +14,7 @@ import { motion, AnimatePresence } from "motion/react";
 	whileHover={{ background: "green" }} // hover state
 	initial={{ rotate: "0deg" }} // start state
 	animate={{ rotate: "135deg" }} // entry and animate
+	transition = {{ duration: 1, delay: 1 }}
 >
 	divElement
 </motion.div>
@@ -29,6 +30,7 @@ MotionConfig
 > ... </MotionConfig>
 ```
 
+Variants
 ``` tsx
 variants={{
 	flip: {
@@ -78,4 +80,13 @@ Scroll triggered
 	 margin: "-200px" // offset
 	}}
 </motion.div>
+```
+
+control
+``` ts
+const control = useAnimation()
+
+useEffect(() => {
+	control.start("variantName")
+}, [isInView])
 ```

@@ -23,6 +23,27 @@ createFileRoute('/users/$userId') ({
 })
 ```
 
+``` ts
+head: () => ({
+	meta: [
+		{
+			title: "Collax: Your online space to collect and share it all.",
+		},
+		{
+			name: "description",
+			content:
+			"Collax is a free and easy-to-use online space to showcase portfolios, manage digital content, and create with high-quality templates.",
+		},
+	],
+	links: [
+		{
+			rel: "icon",
+			href: "/favicon.ico",
+		},
+	],
+}),
+```
+
 Example:
 ![[route.png]]
 
