@@ -16,6 +16,9 @@ Zero-shot: You give no examples in the prompt
 One-shot: You give one example, then ask the model
 Many-shot: 
 
+prompt engineering guide
+- https://platform.openai.com/docs/guides/prompt-engineering
+- https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview
 
 [CS 194/294-196 (LLM Agents) - Lecture 3, Chi Wang and Jerry Liu](https://www.youtube.com/live/OOdtmCMSOo4?si=y9EcKGGYIGAv-eLn)
 

@@ -18,6 +18,7 @@ LLMs can be pre-trained and then fine-tuned for specific purposes
 	bytes -> token (symbol), world or subword
 	GPT4 ~100,277 tokens
 	See token:
+	- https://platform.openai.com/tokenizer
 	- https://github.com/openai/tiktoken tiktoken by OpenAI
 	- https://tiktokenizer.vercel.app/
 	token also could be a part of image or sound
@@ -114,6 +115,19 @@ Train smaller model based on the hard labels annd the teacher soft labels
 
 Better to hybrid fine-tuning with RAG database
 
+### Context Window & Tokens
+- GPT-4.1-nano 1 million tokens in a single conversation
+- One million tokens is roughly 2,500 to 3,000 pages of text. That's equivalent to feeding the entire Lord of the Rings trilogy.
+- When you hit that limit, older information starts getting pushed out to make room for new stuff
+
+Input & output tokens
+- for LLMs, depending on the context and the model you're using, the same word might be tokenized differently, 1 token ≈ 4 words
+- different model has different input/output token limit
+- input and output token cost differently, GPT 4.1, output token cost 4x than input token
+
+- [[Vercel AI SDK#Usage]]
+- Final input token might be more than input toke because, for example, hidden system prompts are added.
+
 LangChain 
 LLM Framework -> Python / JavaScript [[LangChain.js]]
 Document -> Document Chunks -> VectorStore (Vector database)
@@ -140,7 +154,6 @@ ReAct Reasoning and Acting
 - Final Answer
 
 Plan-And-Execute
-
 
 ---
 ### Trends

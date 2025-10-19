@@ -73,9 +73,17 @@ const messages: [
 	{ role: "assistant", content: "Hi there!" },
 ]
 ```
+### Usage
+``` ts 
+const result = await generateText ...
 
+result.usage.then((usage) => {
+	usage.inputTokens
+	usage.outputTokens
+	usage.totalTokens
+})
+```
 ### OpenAI Compatible
-
 use Poe API
 ```js
 // use .env / .env.local file for key
@@ -95,6 +103,39 @@ const result = await generateObject({
 	prompt: "please come up with 10 jokes.",
 }),
 ```
+
+### Chat
+``` tsx
+`convertToModelMessages(message)` // extract essential messages
+```
+
+UI side
+``` tsx
+import { useChat } from '@ai-sdk/react'
+
+useChat()
+useCompletion() // no memory
+```
+##### Reasoning
+```ts
+// reasoning
+const result = streamText({
+	model: openai("gpt-5-nano"), // openai  has reasoning, poe provider does not
+	system: "You are a helpful assistant.",
+	messages: convertToModelMessages(messages),
+	providerOptions: {
+	  openai: {
+		reasoningSummary: "auto",
+		reasoningEffort: "low",
+	  },
+	},
+});
+
+return result.toUIMessageStreamResponse({ sendReasoning: true });
+```
+
+output `type: 'reasoning'`
+![[console-reasoning.png]]
 
 next.js AI Chatbot
 
@@ -213,7 +254,6 @@ await streamObject({
 ```
 
 ### Reading Image
-
 ``` ts
 const imageAsUint8Array = readFileSync(imagePath)
 
@@ -331,3 +371,5 @@ export async function searchDocuments(
 	)
 }
 ```
+
+// todo add try catch for text generation
