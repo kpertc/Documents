@@ -10,14 +10,25 @@
 	- Self correct: (worse than self-consistency method) LLMs can correct inaccurate answers, ==may also risk changing correct answers into in correct ones==
 	- Content (questions) order matters
 
-Define a right problem to work on 
+Define a right problem to work on
+
+Zero-shot: You give no examples in the prompt
+One-shot: You give one example, then ask the model
+Many-shot: 
 
 
 [CS 194/294-196 (LLM Agents) - Lecture 3, Chi Wang and Jerry Liu](https://www.youtube.com/live/OOdtmCMSOo4?si=y9EcKGGYIGAv-eLn)
 
 Agent → Handle more complex tasks, improve response quality
+
+Compound AI system
+
 framework:
 	- AutoGen
-	- LangChain
+	- LangChain [[LangChain.js]]
 
 Meta-prompting → LLMs generate, modify, or optimize prompts for themselves
+
+Evaluate Performance
+- data sets
+- good LLMs, e.g. GPT5-high

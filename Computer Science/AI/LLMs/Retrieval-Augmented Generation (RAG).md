@@ -6,12 +6,14 @@ Retrieve data from Internet / database?
 Reduce hallucination
 
 ### Chunking data
+
+require good data parser
+
 Primitive
 Data → Text Splitting → Index → TopK → Response
 
+Retrieve and Ranking
 TopK, top {{count}} relevant results
-
-require good data parser
 
 ### Vector Database
 Semantic Gap that traditional database can not

@@ -1,10 +1,15 @@
 Large Language Models (LLMs) are a subset of Deep Learning
+
+GPT, Generative Pre-trained ==Transformer==
+Transformer → Specific neural network
+Introduced in 2017 by Google, Paper “Attention is All You Need”
+
+Predict next words
+
 LLMs can be pre-trained and then fine-tuned for specific purposes
 
 > [Deep Dive into LLMs like ChatGPT](https://youtu.be/7xTGNNLPyMI?si=-zVK05j1ZUyNo76U)
 ### 1. Pre-Training (预训练)
-
- GPT, Generative Pre-trained ==Transformer==
 
 	Data set such as [FineWeb](https://huggingface.co/spaces/HuggingFaceFW/blogpost-fineweb-v1)
 	then filtering and deduplicate data
@@ -15,6 +20,7 @@ LLMs can be pre-trained and then fine-tuned for specific purposes
 	See token:
 	- https://github.com/openai/tiktoken tiktoken by OpenAI
 	- https://tiktokenizer.vercel.app/
+	token also could be a part of image or sound
 
 - Neural network
 	sequence of Token to neural network
@@ -38,6 +44,12 @@ Hallucination (幻觉)
 - use another LLM to test accuracy 
 - train to say "I dont know"
 
+Minimizing hallucination by grounding
+- right context
+	- access information
+	- Retrieve and Generate (RAG), (searching result)
+- use better model
+
 parameters → vague recollection
 text in context window → direct access working memory
 
@@ -52,32 +64,59 @@ Reinforcement Learning (RF)
 Answer question, check with answer, good answer will get rewarded and be trained for further cycles
 
 RL tend to find trick to win
-
 RL Model (Not standard yet)
 
 ### 3. Reinforcement Learning from Human Feedback (RLHF)
 
----
+### Tuning
+The process of adapting a model to a new domain or set of custom use cases by training the model on new data. For example, we may collect training data and "tune" the LLM specifically for the legal or medical domain.
 
 - (Large) Pre-trained -> General purpose
 - (Small) Fine tuned -> Special purpose 
 
-Prompt Design
-Prompt Engineering
-
-Tuning
-The process of adapting a model to a new domain or set of custom use cases by training the model on new data. For example, we may collect training data and "tune" the LLM specifically for the legal or medical domain.
-
 Fine tuning
-Bring your own dataset of and retrain the model by tuning every weight in the LLM. This requires a big training job (like really big) and hosting your own fine-tuned model.
-  
-LangChain 
-LLM Framework -> Python / JavaScript
-Document -> Document Chunks -> VectorStore (Vector database)
+Bring your own dataset of and retrain the model by tuning every weight in the LLM. This requires a big training job (like really big) and hosting your own fine-tuned model. (train for a few days?)
 
----
-LLM JSON Output -> Validate Schema 
-Valid ->
+> ↓ [CS 194/294-196 (LLM Agents) - Lecture 4, Burak Gokturk](https://www.youtube.com/live/Sy1psHS3w3I?si=1p9NqZUeJR6aTiMW)
+![[CS 194_294-196 (LLM Agents) - Lecture 4, Burak Gokturk 39-23 screenshot.png]]
+
+Parameter-Efficient Fine-Tuning (PEFT)
+- cheaper, faster than conventional Fine-tuning
+- generally not as good as conventional Fine-tuning
+e.g. LoRA, Low-Rank Adaptation
+- apply weights to any dense layers in the founding models
+- only applying adaptation on attention weights, not on MLPs
+
+Prompt Engineering - Guide LLMs for specific task
+Prompt Design 
+- hard prompts - human written prompts
+- soft prompts - a small set of trainable vectors, embeddings, not understand by human
+
+Prompt tuning
+- prepend a soft prompt to the input, (like regular prompting?)
+- more effect than hard prompt
+- Compare to fine-tuning
+	- cheaper than fine tuning
+	- easy to switch to switch different task
+
+ Distillation
+ Huge model mean expensive and higher latency
+- Teacher Model - The original (large model) that we want to extract the knowledge from it
+- Student Model - new model with smaller size
+- Soft label - probable target - The outpuit of teacher model when the temperature > 1
+- Soft Prediction - The output of student model when the temperature > 1
+- Hard label - definitive target softmax (T=1)
+- Hard Prediction
+No need a lot of labels
+
+Train smaller model based on the hard labels annd the teacher soft labels
+![[CS 194_294-196 (LLM Agents) - Lecture 4, Burak Gokturk 47-51 screenshot.png]]
+
+Better to hybrid fine-tuning with RAG database
+
+LangChain 
+LLM Framework -> Python / JavaScript [[LangChain.js]]
+Document -> Document Chunks -> VectorStore (Vector database)
 
 ---
 - [[Improve the performance of LLMs]]
@@ -101,3 +140,16 @@ ReAct Reasoning and Acting
 - Final Answer
 
 Plan-And-Execute
+
+
+---
+### Trends
+
+LLMs replace traditional search
+- Before LLMs, enterprise need collect data of training sets
+- (Compare to traditional algorithm) everyone can develop AI
+
+Anthropic - Claude
+- Haiku - small, fast, cheap
+- Sonnet - medium
+- Opus - smartest, slow
