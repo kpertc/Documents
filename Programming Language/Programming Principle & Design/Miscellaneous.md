@@ -28,6 +28,8 @@ C++ → smart pointers and RAII (Resource Acquisition Is Initialization)
 > Serverless is a cloud computing application development and execution model that enables developers to build and run application code without provisioning or managing servers or backend infrastructure.
    VM → Container → Serverless
 
+Functions-as-a-Service
+
 
 ##### SPAs (Single Page Applications)
 ##### SSR (Server-Side Rendering)

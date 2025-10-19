@@ -1,13 +1,21 @@
 #JavaScript #TypeScript 
 ### Related Topics:
 - [[Zod]]
+- [[dotenv]]
+- [[Next.js]]
 ### Tutorials
 - https://ai-sdk.dev/docs/introduction
 - [Vercel AI SDK Masterclass: From Fundamentals to Deep Research](https://youtu.be/kDlqpN1JyIw?si=3a1M_8tkeWKCn-VX)
-- https://youtu.be/mojZpktAiYQ?si=GJvSKAF3ZfNPvyzw
+- [A Complete Guide To Vercel’s AI SDK // The ESSENTIAL Tool For Shipping AI Apps](https://youtu.be/mojZpktAiYQ?si=GJvSKAF3ZfNPvyzw)
+- [Build a RAG Chatbot from Scratch | React, Next.js, AI SDK, AI Elements, Neon, Drizzle, Clerk](https://youtu.be/3E5OxozYuA8?si=Gk4982CsMrYLkhFz)
 ### Docs
 - streamText
 - [generateText](https://ai-sdk.dev/docs/reference/ai-sdk-core/generate-text#messages.user-model-message.content.image-part.image)
+- AI Elements: UI elements based on shadcn/ui https://ai-sdk.dev/elements/overview
+
+- AI SDK
+- AI SDK UI
+- AI SDK RSC (React Server Components)
 
 ``` ts
 import { streamText } from "ai";
@@ -27,8 +35,6 @@ async function main() {
 	console.log("Token usage:", await result.usage);
 	console.log("Finish reason:", await result.finishReason);
 }
-
-
 ```
 
 ``` ts
@@ -71,6 +77,11 @@ const messages: [
 ### OpenAI Compatible
 
 use Poe API
+```js
+// use .env / .env.local file for key
+import "dotenv/config";
+apiKey: process.env.POE_API_KEY,
+```
 ``` ts
 const provider = createOpenAICompatible({
 	name: "provider-name",
@@ -83,9 +94,7 @@ const result = await generateObject({
 	model: provider("gpt-5-mini"),
 	prompt: "please come up with 10 jokes.",
 }),
-
 ```
-
 
 next.js AI Chatbot
 
@@ -112,6 +121,45 @@ tools: {
 
 result.toolResults
 result.steps.length
+```
+### MCP Tools
+```ts
+// connection
+const httpTransport = new StreamableHTTPClientTransport(
+	// mock mcp demo api
+	new URL("https://app.mockmcp.com/servers/fpFnWsRviXla/mcp"),
+	{
+	  requestInit: {
+		headers: {
+		  authorization:
+			"Bearer mcp_m2m_vR1nI9aiaqRCv8Lj6OT0XdPgmvDtccQzpv8Kdc2k6oY_96e802af942bdd84",
+		},
+	  },
+	},
+);
+
+// client
+const mcpClient = await createMCPClient({
+	transport: httpTransport,
+});
+
+// tools
+const mcpTools = await mcpClient.tools();
+
+const result = streamText({
+	model: provider("gpt-5-mini"),
+	system: "You are a helpful assistant.",
+	messages: convertToModelMessages(messages),
+	tools: mcpTools, // add mcp tools to model
+	// properly close the connection
+	onFinish: async () => {
+	  await mcpClient.close();
+	},
+	onError: async (error) => {
+	  await mcpClient.close();
+	  console.error(error);
+	},
+});
 ```
 
 ### Structured Output
@@ -217,8 +265,69 @@ const result = await generateText(
 ```
 
 ### Embedding
-vector data base
+vector data base → RAG
+
+use [[drizzle]] to store vector with Neon database
 
 ``` ts
 import { embedMany, embed, cosineSimilarity } from 'ai'
+```
+
+ embed one text
+```ts
+export async function generateEmbedding(text: string) {
+
+	const input = text.replace("\n", " ");
+	
+	const { embedding } = await embed({
+		model: provider.textEmbeddingModel("text-embedding-3-small"),
+		value: input,
+	});
+	
+	return embedding;
+}
+```
+
+embed many texts in one request
+```ts
+export async function generateEmbeddings(texts: string[]) {
+
+	const inputs = texts.map((text) => text.replace("\n", " "));
+	
+	const { embeddings } = await embedMany({
+		model: provider.textEmbeddingModel("text-embedding-3-small"),
+		values: inputs,
+	});
+	
+	return embeddings;
+}
+```
+
+```ts
+import { cosineDistance, desc, gt, sql } from "drizzle-orm";
+
+export async function searchDocuments(
+	query: string,
+	limit: number = 5,
+	threshold: number = 0.5
+) {
+	const queryEmbedding = await generateEmbedding(query)
+	
+	const similarity = sql<number>`1 - (${cosineDistance(
+		documents.embedding,
+		embedding
+	)})`
+	
+	const similarDocumnets = await db.select(
+		{
+			id: documents.id,
+			content: documents.content,
+			similarity,
+		})
+		.from(documents)
+		.where(gt(similarity, threshold))
+		.orderBy(desc(similarity)) // desc -> descending
+		.limit(limit)
+	)
+}
 ```
