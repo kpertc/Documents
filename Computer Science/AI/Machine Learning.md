@@ -60,9 +60,12 @@ hidden layers
 higher number of neurons -> lower number of neurons of output
 
 - Convolutional Neural Network, CNN 卷积神经网络 - Good for image recognition
+擅长处理空间局部特征
 > 	是一种深度学习模型，它在图像处理、视频识别和自然语言处理等领域特别有效。CNN在视觉识别任务中特别流行，因为它们能够从图像数据中自动、有效地学习空间层级特征。
-
 - Long short-term memory network, Good for speech recognition
+
+RNN, recurrent neural networks (RNNs)
+擅长处理序列数据
 
 Multi-Layer Perceptrons, MLPs
 

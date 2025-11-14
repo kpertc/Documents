@@ -1,3 +1,7 @@
+#Ai 
+
+- [[Ollama]] run LLMs locally
+
 Large Language Models (LLMs) are a subset of Deep Learning
 
 GPT, Generative Pre-trained ==Transformer==
@@ -70,6 +74,7 @@ RL Model (Not standard yet)
 ### 3. Reinforcement Learning from Human Feedback (RLHF)
 
 ### Tuning
+
 The process of adapting a model to a new domain or set of custom use cases by training the model on new data. For example, we may collect training data and "tune" the LLM specifically for the legal or medical domain.
 
 - (Large) Pre-trained -> General purpose
@@ -77,6 +82,12 @@ The process of adapting a model to a new domain or set of custom use cases by tr
 
 Fine tuning
 Bring your own dataset of and retrain the model by tuning every weight in the LLM. This requires a big training job (like really big) and hosting your own fine-tuned model. (train for a few days?)
+
+- 领域知识不足
+- 任务适应性不佳
+- 风格不符合要求
+- 缺乏最新知识
+
 
 > ↓ [CS 194/294-196 (LLM Agents) - Lecture 4, Burak Gokturk](https://www.youtube.com/live/Sy1psHS3w3I?si=1p9NqZUeJR6aTiMW)
 ![[CS 194_294-196 (LLM Agents) - Lecture 4, Burak Gokturk 39-23 screenshot.png]]
