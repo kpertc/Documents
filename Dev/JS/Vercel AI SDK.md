@@ -1,4 +1,4 @@
-#JavaScript #TypeScript 
+#JavaScript #TypeScript #Ai 
 ### Related Topics:
 - [[Zod]]
 - [[dotenv]]
@@ -156,13 +156,74 @@ tools: {
 		execute: async ({num1, num2}) => {
 			return num1 + num2
 		}
-	})
+	}),
 }
 
+// fake tool
+tools: {
+      getCurrentTime: {
+        description: "Get current time base on city",
+        inputSchema: z.object({
+          city: z.string().describe("The city to get the current time for"),
+        }),
+        execute: async ({ city }) => {
+          if (city === "New York") {
+            return "10:00 AM";
+          } else if (city === "London") {
+            return "11:00 AM";
+          } else {
+            return "12:00 PM";
+          }
+        },
+      },
+    },
+stopWhen: stepCountIs(2), // to proces
 
 result.toolResults
 result.steps.length
 ```
+
+``` tsx
+// type for tools
+export type ChatTools = InferUITools<typeof tools>
+export type ChatMessage = UIMessage<never, UIDataTypes, ChatTools>
+
+const { message } : { message: ChatMessage[] } ... 
+```
+
+base on the tool to create custom UI
+``` tsx
+messsage.part.type === "text" // normal text is "text"
+messsage.part.type === "tool-getCurrentTime"// tool reuslt is start with "tool-"
+
+part.state
+part.input // input
+part.input.{argument}
+part.output // output
+```
+
+Multi-step tool call
+getLocation -> getWeather
+Tool orchestra
+
+### Web Search
+by model provider
+```tsx
+// openai
+const tools = {
+	webSearchPreview: openai.tools.webSearchPreview({}),
+};
+
+// reasoning
+const result = streamText({
+	model: openai.responses("gpt-5-mini"), // gpt has reasoning
+	tools,
+	
+// anthropic
+```
+
+
+
 ### MCP Tools
 ```ts
 // connection
@@ -247,6 +308,7 @@ const result = await generateObject({
 ```
 
 `streamObject()`
+[streamObject()](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-object)
 ``` ts
 await streamObject({
 
@@ -373,3 +435,10 @@ export async function searchDocuments(
 ```
 
 // todo add try catch for text generation
+### Audio
+ ``` ts
+ const transcript = await transcribe({
+	 model: openai.transcription("whisper-1")
+	 audio: uint8Array
+ })
+ ```

@@ -133,3 +133,18 @@ Unified data warehouse
 
 
 [[Large Language Models (LLMs)]]
+
+### AI Safety
+
+Anthropic
+
+measurement / benchmark for ai
+
+Ai Safety Level, ASL
+
+ASL1
+ASL2 
+ASL3 
+ASL4
+
+computer use

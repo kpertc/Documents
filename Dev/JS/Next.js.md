@@ -272,3 +272,5 @@ export const metadata: Metadata = {
 		absolute: "", // overwrite using absolute
 	}
 ```
+
+Image

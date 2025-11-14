@@ -33,6 +33,7 @@ pip3 list
 ```shell
 # create a venv and also create a folder
 python3 -m venv venvName
+python3 -m venv venv
 python3 -m venv project_env
 
 # venv naming convention → "venv"
@@ -41,6 +42,9 @@ python3 -m venv myproject/venv
 
 # use the venv
 source project_env/bin/activate
+
+./venv/Scripts/activate # Windows
+./venv/bin/activate # Mac
 
 # deactivate the vene
 deactivate
@@ -74,4 +78,41 @@ python3 -m venv venv --system-site-packages
 # list packages only in the vene, not in the global
 pip list --local
 pip freeze # also only show the local packages
+```
+
+### UV
+https://docs.astral.sh/uv/guides/install-python/
+100x faster than pip, written in rust
+handle virtual environment
+
+``` sh
+# run script
+uv run main.py
+uv run --python 3.9 main.py # run use python 3.9
+uv run --with packageName --python 3.9 main.py # install dependency and run
+
+uv run main.py
+↓ in the file
+#/// script
+# requires-python = "==3.9"
+# dependencies = ["rich"]
+#///
+
+uv init . # create a project
+
+# add pacakge
+uv add langchain-openai langgraph python-dotenv
+```
+
+Python
+```sh
+# manage python
+uv python list
+
+# install a python 3.8
+uv python install 3.8
+uv python uninstall 
+
+# 
+uv python find 3.8
 ```
