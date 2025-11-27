@@ -139,8 +139,14 @@ Input & output tokens
 - [[Vercel AI SDK#Usage]]
 - Final input token might be more than input toke because, for example, hidden system prompts are added.
 
+Context Engineering Principles
+Andrej Karpathy
+1. offload - Move context from the LLM context window to the filesystem
+2. reduce - Reduce the size of context pass to the LLM
+3. Isolate - Isolate context windows for tasks
+
 LangChain 
-LLM Framework -> Python / JavaScript [[LangChain.js]]
+LLM Framework -> Python [[LangChain]] / JavaScript [[LangChain.js]]
 Document -> Document Chunks -> VectorStore (Vector database)
 
 ---

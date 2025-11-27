@@ -28,7 +28,7 @@ Compound AI system
 
 framework:
 	- AutoGen
-	- LangChain [[LangChain.js]]
+	- LangChain [[LangChain]] [[LangChain.js]]
 
 Meta-prompting → LLMs generate, modify, or optimize prompts for themselves
 

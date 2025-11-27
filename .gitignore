@@ -1,3 +1,45 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE & editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node.js
+node_modules/
+dist/
+build/
+
+# Logs & temp files
+*.log
+*.tmp
+*.temp
+
+# Environment & secrets
+.env
+.env.*
+
+# Archives & backups
+*.zip
+*.tar
+*.tgz
+*.bak
+*.old
 .obsidian/*
 .obsidian/
 
@@ -6,3 +48,5 @@
 
 .trash/
 .DS_Store
+
+copilot/

@@ -1,4 +1,4 @@
-#JavaScript 
+#JavaScript  #Ai 
 
 - [[Vercel AI SDK]]
 

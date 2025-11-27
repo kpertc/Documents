@@ -703,11 +703,11 @@ issubclass() # print to check if it is a subclass
 issubclass(Developer, Employee) 
 ```
 
-### [Type Hint](https://docs.python.org/3/library/typing.html)
+### Type Hint
+https://docs.python.org/3/library/typing.html
 
 Python 3.5+
-
-Only for documentation / readability purpose
+python will ignore "types" at runtime, they are just meta data, only for documentation / readability purpose
 
 ```python
 from typing import List
@@ -715,6 +715,33 @@ from typing import List
 def myFunc (array: List, device: str) -> List:
     print(array)
 ```
+
+``` python
+user1: string = "111"
+```
+
+``` python
+from dataclasses import dataclass
+
+@dataclass
+class User:
+	name: str
+	email: str
+	account_id: int
+```
+##### type checking
+check type before runtime
+VS code `Mypy Type Checker` extension
+[ty - Python type checker](https://docs.astral.sh/ty/)
+##### Data Validation
+valid data at runtime
+``` python
+# manual type check
+if not isinstance(name, str)
+	raise TypeError("name must be a string")
+```
+
+use [[Pydantic]]
 
 ### zip command
 return paired tuples
@@ -804,6 +831,32 @@ def my_range(start):
 	while True:
 		yield current
 		current += 1
+```
+
+![[Asyncio in Python - Full Tutorial 1-56 screenshot.png]]
+### Asyncio
+python version >= 3.4, for tasks less CPU intense
+Event loop
+``` python
+import asyncio #python build-in
+
+async def main():
+	# await keyword only in async function
+	await
+	
+# async function() → return a coroutine object
+
+asyncio.run(main())
+```
+
+``` python
+async def fake_fetch(delay):
+	await asyncio.sleep(delay)
+```
+
+Task
+``` python
+
 ```
 
 ### [[Python Threading & Multi-processing]]
