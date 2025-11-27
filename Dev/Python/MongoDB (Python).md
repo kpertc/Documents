@@ -26,7 +26,7 @@ storing info by using Json-like document (BSON)
 ### Two ways to use MongoDB with Python
 
 1.  ##### **Online -> Create a free account and create a cluster**
-	![[MongoDB (Python) img/create-account-1.png]]|![[MongoDB (Python) img/create-account-2.png]]|![[MongoDB (Python) img/create-account-3.png]]
+	![[create-account-1.png]]|![[create-account-2.png]]|![[create-account-3.png]]
 	---|---|---    
   
 

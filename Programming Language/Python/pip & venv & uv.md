@@ -81,10 +81,13 @@ pip freeze # also only show the local packages
 ```
 
 ### UV
+
 https://docs.astral.sh/uv/guides/install-python/
+
 100x faster than pip, written in rust
 handle virtual environment
 
+run script
 ``` sh
 # run script
 uv run main.py
@@ -97,11 +100,23 @@ uv run main.py
 # requires-python = "==3.9"
 # dependencies = ["rich"]
 #///
+```
 
+project
+```sh
+uv init
 uv init . # create a project
 
 # add pacakge
+# automatically create virtual environment
 uv add langchain-openai langgraph python-dotenv
+uv add requests==2.2.3
+
+# remove package
+uv remove requests
+
+
+uv sync # npm i
 ```
 
 Python
@@ -115,4 +130,9 @@ uv python uninstall
 
 # 
 uv python find 3.8
+```
+
+Checking typing error
+```sh
+uvx mypy main.py
 ```

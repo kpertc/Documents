@@ -1,6 +1,6 @@
 #python #data 
 
-[[../../Software & Tool/Jupyter Notebook]]
+[[Jupyter Notebook]]
 
 
 Use Jupyter Notebook or Google Collab

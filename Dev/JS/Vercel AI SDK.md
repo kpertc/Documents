@@ -1,7 +1,7 @@
 #JavaScript #TypeScript #Ai 
 ### Related Topics:
 - [[Zod]]
-- [[dotenv]]
+- [[Dev/JS/dotenv]]
 - [[Next.js]]
 ### Tutorials
 - https://ai-sdk.dev/docs/introduction
@@ -306,6 +306,10 @@ const result = await generateObject({
 })
 
 ```
+
+ai-sdk 6
+
+
 
 `streamObject()`
 [streamObject()](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-object)
