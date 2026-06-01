@@ -137,14 +137,12 @@ when use JS to render a list of item by `array.map()`, child item needs `key={}`
 ))}
 ```
 
-
-
 ### React Hooks
 are functions that let us **hook** into the **React** state and lifecycle features from function components
 -   **useState** - Return a stateful value and a function to update it
 -   **useEffect** Perform side effects in function components
 -   useContext, useReducer, useRef
-
+- 
 ### useState
 setState will re-render the component
 ```JavaScript
@@ -168,7 +166,6 @@ function App() {
 // update array
 <button onClick={()=> setArray()}>
 ```
- 
 ### useEffect
 ```JavaScript
 
@@ -236,7 +233,6 @@ import { ThemeContext } from "path";
 
 const _sceneManager: SceneManager = useContext(ThemeContext)!;
 ```
-
 ### [useMemo](https://youtu.be/THL1OPn72vo) 
 Memo -> Memorization, will not re-process until dependencies change
 ```ts

@@ -274,3 +274,22 @@ export const metadata: Metadata = {
 ```
 
 Image
+
+
+Google Font
+``` tsx
+import { Bokor } from "next/font/google";
+
+const bokorFont = Bokor(
+	{
+		subsets: ["latin"],
+		weight: "400"
+	}
+)
+
+return (
+	<div className={`${bokorFont.className}`}>
+		1111
+	</div>
+)
+```

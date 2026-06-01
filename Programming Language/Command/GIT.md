@@ -344,6 +344,10 @@ git submodule update --init
 
 # update
 git submodule update --remote
+git submodule update --remote schemas # pull
+
+# set branch
+git submodule set-branch --branch feat-qwen-camera-control schemas
 ```
 
 ### Git Hook
