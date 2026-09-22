@@ -37,7 +37,7 @@ Turning your node graph into one custom node called digital asset
 	Have to merge everything into one node<br>
 	SOP Assets have trouble merging conflicting Attribute Classes for Unreal<br>
 	</div>
-</div>    
+</div>
 
 
 Object Asset
@@ -52,7 +52,7 @@ Object Asset
 	- Cons<br>
 	Hard to integrate into SOP asset<br>
 	</div>
-</div>    
+</div>
 
 OBJ Assets output unique meshes per Geometry Container inside Unreal
 

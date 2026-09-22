@@ -207,7 +207,7 @@ html[data-theme='dark'] {
 ```
 
 ### React CSS Properties Object
-```jsx
+```tsx
 const buttonStyle: React.CSSProperties = {
 	padding: "20px",
 	margin: "10px",

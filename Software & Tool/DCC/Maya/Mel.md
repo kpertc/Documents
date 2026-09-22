@@ -5,7 +5,7 @@
 | - cross DCCs<br/> - most maya functions<br/> - extern| - only in maya<br/> - (all maya functions<br/> - feedback & help)|
 
 
-```python
+```mel
 print "Hello World"
 
 polyCube //create a cube
@@ -13,13 +13,13 @@ polyCube //create a cube
 help polyCube //Open Help
 ```
 
-```python
+```mel
 polyCube
 
 setAttr pCube1.translateX 20
 ```
 
-```python
+```mel
 string $myString = "Hello World";
 print $myString;
 
@@ -36,7 +36,7 @@ print $myInt;
 
 ### Comments
 
-```python
+```mel
 //Comment
 
 /*

@@ -348,7 +348,7 @@ console.log(`text ${variable1} ${variable2} text`); // text A B text
 
 ### Math & Numbers
 
-```TypeScript
+```js
 11 % 3 //mod
 Math.abs(number) //absolute value
 
@@ -1175,7 +1175,7 @@ Usage depends on Browser
 
 ![[profiler.png]]
 
-```undefined
+```js
 console.profile("Name")
 // do something ...
 console.timeStamp("Name")

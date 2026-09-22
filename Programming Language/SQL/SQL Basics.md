@@ -162,13 +162,11 @@ FROM employee
 WHERE employee.salary > 30000;
 ```
 
-```
 ### Installation
 
 **MacOS**
 
 https://dev.mysql.com/downloads/mysql/
-```
 
 ```SQL
 echo 'export PATH=/usr/local/mysql/bin:$PATH'>>~/.bash_profile
