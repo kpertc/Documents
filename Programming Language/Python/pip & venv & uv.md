@@ -5,14 +5,15 @@ pip --help
 
 pip help install # show help for install command
 
-pip search 
+# pip search removed - PyPI disabled the XML-RPC search backend, use https://pypi.org/search
+pip index versions packageName # available versions
 
 pip list # list all installed packages
 
 # check packages need upgrade
 pip list --outdated
 pip list -o
-pip install -u packageName # upgrade the package
+pip install -U packageName # upgrade the package (--upgrade)
 
 pip install packageName
 pip uninstall packageName
@@ -43,14 +44,14 @@ python3 -m venv myproject/venv
 # use the venv
 source project_env/bin/activate
 
-./venv/Scripts/activate # Windows
-./venv/bin/activate # Mac
+venv\Scripts\activate # Windows cmd (PowerShell: venv\Scripts\Activate.ps1)
+source venv/bin/activate # Mac / Linux - must be sourced, running it directly does nothing
 
 # deactivate the vene
 deactivate
 
 # delete the vene files
-rm rf project_env/
+rm -rf project_env/
 ```
 
 ![[activate-venv.png|400]]
@@ -63,10 +64,10 @@ Output exact version
 pip freeze
 pip freeze --local # (venv local packages)
 
-pip freeze > requirement.txt
+pip freeze > requirements.txt
 
-# install the same pip install by requirement.txt
-pip install -r requirement.txt
+# install the same pip install by requirements.txt
+pip install -r requirements.txt
 ```
 
 let the venv to have global packages
@@ -77,29 +78,29 @@ python3 -m venv venv --system-site-packages
 
 # list packages only in the vene, not in the global
 pip list --local
-pip freeze # also only show the local packages
+pip freeze --local # required here - plain pip freeze would include the global packages
 ```
 
 ### UV
 
 https://docs.astral.sh/uv/guides/install-python/
 
-100x faster than pip, written in rust
+10-100x faster than pip (warm cache), written in Rust
 handle virtual environment
 
 run script
 ``` sh
 # run script
 uv run main.py
-uv run --python 3.9 main.py # run use python 3.9
-uv run --with packageName --python 3.9 main.py # install dependency and run
+uv run --python 3.13 main.py # run use python 3.13
+uv run --with packageName --python 3.13 main.py # install dependency and run
 
 uv run main.py
 ↓ in the file
-#/// script
-# requires-python = "==3.9"
+# /// script
+# requires-python = "==3.13"
 # dependencies = ["rich"]
-#///
+# ///
 ```
 
 project
@@ -124,12 +125,12 @@ Python
 # manage python
 uv python list
 
-# install a python 3.8
-uv python install 3.8
+# install a python 3.13
+uv python install 3.13
 uv python uninstall 
 
 # 
-uv python find 3.8
+uv python find 3.13
 ```
 
 Checking typing error

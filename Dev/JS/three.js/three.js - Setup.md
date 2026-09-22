@@ -21,7 +21,7 @@ https://hofk.de/main/discourse.threejs/
 Require: Node.js installation
 Initialize a project: `npm init vite`
 `npm install` - to install packages in package.json
-`n``pm run dev` - host server & preview the website
+`npm run dev` - host server & preview the website
 
 ![[vite-setting1.png | 300]]
 ![[vite-setting2.png | 300]]
@@ -31,11 +31,13 @@ file name `vite.config.js`
 ``` js
 // vite.config.js
 import { defineConfig } from 'vite';
+import basicSsl from '@vitejs/plugin-basic-ssl'; // npm i -D @vitejs/plugin-basic-ssl
 
 export default defineConfig({
+    plugins: [basicSsl()], // since Vite 3, `https: true` alone no longer generates a self-signed cert
     server: {
         host: '0.0.0.0',
-        https: true
+        // or pass real key/cert: https: { key, cert }
     }
 })
 ```
@@ -44,7 +46,7 @@ Install three.js `npm install --save three`
 
 ### TypeScript Part
 Check TypeScript installed: `tsc --version`
-Convert TypeScript to JavaScript `tsc name.tx`
+Convert TypeScript to JavaScript `tsc name.ts`
 `npm install --save @types/three`
 
 ### ~~dat.gui~~ (use lil-gui)

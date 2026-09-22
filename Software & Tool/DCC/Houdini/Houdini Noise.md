@@ -30,8 +30,8 @@ Noise value will mostly distribute between 0.25 - 0.75.
 Remap value to range 0 -1
 
 ```C#
-clampedNoise = clamp(noiseVal, 0.25, 0.75)
-fit(clampedNoise, 0.25, 0.75, 0.0, 1.0) // remap range to 0-1
+float remapped = fit(noiseVal, 0.25, 0.75, 0.0, 1.0); // remap range to 0-1
+// fit() already clamps to the source range, no clamp() needed
 ```
 
 

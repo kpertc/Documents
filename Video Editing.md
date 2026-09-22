@@ -1,9 +1,9 @@
 
-8 bit - 256 - 15777216
+8 bit - 256 - 16777216
 10 bit - 1024 - 10亿
 
 > [!info] LUT分为矫正类LUT和风格化LUT
-> 调整LUT浓度 Key > Key Output
+> 调整LUT浓度 [[DaVinci Resolve]] 调色页 Key > Key Output
 
 > [!info]
 > 一级调色 → 整体

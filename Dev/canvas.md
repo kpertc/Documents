@@ -12,14 +12,13 @@ Draw Rectangle
 // Fill
 ctx.fillStyle = "red"; // fill with red
 ctx.fillRect(0, 0, 100, 100); // x, y, width, height
-ctx.st
 
 // Stroke
 ctx.lineWidth = 1;
 ctx.strokeStyle = "green"; // stroke with black
 ctx.strokeRect(200, 200, 100, 100);
 
-// Clear React
+// Clear Rect
 ctx.clearRect(10, 10, 50, 50); // clear rect area
 ```
 
@@ -43,3 +42,12 @@ ctx.stroke(); // stroke
 ```
 
 Load Image and process and save to base64 data image
+``` js
+const img = new Image();
+img.crossOrigin = "anonymous"; // else toDataURL throws on a tainted canvas
+img.onload = () => {
+  ctx.drawImage(img, 0, 0);
+  const base64 = canvasElement.toDataURL("image/png"); // "data:image/png;base64,..."
+};
+img.src = url;
+```

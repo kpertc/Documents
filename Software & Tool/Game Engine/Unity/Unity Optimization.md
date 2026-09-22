@@ -117,7 +117,7 @@ void Update()
 
 ## Dots → Data Oriented Technology Stack
 
-AKA (Jobs System)
+umbrella term: Entities (ECS) + C# Job System + Burst
 
 Boost performance by Multi threads
 
@@ -207,8 +207,9 @@ Much less memory: `gameObject.CompareTag("Player")`
 
 <br>
 
-Slow: `If (gameObject != null)`
-Faster: `If (! System.Object.ReferenceEquals( gameObject, null ))`
+Slow: `if (gameObject != null)`
+Faster: `if (! System.Object.ReferenceEquals( gameObject, null ))`
+ReferenceEquals 跳过 Unity 重载的 fake-null 检查 -> 只对纯 C# 对象安全。UnityEngine.Object 一律用 `!= null`，否则已销毁的对象会通过判断，下一行抛 MissingReferenceException
 
 Guard Clause, exit condition early, avoiding
 
@@ -250,9 +251,10 @@ Frame Buffer
 
 Depth Buffer / Z-buffer
 
-Smaller number -> Closer to the screen
+Smaller number -> Closer to the screen (textbook Z-buffer)
+Unity on modern APIs (D3D11/12, Metal, Vulkan) uses reversed-Z -> 1 = near, 0 = far, check `UNITY_REVERSED_Z` in shader
 
-Unity draws from front object to far (small number to large number)
+Unity draws opaque from front object to far (small number to large number), transparent from far to front
 
 Render Queues
 
@@ -284,7 +286,9 @@ Draw Call多影响性能
 
 * Static batching 静态批处理//Static in Unity
 
-优先级：静态>GPU Instancing>动态
+优先级：静态 > 动态 > GPU Instancing（小网格先被动态批处理吃掉，想用 Instancing 要在 Player Settings 关掉 Dynamic Batching）
+动态批处理限制：约300顶点 / 900顶点属性
+SRP Batcher 和这三者无关，省的是 SetPass，不是 Draw Call
 
 先执行了高级，低级的设置会失效
 

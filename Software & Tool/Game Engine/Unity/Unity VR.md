@@ -9,7 +9,7 @@ Oculus VR 设计指南
 
 ### VR General
 
-[Unity Intergration SDK](https://developer.oculus.com/downloads/unity/) 可以通过Unity Asset Store
+[Meta XR All-in-One SDK](https://developer.oculus.com/downloads/unity/) (`com.meta.xr.sdk.all`，取代已停更的 Oculus / Unity Integration SDK) 通过 Unity Package Manager 安装；OVRInput / OVRCameraRig 名字不变
 
 
 ![[img/Unity VR img/immersion-navigation-interaction.png | 300]]
@@ -98,7 +98,8 @@ input = callbackContext.ReadValue<Vector2>();
 // unity XR
 List<UnityEngine.XR.InputDevice> devices = new List<UnityEngine.XR.InputDevice>();
 
-UnityEngine.XR.InputDevices.GetDevicesWithRole(UnityEngine.XR.InputDeviceRole.RightHanded, devices);
+// GetDevicesWithRole / InputDeviceRole deprecated in Unity 2019.3
+UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Right | UnityEngine.XR.InputDeviceCharacteristics.Controller, devices);
 
 foreach (var device in devices)
 {
@@ -134,7 +135,7 @@ Unity Demo https://github.com/Unity-Technologies/XR-Interaction-Toolkit-Examples
 
 <br>  
 
-##### XR-Rig (Action Base), no offset (recommend)
+##### XR Origin (原 XR-Rig，XRI 2.x 改名) (Action Based), no offset (recommend)
 
 Add `Input Action Manager`
 
@@ -148,9 +149,9 @@ XR Grab Interactable
 
 ##### Teleport
 
--   Add `Locomotion System`
+-   Add `Locomotion System` (XRI 3.0+: `Locomotion Mediator` + `Teleportation Provider`)
     
--   Add `Teleportation Anchor` or `Teleportaton Area`
+-   Add `Teleportation Anchor` or `Teleportation Area`
 
 <br>  
 

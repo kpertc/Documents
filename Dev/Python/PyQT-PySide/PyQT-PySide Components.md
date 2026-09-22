@@ -2,11 +2,12 @@
 
 
 ```Python
-from PySide2.QtWidgets import 
-QApplication, # application, no need for maya
-QMainWindow, # a window
-QWidget, # a child window
-QPushButton,
+from PySide2.QtWidgets import (
+	QApplication, # application, no need for maya
+	QMainWindow, # a window
+	QWidget, # a child window
+	QPushButton,
+)
 ```
 
 <br>
@@ -112,7 +113,7 @@ File(s)
 # Single File
 path = QFileDialog.getOpenFileName()[0]
 # Multiple Files
-path = QFileDialog.getOpenFileName()[0]
+paths = QFileDialog.getOpenFileNames()[0] # plural → list of paths
 
 # set path / filter ...
 qfd = QFileDialog()
@@ -135,7 +136,7 @@ path = QFileDialog.getExistingDirectory()
 def printValue(data):
     print(data)
     
-slider = QSlider(Qt.Horizontal)
+slider = QSlider(Qt.Orientation.Horizontal) # Qt6 scoped enum (Qt5: Qt.Horizontal, removed in PyQt6)
 
 slider.setMinimum(1)
 slider.setMaximum(100)

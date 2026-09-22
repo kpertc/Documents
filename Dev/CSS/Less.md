@@ -11,7 +11,7 @@ https://lesscss.org/
 
 ```
 h1 {
-	.bordered // use .bordered properties
+	.bordered(); // use .bordered properties
 }
 
 .bordered {

@@ -1,15 +1,22 @@
 #JavaScript #CG #web-dev #TypeScript 
+
+`@gltf-transform/core` v4.x
+```ts
+import { Document, NodeIO, copyToDocument } from '@gltf-transform/core'
+```
+
 ##### List Material
 ```ts
 doc
     .getRoot()
     .listMaterials()
-    .forEach((material) => { }
+    .forEach((material) => { })
 ```
 
 ##### List objects
 ```ts
 doc
+    .getRoot() // listNodes() is on Root, not Document
     .listNodes()
     .forEach((node) => {
         // get basic info
@@ -57,7 +64,9 @@ Using Blender to automatically load the model → [[Blender Scripting Basics#Com
 ### Transform
 
 ``` js
-doc.transform(
+await MeshoptEncoder.ready; // reorder() needs the WASM module initialized
+
+await doc.transform( // transform() is async
 	palette({ min: 5 }),
 	flatten(),
 	dequantize(),

@@ -16,7 +16,7 @@ node -v #nodejs version to check if nodejs is installed
 
 ### Why use node
 - Fast, efficient and highly scalable
-- Event driven, non-blocking 1/0 model
+- Event driven, non-blocking I/O model
 - Popular in the industry
 - Same language on the front and back e nd (JS)
 
@@ -33,6 +33,7 @@ Good to use Node.js
 - Tools & Utilities
 
 Short Answer: Anything that is not CPU intensive
+CPU intensive work → offload to `worker_threads` (stable since Node 12)
 
 
 
@@ -63,7 +64,7 @@ process.env // webpack
 
 ### NPM 
 Node Package manager
-Acquired by Microsoft
+Acquired by GitHub (2020)
 
 https://www.npmjs.com
 
@@ -95,16 +96,17 @@ rm -rf node_modules yarn.lock package-lock.json
 npm install packagename1 # install one package
 npm install packagename1 packagename2 ... # install multiple at once
 
-npm instal -g packagename # install globally 
+npm install -g packagename # install globally 
 
 npm install packagename@4.17.3 # install specific version
 
-npm install ... # ? install but will not add to package.json
-npm install ... --save # save to package.json dependencies 
+npm install ... --no-save # install but will not add to package.json
+npm install ... # save to package.json dependencies (default since npm 5, --save is a no-op)
 npm install ... --save-dev # save to package.json devDependencies 
 
 npm install # all dependencies (include devDependencies)
-npm install --production # only install dependencies (not devDependencies)
+npm install --omit=dev # only install dependencies (not devDependencies), was --production
+npm ci --omit=dev # clean install from package-lock.json (CI / Docker)
 
 # Uninstall package:
 npm uninstall packagename
@@ -139,16 +141,19 @@ npm init -y # default settings
 npm init --yes
 npm init ...  # start a project with settings
 
-# change package.json settings
+# npm config → ~/.npmrc, NOT package.json
 npm set ...
 npm config set ...
 
-# get package.json setting
+# get npm config
 npm get ...
 npm config get ...
 
-# delete package.json setting
-npm delete ...
+# delete npm config
+npm config delete ...
+
+# edit package.json itself
+npm pkg set key=value
 
 # get registry 
 npm get registry
@@ -197,7 +202,7 @@ npm run start
 
 ##### Global Packages
 ``` shell
-npm instal -g packagename # install globally
+npm install -g packagename # install globally
 
 npm remove/uninstall -g packagename
 
@@ -208,7 +213,13 @@ npm root -g
 
 ##### `npm link`
 ```shell
-npm link typescript
+# 1. in the package folder (~/my-lib)
+npm link # register globally
+
+# 2. in the consuming project
+npm link my-lib
+
+npm unlink my-lib # teardown
 ```
 link between a globally installed package and a local project. Allows you to work on a package locally while using it as a dependency in another project without the need to publish it to the npm registry.
 
@@ -243,7 +254,7 @@ run packages without in a project packages and dependencies
 ![[image-2.png]]
 
 check if NPX is installed `which npx`
-Install NPX `npm install -g npx`
+if missing → repair/update Node & NPM (`npm install -g npx` is deprecated and shadows the bundled one)
 
 
 
@@ -271,8 +282,9 @@ run shell command
 ```js
 const { exec } = require("child_process");
 
+// callback is (error, stdout, stderr)
 exec("pwd", (err, data) => {
-	if (err) { console.log(eer) }
+	if (err) { console.log(err) }
 	else { console.log(data) }
 })
 ```

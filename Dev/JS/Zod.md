@@ -2,9 +2,10 @@
 
 Schema Type validation
 https://zod.dev/
+Zod 4 (v3 differences noted)
 
 ``` ts
-import { z } from zod 
+import { z } from "zod"
 ```
 
 ``` ts
@@ -19,7 +20,7 @@ type User = z.infer<typeof UserSchema>
 object
 ``` ts
 .partial()
-.deepPartial() // make all nested property partial
+.deepPartial() // (v3 only, removed in v4) make all nested property partial
 
 .extend() // add property
 .merge()
@@ -27,21 +28,22 @@ object
 .omit()
 .pick()
 
-.passthrought() // allow additional properties during validation
-.strict() // not allow
+.passthrough() // allow additional properties during validation -> v4: z.looseObject({})
+.strict() // not allow -> v4: z.strictObject({})
 ```
 
 ``` ts
-z.min()
-z.max()
+z.string().min(5) // chained method, not z.min()
+z.number().max(10)
 
-z.gt(4) // greater than 4
-z.int() // integer
+z.number().gt(4) // greater than 4
+z.int() // integer (v4 top-level, not in v3)
 
 z.nullish() // null | undefine
 z.nullable() // null  
 
-z.deafult() // add defaut value
+z.string().default("value") // default when input is undefined
+z.string().catch("value") // fallback when validation fails
 
 z.enum(["aaa", "bbb"])
 z.nativeEnum()
@@ -71,6 +73,11 @@ z.discriminatedUnion("status", [
 ```
 
 ``` ts
-parse
-safeparse 
+UserSchema.parse(input) // throw on invalid
+
+const r = UserSchema.safeParse(input) // no throw
+if (!r.success) r.error.issues
+else r.data
+
+// parseAsync / safeParseAsync -> async refinement
 ```

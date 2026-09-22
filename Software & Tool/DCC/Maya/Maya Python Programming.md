@@ -74,8 +74,9 @@ Command Document|Shift + ( Ctrl ) + Arrow -> Selection
 
 DG [DAG Hierarchy](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2022/ENU/Maya-Basics/files/GUID-5029CF89-D420-4236-A7CF-884610828B70-htm.html)
 
-DAG → Transform
-DG → no Transform
+All DAG nodes ARE DG nodes
+DAG → has hierarchy + DAG path (transform, shape)
+non-DAG DG → no hierarchy, no transform (shader, deformer, constraint, blendShape)
 
 The DAG hierarchy (also known as an object hierarchy) refers to the parent-child relationships of all nodes that make up an object. DAG stands for directed acyclic graph.
 

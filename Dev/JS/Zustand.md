@@ -27,16 +27,23 @@ export const useStore = create<_storeType>(() => ({
 }))
 ```
 
-```jsx
+```TypeScript
+// actions are part of the store type too
+type _storeType = {
+    count: number
+    increment: () => void
+    incrementAsync: () => Promise<void>
+}
+
 export const useStore = create<_storeType>((set) => ({
-    count: 0
+    count: 0,
     // function to update value
     increment: () => {
 	    // set hard-coded value
 	    set({ count: 1 })
 	    // set value from pre value
 	    set((state) => ({ count: state.count + 1}))
-    }
+    },
 	incrementAsync: async () => {
 		...
 	}
@@ -65,7 +72,12 @@ const count = useStore((state) => state.count)
 
 // do not -> Less performance -> the component will listen to all `state`
 const { count } = useStore((state) => state)
+
+// v5: multiple fields -> `useShallow` (v5 removed the 2nd equality-fn arg -> infinite re-render)
+import { useShallow } from 'zustand/react/shallow'
+const { a, b } = useStore(useShallow((s) => ({ a: s.a, b: s.b })))
 ```
+Zustand v5 requires React 18+
 
 ### Outside react component
 ```TypeScript

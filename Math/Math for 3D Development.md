@@ -5,9 +5,9 @@
 ```js
 const pointCount = 10;
 
-for (let i = 0; i < pointCount; I++) {
+for (let i = 0; i < pointCount; i++) {
     const theta = i/pointCount * Math.PI * 2;
-    let x = Math.cos(theta) // Math.cos(theta + time) to rotate the sphere
+    let x = Math.cos(theta) // Math.cos(theta + time) to rotate the circle
     let y = Math.sin(theta) // Math.sin(theta + time)
     let z = 0;
     

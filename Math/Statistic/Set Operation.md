@@ -5,8 +5,8 @@ https://www.khanacademy.org/math/statistics-probability/probability-library/basi
 
 Latex: [[Markdown#Equation Latex]]
 
-x = {3, 12, 5, 13}
-y = {14, 15, 6, 3}
+A = {3, 12, 5, 13}
+B = {14, 15, 6, 3}
 
 ##### Intersection(and)
 A $\cap$ B = {3}
@@ -65,6 +65,7 @@ B is subset of A
 A is superset of B
 
 B is strict / proper subset of A
+C is not subset of A, because 19 $\notin$ A
 
 ---
 

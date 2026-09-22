@@ -1,6 +1,14 @@
 #JavaScript  #TypeScript 
 
-https://reactjs.org/docs/hello-world.html
+React 19
+https://react.dev/learn
+
+### React 19
+- `use()` unwrap a promise or context during render
+- Actions + `useActionState`, `useOptimistic`, `useFormStatus`
+- ref as a prop → `forwardRef` deprecated
+- `<Context>` works as the provider → `<Context.Provider>` deprecated
+- `defaultProps` / `propTypes` removed on function components
 
 ### Tutorials
 [[YouTube] React Tutorial for Beginners by Programming with Mosh](https://www.youtube.com/watch?v=SqcY0GlETPk)
@@ -28,15 +36,19 @@ React is not platform specific
 ### Installation
 
 Folder name can not have capital letters and space.
+
+Init React-TS with Vite
+`npm create vite@latest projectname -- --template react-ts`
+
+react.dev now points to: Next.js, React Router, Expo (frameworks) / Vite, Parcel, Rsbuild (from scratch)
+
+---
+Deprecated — `create-react-app` was sunset Feb 2025 and removed from the docs
 `npx create-react-app` need to specify a folder
 `npx create-react-app .` Create React app in the folder, the folder should be empty.
 
 Create react TypeScript template
 `npx create-react-app react-typescript-demo --template typescript`
-
----
-Init React-TS with Vite
-`npm init vite@latest` `projectName` `-- --template react-ts`
 
 ---
 Recommend Tool:
@@ -59,7 +71,7 @@ Components can have "state" which is an object that determines how a component r
 ### Basic Component
 
 ```jsx
-const Header = () => { // capitalize → PascalCasing
+const Header = ({ title = 'name' }) => { // capitalize → PascalCasing
     return (
         <header>
             <h1>{title}</h1>
@@ -75,6 +87,7 @@ const Header = () => { // capitalize → PascalCasing
 ```
 
 ```JavaScript
+// ≤ React 18 only — React 19 removed both on function components, they are now silently ignored
 Header.defaultProps = {
     title: 'name'
 }
@@ -83,6 +96,8 @@ Header.defaultProps = {
 Header.propTypes = {
     title: PropTypes.string.isRequired
 }
+
+// React 19: default → ES6 default parameter `({ title = 'name' })`, types → TypeScript
 
 export default Header
 ```
@@ -95,7 +110,7 @@ const Button = ({ color, text }) => {
     
     return (
         <button
-            onClick = {onclick}
+            onClick={onClick}
             style = {{ background: color }}
             className = 'btn'
         >
@@ -161,10 +176,12 @@ function App() {
 <button onClick={() => setCount(prevCount => prevCount + 1)}> // prevCount is pending state not current state
 
 // update object with pending state, naming convention → first letter
-<button onClick={()=> setObject(o => ...o, property: event.target.value)>
+<button onClick={(event) => setObject(o => ({ ...o, property: event.target.value }))}> // ({ }) wrapper is required, otherwise the braces read as a function body
 
-// update array
-<button onClick={()=> setArray()}>
+// update array, always immutable, never a.push() then setArray(a)
+<button onClick={()=> setArray(a => [...a, item])}>                                      // append
+<button onClick={()=> setArray(a => a.filter(x => x.id !== id))}>                        // remove
+<button onClick={()=> setArray(a => a.map(x => x.id === id ? {...x, done: true} : x))}>  // update
 ```
 ### useEffect
 ```JavaScript
@@ -173,6 +190,7 @@ function App() {
 useEffect( () => {...} )
 
 // blank [], will run once when component start
+// dev + StrictMode runs it twice (mount → unmount → remount) by design, write the cleanup so the double-run is harmless
 useEffect( () => {...}, [] )
 
 // update, when variable changes
@@ -208,10 +226,10 @@ useEffect(() => {
 
 Reference object
 ```jsx
-const inputRef = useRef(); // inputRef = <input> element
+const inputRef = useRef(); // inputRef.current = <input> element
 
 return (
-	<input ref={inputRef}> 
+	<input ref={inputRef} /> 
 )
 ```
 
@@ -256,9 +274,11 @@ const positions = useMemo(() => {
 ```
 
 ### useCallback
-store a function?
+`useCallback(fn, deps)` returns a stable **function identity** across renders, so `React.memo` children don't re-render and effect dependency arrays don't re-fire
 ``` js
-
+const handleClick = useCallback(() => {
+	doSomething(id)
+}, [id])
 ```
 
 ### `<Suspense />`
@@ -267,8 +287,8 @@ Lazy loading
 https://react.dev/reference/react/Suspense
 
 ```JavaScript
+// fallback elements
 <Suspense
-    {/* fallback elements */}
     fallback={ 
         <> 
         ...
@@ -284,11 +304,13 @@ https://react.dev/reference/react/Suspense
 Previously, ONLY class based component could have STATE in a component. This is no longer the case since React Hooks. Functional Components to the Rescue!
 
 ```jsx
+import { Component } from 'react'
+
 export default class App extends Component {
     render() {
-        return {
+        return (
         <div>...</div>
-        }
+        )
     }
 }
 ```
@@ -300,15 +322,14 @@ export default class AppClass extends Component {
 
 	constructor(props) {
 		super(props);
+		this.state = {
+			name: "",
+			age: 100,
+			isMale: true,
+		};
 	}
 
-	this.state = {
-		name: "",
-		age: 100,
-		isMale: true,
-	};
-
-	this.setState ...
+	// this.setState({ age: 101 })  // only inside methods, never in the class body
 
 	render() {
 
@@ -329,6 +350,8 @@ export default class AppClass extends Component {
 
 **React-route package**
 
-`react-router-dom`
+`react-router-dom` — v7 (Nov 2024): most APIs now import from `react-router`
 
 `<Switch />` use prior to React Router v6, Now it is replaced by `<Routes />`
+
+v6.4+ / v7: data router `createBrowserRouter` with `loader` / `action`, the pattern to reach for now instead of bare `<Routes>`

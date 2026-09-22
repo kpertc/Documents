@@ -15,7 +15,7 @@ winName = 'windowName'
 
 # check window exist base on window
 if cmds.window(winName, exists = True) == True:
-    cmds.deleteUI(myWindow)
+    cmds.deleteUI(winName, window=True)
     
 # create window
 myWindow = cmds.window(winName, resizeToFitChildren=True)
@@ -32,7 +32,7 @@ cmds.showWindow(myWindow)
 ### Common Components Samples
 
 ```python
-Python Variables
+# Python Variables
 # create the UI
 # get the Value
 
@@ -40,13 +40,13 @@ cmds.text(label = 'This is a label')
 cmds.button(label = 'This is a button', command = functionName)
 cmds.separator(height=5)
 
-most of these component types has Grp option that include a prefix text
+# most of these component types has Grp option that include a prefix text
 
 checkBox = cmds.checkBox(label = 'This is a CheckBox')
 cmds.checkBox(checkBox, query=True, value = True)
 
 intField = cmds.intField()
-cmds.intField(intField, query=True, value = True))
+cmds.intField(intField, query=True, value = True)
 
 textField = cmds.textField(text = 'Sample Text')
 cmds.textField(textField, query = True, text = True )
@@ -55,10 +55,10 @@ scrollField = cmds.scrollField( editable=False, wordWrap=True, text='Non editabl
 cmds. scrollField(scrollField, query = True, text = True ) # query
 cmds.scrollField(scrollField , edit=True, text = "Edited Text") # 
 
-int / float slider
+# int / float slider
 
-intSlider = cmds.intSlider(minValue=1, maxValue=6, value=0 )
-cmds.textField(intSlider, query = True, text = True )
+intSlider = cmds.intSlider(minValue=1, maxValue=6, value=0 ) # value below minValue is clamped
+cmds.intSlider(intSlider, query = True, value = True )
 ```
 
 Float slider
@@ -84,16 +84,18 @@ cmds.progressBar(maxValue=10, width=300)
 ### FilePath
 
 ```python
+import os
+
 path = ''
 
-def getPath():
+def getPath(*args): # cmds.button(command=...) passes a bool to the callback
     print(*args)
     global path
     path = cmds.fileDialog2(fileMode=2, dialogStyle=1, caption="Choose Data Path")[0].replace('\\', '/')
     #print(path)
 
     # check the folder
-    if os.path.isdir(imageFolderPath): # check folder is correct
+    if os.path.isdir(path): # check folder is correct
         for folder in os.listdir(path):
            ...
     else:

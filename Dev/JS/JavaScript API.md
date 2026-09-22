@@ -30,8 +30,14 @@ Because American Standard Code for Information Interchange (ASCII) only supports
   
 
 ```JavaScript
-btoa() // Encode to Base64
+btoa() // Encode to Base64, 只吃 Latin-1，中文/emoji 直接 InvalidCharacterError
 atob() // decode
+
+// UTF-8 safe
+btoa(String.fromCharCode(...new TextEncoder().encode(str)))
+new TextDecoder().decode(Uint8Array.from(atob(b64), c => c.charCodeAt(0)))
+
+// 新 runtime: Uint8Array.prototype.toBase64() / Uint8Array.fromBase64()
 ```
 
 ### URL Decode
@@ -46,8 +52,11 @@ encodeURIComponent(document.URL)
 
 ### Calculate percentage of scrolling of element 
 ```js
-const scrollTop = parentElement.scrollTop; 
-const scrollHeight = parentElement.scrollHeight - parentElement.clientHeight; 
-if (scrollHeight === 0) return 0; 
-const scrollPercentage = (scrollTop / scrollHeight) * 100;
+function getScrollPercentage(parentElement) {
+	const scrollTop = parentElement.scrollTop; 
+	const scrollHeight = parentElement.scrollHeight - parentElement.clientHeight; 
+	if (scrollHeight === 0) return 0; 
+	const scrollPercentage = (scrollTop / scrollHeight) * 100;
+	return scrollPercentage;
+}
 ```

@@ -159,7 +159,7 @@ Active Object → yellow outline object
 	</div> 
 	</div>
 
-[Blender Common Shortcuts](https://docs.blender.org/manual/en/latest/interface/keymap/introduction.html)
+[Blender Common Shortcuts](https://docs.blender.org/manual/en/latest/interface/keymap/index.html)
 https://www.dummies.com/article/technology/software/animation-software/blender/blender-for-dummies-cheat-sheet-208646/
 
 Alt + G: move to world origin
@@ -244,7 +244,7 @@ Spin Tool -> 3D Cursor as pivot point
 ![[img/Blender Basics/Separate.png]]
 
 ###### Loop Cut
-`⌘ + R` Loop Cut
+`Ctrl` + `R` Loop Cut (Blender has no Cmd bindings, Ctrl on macOS too)
 Scroll wheel to change cuts #
 ![[loopcut.gif]]
 
@@ -280,7 +280,7 @@ Select 3D Cursor Icon
 ![[img/Blender Basics/cursor.png]]|![[img/Blender Basics/Selection to Cursor.png]]
 
 `Shift RMB` Move 3D Cursor
-`Shift C` Center 3D Cursor
+`Shift C` Center 3D Cursor (cursor back to world origin + view all)
 
 Manually move 3D Cursor
 Panel > View > 3D Cursor
@@ -300,7 +300,7 @@ Change object pivot point by 3D cursor|Manual Edit Tool > Options > Transform > 
 
 Statistic → show face count
 
-Show Statistic|Show Measurement (Edit Mode)
+Show Statistic|Show Measurement (Edit Mode)|Viewport Overlay
 ---|---|---
 ![[img/Blender Basics/showStatistic.gif]]|![[img/Blender Basics/Show Measurement (Edit Mode).png]]|![[img/Blender Basics/viewport-overlay.png \| 100]]
 
@@ -367,7 +367,7 @@ Proportional Editing (Smooth Selection)|Mouse Scrolling / `Page Up` / `Page Down
 ---|---
 ![[img/Blender Basics/porpotionalEditing.gif]]|![[img/Blender Basics/influence.gif]]
 
-##### Edge Slide `Shift` + `V`
+##### Edge Slide `G` `G` (or `Ctrl` + `E` ▸ Edge Slide) — `Shift` + `V` is Vertex Slide
 
   
 
@@ -406,7 +406,7 @@ Proportional Editing (Smooth Selection)|Mouse Scrolling / `Page Up` / `Page Down
 
 ### Normal
 
-Shading Smooth / Flat|AutoSmooth (when smooth shading)
+Shading Smooth / Flat|Shade Auto Smooth (4.1+: Object ▸ Shade Auto Smooth adds a "Smooth by Angle" modifier; the old mesh Auto Smooth checkbox is gone)
 ---|---
 ![[img/Blender Basics/ShadingFlatSmooth.gif]]|![[img/Blender Basics/autoSmooth.gif]]
   
@@ -452,7 +452,7 @@ Drag to apply Material|Select / Deselect Material
 Select different Material Output Node to view different output
 ![[select-view-different-materialoutput.gif]]
 
-`Ctrl H`
+`H` Collapse node / `Ctrl H` Collapse and hide unused sockets
 ![[collpase node.gif]]
 
 Find nodes
@@ -460,7 +460,8 @@ Find nodes
 ![[find-nodes.gif]]
 
 Perlin Noise Texture
-[Musgrave Texture Node](https://docs.blender.org/manual/en/latest/render/shader_nodes/textures/musgrave.html)
+[Noise Texture Node](https://docs.blender.org/manual/en/latest/render/shader_nodes/textures/noise.html)
+Musgrave Texture Node removed in 4.1 → its modes are now the Noise Texture `Type` dropdown (fBM, Multifractal, Hybrid Multifractal, Ridged Multifractal, Hetero Terrain)
 
 (UV Control)
 Texture Coordinate → Mapping → Texture
@@ -488,7 +489,7 @@ Orphan Data
 
 > `Purge` button will purge all orphan data that does not have a fake user assigned. This is how we delete unused data in Blender.
 
-Blender will purge orphan data every time when close Blender
+Zero-user data-blocks are not saved into the .blend → gone after save & reopen; File ▸ Clean Up ▸ Purge removes them immediately
 
 ![[orphandata.gif]] | ![[orphandata-purge.jpeg]]
 ---|---
@@ -686,7 +687,8 @@ Light Visibility
 ![[img/Blender Basics/ray-visibility.png | 300]]
 
 ###### Pass
-Depth Map → Mist Pass
+Depth Map → Z (Depth) Pass (View Layer ▸ Passes ▸ Data)
+Mist Pass → normalized 0-1 atmospheric falloff (World ▸ Mist Pass start/depth), not real depth
 ![[depth-map.png]]
 
 
@@ -751,7 +753,7 @@ frame
 
 sin(frame)
 
-radian(frame)
+radians(frame)
 ```
 
 Export, Smoothing → Face

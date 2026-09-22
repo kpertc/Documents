@@ -22,8 +22,8 @@ Mask Property Feather
 ![[ps-mask-property-feather.gif]]
 
 ##### Exposure vs Brightness
-1 stop exposure = 50% brightness ??
-150% brightness = 3 stops exposure
++1 stop = 2x linear light, +2 stops = 4x, +3 stops = 8x
+PS Brightness slider is a tone curve, not a linear multiplier → no fixed stop ↔ % conversion
 
 brightness → affect equally
 Exposure → affect more highlight

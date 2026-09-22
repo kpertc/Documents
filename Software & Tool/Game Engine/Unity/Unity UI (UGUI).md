@@ -27,7 +27,7 @@ Camera (left) VS Overlay (right)
 |**Pros**: Easy to use the size is determined by the size of game viewpoint (not editable).|**Pros**: Use a perspective camera to render, can render perspective angle. Can use properly use Z-axis|
 |**Cons**: Only support orthographic angle, no depth effect. | **Cons**: 3D objects can block UI in Screen Space|
 |![[img/Unity VR img/Screen Space Overlay Canvas.png]]|![[img/Unity VR img/Screen Space Camera Canvas.png]]|
-|The position of Screen Space Camera Canvas will be constrained at front of the camera.|3D objects can block UI in Screen Space Camera Canvas.|
+|Renders last, always on top, ignores all cameras, no camera post-processing applies.|The position of Screen Space Camera Canvas will be constrained at front of the camera.|
 
 "Plane Distance" setting can adjust the distance between the canvas and the camera, to minimize the error. To completely prevent the issue, use a second camera render the UI.
 
@@ -47,8 +47,8 @@ Camera (left) VS Overlay (right)
 		<a href="https://www.youtube.com/watch?v=y6tDqOm6xKE">[YouTube] 3DBuzz</a>
 	</div>
 	<div>
-		<a href="https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/UIBasicLayout.html">[[Unity Official Docs] Basic Layout</a><br>
-		<a href="https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/class-RectTransform.html">[[Unity Official Docs] RectTransform</a>
+		<a href="https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/UIBasicLayout.html">[Unity Official Docs] Basic Layout</a><br>
+		<a href="https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/class-RectTransform.html">[Unity Official Docs] RectTransform</a>
 	</div>
 </div>
 <br/>
@@ -155,6 +155,8 @@ Use `Sprite Editor` to slice UI border
 
 ##### Text
 
+legacy UI Text (shows as "Text - Legacy" in the Create menu) -> use `TextMeshProUGUI` for new work. TMP equivalents: Best Fit -> Auto Size, Horizontal Overflow -> Wrapping, Vertical Overflow -> Overflow
+
 [Rich Text](https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html) Enable to support rich text. 
 
 ![[img/Unity UI (UGUI)/rich-text.png]]
@@ -163,8 +165,8 @@ Use `Sprite Editor` to slice UI border
 ``` html
 <b></b>
 <i></i>
-<size></size>
-<color = red></color>
+<size=24></size>
+<color=red></color> or <color=#FF0000></color>
 ...
 ```
 

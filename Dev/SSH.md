@@ -1,4 +1,4 @@
 
 Secure Shell
 
-Communication Protocol (Like http)
+Communication Protocol - encrypted, persistent session (not stateless like http), port 22

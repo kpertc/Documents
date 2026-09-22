@@ -125,7 +125,9 @@ Tables and Keys
 **Primary Key**
 -   Surrogate Key - ID, no mapping to anything in the real world
 -   Natural Key - SSN, email
--   Foreign Key - primary key in another database table
+
+**Foreign Key**
+-   column in this table whose value must match a primary key in another table
 
 ### Structured Query Language (SQL)
 
@@ -162,18 +164,16 @@ FROM employee
 WHERE employee.salary > 30000;
 ```
 
-```
 ### Installation
 
 **MacOS**
 
 https://dev.mysql.com/downloads/mysql/
-```
 
 ```SQL
-echo 'export PATH=/usr/local/mysql/bin:$PATH'>>~/.bash_profile
+echo 'export PATH=/usr/local/mysql/bin:$PATH'>>~/.zshrc
 
-. ~/.bash_profile
+source ~/.zshrc
 
 mysql
 
@@ -191,8 +191,9 @@ INT             -- Whole Number
 DECIMAL(M,N)    -- Deciamal Numbers -- Exact Value M-Total Digit N Digit after decimal
 VARCHAR(1)      -- String of text of length 1
 BLOB            -- Binary Large Object, Stores large data
-DATA            -- 'YYYY-MM-DD'
-TIMESTAMP       -- 'YYYY-MM-DD HH:MM:SS' - used for recording time
+DATE            -- 'YYYY-MM-DD'
+DATETIME        -- 'YYYY-MM-DD HH:MM:SS' - no timezone conversion, no 2038 limit
+TIMESTAMP       -- 'YYYY-MM-DD HH:MM:SS' - used for recording time - converts to/from UTC, range ends 2038
 ```
 
 
@@ -201,5 +202,5 @@ object relational database (custom type)
 
 | PostgreSQL                                                                                                           | mySQL                                    |
 | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| Enterprise Level                                                                                                     | Small Website                            |
-| - performance<br>- MVCC,  multi-version concurrency control<br>multiple transaction at the same time<br>- continuity | - easy to use<br>- fast<br>- Scalability |
+| Enterprise Level (positioning, not a technical limit)                                                                | Small Website                            |
+| - performance<br>- MVCC, multi-version concurrency control<br>multiple transaction at the same time<br>- richer types (JSONB, arrays, custom types)<br>- continuity | - easy to use<br>- fast<br>- Scalability<br>- simpler replication |

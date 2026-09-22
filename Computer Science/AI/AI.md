@@ -20,7 +20,7 @@ E.g., smart speaker, self-driving car, web search, Al in farming and factories|D
 
 ### An AI Company?
 
-Any company + deep learning ‡ AI company
+Any company + deep learning ≠ AI company
 
 - Strategic data acquisition
 - Unified data warehouse
@@ -140,11 +140,11 @@ Anthropic
 
 measurement / benchmark for ai
 
-Ai Safety Level, ASL
+Ai Safety Level, ASL — capability thresholds in Anthropic's Responsible Scaling Policy, each one gating extra deployment & security requirements
 
-ASL1
-ASL2 
-ASL3 
-ASL4
+ASL1 no meaningful catastrophic risk (e.g. chess bot)
+ASL2 early signs of dangerous capability, but not yet more useful than a search engine
+ASL3 substantially raises misuse risk (CBRN / cyber) or shows low-level autonomy → hardened security + deployment safeguards
+ASL4 higher thresholds, not yet fully defined
 
 computer use

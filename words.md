@@ -20,13 +20,13 @@
 
 ---
 
-*PV* Per View 展现量
+*PV* Page View 浏览量
 
 *UV* Unique Visitor/View 独立访客
 
 *CTR* Clickthrough Rate 点击率
 
-*CVR*Conversion Rate 转化率
+*CVR* Conversion Rate 转化率
 
 *CPC* Cost-per-click 每次点击成本
 
@@ -42,7 +42,7 @@
 
 *OKR* Objectives and Key Results 目标与关键成果
 
-—
+---
 
 *O2O* Online To Offline
 

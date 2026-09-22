@@ -2,13 +2,13 @@
 
 https://www.youtube.com/watch?v=g9_6KmiBISk
 
-Yarn (Yet Another Resources Negotiator) 
+Yarn (名字不是缩写，别和 Hadoop 的 YARN 混)
 A JavaScript Package Manager developed by Facebook
 Any thing can be installed by NPM can be installed by Yarn
 
 Yarn is used to be much better than NPM, but not so much for now
 NPM 2017
-Compare to NPM 4
+Compare to NPM 4 (2017 snapshot)
 - Much faster than NPM 4
 - Added standardized lockfile for cross-package compatibility
 - Removed the need for --save to save as dependency
@@ -26,14 +26,14 @@ sudo npm install -g yarn
 # 输入
 yarn
 
-安装依赖资源后会生成node_module文件夹
+安装依赖资源后会生成node_modules文件夹
 ```
 
 ```shell
 yarn help
 
 yarn cache list
-yarn cache list --parten packagename
+yarn cache list --pattern packagename
 
 yarn cache clean
 ```
@@ -58,7 +58,7 @@ yarn add packagename --dev
 # remove package
 yarn remove packagename
 
-# install globally 
+# install globally (Yarn 1 only, 2+ 已移除 global)
 yarn global add packagename
 
 # remove globally 
@@ -68,9 +68,11 @@ yarn global remove packagename
 yarn global bin
 # /usr/local/bin
 
-# upgrade
+# Yarn 2+: 一次性执行用 yarn dlx packagename，常驻的用 npm -g 装
+
+# upgrade (Yarn 2+ 改叫 yarn up)
 yarn upgrade
-yarn upgrade@4.1.1 #specific version
+yarn upgrade packagename@4.1.1 #specific version
 ```
 
 ``` shell
@@ -78,7 +80,7 @@ yarn upgrade@4.1.1 #specific version
 yarn list
 
 # list only "packagename" 's dependency
-yarn list --parttern packagename
+yarn list --pattern packagename
 
 yarn list --depth=0 # only list top layer packages
 ```
@@ -98,11 +100,13 @@ yarn outdated packagename
 Install exact version cross different computes
 
 ```shell
-# check if yarn.lock match package.json
+# Yarn 1 only: check if yarn.lock match package.json
 yarn check
+# Yarn 2+ (Berry): yarn install --immutable (CI 里就用这个)
 
-# generate yarn.lock base on existing node_module
+# Yarn 1 only: generate yarn.lock base on existing node_module
 yarn import
+# Yarn 2+: 已移除，不需要替代
 ```
 
 ##### Script
@@ -118,7 +122,8 @@ yarn pack
 ```shell
 # 在home directory
 
-yarn set version stable # 升到3
+yarn set version stable # stable = 当前 major（现在是 4.x）
+yarn set version 4 # 明确锁到 4
 
 yarn set version 1.22.19 #  使用1**
 ```

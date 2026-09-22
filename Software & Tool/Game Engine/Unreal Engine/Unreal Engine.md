@@ -16,7 +16,8 @@ Programming
 >		- Game Development with C++
 >	
 >	Individuals components:
->		- .Net Core 3.1
+>		- .NET runtime per UE version (.NET Core 3.1 is EOL)
+>		- Unreal Engine installer
 
 `UObject` → The parent class for all other Unreal Engine Classes
 Can not be placed in scene
@@ -27,10 +28,13 @@ Can not be placed in scene
 		↳ Actor Class → can be spawn 
 			↳ Pawn Class → can receive input
 				 ↳ Character Class
-
-	Actor Component Class
-	↳ Game Mode Class
-	↳ Player Controller Class
+			↳ Info Class
+				 ↳ Game Mode Class
+			↳ Controller Class
+				 ↳ Player Controller Class
+		↳ Actor Component Class → not an Actor, attached to Actors
+			↳ Scene Component Class
+				 ↳ Primitive Component Class
 ### Change Quality
 Settings > Engine Scalability Settings
 Adjust Performance ↔ Quality

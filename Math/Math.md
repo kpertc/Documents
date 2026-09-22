@@ -38,7 +38,7 @@ norm||范数|
 Dot (==Scalar==) product (Inner Product)||点乘，内积|返回比例，（Normalize）用Cos可得到角度$$a·b = a_x · b_x + a_y · b_y$$$$a·b = a_x · b_x + a_y · b_y + a_z · b_z$$
 Cross Product (Outer Product)|$$\times$$|叉乘，叉积|算垂直法向量， 判断垂直，内外，旋向性$$\begin{bmatrix}x_1\\y_1\\z_1\end{bmatrix} \times \begin{bmatrix}x_2\\y_2\\z_2\end{bmatrix} = \begin{bmatrix}y_1z_2 -z_1y_2\\z_1x_2-x_1z_2\\x_1y_2-y_1x_2\end{bmatrix}$$
 Homogeneous coordinates||齐次坐标|
-Linear Transformation||线性变换|Rotation, Scale, Orthographic Projection, Reflection, Shearing<li>All lines remains on line</li><li>Origin -> fixed</li><br>Paralleled & Even space<br>Transform is not linear transformation
+Linear Transformation||线性变换|Rotation, Scale, Orthographic Projection, Reflection, Shearing<li>All lines remains on line</li><li>Origin -> fixed</li><br>Paralleled & Even space<br>Translation (平移) is NOT a linear transformation (moves the origin)
 [Affine Transformation](https://www.youtube.com/watch?v=E3Phj6J287o)||仿射变换|平移 + 线性变换
 Upright Space||直立空间|World Space ⇌ Upright Space ⇌ Object Space<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp平移 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp旋转
 Eigenvector||特征向量|only scale not rotate ![[eigenvector.png\|200]]
@@ -64,7 +64,7 @@ Polynomial|多项式
 Integral|积分
 Anisotropy|各向异性
 Isotropy|各项同性
-Orthogonal|直角的，矩形的
+Orthogonal|正交的（垂直的）
 Orthonormal|正交规范的
 Convolution|卷积
 Manifold|流形
@@ -111,10 +111,10 @@ Matrix x Vector
 matrix column # match vector #
 
 $$ 
-A = \begin{bmatrix} a_{11}&a_{22}&\dots&a_{1n}\\ a_{21}&a_{22}&\dots&a_{2n}\\ \vdots&\vdots&\vdots&\vdots\\ a_{m1}&a_{m2}&\dots&a_{mn}\\ \end{bmatrix}
-\begin{bmatrix} x_1\\ x_2\\ \vdots\\ x_m\\ \end{bmatrix}
+A = \begin{bmatrix} a_{11}&a_{12}&\dots&a_{1n}\\ a_{21}&a_{22}&\dots&a_{2n}\\ \vdots&\vdots&\vdots&\vdots\\ a_{m1}&a_{m2}&\dots&a_{mn}\\ \end{bmatrix}
+\begin{bmatrix} x_1\\ x_2\\ \vdots\\ x_n\\ \end{bmatrix}
 =
-\begin{bmatrix} a_{11}x_1&a_{22}x_2&\dots&a_{1n}x_n\\ a_{21}x_1&a_{22}x_2&\dots&a_{2n}x_n\\ \vdots&\vdots&\vdots&\vdots\\ a_{m1}x_1&a_{m2}x_2&\dots&a_{mn}x_n\\ \end{bmatrix} 
+\begin{bmatrix} a_{11}x_1+a_{12}x_2+\dots+a_{1n}x_n\\ a_{21}x_1+a_{22}x_2+\dots+a_{2n}x_n\\ \vdots\\ a_{m1}x_1+a_{m2}x_2+\dots+a_{mn}x_n\\ \end{bmatrix} 
 $$
 
 
@@ -123,7 +123,7 @@ $$
 \begin{bmatrix}
 a & b \\
 c & d  
-\end{bmatrix} + 
+\end{bmatrix} \times
 \begin{bmatrix}
 e & f \\
 g & h  
@@ -136,7 +136,7 @@ $$
 
 <br>
 
-Transformation: Transform, Rotation, Scale matrix, orders matters
+Transformation: Translation (平移), Rotation, Scale matrix, orders matters
 
 
 > [!NOTE]- Zero

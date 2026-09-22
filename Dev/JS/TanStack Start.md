@@ -15,7 +15,7 @@ Tutorial:
 generate type?
 
 ``` ts
-createFileRoute('/users/$userId') ({
+export const Route = createFileRoute('/users/$userId')({ // the named `Route` export is what the generated route tree looks for
 	loader:
 	component:
 	errorComponent:
@@ -49,8 +49,9 @@ Example:
 
 Server example:
 ``` tsx
-createServerFn({})
-	.validator()
+createServerFn({ method: 'POST' })
+	.validator((d: unknown) => schema.parse(d))
+	.handler(async ({ data }) => { ... }) // .handler() returns the callable
 ```
 
 

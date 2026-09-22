@@ -1,7 +1,7 @@
 
 ==项目经理不是产品经理==
 
-PM will be more difficult than other roles due to role scarcity
+Project Manager (项目经理) will be more difficult than other roles due to role scarcity
 https://www.youtube.com/watch?v=KH-qoTqtMXE
 
 ### Project Managers

@@ -7,7 +7,7 @@ const observer = new IntersectionObserver(
 	entries => {
 		entries.forEach(entry => {
 			// when observer update, do something
-			entry.target.classList.toggle("show", entry.IsIntersecting)
+			entry.target.classList.toggle("show", entry.isIntersecting)
 			// when observed, remove observe the element
 			if (entry.isIntersecting) observer.unobserve(entry.target)
 		})
@@ -16,7 +16,7 @@ const observer = new IntersectionObserver(
 	{
 		threshold: 1, // default -> 0
 		rootMargin: "-100px",
-		root: 
+		root: null // null -> viewport (default), or an element to scroll within
 	}
 )
 

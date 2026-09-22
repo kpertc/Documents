@@ -8,13 +8,14 @@
 ![[Distributed System.jpg]]
 
 -   Fallacies of Distributed Systems
--   Network is reliable
--   Latency is zero
--   Bandwidth is infinite
--   Transport cost is zero
--   Topology doesn't change
--   network is secure
--   only one administrator
+    -   Network is reliable
+    -   Latency is zero
+    -   Bandwidth is infinite
+    -   Transport cost is zero
+    -   Topology doesn't change
+    -   network is secure
+    -   only one administrator
+    -   network is homogeneous
   
 ### Distributed System Characteristics
 -   No shared clock
@@ -39,7 +40,7 @@
 -   Increased volume of data or requests
 
 ##### Reliability
--   Probability a system will fail during a peroid of time
+-   Probability a system will operate without failure during a period of time
 -   Slightly harder to define than hardware reliability
 
 > [!tip] **Mean Time Between Failure**
@@ -95,12 +96,12 @@
 > [!tip] Common Data Types
 >Char - 1 byte
 >Integer - 4 bytes
->UNIX Timestamp - 4 bytes
+>UNIX Timestamp - 4 bytes (32-bit, overflows 2038; 8 bytes if 64-bit)
 
 > [!tip] Time
 >60 secs x 60 mins = 3600 secs per hour
 >3600 x 24 hrs = 86400 secs per day
->86400 x 30 days = 2500000 secs per mons  
+>86400 x 30 days = 2,592,000 ≈ 2.5M secs per mons  
 
 ### LB Routing Methods
 
@@ -143,7 +144,7 @@ Improve performance and save money
 
 
 ### Speed and Performance
--   Reading from memory is much faster than disk, 50-200x faster
+-   Reading from memory is much faster than disk (latency RAM ~100ns, SSD ~100µs, HDD seek ~10ms)
 -   Can serve the same amount of traffic with fewer resources
 -   Pre-calculate and cache data
 -   Most apps have fat more reads than writes, perfect for caching    
@@ -172,7 +173,7 @@ Used to prevent stale data
   
 
 ##### Least Recently Used, LRU
-Once cache is full, remove the last accessed key and add a new key
+Once cache is full, evict the key accessed longest ago, then add the new key
 
   
 
@@ -183,10 +184,10 @@ Once cache is full, remove the last accessed key and add a new key
   
 
 ### Caching Strategies
--   Cache Aside - most common
--   Read Through 从缓存中读
--   Write Through
--   Write Back
+-   Cache Aside - most common, app 读缓存，miss 时自己读 DB 再写回缓存
+-   Read Through - 缓存自己在 miss 时去 DB 取
+-   Write Through - 同时写缓存和 DB，一致但写慢
+-   Write Back - 先写缓存，之后再刷到 DB，快但可能丢数据
   
 
 ### Cache Consistency

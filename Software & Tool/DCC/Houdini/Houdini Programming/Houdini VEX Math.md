@@ -7,7 +7,7 @@ math.h file: `$HFS/houdini/vex/include/math.h` from hscript textport
 ![[Houdini VEX Math img/mathh.gif]]
 
 
-[math.h](./Houdini VEX Math img/math.h)
+[[Houdini VEX Math img/math.h|math.h]]
 
 
 ### [Math](https://youtu.be/xmgp53xPA9M)
@@ -19,8 +19,9 @@ degrees = degrees(radians);
 
 ```C#
 // Dot Product
-f@dot = dot(V1, V2);
+f@dot = dot(normalize(V1), normalize(V2)); // must normalize, else dot leaves [-1,1] and acos → NaN
 f@degree = degrees(acos(@dot)); // get angle, default unit is radian
+// robust, no normalize needed: degrees(atan2(length(cross(V1,V2)), dot(V1,V2)))
 
 // Cross Product
 V3 = cross(V1,V2) // Perpendicular to V1 and V2
@@ -32,8 +33,8 @@ vector4 Q = quaternion(radians(degree), V); // rotate around vector V
 @P = qrotate(Q, @P);
 
 // method2: convert quaternion to matrix
-matrix QtoM = qconvert(Q);
-@P = @P * QToM;
+matrix3 QtoM = qconvert(Q); // qconvert() returns matrix3
+@P = @P * QtoM; // rotates about the origin, handle pivot yourself
 
 // Matrix
 ```
@@ -99,7 +100,10 @@ rotate(mat, angle, axis); // rotation
 ```
 
 ```C#
-makeTransform(); // TRS → matrix
+maketransform(); // TRS → matrix, all lowercase, VEX is case-sensitive
+// matrix maketransform(int trs, int xyz, vector t, vector r, vector s)
+// trs order (math.h): XFORM_SRT 0, XFORM_STR 1, XFORM_RST 2, XFORM_RTS 3, XFORM_TSR 4, XFORM_TRS 5
+// xyz rotate order (math.h): XFORM_XYZ 0 ... XFORM_ZYX 5
 cracktransform(); // matrix → TRS
 // need TRS order and matrix
 ```

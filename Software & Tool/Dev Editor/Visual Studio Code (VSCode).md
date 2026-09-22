@@ -13,7 +13,8 @@
 | New Window                                                    | ⌘ ⇧ N          |     |
 | Tab Bar Explore (File)                                        | ⌘ ⇧ E          |     |
 | Tab Bar Search                                                | ⌘ ⇧ F          |     |
-| Open & Fold UnFold                                            | ⌘ ↓            |     |
+| Open File (from Explorer)                                     | ⌘ ↓            |     |
+| Fold / Unfold                                                 | ⌥ ⌘ \[ / ⌥ ⌘ ] |     |
 | Split Editor                                                  | ⌘ \            |     |
 | Duplicate Line                                                | ⇧ Option ↑ / ↓ |     |
 | Select Entire Line<br>Select Multiple Lines if Multiple Times | ⌘ L            |     |
@@ -23,14 +24,14 @@
 | Multiline Comment                                             | ⇧ Option A     |     |
 | Highlight(Select)                                             | Shift ↑/↓/←/→  |     |
 | Select Next Match                                             | ⌘ D            |     |
-| Tab                                                           | Ctrl + tab#    |     |
+| Cycle open editors (MRU order)                                | ⌃ Tab / ⌃ ⇧ Tab |     |
 | Close All Tabs                                                | ⌘ K W          |     |
 
 
-Same as Chrome| 
+Same as Chrome|Shortcut
 ---|---
-Right Tab|⌘ ⇧ \[
-Left Tab|⌘ ⇧ ]
+Right Tab|⌘ ⇧ ]
+Left Tab|⌘ ⇧ \[
 Settings| ⌘ , (MacOS) <br> Ctrl , (Win)
 Open last closed Tab|⌘ ⇧ T
 
@@ -38,7 +39,7 @@ Open last closed Tab|⌘ ⇧ T
 Selects the word at the cursor|`⌘` + `D`
 multi-cursor|Alt+Click ⌥⌘↓ ⌥⌘↑
 
-Shift+Alt
+Shift+Alt ↑/↓ copy line, ⇧⌥F format, ⇧⌥A block comment, ⇧⌥ drag column select
 
 Ctrl Tab![[ctrl-tab.gif]]
 
@@ -63,6 +64,8 @@ Preview markdown side by side
 ### Snippets
 
 ![[snippet-JavaScript.gif]]
+
+Command Palette → Snippets: Configure Snippets → `javascript.json` (blocks below go inside the outer `{ }`)
 
 Basic
 ```json
@@ -97,14 +100,14 @@ $0 → last point
 	}
 ```
 
-$variable type at same time, `Tab` type next $variable
+`${1:name}` same number → type at same time, `Tab` → next tabstop, `$0` → last point
 ```json
 "For Loop for Array" : {
 	"prefix": "forarr",
 	"body": [
-		"for (let $index = 0; $index < $array.length; $index++) {",
-		"\\tconst element = $array[$index];",
-		"\\t",
+		"for (let ${1:index} = 0; ${1:index} < ${2:array}.length; ${1:index}++) {",
+		"\tconst element = ${2:array}[${1:index}];",
+		"\t$0",
 		"}"
 	],
 	"description": "This will create a for loop through an array"
@@ -114,7 +117,7 @@ $variable type at same time, `Tab` type next $variable
 Settings Sync is on → VS Code Settings automatically sync
 ![[Settings-Sync-Configure.png]]
 
-Sync Extension: Settings Sync
+Built-in since v1.48 (the old `Shan.code-settings-sync` extension is deprecated)
 
 <br>
 
@@ -157,7 +160,7 @@ margin: 10px;
 ![[vscode-open-settingjson.gif]]
 
 ##### Bracket pair colorizer
-1. `editor.guides.bracketPairs": true,`
+1. `"editor.bracketPairColorization.enabled": true,` → on by default since v1.67 (`editor.guides.bracketPairs` = guide lines)
 2. restart VS Code
 ![[builtin-bracket-pair-colorizer.png| 200]]
 
@@ -189,7 +192,8 @@ margin: 10px;
 <br>
 
 ### (File) Timeline
-https://github.com/microsoft/vscode-docs/blob/vnext/release-notes/v1_66.md#local-history
+Explorer sidebar → Timeline panel (bottom): local file history + git commits
+https://code.visualstudio.com/updates/v1_66#_local-history
 
 <br>
 
@@ -255,7 +259,8 @@ run C++
 [https://code.visualstudio.com/api/get-started/your-first-extension](https://code.visualstudio.com/api/get-started/your-first-extension)
 
 ```shell
-npm install -g yo generator-code yo code
+npm install --global yo generator-code
+yo code
 ```
 
 ##### [[Blender VSCode Setup]]

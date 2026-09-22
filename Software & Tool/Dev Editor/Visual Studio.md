@@ -2,6 +2,8 @@
 
 Install Unreal Engine .Net Development Environment: [[Software & Tool/Game Engine/Unreal Engine/Unreal Engine]]
 
+Visual Studio on Windows (Visual Studio for Mac retired 31 Aug 2024)
+
  | Shortcut
 :--|:--
 Move Code|Alt + Arrow

@@ -31,12 +31,12 @@ background: var(--variable);
 `%` relative to parent
 `vw` `vh`: view-width / view-height, relative to entire ==viewport==
 	1 viewport unit is 1% of viewport length, can be used for font
-`rem`, `em`: both relative to font size, rem -> always root font size; em -> relative to parent's font size. Useful when scaling font with elements.
-`fr`: use in flex and grid
+`rem`, `em`: both relative to font size, rem -> always root font size; em -> the element's OWN computed font size, only inside `font-size` itself does it resolve against the parent (font-size inherits). On a 16px parent `{ font-size: 2em; padding: 1em }` gives 32px font AND 32px padding. Useful when scaling font with elements.
+`fr`: grid only -> a fraction of the leftover space in `grid-template-columns` / `rows` and `grid-auto-*`. Flex has no `fr`, use the unitless grow factor (`flex: 1`)
 
 ``` css
-font-size: clamp(min, current, upper)
-font-size: clamp(50px, 8vw, 100px) // 8vw font, low to 50px, up tp 100px
+font-size: clamp(MIN, PREFERRED, MAX); /* = max(MIN, min(PREFERRED, MAX)) */
+font-size: clamp(50px, 8vw, 100px); /* 8vw font, floor 50px, ceiling 100px */
 ```
 
 ### Position
@@ -45,11 +45,11 @@ font-size: clamp(50px, 8vw, 100px) // 8vw font, low to 50px, up tp 100px
 
 `Relative`: adjustable base on static
 
-`Absolute`: ignore document flow, can be applied (top, right, bottom, left), to relative to parent, without parent, ultimately fall back to root, relative to the viewport, move with content
+`Absolute`: ignore document flow, can be applied (top, right, bottom, left), relative to the nearest ancestor whose `position` is not `static` (an ancestor with `transform` / `filter` / `will-change` also becomes the containing block), without one, ultimately fall back to the initial containing block (viewport-sized, but move with content)
 
 `Fixed`: Similar to absolute, relative to the viewport. Move with scroll.
 
-`Sticky`:
+`Sticky`: relative until it crosses the threshold, then fixed within its scroll container. Requires at least one of top / right / bottom / left, or it does nothing. Any ancestor with `overflow: hidden / auto / scroll` becomes its scroll container, so it silently stops sticking to the page.
 
   
 <br>
@@ -58,7 +58,7 @@ font-size: clamp(50px, 8vw, 100px) // 8vw font, low to 50px, up tp 100px
 
 Block: `<div>` occupy full line
 Inline: `<span>` minimum size,
-Inline-Block: `<img>` similar to inline, but can set width / height
+Inline-Block: flows inline, but can set width / height and vertical margin. Nothing defaults to it, opt in with `display: inline-block` (`<img>` is `display: inline` yet still takes width / height, being a replaced element)
 
 None:
 
@@ -83,6 +83,8 @@ justify-content: flex-start; /* flex-start, center, space-between, space-around 
 align-items:  ;
 
 flex-wrap: ;
+
+gap: ; /* works on flex too, unlike grid-gap */
 ```
 
 - Flex item (Children)
@@ -99,7 +101,7 @@ Grid
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
 Grid-template-rows: 1fr 1fr 1fr;
-grid-gap: 10px 20px; 
+gap: 10px 20px; /* grid-gap is the legacy alias */ 
 /* vertical, Horizontal */ 
 ```
 
@@ -111,14 +113,14 @@ Grid cross section
 ```css
 animation: animationName ...;
 
-animation-timeline: scroll()
-animation-timeline: scroll(x) // for check horizontal percentage
+animation-timeline: scroll();
+animation-timeline: scroll(x); /* for check horizontal percentage */
 
-animation-timeline: view()
-animation-timeline: view(250px) // offset
+animation-timeline: view();
+animation-timeline: view(250px); /* offset */
 
-animation-range-start: 500px; // start animation 500px away
-animation-range-end: 700px; // end animation 700px away
+animation-range-start: 500px; /* start animation 500px away */
+animation-range-end: 700px; /* end animation 700px away */
 ```
 
 <br>
@@ -140,13 +142,13 @@ a[target="_blank"] {
 }
 
 [data-tooltip]::after {
-	content: 
+	content: attr(data-tooltip);
 }
 ```
  
 ### Attribute Function
 ```css
-attr()
+attr() /* only usable in content; typed form attr(data-x type(<length>)) is new, check support */
 ```
 
 [Pseudo-classes_and_pseudo-elements](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Pseudo-classes_and_pseudo-elements)
@@ -161,6 +163,11 @@ state
 
 :hover
 :focus
+:focus-visible /* keyboard-only focus ring */
+
+:has() /* parent / previous-sibling selection */
+:is() /* grouping */
+:where() /* grouping, zero specificity */
 ```
 
 ### Pseudo Elements
@@ -207,7 +214,7 @@ html[data-theme='dark'] {
 ```
 
 ### React CSS Properties Object
-```jsx
+```tsx
 const buttonStyle: React.CSSProperties = {
 	padding: "20px",
 	margin: "10px",
@@ -222,7 +229,7 @@ const buttonStyle: React.CSSProperties = {
 component scope css
 ```jsx
 import React from "react"
-import * as containerStyles from "./container.module.css"
+import containerStyles from "./container.module.css"
 
 export default function Container({ children }) {
 

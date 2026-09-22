@@ -101,7 +101,8 @@ for child in children:
 
 ```Python
 _geo = _node.geometry()
-_attribute = geo.findGlobalAttrib('attributeName') # GlobalAttrib -> Detail Attrib
+_attribute = _geo.findGlobalAttrib('attributeName') # GlobalAttrib -> Detail Attrib
+# same family: _geo.findPointAttrib() / findPrimAttrib() / findVertexAttrib()
 ```
 
 ### Set DisplayFlag

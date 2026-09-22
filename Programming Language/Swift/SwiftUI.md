@@ -47,14 +47,14 @@ struct Sandwich: Identifiable { ... }
 <br>
 
 ```swift
-NavigationView {
-	List() {
+NavigationStack { // NavigationView deprecated since iOS 16
+	List {
 		VStack() {
 			...
 		}
 	}
+	.navigationTitle("Title")
 }
-.navigationTitle("Title")
 
 VStack()
 VStack(spacing: 12) 
@@ -74,6 +74,9 @@ ScrollView(.horizontal)
 
 ``` swift
 height: UIScreen.main.bounds.height * 0.5 // half of screens height
+// deprecated, wrong in split view / external display
+// GeometryReader { geo in geo.size.height * 0.5 }
+// iOS 17 -> .containerRelativeFrame(.vertical) { h, _ in h * 0.5 }
 ```
 
 ```swift
@@ -105,7 +108,7 @@ RoundedRectangle(cornerRadius: 50)
 
 .trim()
 .frame(width: 200, height: 100)
-.cornerRadius(8)
+.cornerRadius(8) // iOS 17 -> .clipShape(.rect(cornerRadius: 8))
 
 
 // shadow
@@ -114,7 +117,7 @@ RoundedRectangle(cornerRadius: 50)
 .shadow(color: Color.red.opacity(0.3), radius: 10, x: 0, y: 20) // add opacity
 
 // let UI could show on safe area
-.edgesIgnoringSafeArea(.bottom)
+.ignoresSafeArea(edges: .bottom)
 
 .zIndex(2.0) // order in ZStack
 ```
@@ -153,14 +156,15 @@ Image set / Color set
 ##### Gradients
 ```swift
 // Linear gradients
-var LinearGradient = LinearGradient(
+// do not name the variable after the type -> "variable used within its own initial value"
+let linearGradient = LinearGradient(
    gradient: Gradient(colors: [Color.red, Color.blue]), 
    startPoint: .leading,
    endPoint: .trailing
 )
 
 // add more color
-var LinearGradient = LinearGradient(
+let linearGradient = LinearGradient(
    gradient: Gradient(colors: [Color.red, Color.blue, Color.orange, Color.purple]), 
    startPoint: .leading,
    endPoint: .trailing
@@ -169,14 +173,14 @@ var LinearGradient = LinearGradient(
 // .top .bottom .topLeading .topTrailing
 
 // Radial gradient
-var RadialGradient = RadialGradient(
+let radialGradient = RadialGradient(
 	colors: [Color.red, Color.blue], center: .center, 
 	startRadius: 5, 
 	endRadius: 400
 )
 
 // Angular gradient
-var AngularGradient = AngularGradient(
+let angularGradient = AngularGradient(
 	  colors: [Color.red, Color.blue], 
 	  center: .center, 
 	  angle: .degrees(180)
@@ -191,7 +195,7 @@ var AngularGradient = AngularGradient(
 ```swift
 Image(systemName: "heart") // heart icon
 Image(systemName: "heart.fill") // filled Color
-	.resizeable() // -> resize to frame
+	.resizable() // -> resize to frame
 	.aspectRatio(contentMode: .fit)
 
 	// change font size to change icon size
@@ -199,10 +203,10 @@ Image(systemName: "heart.fill") // filled Color
 	.font(.caption)
 	.font(.system(size: 500)) // custom size
 
-	.foregroundColor(Color.red)
+	.foregroundColor(Color.red) // iOS 17 -> .foregroundStyle( ... )
 	.background(Color.green)
 
-	.frame(width: 300, height: 100) // require resizeable to match the frame
+	.frame(width: 300, height: 100) // require resizable to match the frame
 ``` 
 
 ```swift
@@ -267,7 +271,7 @@ Toggle(isOn: $_bool, label: {
 
 .onTapGesture { 
 	withAnimation { // animation
-		zoomed.toggled()
+		zoomed.toggle()
 	}
 } 
 ```
@@ -297,7 +301,7 @@ RoundedRectangle(cornerRadius: 20)
 	.offset(offset)
 	.gesture(
 		DragGesture()
-			.onChange {value in 
+			.onChanged { value in 
 				withAnimation(.spring()) {
 					offset = value.translation
 				}
@@ -319,9 +323,10 @@ RoundedRectangle(cornerRadius: 20)
 ...
 .scaleEffect(1 + currentAmount)
 .gesture(
-	MagnificationGesture()
+	MagnifyGesture() // iOS 17, was MagnificationGesture
+		// RotationGesture -> RotateGesture at the same time
 		.onChanged{ value in
-			currentAmount = value - 1
+			currentAmount = value.magnification - 1
 		}
 		.onEnded { value in
 			withAnimation(.spring()) { 
@@ -415,7 +420,8 @@ ScrollView(
 // content 
 ) 
 
-ScrollView(.vertical, showIndicators: false, content: { ... })
+ScrollView(.vertical, showsIndicators: false, content: { ... })
+// iOS 17+ -> .scrollIndicators(.hidden)
 ```
 
 showsIndicators
@@ -424,7 +430,7 @@ showsIndicators
 ##### ScrollViewReader
 
 ```swift
-@State var 
+@State var scrollToIndex: Int = 0
 
 ScrollView {
 	ScrollViewReader { proxy in 
@@ -439,11 +445,12 @@ ScrollView {
 	
 	Text("dummy text")
 	.id(index)
-	
-	}
 	// change proxy by outside by @State var and .onChange()
-	.onChange(of: scrollToIndex, perform: { value in
+	// must stay INSIDE the reader closure, proxy only exists here
+	.onChange(of: scrollToIndex) { _, value in
 		proxy.scrollTo(value, anchor: nil)
+	}
+	
 	}
 }
 ```
@@ -452,20 +459,20 @@ ScrollView {
 
 ### Grid
 ```swift
-let columns: [GridItems] = [
-	GridItem(.fix(50), spacing: nil, alignment: nil),
+let columns: [GridItem] = [
+	GridItem(.fixed(50), spacing: nil, alignment: nil),
 	// spacing -> horizontal or column spacing
 ]
 
-// .fix .flexible .adaptive 
+// .fixed .flexible .adaptive 
 GridItem(.flexible(), spacing: nil, alignment: nil),
 GridItem(.adaptive(minimum: 50, maximum: 300), spacing: nil, alignment: nil),
 
-LazyVGrid(columns: columns
-	spacing: 10 // row spacing or vertical
+LazyVGrid(columns: columns,
+	spacing: 10, // row spacing or vertical
 	pinnedViews: [.sectionHeaders]
 ) {
-	Section: // .header .footer
+	// Section(header: ... ) { ... } // .header .footer
 
 	// create content
 	ForEach(0..<50) {index in 
@@ -544,30 +551,28 @@ List {
 ```swift
 Picker(
 	selection: $selection,
-	label: Text("Picker")
+	label: Text("Picker"),
 	content: {
 		Text("1").tag("1")
 		Text("2").tag("2")
-		})
+		// Text("1") -> UI
+		// .tag("1") -> value
 	}
-	// Text("1") -> UI
-	// .tag("1") -> value
-	
 )
 
 Picker(
 	selection: $selection,
-	label: Text("Picker")
+	label: Text("Picker"),
 	content: {
 		Text("1").tag("1")
 		Text("2").tag("2")
 		// or
-		ForEach(18 ..< 100 { number in
+		ForEach(18 ..< 100) { number in
 			Text("\\(number)")
 				.font( ... )
 				.foregroundColor( ... )
-			.tag("\\(number)")
-		})
+				.tag("\\(number)")
+		}
 	}
 )
 	.background( ... )
@@ -576,10 +581,10 @@ Picker(
 	// SegmentedPickerStyle()
 ```
 
-```jsx
+```swift
 init() {
 	// UIKit
-	UISegmentedControl.appearance().selectedSegmentTintColor = UI.Color.red
+	UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.red
 }
 ```
 
@@ -606,10 +611,6 @@ ColorPicker("Select Color",
 	selection: $color,
 	supportsOpacity: true
 )
-	.datePickerStyle(
-		// WheelDatePickerStyle()
-		// GraphicalDatePickerStyle()
-	)
 ```
 
 <br>
@@ -619,14 +620,18 @@ ColorPicker("Select Color",
 [https://developer.apple.com/documentation/swiftui/datepicker](https://developer.apple.com/documentation/swiftui/datepicker)
 
 ```swift
+@State private var date: Date = Date()
 var startingDate: Date = Date()
 var endingDate: Date = Date()
 
+// order is fixed: DatePicker(_:selection:in:displayedComponents:)
 DatePicker("title",
    selection: $date,
+   in: startingDate...endingDate, // range
    displayedComponents: [.date, .hourAndMinute]
-   in: startingDate...endingDate // range
 )
+	.datePickerStyle(WheelDatePickerStyle())
+	// GraphicalDatePickerStyle()
 ```
 
 ```swift
@@ -686,9 +691,16 @@ List {
 @State var showAlert: Bool = false
 
 Button ("Click") { ... }
+	.alert("Title", isPresented: $showAlert) {
+		Button("OK") {}
+	} message: {
+		Text("message")
+	}
+
+// iOS 13 form, Alert & alert(isPresented:content:) deprecated since iOS 15
 	.alert(isPresented: $showAlert, content: {
 		Alert(title: Text("Title"))
-	}
+	})
 ```
 
 <br>
@@ -719,7 +731,7 @@ Button ("Click") { ... }
 ZStack {
 	//background
 	Color.blue
-		.edgesIgnoringSafeArea(.all)
+		.ignoresSafeArea()
 
 	//foreground
 	... content
@@ -729,7 +741,7 @@ ZStack {
 Rectangle()
 	.background(
 		Color.red
-			.edgesIgnoringSafeArea(.all)
+			.ignoresSafeArea()
 	)
 ```
 
@@ -760,19 +772,20 @@ Button("Button"){
 	// modifiers
 	withAnimation(Animation
 		.default 
-		// .default(duration: 3.0) // duration
+		// .easeInOut(duration: 3.0) // duration
 		.delay(2.0) // delay 2 seconds
-		.repeatCount(repeatCount: 5, autoreverses: true) // repeat animation 5 times
+		.repeatCount(5, autoreverses: true) // repeat animation 5 times
 	) {
 		// change some properties 
 	}
 }
 
 // or on Shape
+// iOS 15+ the value-less .animation(_:) is deprecated, pass value:
 RoundedRectangle(cornerRadius: 30)
-	.anmation(Animation
-		.default
-		.repeatForever(autoreverses: true)
+	.animation(
+		.default.repeatForever(autoreverses: true),
+		value: isAnimating
 	)
 ```
 
@@ -800,7 +813,7 @@ RoundedRectangle(cornerRadius: 30)
 .sheet(isPresented: $booleanVar, content: {
    // View
    Button("return", action: {
-	   presentationMode.wrappedValue.dismiss()
+	   dismiss()
    })
 })
 
@@ -809,8 +822,9 @@ RoundedRectangle(cornerRadius: 30)
 })
 ```
 
-Only one sheet / fullScreencover per view, can not add multiple sheets on one view
-Do not add conditional logic in sheet / fullScreencover
+iOS 13/14: only one sheet / fullScreencover per view, no conditional logic inside
+now: multiple `.sheet` on one view is fine (iOS 14.5+)
+`.sheet(item:)` over `.sheet(isPresented:)` when content depends on data
 
 ##### Ways to create display a new page
 1. Sheet
@@ -820,8 +834,8 @@ Do not add conditional logic in sheet / fullScreencover
 		if isShow {
 			View()
 				.padding(.top, 100) // for show top area
-				.transition(.move(.bottom))
-				.animation(.spring())
+				.transition(.move(edge: .bottom))
+				.animation(.spring(), value: isShow)
 		}
 	}
 	.zIndex(2.0) // prevent disapper immediately
@@ -830,8 +844,8 @@ Do not add conditional logic in sheet / fullScreencover
 	``` swift
 	View(isShow: $bindingBool)
 		.padding(.top, 100)
-		.offset(y: bindingBool ? 0 : UIScreen.main.bounds.heights)
-		.animation(.spring())
+		.offset(y: bindingBool ? 0 : UIScreen.main.bounds.height)
+		.animation(.spring(), value: bindingBool)
 	```
 
 <br>
@@ -840,10 +854,26 @@ Do not add conditional logic in sheet / fullScreencover
 
 NavigationView -> container include navigation title & bar
 `NavigationView` is deprecated now use `NavigationStack`
-- `NavigationView` is lazy
-- `NavigationStack` not lazy
+- `NavigationView` + `NavigationLink(destination:)` is not lazy → builds every destination
+- `NavigationStack` + `NavigationLink(value:)` + `.navigationDestination(for:)` is lazy
 
 Do not nest a NavigationView inside a NavigationView
+
+```swift
+@State private var path = NavigationPath()
+
+NavigationStack(path: $path) {
+	List(fruits) { fruit in
+		NavigationLink(fruit.name, value: fruit) // value, not destination
+	}
+	.navigationDestination(for: Fruit.self) { fruit in
+		DetailView(fruit: fruit) // built only when pushed
+	}
+	.navigationTitle("Title")
+}
+
+// path.append(fruit) / path.removeLast() -> programmatic navigation
+```
 
 ```swift
 .navigationTitle("Navigation Title")
@@ -944,6 +974,14 @@ Button("Click") {
 }
 ```
 
+`ActionSheet` deprecated since iOS 15 → `confirmationDialog`
+```swift
+.confirmationDialog("title", isPresented: $showActionSheet, titleVisibility: .visible) {
+	Button("destructive", role: .destructive) {}
+	Button("Cancel", role: .cancel) {}
+}
+```
+
 ### Group
 apply modifiers
 no change to layout
@@ -961,9 +999,11 @@ Animate object, for geometry shapes
 
 ```swift
 @Namespace private var namespace
+@State private var clicked = false
 
 // view
-if !Clicked {
+// only ONE view with the same id may exist at a time
+if !clicked {
 	Rectangle()
 		.matchedGeometryEffect(id: "rectangle", in: namespace)
 		.frame(width: 100, height: 200)
@@ -971,7 +1011,7 @@ if !Clicked {
 
 Spacer()
 
-if !Clicked {
+if clicked {
 	Rectangle()
 		.matchedGeometryEffect(id: "rectangle", in: namespace)
 		.frame(width: 300, height: 200)
@@ -983,13 +1023,13 @@ if !Clicked {
 
 # Swift UI Logic
 
-### NVVM Architecture
+### MVVM Architecture
 - Model - data point
 - View UI
 - View Model - manages Model for View
 
 Struct → Class → View
-Model → ModelView → View
+Model → ViewModel → View
 
 
 Views are `struct`, only require `body`
@@ -997,14 +1037,14 @@ Views are `struct`, only require `body`
 ```swift
 // state changed -> View update
 // @State -> only in struct : View
-@state var zoomed = false 
-@state private var zoomed = false
+@State var zoomed = false 
+@State private var zoomed = false
 ...
 .aspectRatio(contentMode: zoomed ? .fill : .fit)
 
 .onTapGesture { 
 	withAnimation { // animation
-		zoomed.toggled()
+		zoomed.toggle()
 	}
 } 
 ```
@@ -1035,7 +1075,7 @@ init(backgroundColor: Color, count: Int, title: String) {
 
 strong reference → will not `deinit()`
 ```swift
-DispatchQueue.main.asyncAfter(deadline: .now() + 500) {
+DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 	self.data = "New Data"
 }
 ```
@@ -1044,7 +1084,7 @@ DispatchQueue.main.asyncAfter(deadline: .now() + 500) {
 weak reference → will `deinit()` → more efficient
 Its ok for the class (self) to `deinit()`
 ```swift
-DispatchQueue.main.asyncAfter(deadline: .now() + 500) { [weak self] in
+DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
 	self?.data = "New Data" // weak is optional
 }
 ```
@@ -1074,7 +1114,7 @@ create for all types
 ```swift
 struct GenericModel<T> {
 	let info: T?
-	func removeInfo() -> T {
+	func removeInfo() -> GenericModel<T> {
 		// return GenericModel(info: nil)
 		// one line no need for return
 		GenericModel(info: nil)
@@ -1100,12 +1140,12 @@ GenericView(content: Text("text"))
 ### @Binding
 Parent ← connect @state ← Child 
 ```swift
-struct MainView; View {
+struct MainView: View {
 	@State var backgroundColor: Color = Color.green
 	@State var title: String = "Title"
 
 	var body: some View {
-		ChildView(backgroundColor: $backgroundColor)
+		ChildView(backgroundColor: $backgroundColor, title: $title)
 	}
 }
 
@@ -1128,6 +1168,7 @@ struct ChildView: View {
 
 ### @ObservedObject & @Published
 
+pre-iOS 17
 ```swift
  class MyClass : ObservableObject { 
 	@Published var fruitArray: [Fruit] = []
@@ -1161,15 +1202,32 @@ init(id: Int = 1) {
     _object = StateObject(wrappedValue: MyObject(id: id))
 }
 ```
+
+iOS 17+ `@Observable` → no `@Published` / `@ObservedObject`
+```swift
+@Observable final class MyClass {
+	var fruitArray: [Fruit] = []
+}
+
+struct MyView: View {
+	@State private var myModel = MyClass() // owner
+}
+
+struct SecondView: View {
+	let myModel: MyClass // child, no wrapper
+	// @Bindable var myModel: MyClass // only for two-way binding
+}
+```
 <br>
 
 ### Environment Variable
 ``` swift
 // Environment Variable
-@Environment(\.presentationMode) var presentationMode
+// presentationMode deprecated since iOS 15
+@Environment(\.dismiss) private var dismiss
 
 {
-	presentationMode.wrappedValue.dismiss()
+	dismiss()
 }
 
 ```
@@ -1206,7 +1264,7 @@ class SoundManager { // singleton
 
 	func playSound() {
 
-		guard let url = Bundle.main.url(forResources: "", withExtension: ".mp3") else {return}
+		guard let url = Bundle.main.url(forResource: "sound", withExtension: "mp3") else {return}
 
 		do {
 			player = try AVAudioPlayer(contentsOf: url )
@@ -1238,14 +1296,14 @@ for small data
 UserDefaults
 
 ```swift
-@State var cuurentUserName: String?
+@State var currentUserName: String?
 
 // save 
-UserDefaults.standard.set(value: "Nick", forKey: "name" )
+UserDefaults.standard.set("Nick", forKey: "name")
 
 // .onAppear() fetch
-name = UserDefaults.standard.string(forKey: "name")
-// name = "Nick"
+currentUserName = UserDefaults.standard.string(forKey: "name")
+// currentUserName = "Nick"
 ```
 
 @AppStorage
@@ -1266,8 +1324,8 @@ func downloadData(fromURL url: URL, completionHandler: @escaping (_ data: Data?)
 	guard
 		let data = data,
 		error == nil,
-		let response = response as? HTTPURLResponse
-		response.statusCode >= 200 & response.statusCode < 300 else {
+		let response = response as? HTTPURLResponse,
+		response.statusCode >= 200 && response.statusCode < 300 else {
 			print("Error downloading data.")
 			completionHandler(nil)
 			return
@@ -1278,12 +1336,14 @@ func downloadData(fromURL url: URL, completionHandler: @escaping (_ data: Data?)
 ```
 
 ```swift
-downloadData(fromURL: url) { (returnedData) in
+// [weak self] -> inside a class
+downloadData(fromURL: url) { [weak self] returnedData in
 	if let data = returnedData {
 		guard let newPosts = try? JSONDecoder().decode([PostModel].self, from: data) else { return }
-		DispatchQueue.main.async { [weak self] in
-		self?.posts=newPosts
-	}else{
+		DispatchQueue.main.async {
+			self?.posts = newPosts
+		}
+	} else {
 		print("No data returned.")
 	}
 }
@@ -1299,6 +1359,26 @@ downloadData(fromURL: url) { (returnedData) in
 ##### Combine
 require \>= iOS 13
 
+```swift
+import Combine
+
+var cancellables = Set<AnyCancellable>()
+
+URLSession.shared.dataTaskPublisher(for: url)
+	.map(\.data)
+	.decode(type: [PostModel].self, decoder: JSONDecoder())
+	.receive(on: DispatchQueue.main)
+	.sink(receiveCompletion: { _ in }, receiveValue: { posts in
+		self.posts = posts
+	})
+	.store(in: &cancellables)
+```
+
+async / await \>= iOS 15, call inside `.task { }`
+```swift
+let (data, _) = try await URLSession.shared.data(from: url)
+let posts = try JSONDecoder().decode([PostModel].self, from: data)
+```
 
 <br>
 
@@ -1313,7 +1393,7 @@ require \>= iOS 13
 
 ```swift
 struct MyCustomModel: Identifiable {
-	let id = UUID.uuidString
+	let id = UUID().uuidString
 	...
 }
 
@@ -1327,7 +1407,7 @@ ForEach(_array) {
 
 ##### Hashable
 
-similar to C# `IEnumerable`?
+similar to C# `IEquatable<T>` + `GetHashCode()` (C# `IEnumerable` ≈ Swift `Sequence`)
 
 ```swift
 // stirng conforms hashable
@@ -1369,13 +1449,15 @@ typealias TVModel = MovieModel
 timer → Publisher
 
 ```swift
+import Combine
+
 // on -> thread
-// autoconnected -> start
-let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnected()
+// autoconnect -> start
+let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
 
 Timer
 	.publish(every: 1.0, on: .main, in: .common)
-	.autoconnected()
+	.autoconnect()
 
 // view
 view {
@@ -1431,7 +1513,7 @@ struct WebView: UIViewRepresentable {
   
     // 2 -> init
     func makeUIView(context: Context) -> WKWebView {
-			let view = UIView() // basic UI View
+			let view = WKWebView() // basic UIKit view
 			view.backgroundColor = .red
 			return view
     }
@@ -1443,12 +1525,12 @@ struct WebView: UIViewRepresentable {
 
 	// from UIKit to SwiftUI
 	// Creates the custom instance that you use to communicate changes from your view to other parts of your SwiftUI interface
-	func makeCoordinator () {
+	func makeCoordinator () -> Coordinator {
 		return Coordinator()
 	}
 
-	class Coordinator: NSObject, UITextField {
-		func textFieldDidChangeSelection() {
+	class Coordinator: NSObject, UITextFieldDelegate {
+		func textFieldDidChangeSelection(_ textField: UITextField) {
 		
 		}
 	}
@@ -1464,10 +1546,10 @@ import WebKit
 
 View
 ```swift
-let website : String = "<https://www.youtube.com/>"
+let website : String = "https://www.youtube.com/"
 
 // open the link in Safari
-Link("Sarunw", destination: URL(string: "<https://sarunw.com>")!)
+Link("Sarunw", destination: URL(string: "https://sarunw.com")!)
 
 // open the link in view
 if let websiteURL = URL(string: website) {
@@ -1555,7 +1637,7 @@ struct CustomerModel: Codable {
 struct CustomerModel: Decodable, Encodable { 
 	
 	// 2 add CodingKeys, parse data to keys
-	enum CodingKeys: String, CodingKeys {
+	enum CodingKeys: String, CodingKey {
 		case id
 		case name
 		case points
@@ -1635,7 +1717,7 @@ Text("Hello")
 ```swift
 struct CustomButtonStyle: ButtonStyle {
 
-	let scaleAmount: CGFloat // custom input optional
+	var scaleAmount: CGFloat = 0.9 // custom input optional
 
 	func makeBody(configuration: Configuration) -> some View {
 		configuration.label
@@ -1653,6 +1735,7 @@ extension View {
 
 // view
 Button(action: { ... }, label: { ... })
+	// 3 ways, pick one (not a chain)
 	.buttonStyle(CustomButtonStyle())
 	.buttonStyle(CustomButtonStyle(scaleAmount: 0.5))
 	._CustomButtonStyle() // use with extension part
@@ -1670,7 +1753,7 @@ struct testApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-        }.onChange(of: scenePhase) { phase in
+        }.onChange(of: scenePhase) { _, phase in // iOS 17: (oldValue, newValue)
             print("changed")
             switch phase {
             case .background:

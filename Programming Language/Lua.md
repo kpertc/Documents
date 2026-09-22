@@ -41,19 +41,19 @@ tonumber()
 
 ```lua
 -- length of string
-a = ‘asdasd’
+a = 'asdasd'
 
 print(#a) -- 6
 
 -- ASCII to string
 s = string.char(0x30, 0x31, 0x32, 0x33) -- 0123
 
-string.byte(s.2)
+string.byte(s, 2) -- 49
 ```
 
 ```lua
-function functionname (…)
-	— body
+function functionname (...)
+	-- body
 end
 
 -- default return nil
@@ -79,7 +79,7 @@ a[1]
 -- write value
 a[1] = 123 
 
--- length
+-- length, only well-defined when the table has no holes (no nil in the middle)
 print(#a)
 
 -- insert
@@ -111,7 +111,7 @@ a["a"] = 2
 ```lua
 a = 1
 
-_G[a] --1
+_G["a"] --1
 _G["table"]["insert"] 
 ```
 
@@ -154,6 +154,10 @@ for i=1, 10 do
 	print(i)
 end
 
+-- iterate a table
+for k, v in pairs(t) do end  -- all keys, order not guaranteed
+for i, v in ipairs(t) do end -- array part only, stops at the first nil
+
 -- 1 3 5 7 9 loop
 for i=1, 10, 2 do
 	print(i)
@@ -161,7 +165,7 @@ end
 
 -- "break" loop
 for i=1, 10 do
-	if i = 5 then break end
+	if i == 5 then break end
 end
 ```
 

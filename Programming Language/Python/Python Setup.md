@@ -59,7 +59,7 @@ alias python="python3"
 alias pip=pip3
 ```
 
-.bash_profile
+~/.zshrc (macOS default shell since Catalina; `.bash_profile` is the legacy bash path)
 
 
 

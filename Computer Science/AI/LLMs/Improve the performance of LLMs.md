@@ -2,7 +2,7 @@
 
 - Intermediate steps
 	- Training / fineTuning / prompting with intermediate steps (Chain of Thought, COT)
-	- Zero-shot, analogical reasoning (show LLMS examples), special decoding (Greedy Decoding)
+	- Zero-shot, analogical reasoning (LLM generates its own examples first), special decoding (CoT-decoding: look at top-k alternatives at the first token instead of greedy)
 - Self-Consistency
 	- generate multiple independent responses to the same prompt and then selecting the most consistent or prevalent answer
 - Limitation
@@ -14,7 +14,7 @@ Define a right problem to work on
 
 Zero-shot: You give no examples in the prompt
 One-shot: You give one example, then ask the model
-Many-shot: 
+Many-shot: hundreds~thousands of examples in context (needs long context), can rival fine-tuning on some tasks
 
 prompt engineering guide
 - https://platform.openai.com/docs/guides/prompt-engineering
@@ -27,8 +27,8 @@ Agent → Handle more complex tasks, improve response quality
 Compound AI system
 
 framework:
-	- AutoGen
-	- LangChain [[LangChain]] [[LangChain.js]]
+	- AutoGen (v0.4 rewrite; now folded with Semantic Kernel into Microsoft Agent Framework)
+	- LangChain [[LangChain]] [[LangChain.js]], LangGraph (the stateful/agent part)
 
 Meta-prompting → LLMs generate, modify, or optimize prompts for themselves
 

@@ -3,15 +3,18 @@
 https://fastapi.tiangolo.com/
 
 ```sh
-pip install fastapi uvicorn
+pip install "fastapi[standard]" # bundles the fastapi CLI (0.111+), or: pip install fastapi uvicorn
 ```
 
 ```sh
-uvicorn src.langchain.fastapi:app --reload
+fastapi dev src/langchain/fastapi.py # dev
+fastapi run src/langchain/fastapi.py # prod
+
+uvicorn src.langchain.fastapi:app --reload # explicit host / port / workers
 ```
 
 ```python
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
 app = FastAPI()
 
@@ -21,5 +24,5 @@ def read_root():
 ```
 
 ``` python
-raise HTTPExeception(status_code=404, detail=f"")
+raise HTTPException(status_code=404, detail="Item not found")
 ```

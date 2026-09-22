@@ -1,7 +1,7 @@
 
 [[Statistics Overview]]
 
-Data Science takes instructed data to find ==order, meaning, and value==
+Data Science takes unstructured data to find ==order, meaning, and value==
 Data Science provides insight & competitive advantage.
 
 ![[coding-stats-domain.jpg | 300]]
@@ -43,7 +43,7 @@ Incremental & cumulative
 
 
 Share & archive data
-ODSC.com
+ODSC.com (Open Data Science Conference)
 OSF.io
 
 

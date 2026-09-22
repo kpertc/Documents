@@ -8,12 +8,13 @@ System -> update per frame
 
 
 ```swift
-import SceneKit
+import RealityKit
+import RealityKitContent // or ARKit, depending on target
 ```
 
 
 ```swift
-let entity = try await En
+let entity = try await Entity(named: "Scene", in: realityKitContentBundle)
 ```
 
 [[SwiftUI]]

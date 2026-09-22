@@ -65,10 +65,10 @@ Inherent only 1, multiple interface
 ``` csharp
 public interface ITaxCalculator
 {
-    int Calculator(); //do not have access modifier
+    int Calculator(); //implicitly public (C# 8+ also allows private/protected/static members and default implementations)
 }
 
-public interface IMyInterface, IMyInterfaceII
+public interface IMyInterface : IMyInterfaceII
 {
    
 }
@@ -84,11 +84,13 @@ public class interfaceTest : MonoBehaviour, IMyInterfaceII
 ### Language Integrated Query, LinQ
 
 ``` csharp
+using System.Linq; // .Where() 需要，否则报 "Where does not exist on List<T>"
+
+List<item> _list = new List<item>();
+
 item i1 = new item("i1", true, 10f);
 item i2 = new item("i2", false, 20f);
 item i3 = new item("i3", true, 30f);
-
-public static List<item> _list = new List<item>();
 
 _list.Add(i1);
 _list.Add(i2);
@@ -105,6 +107,12 @@ var result = _list.Where(t => t.isTrue == true);
 -   Task-based Asynchronous Pattern (TAP)
 -   Legacy - Event-based Asynchronous Pattern (EAP)
 -   Legacy - Asynchronous Programming Model (APM)
+
+-   `async` marks a method whose `await` points yield control
+-   `await` unwraps `Task<T>` → `T`, resumes on the captured context
+-   Never `.Result` / `.Wait()` on a UI thread → deadlock
+-   `Task.WhenAll` for fan-out
+-   `ConfigureAwait(false)` in library code
 
   
 

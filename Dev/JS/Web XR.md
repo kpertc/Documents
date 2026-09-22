@@ -55,21 +55,19 @@ inputSources.gamepad.buttons[4].pressed
 inputSources.gamepad.buttons[5].pressed
 
 // return -1 - 1
-inputSources[0].gamepad.axes[3] // Left -1, right 1
-inputSources[0].gamepad.axes[3] // Up 1, down -1
+inputSources.gamepad.axes[2] // thumbstick X, left -1, right 1
+inputSources.gamepad.axes[3] // thumbstick Y, up -1, down 1
 ```
 
 ![[controller-event.png | 300]]
 
 Events:
--   `connected`, `disconnect`
--   `selectedstart`, `selectedend`, `select` Tigger
--   `squeezestart`, `squeeze`, `squeeze` Grip Button
+-   `connected`, `disconnected`
+-   `selectstart`, `selectend`, `select` Tigger
+-   `squeezestart`, `squeezeend`, `squeeze` Grip Button
 
-Input profile library
-Library ?
+Input profile library → `@webxr-input-profiles/motion-controllers` (npm), controller models loaded from the profiles assets CDN
 
-
-WebXR Dom Overlay
-Anchor
-Layer
+WebXR Dom Overlay → show DOM UI on top of an AR session
+Anchor → pin content to a real world pose, tracked across frames
+Layer → composite quad / cylinder layers, sharper than drawing into the WebGL scene

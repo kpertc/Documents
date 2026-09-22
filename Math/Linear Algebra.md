@@ -67,7 +67,7 @@ $$
 The vector sum of u and v is the vector of the sums
 
 $$
-\vec{w} + \vec{v} =
+\vec{u} + \vec{v} =
 \begin{pmatrix}
 u_1 \\ \vdots \\ u_n
 \end{pmatrix} +
@@ -93,7 +93,7 @@ $$
 
 
 
- | 
+English|中文|Definition
 ---|---|---
 Linear Combination|线性组合|add multiple vectors
 Span||The span of a set of vectors is **the set of all linear combinations of the vectors**
@@ -103,7 +103,7 @@ Span||The span of a set of vectors is **the set of all linear combinations of t
 
 ### Dot product
 
-满足交换率(commutative)和结合律(Associative property)
+满足交换律(commutative)和分配律(distributive): a·(b+c) = a·b + a·c — 不满足结合律(a·b 是标量)
 
 Length by 勾股定理
 Length to product

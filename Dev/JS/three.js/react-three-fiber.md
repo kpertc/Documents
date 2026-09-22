@@ -1,6 +1,7 @@
 #web-dev 
 
 react-three-fiber → R3F
+- note targets @react-three/fiber v9 (React 19) + drei v10
 - https://pmnd.rs/
 - [[React]]
 - [[Zustand]] state management
@@ -105,11 +106,11 @@ const cubeRef = useRef()
 // update
 useFrame((state, delta) => {
 	// cubeRef.current → native three.js object
-    cubeRef.current.rotateion.y += 0.01
+    cubeRef.current.rotation.y += 0.01
 
 	// create sin movement
 	const time = state.clock.elapsedTime
-	cube.current.position.x = Math.sin(time)
+	cubeRef.current.position.x = Math.sin(time)
 })
 
 return (
@@ -199,10 +200,11 @@ const model = useLoader(
     <bufferGeometry>
         <bufferAttribute
             attach = 'attributes-position'
-            count = {position.length / 3}
-            array = {position}
-            itemSize = {3}
+            args = {[position, 3]}
         />
+        // args -> re-constructs the attribute when the array identity changes
+        // v8-era count={position.length / 3} array={position} itemSize={3}
+        // -> only sets props on an already-constructed attribute, does not reliably update
     </bufferGeometry>
     <material />
 </mesh>
@@ -210,21 +212,21 @@ const model = useLoader(
 
 ##### Animation
 ```JavaScript
-const animations = useAnimation(fox.animations, fox.scene)
+const animations = useAnimations(fox.animations, fox.scene)
 
 useEffect(() => {
     const action = animations.actions.Run
     action.play()
 },[])
 
-// use levy to controll animation
+// use Leva to controll animation
 ```
 
 play camera track frame
 ``` js
 const { actions } = useAnimations(animations, group);
 
-// levy ui to manual set animation value
+// Leva ui to manual set animation value
 const { _time } = useControls("Experience-Test", {
 	_time: 0,
 });
@@ -342,7 +344,7 @@ const texture = useTexture("./textures/key-decal.png");
 ```JavaScript
 import { useGLTF } from '@react-three/drei'
 
-const model = useGLTF('./model.glb') // will load when the component is 
+const model = useGLTF('./model.glb') // will load when the component is mounted
 
 useGLTF.preload('./model.glb') // pre-load
 ```
@@ -356,23 +358,23 @@ import { BakeShadows } from "@react-three/drei";
 ###### Percent Closer Soft Shadows (PCSS)
 `three.js` example: https://threejs.org/examples/?q=pcss#webgl_shadowmap_pcss
 ``` js
-import { softShadows } from "@react-three/drei";
+import { SoftShadows } from "@react-three/drei";
 
-// run once, not in <></>
+// component form -> the old imperative softShadows() was removed from drei
 // will send params to shaders, and re-compile shaders
-softShadows({
-	...
-})
+<Canvas>
+	<SoftShadows size={ 25 } samples={ 10 } focus={ 0 } />
+</Canvas>
 ```
-###### AccumulativeShadow
+###### AccumulativeShadows
 ``` jsx
-<AccumulativeShadow /> // rendered on plane only, depended on three.js shadow
+<AccumulativeShadows /> // rendered on plane only, depended on three.js shadow
 ```
-###### ContactShadow
+###### ContactShadows
 on plane only, not depend on three.js shadow, and light, shadow camera recorded from below
 ```jsx
-<ContactShadow />
-<ContactShadow 
+<ContactShadows />
+<ContactShadows 
 	frames={ 1 } // only render on the 1st frame -> baked
 />
 ```
@@ -400,10 +402,10 @@ on plane only, not depend on three.js shadow, and light, shadow camera recorded 
 	ground = { ... } 
 
 // HDRI
-<Environment files={ './sky.hdr' } /> // use .hdr not .exr
+<Environment files={ './sky.hdr' } /> // .hdr (RGBELoader) & .exr (EXRLoader) both work, loader picked by extension
 
 // use presets
-<Environment presets= "sunsets" /> // find names ↓ https://github.com/pmndrs/drei/blob/master/src/helpers/environment-assets.ts
+<Environment preset= "sunset" /> // find names ↓ https://github.com/pmndrs/drei/blob/master/src/helpers/environment-assets.ts
 ```
 
 Add custom lighting & elements in Environment by adding into `<Environment />`
@@ -470,8 +472,8 @@ const { nodes, materials, scene } = useGLTF("./models/key.glb");
 		<Instances
 			geometry={nodes.keycap.geometry}
 			material={nodes.keycap.material}
-     .  >				
-			<Instance position={[[0, 0, 0]]} />
+			>
+			<Instance position={[0, 0, 0]} />
 		</Instances>
 	);
 };

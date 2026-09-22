@@ -3,7 +3,7 @@
 ### Other WebGL based renderer
 -   Babylon.js [[babylon.js]]
 -   A-Frame (three.js based)
--   React - 360
+-   React - 360 (archived by Meta, not a live option)
 -   PlayCanvas (WebGL game engine)
 
 ### Related Topics:

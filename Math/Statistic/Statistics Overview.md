@@ -24,14 +24,15 @@ Examples:
 - How much time do the members of my family spending eating per year?
 
 ---
-##### 3 Types of data
+##### 2 Types of data
 
 1.  Numerical → Quantitive (数量的)
-    1.  Discrete →
+    1.  Discrete → count
     2.  Continuous → Speed
         
-2.  Categorical → Qualitative (定性的，语言的) → Gender, Nationality
-3.  Ordinal → Mixing numerical and categorical → Hotel Ratings (3 star hotels may vary)
+2.  Categorical → Qualitative (定性的，语言的)
+    1.  Nominal → Gender, Nationality (can not be ordered)
+    2.  Ordinal → Hotel Ratings (3 star hotels may vary)
 
   
 
@@ -41,7 +42,7 @@ Mean (平均) → Easy, affect by outlier (异常值)
 
 Median (中位)
 
-Mode ()
+Mode (众数) → most frequent value, the only average that works on categorical data, can be multi-valued (bimodal)
 
 ---
 Entire population -> Census
@@ -130,7 +131,7 @@ Inferential statistic - from sample to conclude entire population
 
   
 
--   Quantitative (continuous)（量化的） -> numerical measurement of something: time / count
+-   Quantitative（量化的） -> numerical measurement of something: time / count
     
     -   Interval
         
@@ -197,7 +198,7 @@ Wording bias
 
 -   Truthfulness of Response
     -   Respondents may lie on purpose (too personal, too hard)
-    -   Respondents may lie advertently "recall bias" (forgotten or influenced by biased event)
+    -   Respondents may lie inadvertently "recall bias" (forgotten or influenced by biased event)
 
 -   Hidden Bias
     -   Question wording may induce a certain response
@@ -258,9 +259,9 @@ Randomized Experiement
 ```mermaid
 graph LR
 start(Measure) --> Group_A_Treatment(Group A Treatment)
-start(Measure) --> Group_B_Treatment(Group A Treatment)
-Group_A_Treatment(Group B Treatment) --> Measure_(Measure)
-Group_B_Treatment(Group B Treatment) --> Measure_(Measure)
+start --> Group_B_Treatment(Group B Treatment)
+Group_A_Treatment --> Measure_(Measure)
+Group_B_Treatment --> Measure_
 ```
 
 Placebo (安慰剂)

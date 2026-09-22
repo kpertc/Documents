@@ -5,7 +5,7 @@
 	- Market size & growth → Vision
 	- Portfolio planning → Business model canvas
 	- Competitive analysis→ Goals
-- 
+
 Define&Validate
 Build
 Acquire
@@ -22,11 +22,12 @@ B2C
 Product Life Cycle
 ![[product-lifecycle.png]]
 
-Sofeware / Hardware
+Software / Hardware
 
 Team size / Structure
 
 Three Horizons of Innovation
+- H1 core business (today) / H2 adjacent, emerging / H3 transformational (future bets) — classic 70/20/10 split of investment
 
 ![[where-to-invest.png]]
 

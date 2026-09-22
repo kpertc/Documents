@@ -2,7 +2,7 @@
 
 ### Basics
 
-> [!note] Similar to C# syntax
+> [!note] C-like syntax (descended from RenderMan SL)
 
 VEX ⇆ VOPs are interchangeable
 ![[Houdini-Vector-Expression Language-VEX-img/VEX-VOPs-are-interchangeable.png | 300]]
@@ -50,7 +50,7 @@ float width = ch('../width');
 ```C#
 string myString = "Hello World";
 float x = 3;
-vector vec1 = (0,1,1);
+// vector vec1 = (0,1,1); // invalid, parens are not a vector literal
 vector vec2 = set(0,1,1);
 vector vec3 = {1,1,1};
 ```
@@ -96,7 +96,7 @@ Create an array
 float fArray[] = array() // init an empty array
 
 // use vector set an array
-v@vec1 = (1, 2, 4);
+v@vec1 = set(1, 2, 4);
 f[]@values = set( v@vec1 );
 ```
 
@@ -127,7 +127,8 @@ removeindex() // remove by specific index
 removevalue() // remove the first matched value
 
 float nums[] = {0, 1, 2, 3, 1, 2, 3};
-removevalue(nums; 2);  // == 1// nums == {0, 1, 3, 1, 2, 3}
+removevalue(nums, 2);  // returns 1
+// nums == {0, 1, 3, 1, 2, 3}
 
 // get length of an array
 int length = len( array );
@@ -178,7 +179,7 @@ f@myAttribute = 5; //deflaut is float
 i@myAttribute = x; // int
 s@myAttribute = x; // string
 v@myAttribute = x; // vector
-d@myAttribute = set{ ... } // dictionary
+d@myAttribute = {}; d@myAttribute["key"] = value; // dictionary, {} is the only literal
 
 f[]@farray = { 1.0, 2.0, 3.0 }; // float array
 s[]@ ... // string array
@@ -187,18 +188,24 @@ v[]@ ... // vector array
 
 ```C#
 //access diffuse color
-v@cd.r = 1; //red value to 1 
+v@Cd.x = 1; //red value to 1 
 
 v@P // position
 v@Cd // color
 v@v // Velocity
 
 v@scale //scale
-@pScale //uniform scale
+@pscale //uniform scale (float)
+// names are case-sensitive: P N Cd Alpha and globals @Time @Frame @TimeInc are capitalized, most others lowercase
 
 @ptnum // point index
-@pnum // total amount of number
+@numpt // total number of points
 @primnum // primnum
+@numprim // total number of prims
+@vtxnum // vertex index
+@numvtx // total number of vertices
+@elemnum // current element index
+@numelem // total number of elements
 
 @id = @ptnum
 ```
@@ -230,7 +237,7 @@ setdetailattrib()
 float area = primintrinsic(0,'measuredarea',@primnum);
 ```
 
-### Houdini Group and VEX
+### [[../Houdini Group and VEX]]
 
 ### Geometry Functions
 
@@ -276,7 +283,7 @@ Primitive / Global
 Retrieve read-only intrinsic attribute
 
 [primintrinsic()](https://www.sidefx.com/docs/houdini/vex/functions/primintrinsic.html)
-[detailintrinsic()](https://www.sidefx.com/docs/houdini/vex/functions/primintrinsic.html)
+[detailintrinsic()](https://www.sidefx.com/docs/houdini/vex/functions/detailintrinsic.html)
 
 ```C#
 primintrinsic()
@@ -294,12 +301,12 @@ https://www.youtube.com/watch?v=jxW1gDeAKiI
 
 ### [Condition](https://www.sidefx.com/docs/houdini/vex/statement.html#if) (If)
 Comparison Operator
-œ
+
 \>|>=|!=|&&
 :-|:-|:-|:-
 Greater Than|Greater Than or Equal To|Is Not Equal To|And
 
-<|<=|\=\=|II
+<|<=|\=\=|\|\|
 :-|:-|:-|:-
 Less Than|Less Than or Equal To|Is Equal to|Or
 
@@ -328,7 +335,7 @@ if (yPos >= 0 && xPos >= 0)
 if ( (value < 0.2 || value > 0.8) || (value > 0.4 && value < 0.6) )
 
 // ternary operator
-value < 1 ? "yes" ; "no";  
+string result = value < 1 ? "yes" : "no";  
 
 // use return to end process
 return
@@ -360,7 +367,7 @@ length(vector v); // Returns the distance of the vector or vector4 from the orig
 ##### Foreach
 
 ```C#
-float sunOfArray = 0;
+float sumOfArray = 0;
 
 foreach (float currentLoopValue; myArray) {
     sumOfArray += currentLoopValue;
@@ -418,9 +425,10 @@ Probability control by rand
 
 ```C#
 // in Detail
+float threshold = chf("threshold");
 for(int i=0; i < len(pts); i++) {
     float value = rand(i); // get a random value between 0 and 1
-    if (val < threshold) {
+    if (value < threshold) {
       ...        
     }
 }
@@ -455,8 +463,8 @@ Force (implement in solver)
 
 ```C#
 vector gravity = set(0, -0.05, 0);
-v@velocity += gravity;
-@P += v@velocity;
+v@v += gravity * @TimeInc;
+@P += v@v * @TimeInc;
 ```
 
 Other Topics:

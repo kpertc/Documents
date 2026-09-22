@@ -38,7 +38,7 @@ Shader "Examples/ShaderSyntax"
     
         Tags{
             "RenderType" = "Opaque" 
-            "RenderPipeline" = "UniversalRenderPipeline" 
+            "RenderPipeline" = "UniversalPipeline" 
             "IgnoreProjector" = "True"
         }
         
@@ -68,9 +68,14 @@ Shader "Examples/ShaderSyntax"
             float3 clipNornal : TEXCOORD1;
         };
         
+        // 贴图和采样器声明在 CBUFFER 外面
+        TEXTURE2D(_ExampleTex);
+        SAMPLER(sampler_ExampleTex);
+        
+        // SRP Batcher 兼容要求 UnityPerMaterial 与 Properties 声明完全一致
         CBUFFER_START(UnityPerMaterial)
-            float4 _ExampleTexture_ST; // Tiling & Offset, x = TilingX, y = TilingY, z = OffsetX, w = OffsetY
-            float4 _ExampleTexture_TexelSize; // x = 1/width, y = 1/height, z = width, w = height.
+            float4 _ExampleTex_ST; // Tiling & Offset, x = TilingX, y = TilingY, z = OffsetX, w = OffsetY
+            float4 _ExampleTex_TexelSize; // x = 1/width, y = 1/height, z = width, w = height.
             float4 _ExampleColor;
             float _ExampleRange;
             float _ExampleFloat;
@@ -85,8 +90,10 @@ Shader "Examples/ShaderSyntax"
            // The code that defines the Pass goes here
         }
         
-        // use URP shadow pass
-        UsePass "Universal Render Pipeline/Lit/ShadowCaster"
+        // use URP shadow pass, pass 名必须大写
+        UsePass "Universal Render Pipeline/Lit/SHADOWCASTER"
+        // UsePass 引入的 pass CBUFFER 布局不受自己控制，可能丢 SRP Batcher 兼容性
+        // 用 Frame Debugger 确认，或者直接把 ShadowCaster pass 抄进来
     }
     Fallback "ExampleFallbackShader"
 }
@@ -95,7 +102,7 @@ Shader "Examples/ShaderSyntax"
 >SRP中特殊的Tag: RenderPipeline - 指定用哪个渲染管线:
 	URP：UniversalPipeline
 	HDRP：HDRenderPipeline
-	SPR：自定义的标签
+	SRP：自定义的标签
 
 >URP也支持CG语言。如果你给Shader添加“CGPROGRAM/ENDCGPROGRAM”块，Unity会自动include内饰渲染管线的代码库，此时如果你再include SRP shader代码库，可能会有一些宏或者函数和内置渲染管线的代码库冲突。此外，使用CG语言无法支持SRP Batcher *Unlit是可以直接用
 
@@ -105,7 +112,7 @@ Shader "Examples/ShaderSyntax"
 
 -   High precision `float`
 -   Medium precision `half`
--   Low precision `fixed`
+-   Low precision `fixed` (Built-in RP / Cg only，URP/HDRP 的 HLSL 已移除，用 `half`)
 
 ### HLSL
 ``` hlsl
@@ -123,7 +130,7 @@ saturate() // clamp value 0-1
 frac() // Returns the fractional (or decimal) part of input 
 lerp
 
-sign() //value is 1 when f is positive or zero, -1 when f is negative.
+sign() //1 if f > 0, 0 if f == 0, -1 if f < 0. 要永不为0用 f >= 0 ? 1 : -1
 floor() //Returns the greatest integer which is less than or equal to.
 ```
 
@@ -141,22 +148,22 @@ https://www.cyanilux.com/tutorials/urp-shader-code/
 
 ### Build-in转URP 命令参考
 
-`SPR Batcher` - All materials using the same shader variant use a single draw call
+`SRP Batcher` - materials using the same shader variant share a persistent CBUFFER, so Unity skips most per-draw setup. Draw call 数量不变，减少的是 SetPass call
 Core.hlsl does not contain default structs use as `appdata` or `v2f`
 Core.hlsl does not contain pre-coded vertex or fragment functions
 
 
 > [!info] URP new naming convention
-> `Appdate` 🠒 `Attribute`
+> `appdata` 🠒 `Attributes`
 > `v2f` 🠒 `Varyings`
 
 > [!info] URP new naming convention
 > **[From Built-in to URP](https://teodutra.com/unity/shaders/urp/graphics/2020/05/18/From-Built-in-to-URP/)** 英文原版
 > **[内置管线Shader升级到URP详细手册](https://www.jianshu.com/p/3fef69e2efb6)** 中文
->1.  Add render pipeline tag `"RenderPipline" = "UniversalPipline"`
+>1.  Add render pipeline tag `"RenderPipeline" = "UniversalPipeline"`
 2.  Replace `CGPROGRAM` by `HLSLPROGRAM`
 3.  Replace `UnityCG.cginc` with URP `Core.hlsl`
-4.  Create `Attribute` & `Varyings`
+4.  Create `Attributes` & `Varyings`
 5.  Replace legacy functions `UnityObjectToClipPos` by new functions `TransformObjectToHClip`
 6.  Replace `fixed` type with `half`
 
@@ -222,5 +229,6 @@ Unity Editor 工具编写 Unity Editor
 Flip UV
 ```hlsl
 (1 - i.uv.x) // Flip Horizontal
-(1 - i.uv.x) // Flip Vertical
+(1 - i.uv.y) // Flip Vertical
+// UV 原点在不同平台 / RenderTexture 上不一致，需要判断用 UNITY_UV_STARTS_AT_TOP
 ```

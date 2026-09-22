@@ -112,18 +112,20 @@ Math.Round(3.5) //return 4
 ``` csharp
 //constant can not be changed, can not contain variable
 
-const int pi = 3.14;
-const double = 65 / 2;
+const double pi = 3.14;
+const double half = 65 / 2.0; // 65 / 2 is integer division -> 32
 const string format = ".mp4";
 ```
 
 ### [Nullable Value](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types) -> T?
 
 ``` csharp
-Bool? _bool;
+bool? _bool = null;
 
-print(_bool.HasValue); // false
+Console.WriteLine(_bool.HasValue); // false
 ```
+
+nullable *value* types only; nullable *reference* types (`string?`, C# 8+, on by default since .NET 6) are a separate feature
 
 ### Getting User's Input
 
@@ -172,7 +174,7 @@ Console.ReadLine();
 ### Arrays
 
 ``` csharp
-int [] LuckyNumbers = { 4, 8, 15, 16, 23, 42};
+int [] luckyNumbers = { 4, 8, 15, 16, 23, 42};
 
 luckyNumbers[2] //return 15, Access info
 luckyNumbers[2] = 100; //modify thrid value to 100
@@ -192,12 +194,12 @@ Breed.Chihuahua;
 ![[img/Unity/enum.png | 300]]
 
 ``` csharp
-public enum Month : 1
+public enum Month : byte // `:` sets the underlying integral type, not a start value
 {
     Jan = 1,
     Feb = 2,
-    Mar = 4,
-    Apr = 8
+    Mar = 3,
+    Apr = 4
 }
 ```
 
@@ -272,7 +274,7 @@ virtual
 override
 
 const // not change
-readonly // changeable by setter
+readonly // assignable only in its declaration or in a constructor of the same type; value computed at runtime, can differ per instance
 
 sealed // the sealed modifier prevents other classes from inheriting from it 
 ```
@@ -380,7 +382,7 @@ static void Main(string[] args)
     {
         if (guessCount < guessLimit)
         {
-            Console.Write("Enter guess； ");
+            Console.Write("Enter guess; ");
             guess = Console.ReadLine();
             guessCount++;
         }
@@ -469,18 +471,7 @@ try
 
 }
 
-catch
-{
-
-} 
-
-//get more information
-catch(exception e)
-{
-    Console.WriteLine(e.Message);
-} 
-
-//catch one type of error
+//catch one type of error, most derived first
 catch(DivideByZeroException e)
 {
     Console.WriteLine(e.Message);
@@ -490,6 +481,18 @@ catch(FormatException e)
 {
     Console.WriteLine(e.Message);
 }
+
+//get more information
+catch(Exception e)
+{
+    Console.WriteLine(e.Message);
+} 
+
+//general catch, must be last
+catch
+{
+
+} 
 
 //will exectue no matter what
 finally 
@@ -561,11 +564,14 @@ Book Book1 = new Book("Harry Potter", "JK Rowling", 400);
 Book Book2 = new Book();
 ```
 
-### Deconstructor
+### Finalizer (~ClassName)
 
 ``` csharp
-~
+~Book() { }
 ```
+
+nondeterministic, almost never write one -> use `IDisposable` / `using`
+(`Deconstruct(out ...)` is an unrelated feature: unpack an object into a tuple)
 
 ### this
 
@@ -624,8 +630,8 @@ Console.WriteLine(student1.HasHonors());
 ### Getters & Setters
 
 ``` csharp
-public var myVariable; //can be accessed by outside
-private var myVariable; //can not be accessed by outside
+public string myVariable; //can be accessed by outside
+private string myVariable; //can not be accessed by outside
 
 public string Rating
 {
@@ -637,7 +643,7 @@ public string Rating
         }
         else
         {
-            rating == "NR";
+            rating = "NR";
         }
     }
 }
@@ -645,9 +651,15 @@ public string Rating
 
 ### Static Attributes
 
+one copy shared by all instances of the class (not per object)
+
 ### Static Class
 
+cannot be instantiated or inherited, every member must be static
+
 ### [Partial Class](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/partial-classes-and-methods)
+
+one type split across several files - how Unity / WinForms generated code is wired in
 
 ### NameSpace
 

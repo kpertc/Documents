@@ -7,7 +7,11 @@ NGINX
 
 层级越高 性能 ↓ 功能 ↑
 
-DNS 负载均衡 （反向代理服务器）
+DNS 负载均衡 - 解析时轮询 A 记录, 不经手流量, 受客户端缓存影响
+
+L4 负载均衡 - 传输层转发连接
+
+L7 反向代理 (NGINX) - 终止 TLS, 按 path / header 路由, 健康检查
 
 <br>
 
@@ -59,7 +63,7 @@ TCP guarantees the data will be received, will resend if not received.
 
 ### [Port Number](https://www.youtube.com/watch?v=RDotMcs0Erg)
 
-A IP Address could do many services such as HTML, SMTP, FTP etc. Port Number will specify port on an IP address.
+A IP Address could do many services such as HTTP, SMTP, FTP etc. Port Number will specify port on an IP address.
 
 ![[port-number-1.png]]|![[port-number-2.png]]
 ---|---
@@ -67,6 +71,8 @@ A IP Address could do many services such as HTML, SMTP, FTP etc. Port Number wil
 -   0 - 1023 -> Well known port #
 -   1024 - 49151 (Company) Registered port #
 -   49152 - 65535 Dynamically assigned port #
+
+Well known ports: 20/21 FTP, 22 SSH/SFTP, 23 Telnet, 25 SMTP, 53 DNS, 67/68 DHCP, 69 TFTP, 80 HTTP, 110 POP3, 143 IMAP, 443 HTTPS, 587 SMTP submission, 993 IMAPS, 995 POP3S, 3389 RDP
 
 
 Manually change port:
@@ -87,7 +93,9 @@ IP version 4 (IPV4)
     
 -   Computer read binary IP address -> `66``.94.29.13` -> `01000010.01011110,00011101.00001101`
     
--   There are ==4,294,967,296 public IPv4 addresses== available.
+-   There are ==4,294,967,296 total IPv4 addresses== (2^32).
+    
+-   About 3.7 billion of them are publicly routable, the rest are reserved: RFC 1918 private (10/8, 172.16/12, 192.168/16), 127/8 loopback, 224/4 multicast, 240/4 reserved.
 
 > [!tips] [NAT](https://www.youtube.com/watch?v=FTUV0t6JaDA) (Network Address Translation)
 >
@@ -133,9 +141,11 @@ Portion
 
 Class | First Octet Address|Default Subnet Mask
 ---- | ---- | ----
-A | 1-127 | 255.0.0.0
+A | 1-126 | 255.0.0.0
 B | 128-191 | 255.255.0.0
 C | 192-223 | 255.255.255.0
+
+127.x.x.x is reserved for loopback (127.0.0.1, IPv6 `::1`), so it cannot be assigned to a host
 
 CIDR - Classless Inter-Domain Routing (Slash notation)
 ![[CIDR.png]]
@@ -223,8 +233,9 @@ MAC address is permanent
 ![[MAC address.png]]
 
 > [!info] Windows: ipconfig /all
->Linux / Mac: ifconfig
+>Linux: `ip addr` (or `ip a`) / Mac: `ifconfig`
 >One computer can have many MAC addresses, depending on the number of network interface
+>more in [[Networking Command]]
 
 ##### **ARP** (Address Resolution Protocol) broadcast
 
@@ -266,7 +277,9 @@ Encrypts the data, provide password and public key authentication
 
 All information is sent in clear text, not secure, vulnerable
 
-##### HTTPS (Secure HyperText Transfer Protocol)
+Status codes: 2xx ok | 3xx redirect (301 permanent, 302 temporary, 307/308 keep the method) | 4xx client (401 not authenticated, 403 authenticated but not allowed, 404, 429 too many requests) | 5xx server (502 bad gateway, 504 gateway timeout)
+
+##### HTTPS (HTTP Secure — HTTP over TLS)
 
 HTTP with a security feature, data is encrypted
 
@@ -275,6 +288,11 @@ HTTP with a security feature, data is encrypted
 ##### TLS, Transport Layer Security, lastest industry standard cryptographic protocol
 
 The successor to SSL
+
+-   SSL 2.0 / 3.0 are dead, disabled everywhere
+-   TLS 1.0 / 1.1 deprecated by RFC 8996 (2021)
+-   TLS 1.2 is the baseline, TLS 1.3 (RFC 8446, 2018) is current
+-   "SSL certificate" is only a colloquialism, it is a TLS certificate
 
 <br>
 
@@ -418,14 +436,14 @@ Command line tool that is used to display the current network connections and po
 
 ### [DMZ](https://www.youtube.com/watch?v=dqlzQXo1wqo) (Demilitarized Zone)
 
-Used to improve the security of an organization's network by segregating devices, such as computers and 
+Used to improve the security of an organization's network by segregating internet-facing devices, such as web, mail and DNS servers, from the internal LAN.
 
 |![[DMZ-1.png]]|![[DMZ-2.png]]|![[DMZ-3.png]]|
 |-|-|-|
 
-A DMZ divides a network into 2 parts, by taking devices from inside the firewall and then putting them outside the firewall.
+A DMZ divides a network into 2 parts, by taking the public-facing devices out of the internal LAN and putting them in a separate perimeter segment.
 
-A DMZ is where firewall protection is forbidden.
+A DMZ is firewalled on both sides: traffic from the internet reaches the DMZ through the firewall, and the DMZ is separately firewalled from the internal LAN, so a compromised public server cannot reach internal hosts.
 
   
 

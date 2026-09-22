@@ -5,7 +5,7 @@
 | - cross DCCs<br/> - most maya functions<br/> - extern| - only in maya<br/> - (all maya functions<br/> - feedback & help)|
 
 
-```python
+```mel
 print "Hello World"
 
 polyCube //create a cube
@@ -13,13 +13,13 @@ polyCube //create a cube
 help polyCube //Open Help
 ```
 
-```python
+```mel
 polyCube
 
 setAttr pCube1.translateX 20
 ```
 
-```python
+```mel
 string $myString = "Hello World";
 print $myString;
 
@@ -36,7 +36,7 @@ print $myInt;
 
 ### Comments
 
-```python
+```mel
 //Comment
 
 /*
@@ -47,16 +47,21 @@ Comment
 
 ### Using Python in MEL
 
-```python
-python("print min(3, 4)");
-python("print 'Hello World'");
+```mel
+python("print(min(3, 4))");
+python("print('Hello World')");
 ```
+
+Maya 2022+ embeds Python 3, so `print` needs the parentheses
+The MEL string uses double quotes, so the Python string inside has to use single quotes
 
 ### Using MEL in Python
 
 ```python
 import maya.mel as mel
-mel.eval('select -r pSphere 3;')
+mel.eval('select -r pSphere3;')
 ```
 
-# [Communicating between Python and MEL](https://download.autodesk.com/us/maya/maya2013_getting_started/index.html?url=files/Using_Python_in_Maya_Communicating_between_Python_and_MEL.htm,topicNumber=d30e45784)
+### Communicating between Python and MEL
+
+[Maya 2013 getting started](https://download.autodesk.com/us/maya/maya2013_getting_started/index.html?url=files/Using_Python_in_Maya_Communicating_between_Python_and_MEL.htm,topicNumber=d30e45784) (old, current docs: https://help.autodesk.com/view/MAYAUL/ENU/)

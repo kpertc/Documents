@@ -29,7 +29,7 @@ with open('xxx.png', 'wb') as f:
 r.status_code # 200 -> ok
 r.ok # -> boolean of connection 200, 300 True
 
-r.header
+r.headers # dict of response headers
 r.headers.get('content-disposition')
 #attachment; filename="image.png"; filename*=UTF-8''image.png
 ```
@@ -43,7 +43,7 @@ r.url # ->  https://httpbin.org/get?page=2&count=25
 
 ##### Auth authentication
 ```python
-r = requests.get('https://httpbin.org/basic-auth/username/password', auth = ('username', 'password')))
+r = requests.get('https://httpbin.org/basic-auth/username/password', auth = ('username', 'password'))
 
 '''
 return ->

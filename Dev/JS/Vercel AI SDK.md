@@ -1,4 +1,5 @@
 #JavaScript #TypeScript #Ai 
+snippets below target AI SDK 5.x
 ### Related Topics:
 - [[Zod]]
 - [[Dev/JS/dotenv]]
@@ -15,7 +16,7 @@
 
 - AI SDK
 - AI SDK UI
-- AI SDK RSC (React Server Components)
+- AI SDK RSC (React Server Components) — deprecated, use AI SDK UI for new projects
 
 ``` ts
 import { streamText } from "ai";
@@ -24,7 +25,7 @@ import "dotenv/config";
 async function main() {
 
 	const result = streamText({
-		model: "openai/gpt-5-mini",
+		model: "openai/gpt-5-mini", // "provider/model" string goes through AI Gateway -> needs AI_GATEWAY_API_KEY; the openai("...") form needs OPENAI_API_KEY
 		prompt: "Invent a new holiday and describe its traditions.",
 	});
 	
@@ -43,7 +44,7 @@ import { openai } from "@ai-sdk/openai";
 async function main () {
 	const result = await generateText(
 		{
-			model: openai("gpt-4o"),
+			model: openai("gpt-5-mini"),
 			prompt: "Tell me a joke",
 			
 			// system prompt, equal to role: system in messages
@@ -51,13 +52,13 @@ async function main () {
 			
 			// or
 			messages: [
-				{"role": "system", "message": "You are a text summarizer" }
+				{"role": "system", "content": "You are a text summarizer" }
 			]
 		}
 	)
 }
 
-console.log(result.txt)
+console.log(result.text)
 
 result.steps // for debug?
 result.steps[0]?.toolCalls
@@ -65,9 +66,9 @@ result.steps[0]?.toolResults
 ```
 
 ``` ts
-import type { CoreMessage } from 'ai'
+import type { ModelMessage } from 'ai' // v4 was CoreMessage
 
-const messages: [
+const messages: ModelMessage[] = [
 	{ role: "system", content: "You are a friendly greeter" },
 	{ role: "user", content: "Hello" },
 	{ role: "assistant", content: "Hi there!" },
@@ -77,11 +78,12 @@ const messages: [
 ``` ts 
 const result = await generateText ...
 
-result.usage.then((usage) => {
-	usage.inputTokens
-	usage.outputTokens
-	usage.totalTokens
-})
+// generateText: usage is a plain object
+result.usage.inputTokens
+result.usage.outputTokens
+result.usage.totalTokens
+
+// streamText: usage is a promise -> await result.usage first
 ```
 ### OpenAI Compatible
 use Poe API
@@ -91,22 +93,25 @@ import "dotenv/config";
 apiKey: process.env.POE_API_KEY,
 ```
 ``` ts
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+
 const provider = createOpenAICompatible({
 	name: "provider-name",
-	apiKey: POE_API_KEY,
-	baseURL: POE_BASE_URL,
+	apiKey: process.env.POE_API_KEY,
+	baseURL: process.env.POE_BASE_URL,
 	// includeUsage: true, // Include usage information in streaming responses
 });
 
 const result = await generateObject({
 	model: provider("gpt-5-mini"),
 	prompt: "please come up with 10 jokes.",
-}),
+	schema: z.object({ jokes: z.array(z.string()) }), // required, or output: 'no-schema'
+});
 ```
 
 ### Chat
 ``` tsx
-`convertToModelMessages(message)` // extract essential messages
+`convertToModelMessages(messages)` // extract essential messages
 ```
 
 UI side
@@ -149,7 +154,7 @@ max step -> loop?
 tools: {
 	addNumbers: tool({
 		description: "Add two numbers together",
-		parameters: z.object({
+		inputSchema: z.object({ // v4 was `parameters:`, renamed in AI SDK 5
 			num1: z.number(), // .describe()
 			num2: z.number()
 		}),
@@ -188,13 +193,15 @@ result.steps.length
 export type ChatTools = InferUITools<typeof tools>
 export type ChatMessage = UIMessage<never, UIDataTypes, ChatTools>
 
-const { message } : { message: ChatMessage[] } ... 
+const { messages } : { messages: ChatMessage[] } = await req.json() // server route
 ```
 
 base on the tool to create custom UI
 ``` tsx
-messsage.part.type === "text" // normal text is "text"
-messsage.part.type === "tool-getCurrentTime"// tool reuslt is start with "tool-"
+message.parts.map((part) => ...) // each message has a parts array
+
+part.type === "text" // normal text is "text"
+part.type === "tool-getCurrentTime"// tool reuslt is start with "tool-"
 
 part.state
 part.input // input
@@ -211,15 +218,20 @@ by model provider
 ```tsx
 // openai
 const tools = {
-	webSearchPreview: openai.tools.webSearchPreview({}),
+	webSearchPreview: openai.tools.webSearchPreview({}), // GA name is openai.tools.webSearch({})
 };
 
 // reasoning
 const result = streamText({
 	model: openai.responses("gpt-5-mini"), // gpt has reasoning
 	tools,
-	
+	messages: convertToModelMessages(messages),
+});
+
 // anthropic
+const anthropicTools = {
+	webSearch: anthropic.tools.webSearch_20250305({ maxUses: 5 }),
+};
 ```
 
 
@@ -266,8 +278,10 @@ const result = streamText({
 
 ### Structured Output
 
-experimentalOutput
+experimental_output
 ``` ts
+import { Output } from 'ai'
+
 // in generate text
 experimental_output: Output.object({
 	schema: z.object({
@@ -275,21 +289,21 @@ experimental_output: Output.object({
 	})
 })
 
-result.experimentalOutput.sum
+result.experimental_output.sum
 ```
 
 `generateObject()`
 ``` ts
 const result = await generateObject({
-	model: openai("gpt-4o"),
+	model: openai("gpt-5-mini"),
 	prompt: "please come up with 10 jokes.",
 	schema: z.object({
 		definitions: z.array(z.string()
 			.describe("use as much jargon as possible.") 
 			// describle is metadata in zod
 		)
-	})
-	schemaName: ""
+	}),
+	schemaName: "Definitions" // schema metadata passed to the provider
 })
 
 result.object.definitions
@@ -298,10 +312,10 @@ result.object.definitions
 classify object using enum
 ``` ts
 const result = await generateObject({
-	model: openai("gpt-4o"),
+	model: openai("gpt-5-mini"),
 	prompt: ".",
 	output: 'enum',
-	enum: ['relevant', 'irrelevant']
+	enum: ['positive', 'negative', 'neutral'],
 	system: "Classify the text as either positive, negative, or neutral"
 })
 
@@ -314,9 +328,15 @@ ai-sdk 6
 `streamObject()`
 [streamObject()](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-object)
 ``` ts
-await streamObject({
-
+const { partialObjectStream } = streamObject({
+	model: openai("gpt-5-mini"),
+	prompt: "please come up with 10 jokes.",
+	schema: z.object({ jokes: z.array(z.string()) }),
 })
+
+for await (const partial of partialObjectStream) {
+	console.log(partial) // object filled in progressively
+}
 ```
 
 ### Reading Image
@@ -362,7 +382,7 @@ const result = await generateText(
 				{
 					type: "file",
 					data: readFileSync(filePath),
-					mimeType: "application/pdf"
+					mediaType: "application/pdf"
 				}
 			] },
 		]
@@ -383,7 +403,7 @@ import { embedMany, embed, cosineSimilarity } from 'ai'
 ```ts
 export async function generateEmbedding(text: string) {
 
-	const input = text.replace("\n", " ");
+	const input = text.replaceAll("\n", " "); // replace() only swaps the first one
 	
 	const { embedding } = await embed({
 		model: provider.textEmbeddingModel("text-embedding-3-small"),
@@ -398,7 +418,7 @@ embed many texts in one request
 ```ts
 export async function generateEmbeddings(texts: string[]) {
 
-	const inputs = texts.map((text) => text.replace("\n", " "));
+	const inputs = texts.map((text) => text.replaceAll("\n", " "));
 	
 	const { embeddings } = await embedMany({
 		model: provider.textEmbeddingModel("text-embedding-3-small"),
@@ -421,10 +441,10 @@ export async function searchDocuments(
 	
 	const similarity = sql<number>`1 - (${cosineDistance(
 		documents.embedding,
-		embedding
+		queryEmbedding
 	)})`
 	
-	const similarDocumnets = await db.select(
+	const similarDocuments = await db.select(
 		{
 			id: documents.id,
 			content: documents.content,
@@ -434,15 +454,18 @@ export async function searchDocuments(
 		.where(gt(similarity, threshold))
 		.orderBy(desc(similarity)) // desc -> descending
 		.limit(limit)
-	)
+
+	return similarDocuments
 }
 ```
 
 // todo add try catch for text generation
 ### Audio
  ``` ts
+ import { experimental_transcribe as transcribe } from 'ai' // no bare `transcribe` export
+
  const transcript = await transcribe({
-	 model: openai.transcription("whisper-1")
+	 model: openai.transcription("whisper-1"),
 	 audio: uint8Array
  })
  ```

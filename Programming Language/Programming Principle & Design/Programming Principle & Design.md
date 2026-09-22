@@ -8,7 +8,7 @@
 
 <br>
 
-Terms | | 
+Terms|中文|Definition
 :--|:--|:--
 Data Concurrency|并发|The ability to allow multiple parts of your application to affect multiple transactions within a single database
 Refactoring|重构|

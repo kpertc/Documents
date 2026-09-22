@@ -11,11 +11,11 @@
 `Alt` + `/` close Panel
 
 Ctrl + B Maximum a Panel|Tear off Panel
----|---|---
+---|---
 ![[img/Houdini UI Tips/Ctrl+B.gif \| 500]]|![[img/Houdini UI Tips/tearoffPanel.gif \| 500]]
 
 ### Get parameter window
-|![[img/Houdini UI Tips/getParameterWindow.gif \| 500]]
+![[img/Houdini UI Tips/getParameterWindow.gif \| 500]]
 
 ### Show Tree View
 ![[img/Houdini UI Tips/Treeview.gif | 300]]

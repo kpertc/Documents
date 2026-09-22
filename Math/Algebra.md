@@ -2,7 +2,7 @@
 
 Logarithms reverse exponents
 
-[[Khan Academy] Intro to Logarithms](https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/a/intro-to-logarithms)
+[Khan Academy - Intro to Logarithms](https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/a/intro-to-logarithms)
 
 $\log _{2}16 = 4$
 Log → 求几次方

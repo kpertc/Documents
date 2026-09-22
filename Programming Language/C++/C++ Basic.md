@@ -3,7 +3,7 @@
 C++ can natively run on machine → fast
 compare to C#, Java → run on virtual machine
 
-Stroustrup加入了OOP特性和对C的泛型编程支持，C++ 是C语言的超集，这意味着任何有效的C程序都是有效的C++程序。
+Stroustrup加入了OOP特性和对C的泛型编程支持，C++ 在很大程度上兼容 C，但不是严格超集（`int *p = malloc(4);`、`int class = 1;`、C99 变长数组在 C++ 里都不合法）。
 
 ### Tutorial
 <iframe width="560" height="315" src="https://www.youtube.com/embed/vLnPwxZdW4Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -23,8 +23,6 @@ gcc -v
 ```
 
 Install Command Line Tool:[[Env Tools]]
-
-```
 
 ![[img/build&run.png]]
 Build | Run I Build&Run
@@ -109,7 +107,7 @@ long long
 
 float gpa1 = 4.0f; // f lower case, double case doesnt matter
 float _double = 4.0; // without ending with f -> is a double
-// float 4 bits, double 8 bits
+// float 4 bytes, double 8 bytes
 
 double gpa2 = 4.0;
 
@@ -129,7 +127,7 @@ cout<<"My Name is "<<name<<"I am "<<age<<" years old."<<endl;
 
 1 byte = 8 bits
 4 byte = 32 bits
-1 int → 4 bits
+1 int → 4 bytes
 empty Class → 1 byte
 
 ```c++
@@ -152,9 +150,9 @@ sizeof(e) // 8
 pointer is int store memory address address of 1 byte(8 bits) memory
 
 ```cpp
-void* ptr = 0; // 0 is not a valid address, will crash
-void* ptr = NULL;
-void* ptr = nullptr; // nullptr is introduced at C++ v11
+void* ptr = 0; // 0 is a null pointer constant, de-referencing it is what crashes
+void* ptr = NULL; // NULL is usually just 0 in C++
+void* ptr = nullptr; // nullptr is introduced at C++ v11, has its own type std::nullptr_t → resolves overload correctly
 ```
 
 ```cpp
@@ -174,7 +172,7 @@ int* ptr = &var;
 
 Edit Memory and check in memory view in Xcode
 ```cpp
-char* buffer = new char[8]; // create a 8-bits memory
+char* buffer = new char[8]; // create a 8-bytes memory
 memset(buffer, 1, 8); // set value of the address of memory to 1
 ```
 ![[cpp_memory_xcode.png]]
@@ -206,8 +204,14 @@ std::unique_ptr<Entity> _entity = std::make_unique<Entity>();
 std::cout << _entity->x << std::endl;
 ```
 2. shared pointer
+	shared by reference counting
 ```cpp
+std::shared_ptr<Entity> _entity = std::make_shared<Entity>();
+std::shared_ptr<Entity> _copy = _entity;
+_entity.use_count(); // 2, freed when the count reaches 0
 
+// weak_ptr does not raise the count -> use it to break circular reference
+std::weak_ptr<Entity> _weak = _entity;
 ```
 
 
@@ -225,13 +229,13 @@ pointer → Print()
 
 ### Header
 ```c++
-#include “file.h”
+#include "file.h"
 
 #pragma once
 // prevent declare multiple times, in different files
 
 #ifndef // if not define
-#define …
+#define ...
 
 #include "../_header.h" relative path
 "" for everything
@@ -338,7 +342,8 @@ cout <<"I love "<<celebrity<<endl;
 
 ### Arrays
 raw array
-raw array is faster than standard array
+raw array is faster than standard array (Debug build only, with optimization on std::array is zero-overhead)
+std::array knows its own size → no need for the fragile sizeof(a)/sizeof(a[0])
 array → save the data continuously in memory
 ```c++
 int luckyNums[20] // create 20 array
@@ -355,7 +360,7 @@ luckyNums[2] = 20; //set
 ```cpp
 // create on stack
 int example[5];
-int* ptr = example; // array is pointer
+int* ptr = example; // array decays to a pointer to its first element
 
 // create on heap
 int* another = new int[5];
@@ -366,6 +371,7 @@ not reliable
 ```cpp
 int a[5]
 int count = sizeof(a) / sizeof(int); // get size of array
+// only works while a is still an array, pass it to a function and it decays → gives 1 or 2
 // or
 int count = sizeof(arr) / sizeof(arr[0]);
 ```
@@ -712,6 +718,8 @@ will be called when the obj destroy, not call to destroy the obj
 }
 
 // manually call destructor
+// only for object created with placement new
+// on a stack object the scope-exit destructor runs again → double destruction, UB
 e.~Entity();
 ```
 
@@ -910,7 +918,7 @@ if (...) { ... } // if scope
 
 Reason to use heap:
 1. Control lifetime: cross the scope
-2. Size: stack is small 1~2MB, when you have a large object, need to use heap
+2. Size: stack is small (~1MB Windows, ~8MB macOS/Linux main thread, much less per spawned thread), when you have a large object, need to use heap
 
 ![[Miscellaneous#Memory Management in Objective C and C++]]
 
@@ -919,6 +927,7 @@ Reason to use heap:
 <br>
 ### Inheritance
 inherit public variable and method
+`class` defaults to private inheritance, `struct` defaults to public → need to write `public` explicitly
 ```c++
 class Entity {
 public:
@@ -930,7 +939,7 @@ public:
     }
 };
 
-class Player : Entity {
+class Player : public Entity {
 public:
     void logout () {
         std::cout << x << std::endl;

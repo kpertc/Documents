@@ -1,7 +1,7 @@
 #CG 
 
 Old: Immediate mode → Fixed function pipeline
-New: Core-profile mode → Deprecate immediate mode from v3.2
+New: Core-profile mode → immediate mode deprecated in v3.0, removed in v3.1 (v3.2 added the core / compatibility profile split)
 
 Learn from OpenGL v3.3
 
@@ -33,7 +33,8 @@ Setup in VSCode:
 ## 
 ```glsl
 void main() {
-	gl_FragColor = vec4(1,1,0,1);
+	gl_FragColor = vec4(1,1,0,1); // GLSL 1.20 only
+	// GLSL 3.30 core / ES 3.00: out vec4 fragColor; fragColor = vec4(1,1,0,1);
 }
 ```
 
@@ -48,7 +49,7 @@ Command Palate show GLSL Canvas
 void main() {
 	texCoords = ...
 	
-	gl_Position = 
+	gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
 ```
 
@@ -66,7 +67,8 @@ const float PI = 3.1415926535897932384626433832795;
 
 void main() {
 	// texCoords do something
-	gl_FragColor = vec4(1,1,0,1);
+	gl_FragColor = vec4(1,1,0,1); // GLSL 1.20 only
+	// GLSL 3.30 core / ES 3.00: out vec4 fragColor; fragColor = vec4(1,1,0,1);
 }
 ```
 
@@ -76,8 +78,13 @@ qualifiers
 
 ### `attribute`
 ```glsl
+// GLSL 1.20 / ES 1.00 (WebGL1)
 attribute vec3 position;
 attribute vec2 texcoord0;
+
+// GLSL 3.30 core / ES 3.00 (WebGL2) -> attribute / varying removed
+in vec3 position;
+in vec2 texcoord0;
 ```
 
 > [attribute](https://thebookofshaders.com/glossary/?search=attribute#:~:text=attribute%20read%2Donly%20variables%20containing,texture%20coordinates%20of%20a%20vertex)  read-only variables containing data shared from WebGL/OpenGL environment to the ==vertex shader==.
@@ -86,7 +93,12 @@ attribute vec2 texcoord0;
 
 ### `varying`
 ```glsl
+// GLSL 1.20 / ES 1.00 (WebGL1)
 varying vec2 uv;
+
+// GLSL 3.30 core / ES 3.00 (WebGL2): out in vertex shader, in in fragment shader
+out vec2 uv; // vertex
+in  vec2 uv; // fragment
 ```
 
 > `varying` variables contain data shared from a vertex shader to a fragment shader.
@@ -95,5 +107,8 @@ varying vec2 uv;
 
 ### `uniform`
 ```glsl
-
+uniform float u_time;
 ```
+
+> `uniform` read-only values set per draw call from the host, identical for every vertex / fragment, usable in both stages.
+> JS side: `gl.getUniformLocation(program, 'u_time')` → `gl.uniform1f(loc, t)`

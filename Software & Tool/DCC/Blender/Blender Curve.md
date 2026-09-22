@@ -11,7 +11,9 @@
 ### `shift D` Duplicate
 ![[curve-duplicate.gif]]
 
-### `F` Fill
+### `F` Make Segment (join two selected endpoints)
+
+fill a closed curve: `Alt C` cyclic toggle + Curve data ▸ Shape ▸ Fill Mode
 
 
 ### Subdivide

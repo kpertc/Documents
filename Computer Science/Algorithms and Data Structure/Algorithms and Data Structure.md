@@ -35,14 +35,14 @@ Complexities ordered from smallest to largest
 </p>
 
 >[!example]
-Constant Time: 0(1)
-Logarithimic Time: 0(log(n))
-Linear Time: 0(n)
-Linearithmic Time: 0(nlog(n))
-Quadric Time: 0(n²)
-Cubic Time: 0(n³)
-Exponential Time: 0(bⁿ), b > 1
-Factorial Time: 0(n!)
+Constant Time: O(1)
+Logarithmic Time: O(log(n))
+Linear Time: O(n)
+Linearithmic Time: O(nlog(n))
+Quadratic Time: O(n²)
+Cubic Time: O(n³)
+Exponential Time: O(bⁿ), b > 1
+Factorial Time: O(n!)
 
 <br>
 
@@ -70,13 +70,13 @@ A static array is a fixed length container containing n elements indexable from 
 
 **Complexity** - Static Array Dynamic Array
 
- | 
+Operation|Static Array|Dynamic Array
 --|--|--
-Access|0(1)|0(1)
-Search|0(n)|0(n)
-Insertion|N/A|0(n)
-Appending|N/A|0(1)
-Deletion|N/A|0(n)
+Access|O(1)|O(1)
+Search|O(n)|O(n)
+Insertion|N/A|O(n)
+Appending|N/A|O(1)
+Deletion|N/A|O(n)
 
 <br>
 

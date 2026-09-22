@@ -1,11 +1,12 @@
 
 ##### Chrome 浏览器
 Chrome full screenshot
+DevTools ⌥⌘I → ⌘⇧P → "Capture full size screenshot"
 
 Search bar ⌘ L 
 
 Switch Tabs
-Option + ⌘ +  ↑ / ↓
+Option + ⌘ +  ← / →
 ![[Tips/img/switch-tabs.gif]]
 
 Chrome / Safari

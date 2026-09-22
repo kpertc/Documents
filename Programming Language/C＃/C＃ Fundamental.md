@@ -59,8 +59,9 @@ Instantiate class needs new keyword
 
 
 > [!NOTE] Class and Struct is different in C# than C++
-> Struct → stack
-> Class → heap
+> Struct → value type, copied on assignment
+> Class → reference type, the reference is copied
+> not stack vs heap: a struct field inside a class, a boxed struct, or one captured by a lambda / held across `await` all live on the heap
 
 Default Values
 ![[Default Values.png]]

@@ -1,6 +1,8 @@
 ### Derivative (导数)
 [Derivative notation review](https://www.khanacademy.org/math/differential-calculus/dc-diff-intro/dc-diff-calc-intro/a/derivative-notation-review)
 
+$f'(x) = \mathop{\lim }\limits_{h \to 0} \frac{f(x+h)-f(x)}{h}$
+
 
 <br>
 
@@ -13,10 +15,9 @@ his is how we would write the limit of `f` as `x` approaches 3
 <br>
 
 -   Unbounded (Limit does not exist)
--   Limit does not exist
 
 
-Only tells when approach, not
+Only tells when approach, not the value at the point
 
 One sided limits
 
