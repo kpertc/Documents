@@ -9,25 +9,25 @@ Turn on / off Minimap
 ^(ctrl) + ⌘ + space 
 ![[emoji.gif]]
 
+##### Format code
+^(ctrl) + i (Editor → Structure → Re-Indent)
+
 <br>
 
 ### Simulator
 
 Switch light & dark mode
 ⌘ + Shift + A
-
-Format code
-Ctrl i 
 <br>
 
 ### SwiftUI
-Shortcut| 
+Shortcut|Action
 ---|---
 Library|![[Library.gif]]
 ⌥ (option) + ⌘ (command) + Enter|Toggle preview
 ⌘  + click|![[menu-of-actions.webp]]
 Add Modifiers|![[add-modifiers.gif]]
-Extracted Subview
+Extracted Subview|⌘ + click → Extract Subview
 
 ### ![[Swift#Documentation]]
 <br>
@@ -64,5 +64,6 @@ struct _view: View {
 		VStack {
 			...
 		}
+	}
 }
 ```

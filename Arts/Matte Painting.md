@@ -21,6 +21,6 @@ Patched angle
 
 Photobash
 
-[](https://photobash.co/)[https://photobash.co](https://photobash.co)
+[https://photobash.co](https://photobash.co)
 
 [https://mattepaint.com/](https://mattepaint.com/)

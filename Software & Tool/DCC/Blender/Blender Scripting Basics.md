@@ -96,7 +96,7 @@ bpy.context
 bpy.context.active_object
 bpy.context.selected_objects
 bpy.context.scene
-bpy.context.selected_pose_bone
+bpy.context.selected_pose_bones # or active_pose_bone for a single bone
 ...
 
 bpy.context.scene.objects.get('objectName')
@@ -160,25 +160,25 @@ _obj.data.materials.append(_material)
 Material - node
 ```python
 # material node
-_material.use_nodes = true
+_material.use_nodes = True
 nodes = _material.node_tree.nodes
 
 # get node
-material_output = nodes.get("Material Ouput") # get node name
+material_output = nodes.get("Material Output") # get node name
 
 # create a node
 node_emission = nodes.new(type="ShaderNodeEmission") # Create a emission node
 
 # Edit Node value
 # node → array
-node_emission.input[0].default_value = ( 0.0, 0.3, 1.0, 1.0 ) # color
-node_emission.input[1].default_value = 500.0
+node_emission.inputs['Color'].default_value = ( 0.0, 0.3, 1.0, 1.0 ) # color
+node_emission.inputs['Strength'].default_value = 500.0
 
 #
 links = _material.node_tree.links
 
 # create a link
-links.new(node_emssion.output[0], material_ouput.input[0]) 
+links.new(node_emission.outputs[0], material_output.inputs[0]) 
 ```
 ##### Add Modifier
 ```Python
@@ -198,8 +198,8 @@ _obj.modifiers['My Modifier'].levels = 3
 bpy.ops.object.shade_smooth()
 
 # 2
-object = bpy.context.active_object.data
-mesh = object.data
+obj = bpy.context.active_object
+mesh = obj.data
 for face in mesh.polygons:
     face.use_smooth = True
 ```
@@ -320,11 +320,13 @@ bpy.types.Scene.mass_import = bpy.props.StringProperty() # Create a new attribut
 
   
 
+```python
 # Test in Console will show
 
 C.scene.mass_import
 
 C.scene.mass_import = "1111"
+```
 
 ![[img/Blender Scripting Basics/Custom Properties.png | 300]]
 

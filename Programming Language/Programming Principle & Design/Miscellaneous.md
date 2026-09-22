@@ -18,7 +18,7 @@ C++ → smart pointers and RAII (Resource Acquisition Is Initialization)
 
 ##### Declarative Programming (声明式)
 ↳ SQL Regex CSS
-##### Imperative Declarative (命令式)
+##### Imperative Programming (命令式)
 ↳ C Java Python
 
 ##### Event Driven Architecture (EDA)
@@ -34,8 +34,7 @@ Functions-as-a-Service
 ##### SPAs (Single Page Applications)
 ##### SSR (Server-Side Rendering)
 - Better for SEO
-- Mostly static content
-- Faster
+- Faster first paint, but higher TTFB & server load
 - SSR Render -> [[Next.js]]
 ##### Client Side Rendering
 - more dynamic

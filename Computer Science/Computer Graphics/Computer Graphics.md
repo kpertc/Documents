@@ -30,7 +30,7 @@ Camera coordinates → View Plane
 > **w** component affects the scale of the image with respect to the projection.
 
 Clip Space
-`ClipCoord.xyz / ClipCoord.w → x, y, z [-1, +1]`
+`ClipCoord.xyz / ClipCoord.w → x, y [-1, +1]`，z: OpenGL [-1, +1]，WebGPU / D3D / Vulkan / Metal [0, 1]
 **NDC (Normalized Device Coordinates)**
 [Homogeneous Coordinates, Clip Space, and NDC | WebGPU](https://carmencincotti.com/2022-05-02/homogeneous-coordinates-clip-space-ndc/)
 
@@ -70,7 +70,17 @@ ambient
 ```
 
 ``` glsl
+// diffuse light
+light += 
+max(dot(normal, lightDir), 0.0)
+* diffuseColor
+;
 
+// specular light
+light += 
+pow(max(dot(viewDir, reflect(-lightDir, normal)), 0.0), shininess)
+* specularColor
+;
 ```
  
 ##### Cubemap
@@ -84,7 +94,7 @@ to bake cubemap, set 6 90 degree FOV cameras, and aspect ratio to `1:1`
 ##### BXDF, Bidirectional XXX Distribution Function, 双向XX分布函数
 求积分 -> 蒙特卡洛积分
 -   BRDF，Reflection，双向反射分布函数
--   BSSDF，Subsurface Scattering，次表面散射
+-   BSSRDF，Subsurface Scattering，次表面散射（双向散射表面反射分布函数，两个点 + 两个方向）
 -   BTDF
 -   BSDF
 
@@ -110,9 +120,9 @@ to bake cubemap, set 6 90 degree FOV cameras, and aspect ratio to `1:1`
 	C1 连续 切线连续 （一阶导数连续）an = b0 = 1/2(an-1 + b1)
 	C2 连续 倒数第一控制点怜恤（二阶导数连续）
 
-2. Spine 样条
-- B-splines -> basis splines B样条 奇函数
-- NURBS, Non-Uniform Rational B-Spines 非均匀有理样条
+2. Spline 样条
+- B-splines -> basis splines B样条 基函数
+- NURBS, Non-Uniform Rational B-Splines 非均匀有理样条
 
 ### [[Geometry]]
 
@@ -152,6 +162,8 @@ Hard Shadow - Point Light
 <br>
 
 ### Axis-Aligned Bounding Box (AABB) 轴对其==包围盒==
+
+盒子的边与世界坐标轴对齐，只需 min / max 两点即可描述 → 相交检测最快
 
 <br>
 

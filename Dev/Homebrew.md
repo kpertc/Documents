@@ -8,7 +8,9 @@ brew install packagename
 brew uninstall packagename
 
 # Casks → Mac OS apps
-brew cask install firefox
+brew install --cask firefox
+brew uninstall --cask firefox
+brew list --cask
 
 # to homepage of pycharm
 brew home pycharm
@@ -21,6 +23,10 @@ brew list
 
 brew outdated
 
+# refresh the formula index
+brew update
+
+# install newer versions
 brew upgrade
 
 # remove old version
@@ -33,10 +39,10 @@ brew doctor
 brew tap packagepath
 ```
 
-install to `/usr/local/Cellar/`
+install to `/opt/homebrew/Cellar/` (Apple Silicon) / `/usr/local/Cellar/` (Intel) — `brew --prefix` prints the live answer
 
 ```shell
-# List all packages
+# search formulae by regex
 brew search /wge*/
 # search + regex
 ```

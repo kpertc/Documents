@@ -30,11 +30,15 @@ module.exports = {
 
 	// loader scss
 	module: {
-		test: /\.scss$/,
-		use: ['style-loader', 'css-loader', 'sass-loader'] 
-	}
+		rules: [
+			{
+				test: /\.scss$/,
+				use: ['style-loader', 'css-loader', 'sass-loader'] 
+			}
+		]
+	},
 
-	plugin: [
+	plugins: [
 		
 	]
 }
@@ -49,15 +53,20 @@ output: {
 },
 ```
 
-specify dependencies that should not be resolved and bundled by Webpack.
+`externals` - specify dependencies that should not be resolved and bundled by Webpack.
+
+```js
+externals: { three: 'THREE' } // provided by CDN / host page, bundling it would duplicate it
+```
 
 ``` js
 const { EnvironmentPlugin, DefinePlugin } = require('webpack')
 ```
 ### Define Global Variable
 ``` javascript
-plugin: [
+plugins: [
 	// Define Global Variable
+	// DefinePlugin = raw text substitution, string values need JSON.stringify()
 	 new DefinePlugin({
 		 IS_PRODUCTION: false,
 	 }),
@@ -70,8 +79,10 @@ plugin: [
 ```
 
 ``` ts
-declare var IE_PRODUCTION: boolean
-console.log(IE_PRODUCTION)
+declare var IS_PRODUCTION: boolean
+console.log(IS_PRODUCTION)
 ```
 
 Define Environment Variable
+
+webpack 5: no automatic Node core-module polyfills (`fs`, `path`, `crypto`) - configure `resolve.fallback` manually.

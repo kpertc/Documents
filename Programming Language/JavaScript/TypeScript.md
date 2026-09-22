@@ -30,6 +30,7 @@ tsc --init # to create a tsconfig.json
 ```
 
 ```json
+// 以下都写在 "compilerOptions" 里面
 // source of ts script
 "rootDir": "./src"
 
@@ -37,19 +38,16 @@ tsc --init # to create a tsconfig.json
 "outDir": "./build/js"
 
 // compile to target version
-"target": ""
+"target": "ES2022"
 
 // compile even there are ts errors
 "noEmitOnError": false
 ```
 
 ```json
+// 顶层，和 "compilerOptions" 平级
 // only compiled paths in the list
 "include": [ "src" ]
-```
-
-``` shell
-
 ```
 
 
@@ -58,7 +56,10 @@ https://blog.csdn.net/dujyong/article/details/106359483
 
 
 ---
-Run TypeScript directly in node.js `npx ts-node test.ts`
+Run TypeScript directly in node.js
+`node test.ts` → Node 22.18+ / 23.6+ 原生 strip types，==不做类型检查==
+`npx tsx test.ts`
+`npx ts-node test.ts` → legacy
 
 Run `npm link` if can not find typescript (on Windows)
 ![[node.js#`npm link`]]
@@ -87,10 +88,10 @@ variable = true;
 
 ``` ts
 var _var: any = 1;
-_val++; // ok
+_var++; // ok
 
-var _var: unknown = 1;
-_val++; // error
+var _unk: unknown = 1;
+_unk++; // error
 ```
 
 ``` ts
@@ -107,8 +108,8 @@ Object
 let variable: object;
 variable = { name: "John", age: 30 };
 
-let variable: { name: string, age: number, info: string };
-variable = { "John", 30, "123456" };
+let typedObj: { name: string, age: number, info: string };
+typedObj = { name: "John", age: 30, info: "123456" };
 ```
 
 ### Type Aliases
@@ -116,18 +117,22 @@ variable = { "John", 30, "123456" };
 ```TypeScript
 type StringOrNum = string | number;
 
-const variable: StringOrNum;
+let variable: StringOrNum;
 ```
 
 ### Type Assertion - Type casting
 
 ```ts
-document.getElementById(“main_canvas”) as HTMLCanvasElement
+const canvas = document.getElementById("main_canvas") as HTMLCanvasElement;
 
 // One is a type
-Let d = <One>’world’
+let d = <One>'world';
 // Bracket type can not be used in tsx file
+```
 
+`satisfies` (TS 4.9) → 按类型检查但不 widen；`as` 只是编译期断言（无运行时转换，还会掩盖真实错误）
+```ts
+const config = { host: 'a', port: 1 } satisfies Config; // 保留字面量类型
 ```
 
 
@@ -173,7 +178,15 @@ var FuncVariable : (obj: person) => void;
 ```
 
 Function overloading 函数重载
-allows you to define ==multiple functions== with the ==same name== but ==different parameters or argument types==.
+allows you to define ==multiple overload signatures== with the ==same name== but ==different parameters or argument types==, plus ==exactly one implementation==.
+
+``` ts
+function pad(v: string, n: number): string;
+function pad(v: number, n: number): number;
+function pad(v: any, n: number): any { /* single body */ }
+```
+
+implementation 的签名本身不能被外部调用
 
 
 ### Optional / default parameter
@@ -201,9 +214,9 @@ Shortcut for Class Constructor by using access modifer
 ```TypeScript
 class Invoice {
     constructor (
-        readonly variable1;
-        private variable2;
-        public variable3;
+        readonly variable1: string,
+        private variable2: number,
+        public variable3: boolean
     ) {}
 }
 ```
@@ -255,10 +268,11 @@ console.log(fake_manager._num); // 2 -> same instance as manager
 ```TypeScript
 enum ResourceType { Book, AUTHOR, FILM, DIRECTOR, PERSON }
 
-resourceType = ResourceType.Book;
+const resourceType = ResourceType.Book;
 ```
 
-Internally use a int
+Numeric enum internally use a int → 反向映射 `ResourceType[0] === 'Book'`（string enum 没有）
+`const enum` 在 `isolatedModules`（Vite / esbuild / SWC）下不跨文件内联（`declare const enum` 直接报错）；`erasableSyntaxOnly` / node 原生 strip types 下，`enum` 和 constructor 参数属性都会报错
 
 Namespace
 
@@ -270,7 +284,7 @@ namespace name {
 
 <br>
 ### Tuples
-(JavaScript ?)
+(TypeScript only，JS 没有 tuple 类型，只有 array)
 a typed array with a pre-defined length and types for each index
 
 ```ts
@@ -299,8 +313,8 @@ const me: IsPerson = {
 	name: 'shuan',
 	age: 30,
 	speak(text: string): void { console.log('...') },
-	spend(amount: number): number { console.log('...') }
-	// can not add other variable ? 
+	spend(amount: number): number { console.log('...'); return amount; }
+	// excess property check: object literal 直接写多余属性会报错；先赋给变量再传则允许（结构化类型）
 	// will raise alert if object is not matched with interface
 };
 
@@ -328,7 +342,11 @@ function _func<T>(arg: T): T { // T -> any type
 work with interface
 
 ``` ts
+interface Box<T> { value: T }
 
+function unwrap<T>(b: Box<T>): T {
+	return b.value;
+}
 ```
 
 ##### keyof
@@ -463,6 +481,17 @@ removeEmailandID => {
 从两个type创建一个新type的object
 
 ``` ts
+type UserRoles = Record<"admin" | "guest", MyUser>;
+/*
+UserRoles => {
+	admin: MyUser,
+	guest: MyUser
+}
+*/
+```
+
+##### Indexed access types
+``` ts
 // use the type of MyUser.id -> more dynamic
 const _obj : MyUser["id"] = "1111";
 ```
@@ -472,11 +501,13 @@ const _obj : MyUser["id"] = "1111";
 type ReadOnlyUser = Readonly<MyUser>;
 /*
 ReadOnlyUser => {
-	Readonly name: string,
-	Readonly id: string,
-	Readonly email: string;
+	readonly name: string;
+	readonly id: string;
+	readonly email?: string; // Readonly 不会去掉 optional
 }
 */
+
+// mapped type modifiers: -readonly / -? 去掉修饰符（Required 就是用 -? 实现）
 ```
 
 ``` ts
@@ -490,7 +521,7 @@ reallyConst[0] = 50; // error
 ```
 <br>
 ### `.d.ts` file
-can only store type, normally for package does not have type 
+只放类型声明（含 `declare const` / `declare function` / `declare module` 这类 ambient 声明），不产出 JS，normally for package does not have type 
 ```ts
 // types.d.ts
 
@@ -499,7 +530,7 @@ export type a = {
 	c:number
 }
 
-function multiplyNumbers(x: number, y: number): number
+export declare function multiplyNumbers(x: number, y: number): number;
 ```
 
 ```ts

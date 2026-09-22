@@ -1,9 +1,10 @@
 #python #markdown #data 
 
-.Ipynb
+.ipynb
 
 -   JupyterLab → more function
--   Jupyter Notebook → plane notebook
+-   Jupyter Notebook → plain notebook
+-   Notebook 7 → rebuilt on JupyterLab (classic UI = deprecated `nbclassic`)
   
 
 Cell → Python Code / Markdown
@@ -27,12 +28,12 @@ Use keyboard Shortcut:
 
 <div style="display: grid; grid-template-columns: repeat(2, 2fr); grid-gap: 10px;">
 	<div>
-		`Esc` exit Edit mode
-		 `Enter` enter Edit mode
+		<code>Esc</code> exit Edit mode
+		 <code>Enter</code> enter Edit mode
 	</div>
 	<div>
-		`M` switch to markdown language
-		`Y` switch to Python
+		<code>M</code> switch to markdown language
+		<code>Y</code> switch to Python
 	</div>
 </div>
 

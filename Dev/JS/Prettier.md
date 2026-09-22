@@ -1,7 +1,7 @@
 ### Install
-prettier recommends install a exact version, using `—save-exact` in npm `-exact` in yarn
+prettier recommends install a exact version, using `--save-exact` in npm `--exact` (`-E`) in yarn
 ```bash
-
+npm install --save-dev --save-exact prettier
 ```
 
 
@@ -9,13 +9,13 @@ prettier recommends install a exact version, using `—save-exact` in npm `-exac
 # formatting
 prettier --write index.html # format a file
 prettier --write . # format all files, need to use ignore node_modules, dist ...
-prettier --write \"{./src,./statics}/**/*.{js,ts,tsx}“ # file glob syntax
+prettier --write "{./src,./statics}/**/*.{js,ts,tsx}" # file glob syntax
 
 # checking
 prettier --check index.html # check
 
-# watch
-prettier --watch
+# no --watch flag in prettier → use editor format on save, or lint-staged pre-commit
+prettier --write . --cache # --cache (2.7+) is the speed lever
 ```
 
 ### ignore file 
@@ -25,18 +25,19 @@ build
 dist
 node_modules
 
-*.html # all .html
+# all .html
+*.html
 ```
 
 ### Config
-`.prettierrc` /  `.prettierrc.json`
+`.prettierrc` /  `.prettierrc.json` (strict JSON, no `//` comments) /  `.prettierrc.json5` (comments OK, used below)
 ```json
 {
 	"semi" : true,
 	"overrides" : [
 		{
 			// override rules, specific to .ts files
-			"files" : ".ts",
+			"files" : "*.ts",
 			"options" : {
 				"semi" : false
 			}

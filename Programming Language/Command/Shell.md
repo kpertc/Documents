@@ -10,8 +10,8 @@ Bash Shell
 `CLI` Command Line Interface
 - Reliable, easy for automation
 
-Shortcuts|
-:---|:----
+Shortcuts|Action
+:---|:---
 Tab|Auto-complete
 Cmd + K|clear
 Up / Down Arrow Key|History
@@ -25,7 +25,8 @@ q|quit
 "" double quote 
 '' single quote 
 
-"Hello, my name is $myname" # Hello, my name is $Jay 
+myname=Jay
+"Hello, my name is $myname" # Hello, my name is Jay
 'Hello, my name is $myname' # Hello, my name is $myname
 
 files=$(ls) #sub shell?
@@ -48,7 +49,8 @@ man git
 
 ```bash
 # show preferred shell
-echo $SHELL #/bin/bash → Bash Shell
+echo $SHELL #/bin/zsh → zsh (macOS default since Catalina), $SHELL is the LOGIN shell
+echo $0 # the shell you are actually in (or `ps -p $$`) -> differs once you run bash inside zsh
 
 which bash # show bash path
 /bin/bash # use bash
@@ -86,20 +88,20 @@ Positional argument `$1` `$2` `$3` ...
 echo "First arg: $1"
 echo "Second arg: $2"
 
-# all argument, exclude the first
-$@
-$*
+# all arguments ($0 is the script name, not a positional parameter)
+"$@" # every argument as a separate word -> what you almost always want
+"$*" # all joined into one word, separated by the 1st char of $IFS
 
 # number of argument
 $#
 ```
 
 ```bash
-if [ $2 - lt 21 ]; then # -lt less than
+if [ "$2" -lt 21 ]; then # -lt less than
 	echo ""
 fi
 
-if [ $2 - lt 21 ]; then # -lt less than
+if [ "$2" -lt 21 ]; then # -lt less than
 	echo ""
 else
 	echo ""
@@ -167,9 +169,9 @@ MY_LOCATION_TO=/my/location/to
 # move
 mv 
 
-# copy, only directory
+# copy a file (plain `cp` refuses directories)
 cp /my/location/from /my/location/to
-cp $MY_LOCATION_FROM $MY_LOCATION_TO
+cp "$MY_LOCATION_FROM" "$MY_LOCATION_TO"
 
 # -R recursive, copy every files
 cp -R ie_js/docs/api docs_scripting/
@@ -207,7 +209,8 @@ cd - # to pre directory
 pushd # pushd ie_js cd to ie_js
 popd # return to pre dir
 
-touch test_file.txt # CG creat test_file.txt or replace if the file already exis
+touch test_file.txt # creat test_file.txt, or update its timestamp if it already exists -> contents are never changed
+# truncate if exists: `: > file` or `> file`
 nano test_file.txt # text editor
 history # show history
 mkdir test_directory # create folder
@@ -284,7 +287,7 @@ rsync
 ```bash
 directory=/etc
 
-if [ -d $directory ]
+if [ -d "$directory" ] # quote it, unquoted breaks on paths with spaces
 then
 	echo "The directory $directory exists."
 else
@@ -297,11 +300,12 @@ fi
 
 ### Where to save the script
 Filesystem Hierarchy Standard (FHS) -> 
-`user/bin`
+`/usr/local/bin`
 can run the script anyway
 file extension is not required in Linux system
 
-add usr/local/bin to PATH if is not in:
+add /usr/local/bin to PATH if is not in:
+not `/usr/bin` -> owned by the OS / package manager, SIP-protected on macOS
 `export PATH=/usr/local/bin:$PATH`
 
 

@@ -149,7 +149,7 @@ SoundManager.instance.playSound()
 
 for small data
 
-Use@rDefaults
+UserDefaults
 
 ```swift
 @State var cuurentUserName: String?

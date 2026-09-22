@@ -135,9 +135,9 @@ First instance|First instance, no need to add 1
 // 1
 ch( strcat( '../scale2', detail('../repeat_begin1_metadata1/', 'iteration', 0) + 1 ) )
 
-// 3 +
-ch (strcat('../'),'r' ) // rgb
-,''ch (strcat('../'),'x' ) // xyz 
+// 3 + components (channel name = parm name + r/g/b or x/y/z)
+ch( strcat( strcat( '../color', detail('../repeat_begin1_metadata1/', 'iteration', 0) + 1 ), 'r' ) ) // rgb
+ch( strcat( strcat( '../t', detail('../repeat_begin1_metadata1/', 'iteration', 0) + 1 ), 'x' ) ) // xyz
 ```
 
 ![[img/Houdini-Channel-Parameters/Parameter.png | x500]]

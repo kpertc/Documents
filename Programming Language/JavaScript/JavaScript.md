@@ -1,4 +1,4 @@
-w#JavaScript #programming-language #web-dev 
+#JavaScript #programming-language #web-dev 
 
 JavaScript Background knowledge: [[JavaScript Overview]]
 JavaScript Browser Functions: [[JavaScript API]]
@@ -52,7 +52,7 @@ function strict_function() {
 ``` js
 // this[] 任意类型
 // this.property
-this.aabb = this[aabb]
+this.aabb = this['aabb']
 ```
 
 ### Comments
@@ -110,7 +110,7 @@ const div = document.createElement('div'); // CSS selector
 document.body.append(div);
 // add text to the div
 div.innerText = "Hello World"; // visible text contained in a node
-div.textContext = "Hello World"; // the full text, with style
+div.textContent = "Hello World"; // all text in the node, ignores CSS (includes hidden elements, <script>, <style>)
 
 // Modify Element
 div.innerHTML = "<strong>Hello World</strong>" 
@@ -120,8 +120,8 @@ strong.innerText = "Hello World"
 div.append(strong)
 
 // Remove Element
-element.remove();
-element.removeChild(element);
+element.remove(); // modern, use this
+element.parentNode.removeChild(element); // old way, needs the parent
 
 // Element Attribute
 element.getAttribute('id');
@@ -133,8 +133,9 @@ element.id = 'valueToSet';
 element.removeAttribute('id'); // remove Attribute
 
 // DataSet
-<span> data-custom-attr = "value" </span>
-element.dataset.customAttr = 'value';
+// <span data-custom-attr="value"></span>  kebab-case -> camelCase
+element.dataset.customAttr = 'value'; // write
+element.dataset.customAttr; // read -> "value"
 
 // Classes
 element.classList.add('hi1'); // add a class
@@ -152,8 +153,8 @@ element.style.backgroundColor = "red"; // background-color in HTML
 
 ```JavaScript
  var
- let // in the scope, can be redeclared value
- const // can not be redeclared value
+ let // block scoped, can be reassigned, can not be redeclared in the same scope
+ const // block scoped, can not be reassigned or redeclared
 ```
 
 ### `var` `let` `const`
@@ -227,7 +228,8 @@ console.log(greeter); // error
 let greeter = "hey hi";
 ```
 
-`let` & `const` are actually `undefined` but scope is not accessible, in "Temporal Dead Zone"
+`let` & `const` are hoisted but left *uninitialized* (no value at all, not `undefined`), in "Temporal Dead Zone"
+reading one before its declaration throws `ReferenceError: Cannot access 'x' before initialization`; `var` is initialized to `undefined` at creation
 
 ![[var-let-lifecycle.png]]
 
@@ -307,14 +309,16 @@ function app() {
     l = 'local';
 }
 
+app(); // without the call `l` never exists
 console.log(l); // print out 'local' at global scope
+// under 'use strict' (and in ES modules, always strict) -> ReferenceError: l is not defined
 ```
 
 
 Get type
 
 ```JavaScript
-console.log(typeof var);
+console.log(typeof myVar);
 console.log(typeof "23");
 ```
 
@@ -348,7 +352,7 @@ console.log(`text ${variable1} ${variable2} text`); // text A B text
 
 ### Math & Numbers
 
-```TypeScript
+```js
 11 % 3 //mod
 Math.abs(number) //absolute value
 
@@ -356,7 +360,7 @@ Math.max(number1, number2) //return the bigger number
 Math.min(number1, number2) //return the smaller number
 
 Math.round(number) //round
-Math.pow（number, 3）//power number³
+Math.pow(number, 3) //power number³
 Math.sqrt(36) //square root → 6 
 
 Math.random()
@@ -371,7 +375,8 @@ const _bigint = 1234n; // A bigint is created by appending n
 console.log(typeof _bigint); // bigint
 
 // math
-console.log(1n + 2n); // 3
+console.log(1n + 2n); // 3n
+console.log(1n + 2); // TypeError: Cannot mix BigInt and other types
 ```
 
 > [!NOTE]
@@ -412,8 +417,9 @@ var fruits = ["Apples", 24, false]; //can store multiple type of variables
 document.write(fruits)
 fruits.length //return the length of the array
 
-var fruits = new Array("Apples", "Oranges", "Peaches");
-fruits = fruits.split(",") //convert string to array, split by ","
+var fruitStr = "Apples,Oranges,Peaches";
+var fruits = fruitStr.split(",") //convert string to array, split by ","
+fruits.join(",") //back to string "Apples,Oranges,Peaches"
 document.write(fruits[0]);
 
 array.unshift(object) // add object the position of first, index 0
@@ -428,7 +434,7 @@ const numbers = ['1', '2', '3', '4', '5', '6']
 
 const [a, b, c] = alphabet // a = 'A', b= 'B', c = 'C'
 const [a,,c] = alphabet // a = 'A', c = 'C'
-const [a,,c ...rest] = alphabet 
+const [a, , c, ...rest] = alphabet 
 // a = 'A', c = 'C', rest = ['D', 'E', 'F']
 
 // concatenate two array
@@ -529,7 +535,7 @@ const { name: firstName, age, favoriteFood = 'Rice' }  = personTwo
 // firstName = 'Sally', age = 32, favoirte = 'Rice' -> default value
 
 const { name: firstName, ...rest } = personTwo
-// rest = [ age, address ]
+// rest = { age: 32, address: { city: 'Somewhere else', state: 'Another one of them' } }
 
 // use spread deconstruct in nested obect
 const { name: firstName, address: { city } } = personTwo // city = 'Somewhere else'
@@ -610,7 +616,7 @@ let sum = (a, b) => a + b // directly return, no curly braces {}
 
 let isPositive = number => number >= 0 // only one parameter, no need parentheses 
 
-let randomNumber = () => Math.random // no parameter ()
+let randomNumber = () => Math.random() // no parameter ()
 ```
 ##### [Arrow Function Scope](https://blog.webdevsimplified.com/2020-09/arrow-functions/)
 ``` javascript
@@ -679,16 +685,17 @@ function handleClick(element){
 var image = document.getElementById("image")
 
 //javaScript no On
+// `this` = the element only because these are regular functions, an arrow function would break it
 //mouseover
 image.addEventListener("mouseover", function(){
     this.style = "box-shadow: 2px 2px 2px grey";
-    this.witdth = "110"
+    this.style.width = "110px"
 });
 
 //mouseout
 image.addEventListener("mouseout", function(){
     this.style = "";
-    this.witdth = "100"
+    this.style.width = "100px"
 });
 
 // remove EventListener
@@ -696,9 +703,9 @@ element.addEventListener("click", functionName)
 element.removeEventListener("click", functionName)
 ```
 
--   Bubbling -> bigger scope 🫧
+-   Bubbling -> target → window, the default 🫧
     
--   Capturing -> smaller scope 📸
+-   Capturing -> window → target, runs FIRST, opt in with `{ capture: true }` 📸
 
 ![[bubbling-capturing.png | 200]]
 
@@ -707,10 +714,14 @@ element.addEventListener("click", e => {}, { capture: true })
 
 { once: true } // only run once
 e.stopPropagation(); // Stop bubbling or Capturing
-e.matches()
+
+// delegation: one listener on the parent for many children
+if (e.target.matches('.btn')) { } // matches() is an Element method, not an Event one
+e.target.closest('.btn') // for nested markup
 ```
 
-Order
+Order: capture (window → target) → target → bubble (target → window)
+`focus` / `blur` / `scroll` do not bubble
 
 ### [Custom Event](https://youtu.be/DzZXRvk3EGg)
 
@@ -725,14 +736,14 @@ document.dispatchEvent(myEvent)
 ### Messaging App
 
 ```JavaScript
-var messages = document.getElementById("")
-var textbox = document.getElementById("")
-var button = document.getElementById("")
+var messages = document.getElementById("messages")
+var textbox = document.getElementById("textbox")
+var button = document.getElementById("button")
 
 button.addEventListener("click", function(){
     var newMessage = document.createElement("Li")
     newMessage.innerHTML = textbox.value;
-    message.appendChild(newMessage);
+    messages.appendChild(newMessage);
     textbox.value = "";
 });
 ```
@@ -762,8 +773,8 @@ else
 
 [Conditional (ternary) operator - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)
 
-```CSS
-condition ？ true ：false
+```js
+condition ? valueIfTrue : valueIfFalse
 condition && true
 ```
 
@@ -797,17 +808,26 @@ finally {} // finally will execute after a try or catch
 ### Object
 
 ```JavaScript
-var person {
+const person = {
     name: "Mike",
     age: 23,
     isMale: true,
     occupation: "programmer"
 }
 
-document.write(person);
+console.log(person); // document.write(person) prints [object Object]
 ```
 
 ### While Loop
+
+```JavaScript
+while (condition) { }
+do { } while (condition) // body runs at least once
+
+for (const item of array) { } // values
+for (const key in object) { } // keys, includes inherited ones
+array.forEach(item => { }) // no break, no return
+```
 
 ### Timing (Delay)
 
@@ -826,11 +846,13 @@ document.write(person);
 var textbox = document.getElementById("textbox");
 var button = document.getElementById("btn");
 
-button.addEventListener("click", function()){
-    localStorage.name = textbox.value;
+button.addEventListener("click", function () {
+    localStorage.setItem("name", textbox.value); // prefer setItem/getItem
 });
-document.write(localStorage.name);
+document.write(localStorage.getItem("name"));
 ```
+
+localStorage stores strings only -> `JSON.stringify` / `JSON.parse` for objects
 
 <br>
 
@@ -977,7 +999,7 @@ Object.keys(luxuryCar)
 // loop through each object key
 Object.keys(luxuryCar).forEach(key => {
 	console.log(key);
-}};
+});
 
 // But a for..in loop includes inherited props
 for (let key in luxuryCar) {
@@ -1065,18 +1087,26 @@ Promise.all([promise1, promise2, promise3]).then(
 
 ##### async / await
 ```js
+// an async function always returns a Promise
 async function init() {
-	await ... // some 
-
-	// wait the previous processed ↓ then execute next line
-
-	getPost();
+	try {
+		const res = await fetch(url); // wait the previous processed ↓ then execute next line
+		const data = await res.json();
+		return data;
+	} catch (err) {
+		console.error(err);
+	}
 }
+
+// sequential: fb() starts only after fa() resolves
+const a1 = await fa(); const b1 = await fb();
+// parallel
+const [a2, b2] = await Promise.all([fa(), fb()]);
 ```
 
 ![[async.png]]
 
-##### Mixins
+##### Factory functions / class factories
 
 a function to create a function
 ``` js
@@ -1092,9 +1122,9 @@ a function to create a class
 ``` js
 function createLoggerClass() {
     return class MyLoggerClass {
-        private msg = "Hello";
+        #msg = "Hello"; // JS private class field, `private` is TypeScript only
         log() {
-            console.log(this.msg);
+            console.log(this.#msg);
         }
     }
 }
@@ -1103,6 +1133,15 @@ const logClass = createLoggerClass();
 const logClassInstance = new logClass();
 
 logClassInstance.log();
+```
+
+a real mixin: mix behavior into an existing class
+``` js
+const Serializable = (Base) => class extends Base {
+    serialize() { return JSON.stringify(this); }
+};
+
+class User extends Serializable(Person) {}
 ```
 
 <br>
@@ -1128,8 +1167,8 @@ JSON.stringify(api, null, 4); // formatting
 // Apply CSS Style
 console.log("Normal, %cGreen", "color: green") // %c begin CSS
 
-// print out as JSON object
-console.dir(var))
+// print out an interactive property listing (JSON.stringify is the JSON one)
+console.dir(myObj);
 ```
 
 `console.table()`
@@ -1169,13 +1208,14 @@ console.time("Name") // can init multple timer
 console.timeEnd("Name")
 ```
 
-Profiler -> `Chrome` / `JavaScript Profiler`
+Profiler -> `Chrome` / `Performance` panel: record → flame chart → Bottom-Up / Call Tree
+the standalone `JavaScript Profiler` panel was removed from DevTools in 2024; `console.profile()` now feeds `Performance`
 
 Usage depends on Browser
 
 ![[profiler.png]]
 
-```undefined
+```js
 console.profile("Name")
 // do something ...
 console.timeStamp("Name")
@@ -1215,7 +1255,17 @@ console.log(myParse);
 <br>
 ### Decorator
 
-Decorators wrap a function in another function
+Decorators wrap a class, method, accessor or field with another function
+
+```js
+function log(target, context) { /* context.kind: 'method' | 'field' | 'class' ... */ }
+
+class A {
+	@log method() { }
+}
+```
+
+standard decorators: TS 5.0+ / ECMAScript stage 3. The old tsconfig `experimentalDecorators` form is legacy and not compatible with it.
 
 ---
 
@@ -1231,15 +1281,17 @@ const foo = (n) => {
 ### Add a Object in Global
 
 ```JavaScript
-global.effect = {
+globalThis.effect = { // globalThis: Node + browser (ES2020); bare `global` is Node-only
 	Ama: "abc"
 };
 ```
 
 ```JavaScript
 // at another script file
-const Ama = effect.Ama; // will not be undefined
+const Ama = globalThis.effect.Ama; // will not be undefined
 ```
+
+ES modules share nothing implicitly between files -> still need `globalThis.effect` or a real import
 
 
 ---

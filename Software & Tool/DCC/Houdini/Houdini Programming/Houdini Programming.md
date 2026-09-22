@@ -29,15 +29,17 @@ Custom Interface
 
 ```C#
 point("node", point number, "attribname", index)
-// point(0,"P",0)
+// point("../grid1", 0, "P", 0)
+// VEX: point(0, "P", 0) — geo, attrib, ptnum（参数顺序不一样）
 
 prim("node", prim number, "attribname", index)
-// prim(0, 0, "attribname", 0)
+// prim("../grid1", 0, "attribname", 0)
 
 vertex("node", prim number, vertex number on prim, "attribname", index)
 detail("node", "attribname", index)
 ```
 
+HScript: `$PR`, `nprims()` — VEX: `@primnum`, `@numprim`
 ```C#
 @primnum // current prim #
 @numprim // total # of prim 

@@ -22,8 +22,11 @@ use attribtue to select group
 @P.y>0
 @Cd>0.5
 
-use VEX
-`nprims('0') -1` last prim number
+HScript in the group field (backticks = expression, not VEX)
+`nprims("../grid1")-1` last prim number
+
+VEX equivalent
+int last = nprimitives(0) - 1;
 ```
 
 Ways to create group
@@ -39,7 +42,7 @@ Ways to create group
 
 ##### Include by Edges
 
-Edge Depth - Expand|Unshared Edges|
+Edge Depth - Expand|Unshared Edges|Unshared Edges (2)
 --|--|--
 ![[img/Houdini Group and VEX/Edge Depth - Expand.png]]|![[img/Houdini Group and VEX/unshared-edge-1.png]]|![[img/Houdini Group and VEX/unshared-edge-2.png]]
 
@@ -64,7 +67,11 @@ Flood Fill to Connected Geometry: allow unbounded growth to connected geometry
 
 ### Group Promote
 
+Convert a group between point / prim / vertex / edge levels
+
 ### Group Rename
+
+Rename groups, supports `*` wildcard patterns
 
 ### Group Copy
 
@@ -139,4 +146,6 @@ if (@primnum % 2 == 0)
 ##### Mixing group expression with VEX
 
 [setpointgroup](https://www.sidefx.com/docs/houdini/vex/functions/setpointgroup.html)
-`setpointgroup(0, "@P.y>0", @ptnum, 0);`
+2nd arg is a group **name**, not an expression — evaluate the condition in VEX yourself:
+`if (@P.y > 0) setpointgroup(0, "top", @ptnum, 1);`
+or the shorthand: `@group_top = @P.y > 0;`

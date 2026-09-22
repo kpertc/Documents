@@ -1,14 +1,17 @@
 #python 
 
 # Threading
+threads share memory -> I/O-bound work (network, disk, sleep), the GIL serializes bytecode execution
+processes have separate memory -> CPU-bound work
+
 ### Basic Threading
 ```python
 import threading
 import time
 
-def do_something():
-	time.sleep(1)
-	print("111")
+def do_something(seconds=1):
+	time.sleep(seconds)
+	return f"Done sleeping {seconds}"
 
 t1 = threading.Thread(target=do_something) # target -> function to execute
 t1 = threading.Thread(target=do_something, args=[1.5]) # pass arguments as list
@@ -36,13 +39,6 @@ python 3.2
 
 ```python
 import concurrent.futures
-```
-
-```python
-with concurrent.futures.ThreadPoolExecutor() as executor:
-	# schedule future object -> can be check isRunning, complete, result
-	f1 = executor.submit(do_something, 1)
-	print(f1.result()) # print return
 ```
 
 ```python
@@ -83,16 +79,16 @@ import multiprocessing
 ```python
 import time
 
-def do_something():
+def do_something(seconds=1):
 	print("start")
-	time.sleep(1)
+	time.sleep(seconds)
 	print("end")
 
 if __name__ == '__main__':
 	p1 = multiprocessing.Process(target=do_something)
 	
 	# arguments
-	p1 = multiprocessing.Process(target=do_something, args=[arg1, arg2])
+	p1 = multiprocessing.Process(target=do_something, args=[1.5])
 	
 	p1.start()
 	# p1.join() # wait p1 to end, then execute next command
@@ -121,9 +117,11 @@ import concurrent.futures
 
 ``` python
 # context manager
-with concurrent.futures.ProcessPoolExecutor() as executor:
-	f1 = executor.submit(do_something, 1) # argument
-	print(f1.result())
+# the guard is mandatory for any process-based pool on macOS/Windows -> spawn re-imports the module in each child
+if __name__ == '__main__':
+	with concurrent.futures.ProcessPoolExecutor() as executor:
+		f1 = executor.submit(do_something, 1) # argument
+		print(f1.result())
 
 
 

@@ -1,7 +1,9 @@
+Gaea 1.x
+
 space to center view
 
 ### Node
-[Node documentation](https://docs.quadspinner.com/Reference/GeoPrimitives/Mountain.html)
+[Mountain node documentation](https://docs.quadspinner.com/Reference/GeoPrimitives/Mountain.html)
 
 Gradient
 

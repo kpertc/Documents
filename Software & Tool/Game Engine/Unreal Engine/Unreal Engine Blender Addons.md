@@ -14,5 +14,5 @@ Blender Install
 1. Project Settings > Python Remote Execution
 ![[UE-Enable-Python-remote-execution.png]]
 
-2. Edit > Editor Preferences > Less CPU When in Background
+2. Edit > Editor Preferences > **UNCHECK** Use Less CPU when in Background, otherwise UE throttles while Blender has focus and remote Python calls hang
 	![[UE-Enable-UseLessCPU.png]]

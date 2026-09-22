@@ -2,16 +2,16 @@
 
 `DOMContentLoaded` event fires when the document has been completely loaded and parsed.
 
--   window.DOMContentLoaded    
--   Document.DOMContentLoaded
+-   `document.addEventListener('DOMContentLoaded', handler)`
+-   fired at `document`, bubbles to `window` → a `window` listener works too (no `onDOMContentLoaded` property exists)
 
 
 innerHTML
 
 Not recommended to use `innerHTML` for ==performance== and ==security== issues.
 
--   use `document.createDocumentFragment` instead.
--   `innerHTML` can be passed in executable content. Make sure input is fully converted to string, then pass in.
+-   performance: batch with `document.createDocumentFragment`, or build one string and assign once. Reflow only, no security benefit.
+-   security: whatever you pass is parsed as HTML — stringifying the input does NOT help. Text → `element.textContent`. Real HTML → sanitize (DOMPurify) / Trusted Types.
 
 
 `window.onload` -> open the page
@@ -52,8 +52,10 @@ const host = window.location.host; // localhost:3000
 ```
 
 
-```
+```js
+// drive CSS from scroll position: var(--scroll) in stylesheet
 function setScrollVar() {
-
+	const ratio = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+	document.documentElement.style.setProperty('--scroll', String(ratio));
 }
 ```

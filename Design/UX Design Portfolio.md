@@ -26,7 +26,7 @@ Portfolio - A collection of work you've created that shows your skills in a cert
     
 -   Include diversity of the projects
     
--   Feature case studise
+-   Feature case studies
     
     -   Case Study: Leads the user through your design process from the beginning to the end
         
@@ -106,7 +106,7 @@ Portfolio - A collection of work you've created that shows your skills in a cert
 
 <br>
 
-##### **Online presense**
+##### **Online presence**
 
 **Personal statement (of personal brand)**
 

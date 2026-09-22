@@ -22,7 +22,7 @@ import vertex from './shaders/vertex.js'
 
 Include three.js header files
 
-```OpenGL
+```glsl
 #include <common>
 ```
 
@@ -144,11 +144,20 @@ const _material = new MeshStandardMaterial({
         shader.vertexShader
         shader.fragmentShader
         
+        // uniform 要注入到声明区才算在 GLSL 里声明；只挂在 shader.uniforms 上不算
+        shader.fragmentShader = shader.fragmentShader.replace(
+            /* glsl */`#include <common>`,
+            /* glsl */`#include <common>
+                uniform float uTime;
+            `
+        )
+        
         // edit fragment shader
         shader.fragmentShader = shader.fragmentShader.replace(
             /* glsl */`#include <color_fragment>`,
             /* glsl */`#include <color_fragment>
                 
+                float greenValue;
                 #ifdef NO_ANIMATION
                     greenValue = 1.0;
                 #else
@@ -160,8 +169,9 @@ const _material = new MeshStandardMaterial({
         )
         
         // get & set shader uniform
-        shader.uniform
-        shader.uniform.uTime.value = 1.0;
+        shader.uniforms
+        shader.uniforms.uTime = { value: 0 }; // 新 uniform 要先注册
+        shader.uniforms.uTime.value = 1.0;
         
         // save shader variable for later use
         _material.userData.shader = shader
@@ -239,7 +249,7 @@ some hardware (windows) can not render `gl_PointSize` below 1.0
 ``` js
 // Move point to far away to hide points
 if (gl_PointSize < 1.0) 
-    gl_Position = vec4(9999.9);
+    gl_Position = vec4(9999.9, 9999.9, 9999.9, 1.0); // w 必须是 1.0，vec4(9999.9) 透视除完还是落在屏幕角上
 ```
 
 ##### Post Process Shader
@@ -314,7 +324,7 @@ vColor ...
 |               |         |      |                           |                               |
 | vPosition     | 本地坐标    |      | `begin_vertex.glsl.js`    | require define `Alphahash`    |
 | worldPosition | 世界空间坐标  | vec4 | `worldpos_vertex.glsl.js` | require define `transmission` |
-| vUv           | UV      |      | `uv_vertex.glsl.js`       |                               |
+| vUv           | UV      |      | `uv_vertex.glsl.js`       | require define `USE_UV` — 否则每张贴图用自己的 varying：`vMapUv` / `vNormalMapUv` … |
 | objectNormal  | normal  |      | `beginnormal_vertex`      |                               |
 
 ```

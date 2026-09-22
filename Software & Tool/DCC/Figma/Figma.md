@@ -36,7 +36,7 @@ Clip Content
 
 prototype tab
 
-Starting point (blur right arrow)
+Starting point (blue right arrow)
 ![[figma-starting-point.png]]
 
 play show hotspot

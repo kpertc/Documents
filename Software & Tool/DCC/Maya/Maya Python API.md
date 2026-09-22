@@ -7,23 +7,23 @@ Tutorial
   
 
 ```Python
-import maya.OpenMaya as om # 1st API
+import maya.OpenMaya as om # 1st API, legacy - use om2 for new work
 import maya.api.OpenMaya as om2 # 2nd API
 ```
 
 ```Python
-st = om.MSelectionList()
-om.MGlobal.getActiveSelectionList(list)
-print ( list.length() )
+sel = om.MSelectionList()
+om.MGlobal.getActiveSelectionList(sel)
+print( sel.length() )
 ```
 
 ```Python
 dagPaths = []
 
 i = 0
-while i < list.length():
+while i < sel.length():
     _dagPath = om.MDagPath()
-    list.getDagPath( i, _dagPath)
+    sel.getDagPath( i, _dagPath)
     dagPaths.append(_dagPath)
     
     i += 1
@@ -136,7 +136,7 @@ MTransformationMatrix
 ```Python
 # Create Matrix from object transformation
 float_mat = om2.MMatrix( cmds.xform('object', q=1, m=1) ) 
-transformation_mat= om.MTransformationMatrix(float_mat)
+transformation_mat= om2.MTransformationMatrix(float_mat)
 
 # convert MMatrix-> transformation matrix
 # transformation matrix can deal with space   
@@ -149,7 +149,7 @@ transformation_mat.shear()
 
 # set 
 transformation_mat.setTranslation(om2.MVector([1,1,1]), space) # Transform Space
-transformation_mat.setRotation(om2.MEulerRotation(om.MVector([radianx, radiany, radianz])))
+transformation_mat.setRotation(om2.MEulerRotation(om2.MVector([radianx, radiany, radianz])))
 transformation_mat.setScale(om2.MVector([1,1,1]), space)
 transformation_mat.setShear(om2.MVector([1,1,1]), space)
 
@@ -162,17 +162,18 @@ cmds.xform('object', m = transformation_mat.asMatrix() )  # set MMatrix to objec
 
 ```Python
 #add to components
-xform_mat.translateBy(om.MVector([1,1,1]), space)
-radians_xfo_2 = om.MVector(math.radians(1), math.radians(1), math.radian(1))
-xform_mat.rotateBy(om.MEulerRotation(radians_xfo_2), space)
-xform_mat.scaleBy(om.Mvector([2,2,1.5]), space)
-xform_mat.shearBy(om.MVector([1,1,11), space)
+xform_mat.translateBy(om2.MVector([1,1,1]), space)
+radians_xfo_2 = om2.MVector(math.radians(1), math.radians(1), math.radians(1))
+xform_mat.rotateBy(om2.MEulerRotation(radians_xfo_2), space)
+xform_mat.scaleBy(om2.MVector([2,2,1.5]), space)
+xform_mat.shearBy(om2.MVector([1,1,1]), space)
 
-print '\n\n\n'
-print 'translation:', translation
-print 'rotation', rotation 
-print 'scale', scale
-print 'shear', shear
+# translation / rotation / scale / shear come from the getters above
+print('\n\n\n')
+print('translation:', translation)
+print('rotation', rotation)
+print('scale', scale)
+print('shear', shear)
 ```
 
 Matrix multi -> 1 follow 2 space

@@ -1,10 +1,12 @@
 #python 
 
-[PyMel Documentation](https://help.autodesk.com/cloudhelp/2017/ENU/Maya-Tech-Docs/PyMel/)
+[PyMel Documentation (Maya 2017)](https://help.autodesk.com/cloudhelp/2017/ENU/Maya-Tech-Docs/PyMel/)
+
+PyMEL is not installed by default since Maya 2022 (optional installer component, not guaranteed on a studio machine or in mayapy) → prefer maya.cmds / OpenMaya 2.0 for new tools
 
 |Pros|Cons|
 |------------ | ------------|
-|OOP<br/>Ref is object, not string<br/>Code is cleaner|Performance|
+|OOP<br/>Ref is object, not string<br/>Code is cleaner|Performance<br/>Not installed by default since Maya 2022|
 
 Pickle / Serialization -> Transfer data lossless
 
@@ -42,16 +44,20 @@ pm.spaceLocator() # Create a locator
 
 Ndoe Type
 ```python
+geo_shapes = []
 for i in pm.selected():
 	shape = i.getShape()
-	if isinstance(shape, pm.nt.GeometryShape):
-		geo_shape.append(shape)
+	if isinstance(shape, pm.nt.GeometryShape): # getShape() returns None for non-geometry transform, so this also guards None
+		geo_shapes.append(shape)
 ```
 
 ```Python
-cam = ls(type='camera')[0]
-parent = listRelatives(cam, p=1)[0]
-trans = xform(parent,q=1,t=1)
+cam = pm.ls(type='camera')[0]
+parent = pm.listRelatives(cam, p=1)[0]
+trans = pm.xform(parent,q=1,t=1)
+
+# or in PyMel
+trans = pm.ls(type='camera')[0].getParent().getTranslation()
 ```
 
 Math
@@ -77,6 +83,6 @@ vecZ = pm.dt.Vector.zAxis
 vecY = pm.dt.Vector.yNegAxis
 ```
 
-![[img/PyMelMatrix.png]]
-
 Matrix
+
+![[img/PyMelMatrix.png]]

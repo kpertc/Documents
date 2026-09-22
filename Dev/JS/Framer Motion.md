@@ -1,5 +1,7 @@
 Documentation: https://motion.dev/
 
+`framer-motion` renamed to `motion` (v11.12+, late 2024) → `npm i motion`, import from `motion/react`; React-independent code imports from `motion`
+
 ``` ts
 import { motion } from "motion/react";
 
@@ -69,24 +71,27 @@ style = {{
 
 Scroll triggered
 ``` tsx
-<motion.div>
-	whileInView = {}
-	viewport ={{
+<motion.div
+	initial={{ opacity: 0, y: 50 }}
+	whileInView={{ opacity: 1, y: 0 }}
+	viewport={{
 	 once: true,
-	 amount: "some" | "all" | 0.8
+	 amount: "some" | "all" | 0.8,
 	 // some -> play animation when partial appear
 	 // all -> play animation when fully appear
 	 // value
 	 margin: "-200px" // offset
 	}}
+>
+	divElement
 </motion.div>
 ```
 
-control
+control (`useAnimation` = legacy alias of `useAnimationControls`)
 ``` ts
 const control = useAnimation()
 
 useEffect(() => {
-	control.start("variantName")
+	control.start("variantName") // element needs a matching variants object
 }, [isInView])
 ```

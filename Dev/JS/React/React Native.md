@@ -4,8 +4,8 @@ https://reactnative.dev/
 
 Apps built by React Native: Facebook, Instagram, Pinterest, Uber Eats ...
 
-- Expo CLI → Simpler → Limited to Expo Native features
-- React Native CLI → More professional
+- Expo → Simpler → now the default, native code still OK via config plugins / prebuild
+- React Native Community CLI → More professional → own the native projects directly
 
 <br>
 
@@ -17,9 +17,8 @@ React Native/React/Redux snippets
 
 ### Expo
 
-`sudo npm i -g expo-cli`
-`expo init projectname`
-`npm start`
+`npx create-expo-app@latest projectname`
+`npx expo start`
 
 Expo Go App
 

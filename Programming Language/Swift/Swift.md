@@ -8,7 +8,7 @@ Practicing using Xcode playground
 
 https://www.youtube.com/watch?v=comQ1-x2a1Q
 
-### Documentation
+### Official Docs
 
 
 ### Stack & Heap
@@ -33,6 +33,7 @@ When you edit a Value type, you create a copy of it with new data.
 
 ##### Objects in the Heap 
 Functions, Class, Actors
+Actor: reference type, serialized access to its own state (`await`, `@MainActor`)
 Objects in the Heap are ==Reference== types.
 When you edit a Reference type, you edit the object that you are referencing. This "reference" is called "pointer" because it "points" to an object in the Heap (in memory).
 
@@ -43,9 +44,9 @@ Memory need to create a reference is almost the same as the object
 ##### ==Automatic Reference Counting (ARC)==
 is **a memory management attribute used to monitor and manage an application's memory usage**
 
-Not affect value type
+Not affect value type (but Array / String / Dictionary buffer is heap + ARC-managed, copy-on-write)
 
-`ARC` is used ()[https://stackoverflow.com/questions/24217586/structure-vs-class-in-swift-language]
+`ARC` is used [structs vs classes](https://stackoverflow.com/questions/24217586/structure-vs-class-in-swift-language)
 
 - When you assign or pass `reference type` a **new reference** to original instance will be created(the address of instance is copied).
 
@@ -131,10 +132,10 @@ End
 Use a backslash (\\) to omits the following line break.
 ```swift
 let softWrapped = """
-This is just \\
+This is just \
 one wrong sentence.
 
-This is another one\\
+This is another one\
 .
 """
 ```
@@ -263,7 +264,7 @@ enum Fruit {
 enum Fruit {
 	case apple, orange, ...
 
-	var title: String = {
+	var title: String {
 		self // enum value 
 		return
 	}
@@ -275,7 +276,7 @@ fruit = .orange
 ```
 
 ```swift
-// use name instead of index
+// Tuple - use name instead of index
 func getUserInfo2() -> (name: String, isPremium: Bool){
 	...
 }
@@ -303,7 +304,7 @@ repeat {
 
 ```swift
 // for can not use in view? 
-for item in 0...<10 {
+for item in 0..<10 {
   ...
 }
 
@@ -324,7 +325,7 @@ continue // next loop
 
 ```swift
 ForEach(0..<10, { index in 
-	print("\\(index)")
+	print("\(index)")
 })
 // 0, 1, 2, 3 ... 9
 
@@ -333,7 +334,7 @@ let data: [String] = ["Hi"]
 
 // index
 ForEach(data.indices) { index in 
-	Text("\\(data[index])")
+	Text("\(data[index])")
 }
 
 
@@ -438,7 +439,7 @@ deinit {
 
 ```swift
 let user = User()
-User.name = "new name"
+user.name = "new name"
 /**
 	class can be changed even on let, because class is reference, 
 	object itself is not changing
@@ -456,8 +457,6 @@ private
 private(set) // read is public, set is private
 ```
 
-
-### ![[SwiftUI#Enum]]
 
 ### Condition
 
@@ -495,7 +494,7 @@ Rectangle()
 
 <br>
 
-### ![[SwiftUI#ForEach]]
+### ![[SwiftUI#List]]
 
 <br>
 
@@ -506,7 +505,7 @@ func _funcname() -> Bool {
 }
 
 // calculated variable
-func calculatedNumber: Int {
+var calculatedNumber: Int {
 	return number1 + number2
 }
 ```
@@ -542,18 +541,18 @@ downloadData{ (returnData) in
 func downloadDataAsync(completionHandler: @escaping (_ data: String) -> ()) {
 	// some async logic
 	DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-		completionhandler("New Data")
+		completionHandler("New Data")
 	}
 }
 
 downloadDataAsync{ (returnData) in 
-	self.text = returnedData // strong reference
+	self.text = returnData // strong reference
 }
 ```
 
 ``` swift
 downloadDataAsync{ [weak self] (returnData) in 
-	self?.text = returnedData // weak reference, ok to de-initialize
+	self?.text = returnData // weak reference, ok to de-initialize
 }
 ```
 
@@ -582,7 +581,7 @@ Text(displayText)
 ```
 
 ```swift
-text! // force to wrap value
+text! // force to unwrap value, crash if nil
 ```
 
 
@@ -643,7 +642,7 @@ let result = manager.getTitle2()
 switch result {
 	case .success(let newTitle):
 		self.text = newTitle
-	case .failure (let error)
+	case .failure(let error):
 		self.text = error.localizedDescription
 }
 ```
@@ -708,7 +707,7 @@ protocol ColorThemeProtocol {
 	var secondary: Color { get }
 	var tertiary: Color { get }
 
-	func someFunc () { }
+	func someFunc()
 }
 
 // a struct conform to ColorThemeProtocol
@@ -773,19 +772,19 @@ let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomai
 let directory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
 let directory = FileManager.default.temporaryDirectory
 
-let path = directory?.appendingPathComponent("\\(name).jpg").first //array.first → [0] 
+let path = directory.first!.appendingPathComponent("\(name).jpg") //array.first → [0]
 
 // save data
-data.write(to: path)
+try data.write(to: path)
 
 // check exists
-FileManager.default.fileExists(atPath: path), 
+FileManager.default.fileExists(atPath: path.path)
 	
 // remove file or path
 FileManager.default.removeItem(at: )
 
 // create path (Folder)
-FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+try FileManager.default.createDirectory(at: path, withIntermediateDirectories: true)
 
 ```
 <br>

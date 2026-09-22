@@ -11,13 +11,10 @@ class HelloWorldOperator(bpy.types.Operator):
     bl_idname = "mesh.hello_world" # change the ID address
     bl_label = "Minimal Operator"
     
-    bl_options = { 
-	    'REGISTER', 
-	    'UNDO', # for undo
-	    'DEFAULT_CLOSED' # panel default -> closed
-	}
-
-	bl_parent_id = "" # put this panel inside of the parent panel
+    bl_options = {
+        'REGISTER',
+        'UNDO', # for undo
+    }
     
     # Property Definitions ↓
     count_x: bpy.props.IntProperty(
@@ -39,11 +36,10 @@ class HelloWorldOperator(bpy.types.Operator):
     @classmethod
     def poll(cls, context):
         # return boolean
-        return context.area.type == "VIEW_3D" # show only in 3D Viewport area
-        return context.active_object is not None
+        return context.area.type == "VIEW_3D" and context.active_object is not None # show only in 3D Viewport area, with an active object
 
     def execute(self, context):
-	    # use this context instead of use bpy.context
+        # use this context instead of use bpy.context
         bpy.ops.mesh.primitive_cube_add()
         print("Hello World" + str(self.count_y))
         return {'FINISHED'} # Tell Blender
@@ -97,6 +93,8 @@ class VIEW3D_PT_HelloWorld(bpy.types.Panel):
     bl_region_type = 'UI' 
     bl_category = "category" #
     bl_label = "label"
+    bl_options = {'DEFAULT_CLOSED'} # panel default -> closed
+    bl_parent_id = "" # put this panel inside of the parent panel
 
     def draw(self, context):
         pass
@@ -115,15 +113,15 @@ def draw(self, context):
 	
 	# refer other property's UI
 	self.layout.prop(context.scene.cycles, "preview_samples")
-	col.props(obj, "scale") # show obj's scale property in here
+	col.prop(obj, "scale") # show obj's scale property in here
 	
 	# simple label
-	self.label(text="title")
+	self.layout.label(text="title")
 	
 	# separator
-	column.separator()
+	col.separator()
 
-	split
+	split = layout.split()
 
 ```
 
@@ -145,9 +143,9 @@ def unregister():
 For script
 ```python
 ### or Create a list of classes   
-blender_classes = [ HelloWorldOperator, HelloWorldOperator ]
-    for blender_class in blender_classes:
-       bpy.utils.register_class(blender_class)
+blender_classes = [ HelloWorldOperator, VIEW3D_PT_HelloWorld ]
+for blender_class in blender_classes:
+    bpy.utils.register_class(blender_class)
 ```
 
 Console type -> `bl_idname` | `F3` Search Bar
@@ -189,7 +187,7 @@ Installed addons directory: `addon_dir="${HOME}/Library/Application Support/Blen
 | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | ![[img/Blender Scripting Operator & Add-on/Can use function after enabling the add-on.png]] | ![[img/Blender Scripting Operator & Add-on/Reload script after editing the script.png]] |
 
-##### Add-on Meta Data (Add-on Only)
+##### Add-on Meta Data (Add-on Only) - legacy, pre-4.2
 [Blender # Add-on Tutorial](https://docs.blender.org/manual/en/latest/advanced/scripting/addon_tutorial.html)
 
 plugin name showed at Add ons list is `{bl_info.category} {bl_info.name}`
@@ -201,11 +199,12 @@ bl_info = {
     "category": "Object",
     ...
     # more info can be found on ↓
-    # bl_info https://developer.blender.org/docs/handbook/addons/addon_meta_info/
+    # bl_info https://developer.blender.org/docs/handbook/addons/
     
 } 
 ```
 
+Blender 4.2+ → Extensions: `blender_manifest.toml` replaces `bl_info`, validate with `blender --command extension validate`, user path `~/Library/Application Support/Blender/${version}/extensions/user_default/`
 
 Update Add-on
 ```python
@@ -238,9 +237,9 @@ myBoolVector : bpy.props.BoolVectorProperty()
 ```
 
 ```python
-text = bpy.props.StringProperty(name="default text", default="default name")
+text: bpy.props.StringProperty(name="Text", default="default name") # name= is the UI label
 ...
-object.name = self.text
+context.object.name = self.text
 ```
 
 ![[img/Blender Scripting Operator & Add-on/Variable Anotation.png | 300]]

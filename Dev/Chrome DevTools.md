@@ -6,7 +6,10 @@ Undock
 ### Chrome long screenshot
 ![[chrome-fullscreen-shot.png]]
 
+### Box model highlight colors
+blue → content
 green → padding
+tan → border
 orange → margin
 
 ### Simulate slow network speed

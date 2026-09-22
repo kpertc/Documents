@@ -13,8 +13,7 @@ $ npm install lil-gui --save-dev
 
 ```JavaScript
 // three includes lil-gui
-import GUI from 'three/examples/jsm/libs/lil-gui.module.min' // use lil-
-gui
+import GUI from 'three/addons/libs/lil-gui.module.min.js' // use lil-gui
 // or
 import GUI from 'lil-gui';
 ```
@@ -59,7 +58,7 @@ gui.addColor(material, 'color')
 	.onChange((value) => {
 		console.log(value) // log out value
 		console.log(value.getHexString()) // actual color in three.js
-	}
+	})
 ```
 
 
@@ -86,7 +85,7 @@ const material = new ShaderMaterial({
 gui.addColor(debugObject, "color").onChange(() => {
 	_mesh.material.uniforms.uColor.value.set(debugObject.color); // value is color, use .set()
 	// _mesh.material.uniforms.uColor.value = new THREE.Color(debugObject.color);
-}
+});
 
 ```
 

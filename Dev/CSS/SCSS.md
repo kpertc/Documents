@@ -7,7 +7,7 @@
 ```scss
 button {
 	a {
-		front-weight: bold;
+		font-weight: bold;
 	}
   
 	.success {
@@ -49,7 +49,7 @@ button {
 
 $sizes: 40px, 50px, 80px;
 @each $size in $sizes {
-	.icon-#{size} {
+	.icon-#{$size} {
 		font-size: $size;
 	}
 }
@@ -61,3 +61,16 @@ $sizes: 40px, 50px, 80px;
 }
 
 ```
+
+
+##### @use / @forward
+```scss
+@use 'variables' as v;   // namespaced, replaces @import
+.btn { color: v.$primary; }
+
+@forward 'variables';    // re-export to whoever @use this file
+
+@use 'sass:math';
+.col { width: math.div(100%, 3); }   // `/` for division is deprecated
+```
+`@import` is deprecated, removal planned for Dart Sass 3.0

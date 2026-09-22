@@ -3,7 +3,7 @@
 export data to `.gltf`
 
 ### UserData
-three.js → `object.userdata`
+three.js → `object.userData`
 Blender → `custom properties`
 
 | ![[DCC-threejs-userdata.png]] | ![[DCC-blender-userdata.png]] | ![[DCC-blender-userdata-export-setting.png]] |

@@ -14,11 +14,11 @@
 
 `:` Probability
 
-`&` Pitch Up
-`^` Pitch Down
+`&` Pitch Down
+`^` Pitch Up
 
-`\\` Row CW
-`/` Row CCW
+`\\` Roll CW
+`/` Roll CCW
 
 `[]` Branch
 `()` Explicit value

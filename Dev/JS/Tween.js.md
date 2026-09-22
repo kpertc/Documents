@@ -6,6 +6,8 @@ https://tweenjs.github.io/tween.js/docs/user_guide.html
 ```TypeScript
 import * as TWEEN from '@tweenjs/tween.js'
 
+const transitionValue = { value: 0 } // the object being tweened
+
 window.addEventListener('mousedown', () => { // mouse down
   console.log("mousedown")
 
@@ -26,7 +28,9 @@ window.addEventListener('mouseup', () => { // mouse up
     .start();
 })
 
-function animate() {
-  TWEEN.update()
- }
+function animate(time) {
+  requestAnimationFrame(animate) // must keep scheduling, or tweens never advance
+  TWEEN.update(time)
+}
+requestAnimationFrame(animate)
 ```

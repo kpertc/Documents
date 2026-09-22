@@ -20,7 +20,8 @@ JScript -> Microsoft JavaScript
 
 ### History
 
-> 1993 - First Browser -> Mosaic
+> 1990 - First Browser -> WorldWideWeb (Tim Berners-Lee)
+> 1993 - First popular graphical browser -> Mosaic
 > 1994 - Mosaic founded company -> Netscape, and release browser
 > Need a more interactive language as glue language, at the same time, Java was popular,
 > `MOCHA` -> `LiveScript` -> `JavaScript`
@@ -111,6 +112,7 @@ function getSum(n1, n2) {
 > [!info] Primitive Types
 > Primitive Types: Stored directly in the ==stack==, where it is accessed from
 > String | Number | Boolean | Null | Undefined | Symbol | Bigint
+> 只是教学模型, 引擎实际把 string / bigint / 闭包变量放在堆上, 真正区别是 copy-by-value vs copy-by-reference
 
 Symbol →用于唯一的标识符。
 

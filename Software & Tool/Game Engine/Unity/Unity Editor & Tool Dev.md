@@ -33,7 +33,7 @@ String - [Multiline] / [TextArea]
 [Header("标题")] / [Space] or [Space(10)]
 
 // Hiding
-[ReadOnly] // Show, but not editable
+[ReadOnly] // Show, but not editable (NOT built-in - needs your own PropertyDrawer)
 [HideInInspector] // Hide, not show
 
 // Help
@@ -58,18 +58,18 @@ String - [Multiline] / [TextArea]
 ```C#
 public float thing0; // serialized, visible, public
 float thing1; // not serialized, hidden, private
-[SerializedField] float thing2; // serialized, visible, private
+[SerializeField] float thing2; // serialized, visible, private
 [HideInInspector] public float thing3; //serialized, hidden, public
 
 //Serializable Class or Struct
-[Seriablizable]
+[System.Serializable]
 public class MyClass {
     public Vector3 pos;
     public Color color;
 }
 ```
 
-Inheritance wont get serialized
+Plain class fields lose the derived type (no polymorphism) - use [SerializeReference] (2019.3+) or a ScriptableObject ref
 
 Protected: A protected member is accessible within its class and by derived class instances.
 
@@ -139,7 +139,7 @@ https://docs.unity3d.com/ScriptReference/Editor.OnInspectorGUI.html
 
 ### Editor & Window
 
-##### Editor Template → Script Attach on GameObject [Editor Example](http://www.vmetu.com/blog/unity-editor-zi-ding-yi-chuang-kou.htmlE)
+##### Editor Template → Script Attach on GameObject [CustomEditor](https://docs.unity3d.com/ScriptReference/CustomEditor.html) [Editor Example](http://www.vmetu.com/blog/unity-editor-zi-ding-yi-chuang-kou.html)
 
 ```C#
 public class ExampleScript : MonoBehaviour {
@@ -164,15 +164,16 @@ public class ExampleEditor : Editor {
             // do Stuff
         }
         Handles.EndGUI();
+    }
 }
 ```
 
-##### EditorWindow Template → Independent Window [EditorWindow Lifecycle](http://www.4k8k.xyz/article/qq_28474981/82949820)
+##### EditorWindow Template → Independent Window [EditorWindow](https://docs.unity3d.com/ScriptReference/EditorWindow.html) [EditorWindow Lifecycle](http://www.4k8k.xyz/article/qq_28474981/82949820)
 
 ```C#
-[MenuItem("Custom/Custom  %#]")]
 public class EditorWindowExample : EditorWindow {
-    static void Init() => GetWindow<CustomEditor>("The Title");
+    [MenuItem("Custom/Custom  %#]")] // MenuItem only targets static methods
+    static void Init() => GetWindow<EditorWindowExample>("The Title");
     void OnGUI() {
         // UI Stuff Here
     }
@@ -183,7 +184,7 @@ public class EditorWindowExample : EditorWindow {
 
 // events...
 
-##### OnSelectionChanged
+##### OnSelectionChange
 
 <br>
 
@@ -193,9 +194,9 @@ public class EditorWindowExample : EditorWindow {
 EditorUtility.FocusProjectWindow(); // Focus window
 
 OnGUI // Only event
-OnInspectorUpdate()  // Update per 10 frame, less times as if it was OnGUI/Update
+OnInspectorUpdate()  // 10 times per second, independent of framerate, less often than OnGUI/Update
 OnValidate() //Editor-only function that Unity calls when the script is loaded or a value changes in the Inspector.
-repaint() // re-draw ?
+Repaint() // re-draw
 ```
 
 ##### SerializedProperty [Example](https://www.jianshu.com/p/fde1ea2c0337)
@@ -263,16 +264,15 @@ Undo.RecordObject(gameobject.transform, "Layout");
 material vs shared material same for mesh / shared mesh
 
 ```C#
-GetComponent<MeshRenderer>().material.color = Color.Red; //Duplicate / Instance the material
-GetComponent<MeshRenderer>().sharedMaterial.color = Color.Red; //Modify the material asset
+GetComponent<MeshRenderer>().material.color = Color.red; //Duplicate / Instance the material
+GetComponent<MeshRenderer>().sharedMaterial.color = Color.red; //Modify the material asset
 ```
 
 Hideflags - To prevent material leak, and properly create material, use Hideflag
 
 ```C#
-Shader shader = shader.Find("Default/Diffuse");
-Material mat = new Material(shader) {hide flags = HideFlags.HideAndDontSave };
-mat.hideFlags = HideFlags.HideAndDontSave;
+Shader shader = Shader.Find("Standard"); // URP: "Universal Render Pipeline/Lit"
+Material mat = new Material(shader) { hideFlags = HideFlags.HideAndDontSave };
 ```
 
 Use ID access material is much faster

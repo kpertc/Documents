@@ -38,7 +38,7 @@ loss -> low is better
 ### 2. Post-Training (Supervised FineTuning)
 - instruct model (assistant)  → train with Q&A sets
 	special token such as：
-		`<im_start> <im_end>`
+		`<|im_start|> <|im_end|>`
 		`<search_start> <search_end>`
 
 LLM models does not recognize world / letters, only recognize token
@@ -52,7 +52,7 @@ Hallucination (幻觉)
 Minimizing hallucination by grounding
 - right context
 	- access information
-	- Retrieve and Generate (RAG), (searching result)
+	- Retrieval-Augmented Generation (RAG), (searching result)
 - use better model
 
 parameters → vague recollection
@@ -65,7 +65,7 @@ Expert response
 监督微调：从自动补全到遵循人类指令回答问题
 
 Reasoning: 
-Reinforcement Learning (RF)
+Reinforcement Learning (RL)
 Answer question, check with answer, good answer will get rewarded and be trained for further cycles
 
 RL tend to find trick to win
@@ -97,7 +97,7 @@ Parameter-Efficient Fine-Tuning (PEFT)
 - generally not as good as conventional Fine-tuning
 e.g. LoRA, Low-Rank Adaptation
 - apply weights to any dense layers in the founding models
-- only applying adaptation on attention weights, not on MLPs
+- LoRA paper only adapted attention weights, not MLPs; in practice (PEFT / QLoRA) MLP too
 
 Prompt Engineering - Guide LLMs for specific task
 Prompt Design 
@@ -132,7 +132,7 @@ Better to hybrid fine-tuning with RAG database
 - When you hit that limit, older information starts getting pushed out to make room for new stuff
 
 Input & output tokens
-- for LLMs, depending on the context and the model you're using, the same word might be tokenized differently, 1 token ≈ 4 words
+- for LLMs, depending on the context and the model you're using, the same word might be tokenized differently, 1 token ≈ 4 characters ≈ 0.75 words (1 word ≈ 1.3 tokens)
 - different model has different input/output token limit
 - input and output token cost differently, GPT 4.1, output token cost 4x than input token
 
@@ -179,7 +179,7 @@ LLMs replace traditional search
 - Before LLMs, enterprise need collect data of training sets
 - (Compare to traditional algorithm) everyone can develop AI
 
-Anthropic - Claude
-- Haiku - small, fast, cheap
-- Sonnet - medium
-- Opus - smartest, slow
+Anthropic - Claude (model id 2026-09)
+- Haiku - small, fast, cheap → `claude-haiku-4-5`
+- Sonnet - medium → `claude-sonnet-5`
+- Opus - smartest, slow → `claude-opus-5`

@@ -1,5 +1,7 @@
 https://gsap.com/docs/v3/Installation/
 
+GSAP 3.13+ (2025) — `SplitText.create()` is the 3.13 API (before: `new SplitText(el, {...})`), and SplitText / DrawSVG / MorphSVG / ScrollSmoother / MotionPathHelper became free from 3.13 on
+
 ### Basics
 ``` sh
 # Install the GSAP library  
@@ -29,6 +31,7 @@ gsap.to(
 )
 
 gsap.fromTo(
+	material.uniforms.uUniform, // target
 	// from
 	{
 		value: 0,
@@ -41,8 +44,8 @@ gsap.fromTo(
 		onComplete: () => {
 			...
 		},
-}
-}
+	}
+)
 ```
 
 `revert()` → returning the targets to their pre-animation state
@@ -64,11 +67,11 @@ Draggable ?
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // register plugin - scroll trigger
-gasp.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 ```
 
 ```js
-gasp.to(".className", {
+gsap.to(".className", {
     x: 700,
     duration: 3,
     // Scroll Trigger
@@ -78,7 +81,7 @@ gasp.to(".className", {
 ```
 
 ``` ts
-gasp.to(".className", {
+gsap.to(".className", {
     x: 700,
     duration: 3,
 	scrollTrigger: {
@@ -86,15 +89,15 @@ gasp.to(".className", {
 		// toggle the playback of the animation
 		trigger: ".a",
 		endTrigger: ".c", // trigger can be different element
-		// toggleAction: "play none none none", // default, only play one
-		toggleAction: "restart none none none", // restart every time
+		// toggleActions: "play none none none", // default, only play one
+		toggleActions: "restart none none none", // restart every time
 
 		markers: true, // debug visualizer
 		id: "my_id", // show text on the marker
 		// const trigger = ScrollTrigger.getById("my-id"), can get the trigger
 		
 		start: "top center", // default, element, viewport
-		start: "top center", // 20px from element top, and 80% of viewport
+		start: "top+=20px 80%", // 20px from element top, and 80% of viewport
 		end: "bottom top", // default
 		end: "+=300", // += 300 unit relative to start
 		end: () => value, // can be function, use dynamic value
@@ -114,7 +117,8 @@ gasp.to(".className", {
 			self.progress // 0 - 1 progress
 		},
 		onToggle: (self) => { self.isActive }, // return true when in, return false when not in 
-		toggleClass: '.classname', // apply class to change style when toggled
+		toggleClass: 'classname', // class name, not selector
+		// toggleClass: { targets: '.box', className: 'active' }, // class on another element
 
 		// 
 		scroller: "#container", // use other element instead of self viewport
@@ -150,7 +154,11 @@ ScrollTrigger.defaults({
 ### ScrollSmoother
 
 ``` ts
+import { ScrollSmoother } from "gsap/ScrollSmoother";
+gsap.registerPlugin(ScrollSmoother);
 
+// markup must be <div id="smooth-wrapper"><div id="smooth-content">...</div></div>
+ScrollSmoother.create({ smooth: 1, effects: true })
 ```
 
 ### React
@@ -169,7 +177,7 @@ const { contextSafe } = useGSAP();
 ```
 
 ```js
-useGSAP() => {}
+useGSAP(() => {})
 
 useGSAP((context, contextSafe) => {
 
@@ -187,7 +195,7 @@ useGSAP((context, contextSafe) => {
 		context.revert(); // not keep property
 		gsap...
 	}
-}. [state])
+}, [state])
 
 ```
 
@@ -229,11 +237,15 @@ refList.current.forEach((mesh, index) => {
 > https://www.youtube.com/watch?v=L1afzNAhI40
 
 ``` ts
+import { SplitText } from "gsap/SplitText";
+gsap.registerPlugin(SplitText);
+
 useGSAP(() => {
 	if (!textRef.current) return;
 	const split = SplitText.create(textRef.current, {
 		type: "chars, lines, words", // create split object base on different level
-		worldClass: "word", // add custom classname ".word", allow use css
+		wordsClass: "word", // add custom classname ".word", allow use css
+		// charsClass / linesClass, "word++" -> word word1, word word2 ...
 	});
 
 	console.log(split);
@@ -286,6 +298,9 @@ mm.revert();
 ### drawSVG
 
 ``` ts
+import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+gsap.registerPlugin(DrawSVGPlugin);
+
 gsap.to(pathRef.current, { duration: 1, drawSVG: `${progress * 100}%` });
 
 gsap.fromTo(
@@ -301,21 +316,26 @@ drawSVG: `20 350` // absolute unit
 ```
 ### MorphSVG
 
-let object follow a path
+tween one SVG shape into another shape
 
 ``` ts
-const motionPath = MorphSVGPlugin.pathDataToBezier("#selector")
+import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+gsap.registerPlugin(MorphSVGPlugin);
+
+gsap.to("#circle", { duration: 1, morphSVG: "#star" })
 ```
 
 ``` ts
-
+// GSAP 2 era, to follow a path use Motion Path instead
+const motionPath = MorphSVGPlugin.pathDataToBezier("#selector")
 ```
 
 ### Motion Path
 follow a path, path can be svg
 
 ``` ts
-
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+gsap.registerPlugin(MotionPathPlugin);
 ```
 
 ``` ts
@@ -323,20 +343,19 @@ gsap.to("#rect", // the element to animate
 {
 	duration: 5,
 	motionPath: {
-		path: "#path" // the svg path
+		path: "#path", // the svg path
 		autoRotate: true, // move and rotate follow the front direction
-
-		delay: 2,
 
 // start and end base on path ratio
 		start: 0.25, 
 		end: 0.75,
-		end: 1.5, // repeat back to 0.5
+		// end: 1.5, // repeat back to 0.5
 
-		align: "#path" // change coord to target coord
+		align: "#path", // change coord to target coord
 
-		curveness: // 0 - 1, can covert straight line to curve line
-	}
+		curviness: 1, // 0 - 1, can covert straight line to curve line
+	},
+	delay: 2, // tween level, not inside motionPath
 })
 ```
 

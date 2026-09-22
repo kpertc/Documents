@@ -25,7 +25,6 @@ os.removedirs()
 
 os.remove() # only for files
 
-s
 import shutil
 shutil.rmtree('/path/to/your/dir/')
 
@@ -45,7 +44,8 @@ for _file in os.listdir(HDRFolder):
 
 ```Python
 os.path.isfile() # check file exist, return T or F
-os.path.exists() # check directory exist, return T or F
+os.path.isdir() # check directory exist, return T or F
+os.path.exists() # file OR directory exist
 os.path.join() # join path
 
 os.path.basename('/tmp/test.txt') # test.txt 
@@ -58,22 +58,17 @@ os.path.dirname('/tmp/test.txt') # /tmp -directory name
 
 ##### Rename
 
-```C#
-os.rename('','')
+```Python
+os.rename('','') # os.replace() -> atomic overwrite, cross-platform
 ```
 
 ##### os.stat()
 
-```Python
-from datatime import datatime
-
-# from timestamp
-mod_time = os.stat
-```
-
 ###### Time of last modification
 
 ```Python
+from datetime import datetime
+
 os.chdir('/Users/coreyschafer/Desktop/')
 
 mod_time = os.stat('demo.txt').st_mtime # Time of last modification.
@@ -85,7 +80,9 @@ print(datetime.fromtimestamp(mod_time))
 go thru all files
 
 ```Python
-for dirpath, dirnames, filenames in os.walk('/Users')
+for dirpath, dirnames, filenames in os.walk('/Users'):
+	# filenames are bare names, join with dirpath
+	...
 ```
 
 ##### os.environ
@@ -103,8 +100,8 @@ os.environ.get('HOME')
 
 ```Python
 import json
-# string to dict
-json.load(_file)
-# dict to string
-json.dumps( dictData )
+json.load(_file) # file -> dict
+json.loads(_str) # string -> dict ("s" = string)
+json.dump(dictData, _file) # dict -> file
+json.dumps(dictData) # dict -> string
 ```

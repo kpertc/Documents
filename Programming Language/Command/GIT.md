@@ -64,7 +64,8 @@ The management of changes to documents, computer programs, large websites, and o
 An SSH key is an access credential for the SSH (secure shell) network protocol.
 
 ```
- ~ ssh-keygen -t rsa -b 4096 -C "dr_cjf@126.com"
+ ~ ssh-keygen -t ed25519 -C "you@example.com"
+ ~ ssh-keygen -t rsa -b 4096 -C "you@example.com" # fallback for legacy servers
 ```
 
 Github use https://github.com/GitCredentialManager/git-credential-manager/blob/main/README.md
@@ -88,8 +89,8 @@ git config --help
 ##### Git Config
 
 ```bash
-git config -- global user.name "Jingfu Chen"
-git config -- global user.email "chenjingfu.design@email.com"
+git config --global user.name "Jingfu Chen"
+git config --global user.email "chenjingfu.design@email.com"
 ```
 
 ```bash
@@ -98,7 +99,7 @@ git config --list
 ![[output.png]]
 
 ```shell
-ssh-keygen -t rsa -C 'xxx@xxx.com'
+ssh-keygen -t ed25519 -C 'xxx@xxx.com'
 ```
 
 Linux case sensitive
@@ -160,17 +161,17 @@ git status
 
 # add all files / stage file
 git add . 
-→ --- command will index any new files and staging modified files from your working tree to be committed. But it will ignore whatever you have removed files from your working tree.
+→ since Git 2.0, stages new, modified AND deleted files under the current directory.
 
-git add -A / -all 
-→ command will add any new files,modified content, and removed files from your working tree.
+git add -A / --all 
+→ same, but covers the whole working tree no matter which directory you are in.
 
 git add filename.extension
 
 # reset stage files / unstage
 git reset "file-name" # unstage files
 git reset . # unstage all changes
-git reset -- hard # unstage and also delete files 
+git reset --hard # unstage and permanently discard working tree changes
 
 # also remove files
 git clean 
@@ -199,7 +200,7 @@ git commit -m "message"
 
 ```bash
 git push
-git pull origin master branch name
+git pull origin <branch-name>
 git push origin master
 ```
 
@@ -232,7 +233,7 @@ git branch # Show currency branch
 https://stackoverflow.com/questions/13716658/how-to-delete-all-commit-history-in-github
 
 Github → main
-GitLab → master
+GitLab → main (since 14.0, older repos may still be on master)
 
 ```bash
 git checkout --orphan latest_branch # start a branch without history
@@ -262,7 +263,7 @@ git log --oneline
 git stash list # list all stash
 
 # save current working on files to stash. name
-git stash save "Worked on XXX"
+git stash push -m "Worked on XXX"
 
 then git diff and git commit no longer have working  on files
 
@@ -353,11 +354,11 @@ git submodule set-branch --branch feat-qwen-camera-control schemas
 ### Git Hook
 .git/ 
 javascript -> husky
-git submodule add `link`
+git submodule add <url>
 
 ### Git Archive
 ```shell
-git archive --remote=`link`:DocView.git develop jdoc2mdx_modification/generate.js --output generate.zip --format=zip
+git archive --remote=<url>:DocView.git develop jdoc2mdx_modification/generate.js --output generate.zip --format=zip
 
 # unzip
 unzip generate.zip

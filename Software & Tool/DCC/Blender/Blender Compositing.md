@@ -24,7 +24,7 @@ Recommend to enable Node Wrangler
 
 <br>
 
-Select Both nodes F to "fill" the connection|`M` Mute node
+Select Both nodes `F` to "fill" the connection (Make Links)|`M` Mute node
 ---|---
 ![[img/Blender Compositing/fill.gif]]|![[img/Blender Compositing/muteNode.gif]]
 
@@ -44,3 +44,4 @@ Enable Denoising Data
 ![[img/Blender Compositing/denoising-data.png]]
 
 Color Correction
+- lift / gamma / gain per range (shadow, midtone, highlight)

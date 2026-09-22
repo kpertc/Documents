@@ -44,9 +44,9 @@ Geometry Nodes is a modifier [[Blender Modifier]]
 		 Random Value
 	</div>
 	<div>
-		Mesh to point<br>
-		Curve to point<br>
-		Instance on point
+		Mesh to Points<br>
+		Curve to Points<br>
+		Instance on Points
 	</div>
 </div>
 
@@ -76,8 +76,8 @@ Geometry Nodes is a modifier [[Blender Modifier]]
 </div>
 
 <br>
-Transform (? Object Mode)
-Set Position (? Edit Mode)
+Transform Geometry (like Object Mode - moves the whole geometry) — named "Transform" before 4.0
+Set Position (like Edit Mode - moves points/vertices)
 Mix
 
 Index
@@ -121,7 +121,7 @@ Collection|Distribute Random Instance
 
 Edit node name|Ctrl Shift add a viewer node
 ---|---
-![[img/Blender Geometry Nodes/Edit node name.png]]|
+![[img/Blender Geometry Nodes/Edit node name.png]]|Ctrl+Shift+LMB on a node links it to the Viewer, result shows in the spreadsheet / viewport overlay
 
 
 ##### View Value

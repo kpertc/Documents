@@ -21,10 +21,11 @@ Average
 
 Luminosity (better)
 ```
-vec3 lumiance = vec3(0.299, 0.587, 0.114);
+vec3 luminance = vec3(0.299, 0.587, 0.114);
 // (0.2125, 0.7154, 0.0721);
 
-vec3 lum = dot(lumiance, color);
+float lum = dot(luminance, color.rgb); // dot() returns float
+vec3 gray = vec3(lum);
 ```
 
 ### Normal Map
@@ -32,6 +33,9 @@ vec3 lum = dot(lumiance, color);
 - Micro detail map
 
 ##### Blending Normals
+- Whiteout - add xy, multiply z
+- UDN - cheap, add xy, keep base z
+- RNM (Reoriented Normal Mapping) - most correct, rotate detail normal into base normal's frame
 
 ### Derivative
 dFdx, dFdy | GLSL OpenGL, WebGL
@@ -80,9 +84,12 @@ Metallic
 - no dark metal, metals are 180 sRGB brighter
 
 
-`saturate()` = `clamp(var, 0, 1)`
+`saturate()` | HLSL only, no GLSL equivalent
+`saturate()` = `clamp(var, 0.0, 1.0)`
 `saturate()` has hardware acceleration, use `saturate()` for clamping value to 0 -1,
 use `clamp()` to clamp value other than 0-1
+in GLSL write `clamp(x, 0.0, 1.0)` — GLSL ES 1.00 has no implicit int → float, so `clamp(x, 0, 1)` fails
 
 
 Parallax Shader
+- offset UV by heightmap along the tangent-space view direction

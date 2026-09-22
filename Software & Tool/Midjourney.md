@@ -10,7 +10,7 @@ Light UpScale Redo, redo make it less variation
 / settings
 ![[midjourney-settings.png]]
 
-Parameters
+Parameters (as of V5, not re-checked for V6 / V7)
 
 [https://docs.midjourney.com/docs/parameter-list](https://docs.midjourney.com/docs/parameter-list)
 
@@ -20,7 +20,7 @@ Aspect ratio Support
 
 ```
 // Aspect ratio
-—-ar 16:9
+--ar 16:9
 
 // chaos 0-100 more variantion
 --c
@@ -42,7 +42,7 @@ Aspect ratio Support
 // Stop
 --stop 30 // stop at 30%
 
---stylize 10000
+--stylize 1000 // --s, 0-1000, default 100
 
 // use image
 <http://xxxx.png> prompt1 prompt2 ...
@@ -53,7 +53,7 @@ Aspect ratio Support
 hot:: dog
 hot::3, dog
 
-// Tile v5 only
+// Tile, v5+
 --tile
 ```
 

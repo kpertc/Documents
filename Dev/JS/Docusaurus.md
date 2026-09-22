@@ -1,16 +1,18 @@
 #JavaScript #TypeScript #markdown 
 
+v2 (v3 since late 2023: MDX v3 — bare `{` / `<` in markdown are parse errors; TS-first template `docusaurus.config.ts` / `sidebars.ts`; React 18+)
+
 [[CSS]]
 
 ### Components
 
-Codeblock
+Codeblock → fence info string `jsx title="src/file.js" showLineNumbers`
 
-Highlight line
+Highlight line `// highlight-next-line`, `// highlight-start` / `// highlight-end`
 
-Tab
+Tab `import Tabs from '@theme/Tabs'` + `import TabItem from '@theme/TabItem'` → `<Tabs><TabItem value="a" label="A">`
 
-Callout
+Callout `:::note` / `:::tip` / `:::warning` / `:::danger` … `:::`
 
 <br>
 
@@ -30,13 +32,13 @@ Callout
     ---
     ```
 3.  Remove `src/pages/index.js`    
-4.  routeBasePath: ‘/’
+4.  `routeBasePath: '/'`
 
 <br>
 
 ### Hide file
 
-Simple way: ignore the file → add `.` before the doc / folder
+Simple way: ignore the file → add `_` before the doc / folder (default exclude of plugin-content-docs)
 
 <br>
 
@@ -89,6 +91,11 @@ Simple way: ignore the file → add `.` before the doc / folder
 
 ### Versioning
 
+```shell
+npm run docusaurus docs:version 1.0.0 # snapshot current docs
+```
+→ `versioned_docs/` + `versions.json`
+`lastVersion` / `onlyIncludeVersions` options @`docusaurus.config.js`
 
 ### Swizzling
 https://docusaurus.io/docs/swizzling
@@ -115,12 +122,12 @@ npm run write-translations
 
 # with specific locale
 npm run write-translations -- --locale en
-# i18/en/code.json
+# i18n/en/code.json
 
 ```
 
 ```shell
-npm run start -- --locale en # not work?
+npm run start -- --locale en # works, dev server only serves one locale at a time
 npm run build -- --locale en # will should locale as /
 ```
 
@@ -135,7 +142,7 @@ Support Chinese
 
 <br>
 
-### `docusaururConfig.js`
+### `docusaurus.config.js`
 
 Plugin
 Webpack setting

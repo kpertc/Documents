@@ -1,5 +1,7 @@
 #UX #design 
 
+[[words|UX & Product Acronyms]]
+
 https://www.youtube.com/watch?v=_PFqcMh7Uqk
 
 
@@ -17,6 +19,17 @@ https://www.youtube.com/watch?v=_PFqcMh7Uqk
 <div style="display: grid; grid-template-columns: repeat(2,  2fr); grid-gap: 10px;">
 	<div>
 		End user
+	</div>
+	<div>
+		The person who ultimately uses the finished product, as distinct from a buyer or administrator
+	</div>
+</div>
+
+<br>
+
+<div style="display: grid; grid-template-columns: repeat(2,  2fr); grid-gap: 10px;">
+	<div>
+		User experience
 	</div>
 	<div>
 		How a person, the user, feels about interacting with, or experiencing, a product<br>
@@ -98,7 +111,7 @@ https://www.youtube.com/watch?v=_PFqcMh7Uqk
 ### Usability Study
 Assesses how easy it is for participants to complete core tasks in a design.
 
- ||Benefits|Limitations
+||Benefits|Limitations
 ---|---|---
 Moderated Usability Studies| - Guide the participant through the study <br> - Ask specific questions and follow up in real time <br> - Rapport building between the moderator and participant|- Moderator could influence or bias the participants <br> -   Less flexible <br>  -  Participant may not identify with the moderator
 Unmoderated Usability Studies|Participants use the product in the real world

@@ -1,4 +1,5 @@
-The default renderer in Houdini - Mantra Renderer
+Mantra - the old default renderer in Houdini (pre-Solaris)
+New work → LOPs / Solaris + Karma
 
 <br>
 

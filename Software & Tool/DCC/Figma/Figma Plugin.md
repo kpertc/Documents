@@ -11,7 +11,7 @@ Search `⌘ +` `/`
 
 Runs the last plugin `⌥ + ⌘ + P`
 
-Build `⇧ +⌘ + B` -> Choose `TSC: Watch` to convert Ts to Js
+VS Code Build `⇧ +⌘ + B` -> Choose `TSC: Watch` to convert Ts to Js
 
   
 
@@ -27,8 +27,8 @@ New Plugin|Open Console
 >Recommend writing in Typescript then convert to Javascript
 
 Install [Node.js](https://nodejs.org/en/download/) include npm
-Install TypeScript `sudo npm install -g typescript`
-安装TypeScript后在Figma中新建~~的Plugin就有.~~~~ts~~~~文件了！~~
+Install TypeScript `npm install --save-dev typescript`，用 `npx tsc` 运行
+Figma 新建 Plugin 时可以直接选 TypeScript 模板
 
 `npm install --save-dev @figma/plugin-typings`
 
@@ -40,14 +40,26 @@ TypeScript|Add to tscofig.json as need
 
   
 
-HTML
+HTML (UI thread -> plugin thread)
 
-```JavaScript
+```HTML
 <script>
     document.getElementById('id').onclick = (event) => {
         parent.postMessage({pluginMessage: {type: 'type'}}, '*')
     }
 </script>
+```
+
+Plugin side (code.ts) receives it
+
+```TypeScript
+figma.showUI(__html__)
+figma.ui.onmessage = (msg) => {
+    if (msg.type === 'type') {
+        // do something
+    }
+    figma.closePlugin()
+}
 ```
 
   
@@ -58,5 +70,6 @@ HTML
 var nodes = figma.currentPage.selection;
 
 // Set current selection
-figma.currentPage.selection = 
+figma.currentPage.selection = [node]; // takes an array of SceneNode
+figma.viewport.scrollAndZoomIntoView([node]);
 ```

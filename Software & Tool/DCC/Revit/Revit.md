@@ -43,9 +43,9 @@ Level
 
 Modify Tab
 
-| Copy                | Array               |
-| ------------------- | ------------------- |
-| ![[revit-copy.gif]] | ![[revit-copy.gif]] |
+| Copy                | Array |
+| ------------------- | ----- |
+| ![[revit-copy.gif]] |       |
 
 ungroup
 ![[revit-ungroup.png]]

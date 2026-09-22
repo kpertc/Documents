@@ -7,6 +7,8 @@ Comment -> JS Documentation generator
 `jsdoc.json` -> config file
 
 ```bash
+npm i -D jsdoc
+# package.json: "doc": "jsdoc -c jsdoc.json"
 npm run doc
 ```
 
@@ -21,13 +23,13 @@ const studentName = 'John Doe';
  * Array of grades
  * @type {Array}
  */
-const grades = [98. 97.7, 76, true]
+const grades = [98, 97.7, 76, true]
 
 /**
  * Array of grades
  * @type {Array<number>}
  */
-const grades = [98. 97.7, 76]
+const grades = [98, 97.7, 76]
 
 /**
  * @type {{id: number, text}}
@@ -60,7 +62,7 @@ const calculateTax = (amount, tax) => {
 ```js
 /**
  * A student
- * @typeof {Object}
+ * @typedef {Object} Student
  * @property {number} id - Student ID
  * @property {string} name - Student name
  * @property {string | number} [age] - Student age (optional)
@@ -89,18 +91,18 @@ class Person {
 	/**
 	 * @param {Object} personInfo Infomation about the person
 	 */
-	constructor() {
+	constructor(personInfo) {
 		/**
-		 * @Property {string} name Persons name
+		 * @property {string} name Persons name
 		 */
 		this.name = personInfo.name;
 		/**
-		 * @Property {number} age Persons age
+		 * @property {number} age Persons age
 		 */
 		this.age = personInfo.age;
 	}
 	/**
-	 * @Property {Function} greet A greeting with the name and age
+	 * @property {Function} greet A greeting with the name and age
 	 * @return {void}
 	 */
 	 greet() {
@@ -119,15 +121,18 @@ class Person {
 or
 
 //  VSCode setting
-"javascript.implicitProjectConfig.checkJs": true
+"js/ts.implicitProjectConfig.checkJs": true
 ```
 
 
 Duplicate from `jsdoc/templates/default`
+
+`jsdoc.json` (JSON has no comments):
 ```json
-// jsdoc.json
-"opts": {
-	"template": 
+{
+	"opts": {
+		"template": "./my-template"
+	}
 }
 ```
 ![[jsdoc-templates-default.png | 300]]

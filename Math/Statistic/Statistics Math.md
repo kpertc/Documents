@@ -3,9 +3,10 @@
 ---|---|---|---
 summation|∑|求和
 mean|μ (mu)|平均数
-variance|$$σ^2$$|方差|数据波动的稳定性 描述数据与平均值的偏离程度<br>Standard deviation measures the spread of a data distribution. **The more spread out a data distribution is, the greater its standard deviation.**
+variance|$$σ^2$$|方差|数据波动的稳定性 描述数据与平均值的偏离程度<br>variance = 与平均数偏差平方的平均 (单位是平方)<br>$\sigma = \sqrt{\sigma^2}$ 标准差与数据同单位，所以报告的是标准差<br>Standard deviation measures the spread of a data distribution. **The more spread out a data distribution is, the greater its standard deviation.**
 standard deviation|$\sigma = \sqrt{\frac{\sum_{i=1}^{N}(x_i-\mu)^2}{N}}$|（总体）标准差|![[标准差解释.png]]
-unbiased sample variance|$S_x = \sqrt{\frac{\sum_{i=1}^{n}(x_i-\bar{x})^2}{n-1}}$<br>$\bar(x)$ sample mean|（样本）标准差|
+sample standard deviation (s)|$S_x = \sqrt{\frac{\sum_{i=1}^{n}(x_i-\bar{x})^2}{n-1}}$<br>$\bar{x}$ sample mean|（样本）标准差|
+unbiased sample variance|$S_x^2 = \frac{\sum_{i=1}^{n}(x_i-\bar{x})^2}{n-1}$ 无根号|（样本）方差|$S_x^2$ 对 $\sigma^2$ 无偏，$S_x$ 对 $\sigma$ 并非无偏
 
 
 <br>
@@ -35,7 +36,7 @@ Median → Interquartile Range
 
 <br>
 
-### Percentile 百位分数
+### Percentile 百分位数
 % of the data is at | below the amount
 Cumulative relative frequency graph → percentile graph
 
@@ -150,9 +151,9 @@ residual = actual - expected
 This vertical distance is known as a residual. The residual is 4
 ![[residual.png|300]]
 
-r → residual
-$$\sum(|r_n|)$$ 
-$$\sum(r_n)^2$$
+$e_i$ → residual (r stays the correlation coefficient)
+$$\sum|e_i|$$ 
+$$\sum e_i^2$$
 
 
 [$r^2$ intuition](https://www.khanacademy.org/math/statistics-probability/describing-relationships-quantitative-data/assessing-the-fit-in-least-squares-regression/a/r-squared-intuition)
@@ -161,8 +162,10 @@ $r^2$ is also called → coefficient of determination.
 
 <br>
 
-Least sqaured 
-$$m = r \frac{s_y}{s_x} + b$$
+Least squares 
+$$\hat{y} = mx + b$$
+$$m = r \frac{s_y}{s_x}$$
+$$b = \bar{y} - m\bar{x}$$
 
 <br>
 
@@ -199,6 +202,6 @@ Combination
 多少种组合？
 `A,B,C,D` 和 `D,A,B,C` 算一种
 
-Formula: $_nC_K=\frac{\frac{n!}{(n-K!)}}{K!}=\frac{n!}{K!(n-K)!}$
+Formula: $_nC_K=\frac{\frac{n!}{(n-K)!}}{K!}=\frac{n!}{K!(n-K)!}$
 多了除以“椅子”的组合数量
 4！4 x 3 x 2 x 1

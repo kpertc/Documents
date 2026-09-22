@@ -11,8 +11,11 @@ ollama list
 # remove
 ollama rm 
 
-# show status
-ollama run xxx -- verbose 
+# show per-response token / timing stats
+ollama run xxx --verbose
+
+# models currently loaded in memory
+ollama ps
 
 ollama create name -f xxx
 
@@ -20,6 +23,7 @@ ollama create name -f xxx
 /clear #clear context 
 /bye
 
+# 0.0.0.0 = reachable by anything on the LAN, ollama has no auth; 127.0.0.1 keeps it local
 OLLAMA_HOST=0.0.0.0:11434 OLLAMA_KEEP_ALIVE=-1
 ollama serve
 
@@ -40,7 +44,7 @@ qwen
 ```
 FROM qwen3:32b
 PARAMETER temperature 0.8
-SYSTEM
+SYSTEM """You are a helpful assistant."""
 
 
 ```

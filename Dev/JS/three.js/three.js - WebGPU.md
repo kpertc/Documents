@@ -2,7 +2,7 @@
 > https://www.youtube.com/watch?v=oIur9NATg-I
 - access from graphic card (even not from an JS, browser, has C++ and Rust Application)
 - wrapper native graphic API (Vulkan, DirectX, Metal)
-- 2 - 8x faster than WebGL
+- 2 - 8x faster than WebGL — only draw-call-heavy / compute scenes (less driver overhead), otherwise on par
 - running computation on GPU 
 - WebGPU → WGSL as shader language
 ---
@@ -124,18 +124,18 @@ const vNoise = varying(float());
 const vPosition = varying(vec3());
 
 const vertexFunc = Fn(() => {
-	vColor.assign(positionGeometry);
+	vPosition.assign(positionGeometry);
 });
 
 const colorFunc = Fn(() => {
-	return vec4(vColor.rgb, 1);
+	return vec4(vPosition.rgb, 1);
 });
 ```
 
 ``` js
 // uv
 uv()
-viewPortUV
+viewportUV
 screenUV
 
 // Depth
@@ -228,6 +228,7 @@ renderAsync work around
 - https://github.com/pmndrs/react-three-fiber/issues/3403
 
 https://codesandbox.io/p/sandbox/patient-lake-9sh577
+v8:
 ``` tsx
 // set to "never", and set to "always" when renderer init
 const [frameloop, setFrameloop] = useState("never");
@@ -250,13 +251,28 @@ const [frameloop, setFrameloop] = useState("never");
 </Canvas>
 ```
 
+v9: `gl` accepts an async factory → drop the frameloop state machine and the `renderer.xr` stub
+``` tsx
+<Canvas
+	gl={async (props) => {
+		const renderer = new WebGPURenderer(props);
+		await renderer.init();
+		return renderer;
+	}}
+>
+	...
+</Canvas>
+```
+
 
 ### WebGPU Inspector
 https://chromewebstore.google.com/detail/webgpu-inspector/holcbbnljhkpkjkhgkagjkhhpeochfal?hl=en-US
 https://github.com/brendan-duncan/webgpu_inspector
 
 
-```
+### Branch vs mix
+> 同一 wave 走同一分支时, 分支更便宜 — mix + step 两边都会算 (通用 shader 规则, 不限 WGSL)
+```glsl
 // Good
 float c = (x < 0.5) ? a : b;
 

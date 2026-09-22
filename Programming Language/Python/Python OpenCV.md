@@ -38,7 +38,7 @@ cv.waitKey(0) # wait key to be pressed, 0 → infinite time
 ### Reading Video
 ``` python
 # index of video capture device, e.g. webcam conncected to the computer
-cv.VideoCaptur(0)
+cv.VideoCapture(0)
 
 # path of the video file
 capture = cv.VideoCapture("/Users/userName/Downloads/飞书20220509-193136.mp4")  
@@ -100,8 +100,8 @@ cv.waitKey(0)
 
 Get shape width & height
 ```python
-blank.shape[0] # width
-blank.shape[1] # height
+blank.shape[0] # height (rows)
+blank.shape[1] # width (cols)
 ```
 
 set all pixel to red|set ranges of pixel to red
@@ -148,13 +148,14 @@ img = cv.imread('sd.png')
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 
 # Blur image
-blur = cv.GaussianBlur(img, (9, 9), cv.BORDER_DEFAULT)
-# kernel size
+blur = cv.GaussianBlur(img, (9, 9), 0)
+# kernel size, 3rd arg is sigmaX, 0 → derive sigma from kernel size
 
 canny = cv.Canny(img, 125, 125)
 
 # dilating the image
-dilated = cv.dilate(canny, (7,7), iterations=3)
+kernel = cv.getStructuringElement(cv.MORPH_RECT, (7,7)) # or np.ones((7,7), np.uint8)
+dilated = cv.dilate(canny, kernel, iterations=3) # 2nd arg is a kernel, not a size
 
 cv.imshow('Show', gray)
 cv.waitKey(0)
@@ -170,8 +171,8 @@ resized = cv.resize(img, (100, 200))
 # des size → (100, 200)
 
 resized = cv.resize(img, (100, 200), interpolation=cv.INTER_CUBIC)
-# default interpolation cv.INTER_AREA 
-# linear, cubic (slow, best)
+# default interpolation cv.INTER_LINEAR 
+# INTER_AREA → shrink, INTER_CUBIC (slow, best) / INTER_LINEAR → enlarge
 ```
 
 Crop
@@ -225,13 +226,16 @@ contour ≠ edge
 2. threshold + contour
 
 ```python
-ret, thresh = cv.threshold(img, 128, 255, cv.THRESH_BINARY)
+gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+# findContours needs a 8-bit 1 channel image
+ret, thresh = cv.threshold(gray, 128, 255, cv.THRESH_BINARY)
 
 cv.imshow('threshold', thresh)
 
 contours, hierarachies = cv.findContours(thresh, cv.RETR_LIST, cv.CHAIN_APPROX_SIMPLE)
 print(len(contours)) 
 
+blank = np.zeros(img.shape, dtype='uint8')
 cv.drawContours(blank, contours, -1, (0,0,255), 3)
 cv.imshow("contour", blank)
 ```
@@ -279,13 +283,15 @@ merged = cv.merge([b,g,r])
 
 average = cv.blur(img, (7,7))
 
-gaussianBlur = cv.GaussianBlur(img, (9, 9), cv.BORDER_DEFAULT)
+gaussianBlur = cv.GaussianBlur(img, (9, 9), 0) # 3rd arg is sigmaX, 0 → from kernel size
 
 # non-linear filter → Blur noise not content (noise reduce)
 
 medium = cv.medianBlur(img, 3)
 
-bilateralFilter = cv.bilateralFilter(img, 15, )
+bilateralFilter = cv.bilateralFilter(img, 15, 75, 75)
+# src, d, sigmaColor, sigmaSpace
+# bigger sigmaColor → mix more distant colors, bigger sigmaSpace → mix more distant pixels
 
 ```
 
@@ -312,8 +318,8 @@ bitwise_or = cv.bitwise_or(rectangle, circle)
 # bitewise xor → not intersection
 bitwise_xor = cv.bitwise_xor(rectangle, circle)
 
-# bitewise not
-bitwise_not = cv.bitwise_not(rectangle, circle)
+# bitewise not → unary, unlike and / or / xor (2nd arg is dst)
+bitwise_not = cv.bitwise_not(rectangle)
 ```
 
 and|or|xor|not

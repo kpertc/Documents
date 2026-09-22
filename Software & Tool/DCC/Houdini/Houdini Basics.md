@@ -93,7 +93,7 @@ Edit > Hotkey Manager
 		In View<br>
 		<code>E</code> Scale<br>
 		<code>R</code> Rotation<br>
-		<code>S</code> Translate<br>
+		<code>T</code> Translate<br>
 	</div>
 	<div>
 		Node<br>
@@ -132,6 +132,9 @@ Holding X on viewport Grid Option
 
 
 Performance monitor
+https://www.sidefx.com/docs/houdini/ref/panes/perfmon.html
+
+Intrinsic attributes
 https://www.sidefx.com/docs/houdini/model/attributes.html#intrinsic
 
 SOPs

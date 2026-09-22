@@ -29,7 +29,7 @@ Simplest form of machine learning: Linear Regression
 
 ### Deep Learning
 
-"Deep Learning" use interchangeably with "Machine Learning"
+"Deep Learning" use interchangeably with "Neural Network"
 
 > [!NOTE]- (Artificial) Neural Network
 > Neural networks were originally inspired by the brain, but the details of how they work are almost completely unrelated to how biological brains work.
@@ -117,9 +117,10 @@ masking
 - TensorFlow
 - PyTorch
 - Keras
-- MXNet
-- CNTK
-- Caffe
+- JAX / Flax
+- MXNet - historical (Apache Attic, 2023)
+- CNTK - historical (last release 2.7, 2019)
+- Caffe - historical (unmaintained; Caffe2 merged into PyTorch)
 - PaddlePaddle
 - Scikit-learn
 - R

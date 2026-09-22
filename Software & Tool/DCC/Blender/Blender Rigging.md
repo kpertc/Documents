@@ -23,7 +23,9 @@ Add new bone: In Edit Mode `E` Extrude|Subdivide
 ---|---
 ![[img/Blender Rigging/ExtrudeBone.gif]] | ![[img/Blender Rigging/subdivide.gif]]
 
-In Edit Mode, Add Single Bone `Ctrl` + `P`
+In Edit Mode, Add Single Bone `Shift` + `A` (Add ▸ Single Bone)
+
+In Edit Mode, Parent bones: select child(ren), then parent, `Ctrl` + `P` ▸ Connected / Keep Offset
 
 Connected | Offset
 ---|---
@@ -59,7 +61,10 @@ to pose / animate
 
 ---
 
-### Bone Layer
+### Bone Collections
+
+Armature data ▸ Bone Collections — replaces the 32 Bone Layers (Blender 4.0+)
+`M` → Move to Bone Collection
 
   
 

@@ -1,6 +1,6 @@
 [Probability: the basics](https://www.khanacademy.org/math/statistics-probability/probability-library/basic-theoretical-probability/a/probability-the-basics)
 
-$$ P(A) = \frac{\text(outcome)}{\text(all possibility outcome)} $$
+$$ P(A) = \frac{\text{favorable outcomes}}{\text{total equally likely outcomes}} $$
 
 0 ≤ P(A) ≤ 1
 Never happen - Always happen
@@ -42,6 +42,9 @@ P(H,H) = $\frac{1}{2} \times \frac{1}{2}$ = $\frac{1}{4}$
 P(H,H,H) = $\frac{1}{2} \times \frac{1}{2} \times \frac{1}{2}$ = $\frac{1}{8}$
 
 ###### Dependent Probability
+P(A and B) = P(A) × P(B|A)
+独立判断：A、B 独立 ⟺ P(A and B) = P(A) × P(B)，即 P(B|A) = P(B)
+条件概率 P(A|B) = P(A∩B) / P(B) → [[Set Operation]]
 
 ---
 

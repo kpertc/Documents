@@ -8,7 +8,7 @@ import subprocess
 
 ``` python
 subprocess.run('ls')
-subprocess.run('ls', shell=True) # shell = True for windows ?
+subprocess.run('ls', shell=True) # shell=True → run string through /bin/sh (pipes, globs, redirects); injection risk
 ```
 
 ### `shell=True`
@@ -51,9 +51,9 @@ with open('output.txt', 'w') as f:
 
 ### Command Error
 ```python
-p1 = subprocess.run(['ls', '-la', 'dne']) # an error command
+p1 = subprocess.run(['ls', '-la', 'dne'], capture_output=True, text=True) # an error command
 print(p1.returncode) # 1 (non-zero return code)
-print(p1.stderr) # ls: dne: No such file or directory
+print(p1.stderr) # ls: dne: No such file or directory → None if not captured, the text goes to the terminal
 
 if p1.returncode != 0:
 	# do something
@@ -65,7 +65,7 @@ p1 = subprocess.run(['ls', '-la', 'dne'], check=True)
 
 
 ```python
-pl = subprocess.run('cat test.txt' capture_output=True,_text=True, shell=True)
+p1 = subprocess.run('cat test.txt', capture_output=True, text=True, shell=True)
 
 # use result from another process
 subprocess.run(['grep', '-n', 'test'], capture_output=True, text=True, input=p1.stdout)

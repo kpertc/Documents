@@ -26,15 +26,17 @@ Runnable
 
 ### Messages
 
-- Function Message
+- System Message
+- Human Message
 - AI Message
 - Tool Message
+- Function Message (legacy, replaced by Tool Message)
 
 ``` python
 from langchain_core.messages import HumanMessage, SystemMessage
  
 messages=[
-	SystemMessage(content="111")
+	SystemMessage(content="111"),
 	HumanMessage(content="111")
 ]
 ```
@@ -45,7 +47,7 @@ model.invoke([
 ])
 
 # stream
-for chunck in model.stream("Hello")
+for chunk in model.stream("Hello"):
 	print(chunk.text, end="|", flush=True)
 
 # return when all complete
@@ -53,12 +55,13 @@ model.batch([
 
 ])
 
-# return when one complete
-for response in mode.batch_as_completed([
+# return when one complete, yields (index, result)
+for idx, response in model.batch_as_completed([
 	"",
 	"",
 	""
-])
+]):
+	print(idx, response)
 ```
 
 Structure Output
@@ -86,20 +89,27 @@ agent = create_agent( # base on langgraph
 )
 
 result = agent.invoke(
-	q
+	{"messages": [{"role": "user", "content": q}]}
 )
+# reply -> result["messages"][-1].content
 ```
 
 Static Model
+model fixed when the agent is built
 
 Dynamic Model
+model picked per invocation at runtime
 
 ### MCP
 ``` python
+from mcp import StdioServerParameters
+
 server_params = StdioServerParameters(
-	command=""
+	command="python",
+	args=["server.py"]
 )
 ```
+bridge to LangChain: `langchain-mcp-adapters` -> `MultiServerMCPClient` -> `await client.get_tools()`
 
 ### Ollama
 ``` python
@@ -109,7 +119,7 @@ from langchain_core.prompts import ChatPromptTemplate
 
 model= OllamaLLM(model="qwen3") 
 
-# deprecated chain langchain 1.0
+# LLMChain / Chain classes deprecated in langchain 1.0, LCEL pipe below is current
 
 template = """
     You are helpful assistant.
@@ -133,6 +143,7 @@ more complex, more control
 https://docs.langchain.com/oss/python/langgraph/overview
 
 ``` python
+from typing import Literal
 from pydantic import BaseModel, Field
 
 class MessageClassifier(BaseModel):
@@ -152,6 +163,8 @@ llm = ChatOllama(
 ``` python
 from typing import Annotated, Literal
 from typing_extensions import TypedDict
+from langgraph.graph.message import add_messages
+from langchain_core.messages import HumanMessage
 
 class State(TypedDict):
     messages: Annotated[list, add_messages]
@@ -184,5 +197,5 @@ graph_builder.set_finish_point("")
 ##### Visualize Graph 
 ``` python
 from IPython.display import Image, display
-display(Image(app.get_graph().draw_mermaid_png()))
+display(Image(graph.get_graph().draw_mermaid_png()))
 ```

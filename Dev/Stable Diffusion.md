@@ -3,6 +3,9 @@
 [Stable Diffusion Crash Course for Beginners by freeCodeCamp.org](https://youtu.be/dMkiOex_cKU)
 
 ## Stable Diffusion webui AUTOMATIC1111
+
+> A1111 开发自 2024 起基本停滞，以下作旧项目参考；新的 SDXL / FLUX 工作流用 ComfyUI
+
 [https://github.com/AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
 
 ### Plugin:
@@ -19,12 +22,12 @@ Easy negative
 Install on MAC
 1. Install dependency `brew install cmake protobuf rust python@3.10 git wget`
 2. Clone the git repo
-3. Copy models to model/stable diffusion folder `.ckpt`
+3. Copy models to `models/Stable-diffusion` folder，用 `.safetensors`（`.ckpt` 是 Python pickle，加载时可执行任意代码）
 4. run `webui.sh` at repo
 5. config for performance, `webui-user.sh`
 
 ```sh
-export COMMANDLINE_ARGS=“—medvram”
+export COMMANDLINE_ARGS="--medvram"
 ```
 
 
@@ -48,10 +51,12 @@ by Hugging Face
 ```python
 # 导入需要的模块  
 import torch  
-from diffusers import StableDiffusionPipeline  
+from diffusers import StableDiffusionXLPipeline  
   
-pipe = StableDiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-2-base")  
-#pipe = pipe.to("cuda")  
+pipe = StableDiffusionXLPipeline.from_pretrained(
+    "stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16
+)  
+pipe = pipe.to("mps")  # Apple Silicon; "cuda" on NVIDIA  
 #pipe.enable_attention_slicing()  
 prompt = "a green apple"  
 image = pipe(prompt).images[0]  
@@ -79,7 +84,7 @@ can use multiple LoRAs
 
 
 CLIP - 语义理解　描述词汇
-LDM - 图像理解　噪声种子　随机噪声　潜空间
+U-Net - 图像理解　噪声种子　随机噪声　潜空间
 VAE - 性能友好　图像生成
 
 

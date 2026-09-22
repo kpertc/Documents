@@ -1,2 +1,2 @@
 #CG 
-These languages are hosted by programs themselves. 3dsmax hosts maxscript, maya hosts mel. Many software packages host their own "scripting languages. They are not compiled, but rather interpreted on the fly and are therefore relatively slow. _Examples = maxscript, mel, javascript, perl, python_ [[Mel]] [[CMDs]]
+These languages are hosted by programs themselves. 3dsmax hosts maxscript, maya hosts mel. Many software packages host their own "scripting languages. They are not compiled ahead of time but interpreted at runtime, which makes maxscript and mel relatively slow (javascript JITs, python compiles to bytecode, so those are faster). _Examples = maxscript, mel, javascript, perl, python_ [[Mel]] [[CMDs]]

@@ -1,4 +1,6 @@
 #JavaScript #TypeScript #CG 
+> r150+ breaking: `outputColorSpace` = `SRGBColorSpace` by default (r152), `physicallyCorrectLights` / `useLegacyLights` gone (r155 / r165), WebGL 1 dropped (r163)
+
 ### [Basic Setup](https://threejs.org/docs/#manual/en/introduction/Creating-a-scene)
 
 ```JavaScript
@@ -39,6 +41,9 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 // set toneMapping
 this.renderer.toneMapping = THREE.ReinhardToneMapping;
 this.renderer.toneMappingExposure = 2.0;
+
+// output colorspace, SRGBColorSpace is the default since r152
+this.renderer.outputColorSpace = THREE.SRGBColorSpace;
 ```
 
 Render to different renderTarget (renderTexture)
@@ -107,7 +112,8 @@ const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
 const mesh = new THREE.Mesh(boxGeometry, material);
 scene.add(mesh);
 
-const material = new THREE.MeshBasicMaterial({color: 0x00ff00, side: THREE.doubleSide});
+// render both faces (note the capital D, THREE.doubleSide is undefined)
+const doubleSidedMaterial = new THREE.MeshBasicMaterial({color: 0x00ff00, side: THREE.DoubleSide});
 ```
 
 ```JavaScript
@@ -163,11 +169,11 @@ const array = new Float32Array(count).fill(0)
 ##### Geometry Material Group
 ```JavaScript
 // Multiple materials on one mesh
-geometry.group
-{
-    0:  {start: 0, count: 120, materialIndex: 0 },
-    0:  {start: 120, count: 60, materialIndex: 1 }
-} 
+geometry.groups // an Array
+[
+    { start: 0, count: 120, materialIndex: 0 },
+    { start: 120, count: 60, materialIndex: 1 }
+]
 
 // clear material groups
 geometry.clearGroups()
@@ -189,7 +195,7 @@ fragmentShader: /* glsl */ `
 	varying vec2 vUv;
 	void main()
 	{
-		gl_FragColor = vec4(uUv, 0.0, 1.0);
+		gl_FragColor = vec4(vUv, 0.0, 1.0);
 	}
 `,
 });
@@ -198,7 +204,7 @@ const overlay = new Mesh(overlayGeometry, overlayMaterial);
 scene.add(overlay);
 ```
 ##### update matrix
-threejs only updates matrixs when needed at once. The matrix of objects that are not in the scene will not be updated. Need to use `.updateMatrix()` manually.
+threejs only updates matrixs when needed at once. The matrix of objects that are not in the scene will not be updated. Need to use `.updateMatrixWorld(true)` (or `.updateWorldMatrix(updateParents, updateChildren)`) manually — `.updateMatrix()` only recomputes the local matrix.
 ##### Line
 ![[threejs-line.png|200]]
 [threejs-Drawing lines](https://threejs.org/docs/index.html?q=line#manual/en/introduction/Drawing-lines)
@@ -246,7 +252,7 @@ renderer.localClippingEnabled = true;
 material.clipShadows = true
 
 // world
-renderer.clipingPlanes = [plane]
+renderer.clippingPlanes = [plane]
 ```
 ##### ExtrudeGeometry
 ```js
@@ -257,7 +263,7 @@ renderer.clipingPlanes = [plane]
 
 Directional Light
 ```JavaScript
-const light = new THREE.DirectionalLigh(0xffffff, 1)
+const light = new THREE.DirectionalLight(0xffffff, 1)
 scene.add(light)
 ```
 
@@ -267,7 +273,7 @@ directionalLight.target.position.set(0, 4, 0)
 directionalLight.target.updateWorldMatrix() // directionalLight.target is not in the scene, so have to manual update its matrix
 
 // add camera helper for directional light shadow camera
-const directionalLightHelper = new THREE.CamaraHelper(directionalLight.shadow.camera)
+const directionalLightHelper = new THREE.CameraHelper(directionalLight.shadow.camera)
 scene.add(directionalLightHelper)
 ```
 
@@ -334,17 +340,24 @@ _texture.flipY
 
 > [!TIP] For mipmap
 > Keep resolution of texture size of a power of 2
+> WebGL 1 only rule — three.js dropped WebGL 1 in r163, WebGL 2 mipmaps NPOT textures fine with all wrap modes
+> POT is still friendlier for GPU-compressed formats and some drivers
 
 ##### Data Texture
 ``` js
-function colorTo255(color: THREE.Color) {
+// THREE.Color is r/g/b only, there is no color.a -> pass alpha separately
+// since colour management, color.r/g/b hold LINEAR-sRGB, so `* 255` no longer matches the hex
+// for the sRGB bytes go via getHex(THREE.SRGBColorSpace) (or getStyle())
+function colorTo255(color: THREE.Color, alpha = 1) {
+	const hex = color.getHex(THREE.SRGBColorSpace);
 	return {
-		r: Math.round(color.r * 255),
-		g: Math.round(color.g * 255),
-		b: Math.round(color.b * 255),
-		a: Math.round(color.a * 255),
+		r: (hex >> 16) & 255,
+		g: (hex >> 8) & 255,
+		b: hex & 255,
+		a: Math.round(alpha * 255),
 	};
 }
+// if you do want linear data in the texture, keep `color.r * 255` and set texture.colorSpace = THREE.NoColorSpace
 
 // use 0-255 value, need covert 0-1 color
 const data = new Uint8Array([
@@ -367,7 +380,10 @@ const texture = new THREE.DataTexture(
 	1,
 	1, // width, height
 	THREE.RGBAFormat, // format
-);
+); // default type is UnsignedByteType -> Uint8Array
+
+texture.needsUpdate = true; // constructor does NOT set it, without this the texture is never uploaded (renders black)
+// set again after every mutation of texture.image.data
 ```
 
 - for dataTexture in custom shader, make sure set proper alpha color
@@ -405,8 +421,8 @@ renderTarget.depthTexture = new THREE.DepthTexture(
 
 // update per frame
 planeRef.current.visible = false; // need to hide itself for not writeFBO and read FBO for at same time
-// webGPURenderer.setRenderTarget(renderTarget);
-webGPURenderer.renderAsync(scene, camera); // renderAsync for WebGPU version
+webGPURenderer.setRenderTarget(renderTarget);
+await webGPURenderer.renderAsync(scene, camera); // renderAsync for WebGPU version, returns a Promise
 
 // show here
 planeRef.current.visible = true;
@@ -417,7 +433,8 @@ webGPURenderer.setRenderTarget(null);
 ### Orbit OrbitControls
 
 ```JavaScript
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+// addon imports need the exact path WITH .js; `three/addons/` is the alias for `three/examples/jsm/`
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 
 const controls = new OrbitControls( camera, renderer.domElement );
 ```
@@ -425,7 +442,7 @@ const controls = new OrbitControls( camera, renderer.domElement );
 ### TransformControls
 
 ```JavaScript
-import { TransformControls } from 'three/examples/jsm/controls/TransformControls.js';
+import { TransformControls } from 'three/addons/controls/TransformControls.js';
 
 const control = new TransformControls(camera, renderer.domElement)
 
@@ -479,10 +496,12 @@ new RGBELoader().setPath("/").load("harvest_1k.hdr", (texture) => {
 scene.backgroundBlurriness = 0.2
 ```
 
-PMREM generator?
+PMREM generator
 ```JavaScript
 const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
-this.scene.environment = pmremGenerator.fromSceneAsync( ... )
+// fromSceneAsync() returns a Promise of a render target -> need await + .texture
+this.scene.environment = (await pmremGenerator.fromSceneAsync(scene)).texture
+// sync version: pmremGenerator.fromScene(scene).texture
 this.scene.environmentIntensity = 10
 ```
 
@@ -496,7 +515,7 @@ this.car.showCar(false);
 
 // at mirrored position
 cubeCamera.position.copy(
-	new THREE.vector3(
+	new THREE.Vector3(
 		camera.position.x, 
 		- camera.position.y, 
 		camera.position.z
@@ -517,11 +536,11 @@ Use Raycaster on different canvas
 ```JavaScript
 const canvasRect = _canvas.getBoundingClientRect() // get rect position
 
-_canvas.addEventListener('pointmove', (event) => {
+_canvas.addEventListener('pointermove', (event) => {
     const canvasX = event.clientX - canvasRect.left
     const canvasY = event.clientY - canvasRect.top
     this.raycasterPointer.x = (canvasX / _canvas.clientWidth) * 2 - 1
-    this.raycasterPointer.y = -(canvasY / _canvas.clientWidth) * 2 - 1
+    this.raycasterPointer.y = -(canvasY / _canvas.clientHeight) * 2 + 1
 })
 ```
 
@@ -574,14 +593,15 @@ scene.remove(_object)
 
 ``` js
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 ```
 
 ```JavaScript
 // after renderer
 const effectComposer = new EffectComposer(renderer)
 
-const renderPass = new RenderPass(scene, camera) effectComposer.addPass(renderPass)
+const renderPass = new RenderPass(scene, camera)
+effectComposer.addPass(renderPass)
 
 // add other passes
 const dotScreenPass = new DotScreenPass();
@@ -618,14 +638,17 @@ window.addEventListener('resize', () => {
 ---
 Other effects
 ```javascript
-import { DotScreenPass } from 'three/examples/jsm/postprocessing/DotScreenPass.js'
+import { DotScreenPass } from 'three/addons/postprocessing/DotScreenPass.js'
 ```
 
-if the effect is dark, which means colorspace is incorrect, then use `GammaCorrectShader`
+if the effect is dark, which means colorspace is incorrect
+current: add `OutputPass` as the **last** pass, it does tone mapping + output colorspace together
+```js
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js'
 
+effectComposer.addPass(new OutputPass())
 ```
-
-```
+pre-r152 idiom: `GammaCorrectionShader` (`three/addons/shaders/GammaCorrectionShader.js`) as a `ShaderPass`
 
 renderer's Antialiasing i
 ##### Custom Shader Pass
@@ -634,7 +657,7 @@ renderer's Antialiasing i
 
 ### Math
 
-JavaScript Math → [[Math (JavaScript)]]
+JavaScript Math → [[JavaScript API#Math]]
 ##### Vector3
 ```js
 // clone to avoid modify original value
@@ -700,7 +723,9 @@ function exportToGLTF(object) {
   exporter.parse(
 	object,
 	function (gltf) {
-	  const blob = new Blob([gltf], { type: "model/gltf+json" });
+	  // binary: true -> gltf is an ArrayBuffer -> "model/gltf-binary"
+	  // binary: false -> gltf is JSON -> "model/gltf+json"
+	  const blob = new Blob([gltf], { type: "model/gltf-binary" });
 	  const url = URL.createObjectURL(blob);
 
 	  // Create a link and trigger download
@@ -754,9 +779,10 @@ for (let i = 0; i < verticesCount; i++) {
 	const i3 = i * 3; // index for position, 3
 	const i4 = i * 4; // index for
 	
-	baseTexture.image.data[i4 + 0] = sphere.attributes.position[i3 + 0];
-	baseTexture.image.data[i4 + 1] = sphere.attributes.position[i3 + 1];
-	baseTexture.image.data[i4 + 2] = sphere.attributes.position[i3 + 2];
+	// BufferAttribute is not indexable, use .array (or getX/getY/getZ(i))
+	baseTexture.image.data[i4 + 0] = sphere.attributes.position.array[i3 + 0];
+	baseTexture.image.data[i4 + 1] = sphere.attributes.position.array[i3 + 1];
+	baseTexture.image.data[i4 + 2] = sphere.attributes.position.array[i3 + 2];
 	baseTexture.image.data[i4 + 3] = 0;
 }
 
@@ -805,6 +831,10 @@ for (let y = 0; y < gpgpuTextureWidth; y++) {
 
 
 ``` js
-// get texture from gpuRenderer, could be used as debug texture?
-_GPUComputationRenderer.getCurrentRenderTarget(uParticle).texture,
+// per frame
+_GPUComputationRenderer.compute();
+
+// get texture from gpuRenderer, feed it to the particle material (also useful as debug texture)
+particlesMaterial.uniforms.uParticleTexture.value =
+	_GPUComputationRenderer.getCurrentRenderTarget(uParticle).texture;
 ```

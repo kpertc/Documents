@@ -15,11 +15,12 @@ Recommend to use AECS
 
 ### Tips
 
-Shortcut| 
+Shortcut|功能
 ---|---
-J|前进 / 快进
+J|后退 / 快退
 K|暂停
-L|后退 / 快退
+L|前进 / 快进
+J / L 连按|2x 4x 8x 加速
 I|in 入点
 O|out 出点
 F9|选择素材 将素材放到时间轴
@@ -29,7 +30,7 @@ shift delete|
 
 <br/>
 
-预览| 
+预览|功能
 ---|---
 ctrl f|视频全屏
 p|视频全屏
@@ -47,7 +48,7 @@ shift ← / → move 5 frames
 
 ### Color Grading
 
-Shortcut| 
+Shortcut|功能
 ---|---
 ctrl d|关闭单个节点
 shift d|关闭调色

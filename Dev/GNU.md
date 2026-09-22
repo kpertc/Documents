@@ -1,5 +1,6 @@
-- GNU is an extensive collection of free software (By Richard Stallman) cd mkdir (core utility)
-- GCC - The GNU Compiler Collection CPL - GNU General Public License (Free License)
+- GNU is an extensive collection of free software (By Richard Stallman) ls cp mkdir (core utility)
+- GCC - The GNU Compiler Collection
+- GPL - GNU General Public License (Free License)
 
 Unix - proprietary Linux - free
 
@@ -12,6 +13,8 @@ Unix - proprietary Linux - free
 
 > The GNU license also allows users to modify and redistribute code, but the key difference is that they are not allowed to commercialize these tools.
  https://linuxconfig.org/freebsd-vs-gnu-linux-whats-the-difference
+↑ wrong: GPL allows commercial use and selling copies (GPLv3 §4). Real difference is copyleft — distribute a derivative, you must ship the corresponding source under GPL; BSD has no such requirement.
+
 
 ![[grep-BSD.png|500]]
 

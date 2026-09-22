@@ -22,12 +22,12 @@ test:
 
 
 
-字节GitLab 需要配置 shared runner `tags: -shared`
+字节 GitLab 需要配置 shared runner，`tags:` 换行写 `- shared`
 ```yml
 test:
-	script: echo "Hello World 1"
-	tags:
-	- shared
+    script: echo "Hello World 1"
+    tags:
+    - shared
 ```
 
 image 镜像
@@ -37,14 +37,14 @@ image 镜像
 
 ```yml
 stages:
-	- build
-	- test
+    - build
+    - test
 
 A:
-	stage: build
+    stage: build
 
 B:
-	stage: test
+    stage: test
 ```
 
 the container of each stage will destroy immediately after complete

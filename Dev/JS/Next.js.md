@@ -1,5 +1,7 @@
 #JavaScript #TypeScript 
 
+App Router, Next 15+
+
 Routing
 API route
 Rendering
@@ -31,7 +33,7 @@ Tanstack router
 Pages Router
 App Router
 
-Turbopack
+Turbopack // default for `next dev` and `next build` since Next 16
 
 ### Route
 ```
@@ -88,7 +90,8 @@ export default async function UserPage({
 }: {
 	params: Promise<{ userId: string }>
 }) {
-	const {} await params;
+	const { userId } = await params;
+	const user = await getUser(userId);
 	
 	if (!user) {
 		notFound(); // manual trigger not found page / 404 page
@@ -101,22 +104,32 @@ export default async function UserPage({
 ```
 ##### slug and params
 ``` tsx
+// in server render component
 export default async function UserPage({
-	params, // [[articleId]] /articleId/
+	params, // [articleId] -> /articleId/
 	searchParams, // ?&lang=en
 }: {
 	params: Promise<{ slug: string[] }>
 	searchParams: Promise<{ lang?: "en" | "fr" }>
 }) {
-	// in server render component
 	const { slug } = await params;
 	
 	const { lang } = await searchParams;
-	
-	// in clinet render component
-	
-	import { use } from "react"
-	
+}
+```
+
+``` tsx
+// in client render component, not async
+"use client";
+import { use } from "react"
+
+export default function UserPage({
+	params,
+	searchParams,
+}: {
+	params: Promise<{ slug: string[] }>
+	searchParams: Promise<{ lang?: "en" | "fr" }>
+}) {
 	const { slug } = use(params);
 	const { lang } = use(searchParams);
 }
@@ -143,7 +156,7 @@ import Image from "next/image";
 ```
 
 ``` ts
-"use clinet";
+"use client";
 import { usePathname } from 'next/navigation'
 
 ... {
@@ -185,12 +198,16 @@ similar to layout use `template.js` or `template.tsx`
 - effect re-synchronized
 ### Error
 ```tsx
-export default function Error({ error, reset }: { error: Error, reset: () => void }) {
+"use client"; // error boundary must be a client component
+
+export default function Error({ error, reset }: { error: Error & { digest?: string }, reset: () => void }) {
 	return <div>{error.message}</div>
 }
 ```
+errors thrown in the root `layout.tsx` are not caught here, use `global-error.tsx`
 
 slot → @folder
+`app/@team/page.tsx` is a named slot, passed to the layout as a prop next to `children`; every slot needs a `default.tsx` or a hard refresh on a sub-route 404s
 ### Server Side Rendering and Client Side Rendering
 
 ##### React Server Component (RSC)
@@ -198,7 +215,7 @@ default is server component
 - async, handle reading files, fetching data
 - no React hooks or interaction
 
-prefix `server`  will should when using `console.log()` on RSC
+`console.log()` in RSC prints to the terminal running `next dev`, not the browser console
 
 `use client` on top of the file to change to Client Component
 ``` tsx
@@ -247,6 +264,7 @@ async function makePostRequest() {
 	const data = await res.json()
 }
 ```
+relative URL only resolves in the browser, in a server component `fetch("/api/hello")` throws `Failed to parse URL` → use an absolute URL, or skip the HTTP round trip and call the data function / Server Action directly
 
 ### MetaData
 handle in `layout.tsx` or `page.tsx` 
@@ -274,7 +292,15 @@ export const metadata: Metadata = {
 ```
 
 Image
+``` tsx
+import Image from "next/image";
 
+<Image src="/a.png" alt="" width={800} height={600} /> // width + height required
+<Image src="/a.png" alt="" fill /> // or fill + parent with position: relative
+// sizes -> responsive srcset
+// priority -> LCP image, turn off lazy loading
+// external host -> images.remotePatterns in next.config
+```
 
 Google Font
 ``` tsx

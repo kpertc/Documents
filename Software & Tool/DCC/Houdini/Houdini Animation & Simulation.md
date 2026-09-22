@@ -1,6 +1,6 @@
 ### Animation & Simulation
 
-`LMB` + `Alt` keyframe|`LMB` + `Ctrl` keyframe
+`LMB` + `Alt` set keyframe|`LMB` + `Ctrl` remove keyframe
 ---|---
 ![[img/Houdini Animation & Simulation/AltKeyFrame.gif]]|![[img/Houdini Animation & Simulation/CtrlRemoveKeyFrame.gif]]
 
@@ -9,7 +9,7 @@
 ![[img/Houdini Animation & Simulation/ShiftAnimationEditor.gif]]
   
 
-Realtime Playback Speed -> make sure Houdini not skipping any frame
+Real Time playback skips frames to keep speed -> for simulation turn Real Time OFF so every frame is cooked
 `Alt` + `Shift` + `G` Global Animation Options
 
 ![[img/Houdini Animation & Simulation/global-animation-options.png]]|![[img/Houdini Animation & Simulation/realtime-playback.png]]

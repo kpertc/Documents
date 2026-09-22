@@ -4,11 +4,13 @@ Modes:
 1.  “ r “, for **reading**.
 2.  “ w “, for writing.
 3.  “ a “, for appending.
-4.  “ r+ “, for both **reading** and writing.
+4.  “ r+ “, for both **reading** and writing. (file must exist)
+5.  “ w+ “, truncate then **read** and write. (creates the file)
+6.  “ x “, create, fail if the file exists.
 
-Rb, reading binary (image)
+rb, reading binary (image)
 
-Wb, write binary (image)
+wb, write binary (image)
 
 Simple open a file
 
@@ -51,11 +53,9 @@ with open('test.txt','r') as f:
     f_contents = f.read(size_to_read)
     
     #print content
-    while len(f_contnets) > 0;
+    while len(f_contents) > 0:
         print(f_contents, end='*')
         f_contents = f.read(size_to_read)
-    
-    while len(f_contents)
 ```
 
 
@@ -78,6 +78,4 @@ employee_file.close()
 ```Python
 with open(targetArtistJsonPath, 'w') as fp:        
     fp.write(strData)
-
-fp.close()
 ```

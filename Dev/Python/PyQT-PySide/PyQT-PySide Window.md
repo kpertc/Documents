@@ -1,5 +1,7 @@
 #UI #python 
 
+> Snippets here target **PySide2 (Qt5)** — kept for older Maya. PySide6: `app.exec_()` → `app.exec()`, `QAction` moved QtWidgets → QtGui.
+
 Empty Window
 ![[Empty Window.png | 300]]
 
@@ -25,22 +27,22 @@ window.show()
 ```
 
 ```Python
-class RocWidget (QWidget):
+class RockWidget (QWidget):
     def __init__(self):
-    super().__init__()
-    self.setWindowTitle("RockWidget")
+        super().__init__()
+        self.setWindowTitle("RockWidget")
+        
+        button1 = QPushButton("Button1")
+        button2 = QPushButton("Button2")
+        
+        button_layout = QVBoxLayout()
+        button_layout.addWidget(button1)
+        button_layout.addWidget(button2)
+        
+        self.setLayout(button_layout)
     
-    button1 = QPushButton("Button1")
-    button2 = QPushButton("Button2")
-    
-    button_layout = QVBoxLayout()
-    button_layout.addWidget(button1)
-    button_layout.addWidget(button2)
-    
-    self.setLayout(button_layout)
-    
-def button1_clicked():
-    print("Button1 Clicked")
+    def button1_clicked(self):
+        print("Button1 Clicked")
 ```
 
 QMainWindow
@@ -80,6 +82,10 @@ menu_bar.addMenu("&Help")
 
 Toolbar
 ```Python
+from PySide2.QtWidgets import QToolBar, QAction  # Qt6: QAction moved to QtGui
+from PySide2.QtGui import QIcon
+from PySide2.QtCore import QSize
+
 toolbar = QToolBar("My main toolbar")
 toolbar.setIconSize(QSize(16, 16)) 
 self.addToolBar(toolbar)
@@ -115,7 +121,7 @@ def button1_clicked(self):
 def toolbar_button_click(self):
     self.statusBar().showMessage("Some message ...",3000)
 def quit(self):
-    self.app.quit ()
+    QApplication.instance().quit()
 ```
 
 ![[some-action.png | 300]]
@@ -130,16 +136,16 @@ def button_clicked_hard(self):
     message = QMessageBox()
     message.setMinimumSize(700,200)
     message.setWindowTitle("Message Title")
-    message.set Text("something happened")
+    message.setText("something happened")
     message.setInformativeText("Do you want to do something about it ?")
     message.setIcon (QMessageBox.Critical)
-    message.setstandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+    message.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
     message.setDefaultButton(QMessageBox.Ok)
     ret = message.exec()
-    if ret == OMessageBox.Ok:
+    if ret == QMessageBox.Ok:
         print("User chose OK")
     else:
-        print ("User chose Cancel"')
+        print ("User chose Cancel")
 ```
 
 Simple way → ==QMessageBox.critical==
@@ -149,7 +155,7 @@ Can be : critical - question - information - warning - about
 
 ```Python
 def button_clicked_critical(self):
-    ret = QMessageBox.critical(se1f,"Message Tit1e","Critical Message!", QMessageBox.Ok | QMessageBox.Cancel)
+    ret = QMessageBox.critical(self,"Message Title","Critical Message!", QMessageBox.Ok | QMessageBox.Cancel)
     if ret == QMessageBox.Ok:
         print ("User chose OK")
     else :

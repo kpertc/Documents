@@ -35,3 +35,7 @@ Surround with `Ctrl` / `CMD` + `Alt`+ `T`
 <br>
 
 Debug
+`⌃` + `⌥` + `R` select run/debug configuration
+`⌘` + `F8` toggle breakpoint
+`F8` step over / `F7` step into / `⇧` + `F8` step out
+`⌥` + `⌘` + `R` resume program

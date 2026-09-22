@@ -3,6 +3,7 @@
 
 OpenGL Shading Language
 Syntax similar to C/C++
+Target here: GLSL ES 1.00 / WebGL1 + three.js `ShaderMaterial` (`varying`, `gl_FragColor`, injected `modelMatrix` / `cameraPosition`)
 
 -   Version Specification
     -   OpenGL version
@@ -46,12 +47,10 @@ sampler2D
 ### Float
 
 ```glsl
-vec3 color = vec3(0.0, 0.0 ,0.0);
+precision mediump float; // mandatory in ES fragment shaders
 
-vec3 color = vec3(1.0); // = vec3(1.0, 1.0, 1.0)
-
-// compose vector
-vec4 colorAlpha = vec4(color, 1.0);
+float strength = 1.0; // write 1.0, not 1 → no implicit int → float in GLSL ES 1.00
+float ratio = strength / 2.0;
 ```
 
 ### Vector 
@@ -129,16 +128,18 @@ float computeSum(float a, float b) {
 ```
 
 ```glsl
-float computeSum(in float a, in float b) {
+// in / out / inout are parameter qualifiers, can NOT overload on them alone
+float computeSum(in float a, in float b) { // in = default, copy
 	return a + b;
 }
 
-float computeSum(out float a, out float b) {
-	return a + b;
+void computeSumOut(float a, float b, out float sum) { // out = write only, undefined on entry
+	sum = a + b;
 }
 
-float computeSum(inout float a, inout float b) {
-	return a + b;
+void doubleValues(inout float a, inout float b) { // inout = read + write back
+	a *= 2.0;
+	b *= 2.0;
 }
 ```
 
@@ -152,11 +153,11 @@ float blendDarken(float base, float blend) {
 	return min(blend, base);
 }
 
-float blendDarken(vec3 base, vec3 blend) {
-	return vec3(blendDarken(base.r, blend.r), blendDarken(base.g, blend.g)), blendDarken(base.b, blend.b)));
+vec3 blendDarken(vec3 base, vec3 blend) {
+	return vec3(blendDarken(base.r, blend.r), blendDarken(base.g, blend.g), blendDarken(base.b, blend.b));
 }
 
-float blendDarken(vec3 base, vec3 blend, float opacity) {
+vec3 blendDarken(vec3 base, vec3 blend, float opacity) {
 	return (blendDarken(base, blend) * opacity + base * (1.0 - opacity));
 }
 ```
@@ -173,17 +174,17 @@ if (length(uIntersect - uLastPos) > 0.01)
 }
 else
 { 
-	vec2 direction = vec2(1.0, 1.0); 
-	float angle = 0.0; 
+	direction = vec2(1.0, 1.0); // no type keyword → assign, don't shadow
+	angle = 0.0; 
 }
 ```
 
 ```
 step()
 
-remap()
+remap() // not built-in ☞ non-glsl Functions below
 smoothstep()
-smoothstep(0.4, 1.0) 
+smoothstep(0.4, 1.0, x)
 // 0-1 clamped value
 // let 0.4 → 0.0, 1.0 → 1.0
 
@@ -199,8 +200,8 @@ clamp()
 
 floor()
 
-plot() ?
-rect() ?
+plot() // not built-in, Book of Shaders helper
+rect() // not built-in, Book of Shaders helper
 
 fract() // 0.xxxxx
 mod()
@@ -255,6 +256,8 @@ float transition = remap(uTransition, 0.0, 1.0, 4.0, -4.0); // reversed
 | ---------------------------------- | ---------------------------------- |
 | ![[glsl-translate-normal.gif.gif]] | ![[glsl-not-translate-normal.gif]] |
 | `modelMatrix * vec4(normal, 1.0)`  | `modelMatrix * vec4(normal, 0.0)`  |
+
+`vec4(normal, 0.0)` only correct under rigid / uniform scale — non-uniform scale needs the normal matrix `transpose(inverse(mat3(modelMatrix))) * normal`（`inverse`/`transpose` 要 GLSL ES 3.00，WebGL1 里直接用 three.js 注入的 `normalMatrix`）
 
 ### Effects
 
@@ -328,7 +331,7 @@ snoise → simplex noise (improved version of perlin noise, also made by perlin)
 Perlin noise is bad for performance ☞ use simple perlin texture instead
 
 ```glsl
-Classic Perlin 3D Noise 
+// Classic Perlin 3D Noise
 // by Stefan Gustavson
 //
 vec4 permute(vec4 x)

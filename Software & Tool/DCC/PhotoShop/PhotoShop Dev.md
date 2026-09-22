@@ -3,7 +3,8 @@
 ## CEP vs UXP
 CEP UXP 是开发框架, PhotoShop API才是具体给PhotoShop的指令
 
-CEP (Common Extensibility Platform) 是旧的PS开发框架 → 内嵌浏览器, node.js (ECMAScript 3 标准)
+CEP (Common Extensibility Platform) 是旧的PS开发框架 → 内嵌浏览器(CEF/Chromium) + node.js, 支持现代ES
+ExtendScript (`.jsx`) 才是旧的宿主脚本层, ECMAScript 3 标准, 已被 UXP + batchPlay 取代
 - https://github.com/Adobe-CEP
 - https://github.com/Adobe-CEP/Getting-Started-guides
 
@@ -208,7 +209,7 @@ entrypoints.setup({
     }
     
     // 方法二, ID直接接function
-    uniqueID: () = { ... }
+    uniqueID: () => { ... }
     
     // 如果fucntion和ID同名, 可以直接用
     uniqueID
@@ -221,7 +222,14 @@ function uniqueID() {
 ```
 
 Panel
-```
+```JavaScript
+entrypoints.setup({
+  panels: {
+    vanilla: { // manifest中的 "id"
+      show(event) { ... }
+    }
+  }
+})
 ```
 
 [www.davidebarranca.com](https://www.davidebarranca.com/development/adobe-uxp-things-you-need-to-know-4-commands-panels-manifest)
@@ -277,23 +285,23 @@ Modeless: permits other activities
 
 `<dialog>`
 modal
-[Adobe Developer Products Products UXP for Adobe XD Develop UXP Design Share Console Sign in Edit Pro](https://developer.adobe.com/xd/uxp/develop/reference/ui/dialogs/)
+[UXP Dialogs — reference](https://developer.adobe.com/xd/uxp/develop/reference/ui/dialogs/)
 ```HTML
 <dialog id="dialog">
     ... some content here
     <div>
         <sp-heading> </sp-heading>
     </div>
-</dialog>const 
+</dialog>
 ```
-[Adobe Developer Products Products UXP for Adobe XD Develop UXP Design Share Console Sign in Edit Pro](https://developer.adobe.com/xd/uxp/develop/reference/ui/dialogs/showing/)
+[UXP Dialogs — showing](https://developer.adobe.com/xd/uxp/develop/reference/ui/dialogs/showing/)
 ```JavaScript
 // get the HTML element
 const res = await document.querySelector('#dialog')
 
 // open aysnc
 await res.uxpShowModal({
-    title: 
+    title: "My Dialog"
 })
 
 // close
@@ -301,7 +309,7 @@ res.close('OK') // will return the string for reason specification
 ```
 `<sp-dialog>`
 ```JavaScript
-.setAttribute("open") // open
+.setAttribute("open", "") // open
 .removeAttribute("open") // close
 ```
 
@@ -320,14 +328,14 @@ core.executeAsModal(async () => {
 })
 ```
 
-2. `FS` https://developer.adobe.com/xd/uxp/uxp/reference-js/Modules/FileSystem/
+2. `FS` [UXP FileSystem](https://developer.adobe.com/xd/uxp/uxp/reference-js/Modules/FileSystem/) (XD的文档, PS同样适用)
 
 ```JavaScript
 const fs = require("fs"); 
 
 core.executeAsModal(async () => {
     // 插件路径内1.png
-    const _file = await require("fs").readFile(`plugin:1.png`);
+    const _file = await require("fs").readFile(`plugin:/1.png`);
 })
 ```
 
@@ -372,8 +380,8 @@ https://developer.adobe.com/photoshop/uxp/2022/ps_reference/classes/document/
 const fileName = "target.psd";
 await core.executeAsModal(async () => {
     let entry = await require('uxp').storage.localFileSystem.getFileForSaving(fileName);
-    app.activeDocument.saveAs.psd(entry);
-}
+    await app.activeDocument.saveAs.psd(entry);
+});
 ```
 
 ##### 读取插件目录下的文件, 并粘贴到图层
@@ -418,8 +426,8 @@ app.showAlert("alert content")
 ### Layers
 ```JavaScript
 // get first object' name in layer
-app.activeDocument.layer[0].name
-app.activeDocument.layer[0].name = "new name"; // 可以直接重命名
+app.activeDocument.layers[0].name
+app.activeDocument.layers[0].name = "new name"; // 可以直接重命名
 
 // all layer
 const layers = app.activeDocument.layers;
@@ -441,9 +449,11 @@ layer.duplicate()
 ```
 
 ### 是否为调整图层
+[Layer reference](https://developer.adobe.com/photoshop/uxp/2022/ps_reference/classes/layer/)
 ```JavaScript
-isAdjustmentLayer(layer) {
-    return layer.adjustmentInfo.hasOwnProperty(layer.kind);
+function isAdjustmentLayer(layer) {
+    // 没有adjustmentInfo的图层直接返回false
+    return layer.adjustmentInfo?.hasOwnProperty(layer.kind) ?? false;
 }
 ```
 
@@ -484,7 +494,7 @@ null: {
 
 BatchPlay async
 ``` js
-photoshop.action.batchPlay([toSmart0bject],{synchronousExecution: true})
+await require('photoshop').action.batchPlay([toSmartObject], {})
 ```
 
 ActionManager
@@ -506,6 +516,6 @@ ActionManager
 通过PS分别导出PNG-8和PNG-24格式的PNG, 在Mac中Terminal File命令查看文件:
 - PS的PNG-24是8-bit/color RGB(A)
 - PS的PNG-8是8-bit colormap
-![[PhotoShop-PNG8:24-1.jpeg]]
-其实不管PNG-8还是PNG-24都是8bit的图片. 不过PNG-8是用colormap格式, colormap是单8bit通道, 通过256个预设颜色来显示图片. PNG-24有多个通道, 是我们正常理解的R,G,B 3个通道分别有8bit(0-256)的值.
-![[PhotoShop-PNG8:24-2.jpg]]
+![[PhotoShop-PNG8-24-1.jpeg]]
+其实不管PNG-8还是PNG-24都是8bit的图片. 不过PNG-8是用colormap格式, colormap是单8bit通道, 通过256个预设颜色来显示图片. PNG-24有多个通道, 是我们正常理解的R,G,B 3个通道分别有8bit(0-255)的值.
+![[PhotoShop-PNG8-24-2.jpg]]

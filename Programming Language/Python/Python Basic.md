@@ -19,7 +19,7 @@ Related Package
 
 ### Python Built-in Functions
 
-https://docs.python.org/zh-cn/3.10/library/functions.html?highlight=dir
+https://docs.python.org/zh-cn/3/library/functions.html
 
 ### Hello World
 
@@ -48,7 +48,7 @@ print ( '', end = ' ' ) # overwrite end with new line
 ```python
 myVariable = 0
 myVariable = 0.111
-myVariable = “string”
+myVariable = "string"
 isVariable = True
 isVariable = False
 ```
@@ -70,7 +70,8 @@ print (phrase.upper().isupper()) #two function togethor
 
 print (len(phrase)) #length of the phrase, character numbers
 print (phrase[0]) # H, get the first character
-print (phrase.index("hel")) #0 location of the string in the phrase
+print (phrase.index("Hel")) #0 location of the string in the phrase, case-sensitive
+print (phrase.find("hel")) #-1 find returns -1, index raises ValueError
 print (phrase.replace("World","Mars")) #replace
 
 my_num = 5 
@@ -82,11 +83,17 @@ rstrip() → end
 
 ```
 
-Sting.format and f string
+String.format and f string
 
 ### f string
 
 Require py3.6+
+
+```python
+f'{name} is {age}'
+f'{value:.2f}' # format spec
+f'{x=}' # x=5, debug, py3.8+
+```
 
 ### r string regular Expression
 
@@ -109,13 +116,15 @@ import re
 print (10 % 3) #mod remainder
 
 my_num = -5 
-print (abs(my_num) #absolute value
+print (abs(my_num)) #absolute value
 print (pow(3,2)) #power, 3^2
 print (max(4, 6, 3, 8)) #return the biggest number
 print (min(4, 6, 3, 8)) #return the smallest number
 
-print (round(3.2)) #3 四舍五入
-print (round(3.5)) #4 四舍五入
+print (round(3.2)) #3 银行家舍入 round-half-to-even
+print (round(3.5)) #4
+print (round(2.5)) #2 不是3，.5 时取偶数
+# 真正的四舍五入: Decimal('2.5').quantize(Decimal('1'), rounding=ROUND_HALF_UP)
 
 from math import * #import more math function
 print (floor(3.6)) #3 向下取值
@@ -166,7 +175,8 @@ friends.insert(1,"Kelly") #insert Kelly to 2nd, items after Kelly +1
 friends.remove("Jim") #remove Jim, all items after Jim -1
 friends.clear() #remove all items
 friends.pop() #remove the last item, "Toby"
-friends2 = friends.copy() #copy from other list
+friends2 = friends.copy() #copy from other list, shallow - nested objects are still shared
+import copy; friends2 = copy.deepcopy(friends) #deep copy for nested
 ```
 
 -   Re-order the list
@@ -176,13 +186,15 @@ friends.sort() #put list into an ascending or alphabet order
 friends.reverse() #reverse of the order of the list
 ```
 
-### Tupel
+### Tuple
 
-Tupel is Immutalable; can not be changed after it created.
+Tuple is immutable; can not be changed after it created.
 
 ```python
-coordinates = (4, 5) # Create Tupel
-print (coordinates[1]) #5 Access Tupel Infomation
+coordinates = (4, 5) # Create Tuple
+print (coordinates[1]) #5 Access Tuple Infomation
+x, y = coordinates # unpacking
+single = (5,) # single element needs the comma, (5) is just an int
 ```
 
 ### Function
@@ -221,6 +233,11 @@ func('tim', '3') # overwrite text
 
 def testFunc (name1="abc", name2="def"): # keyword argument
 testFunc(name2="xyz")
+
+# mutable default trap: [] is evaluated once at def time and shared across calls
+def f(item, bucket=[]): ... # wrong
+def f(item, bucket=None): # right
+    bucket = [] if bucket is None else bucket
 ```
 
 ```python
@@ -231,7 +248,7 @@ def my_func(*args, **kwargs):
     print (args, kwargs)
     
 my_func("abc", "abc", 123, "abc", key=123, abc=123)
-（'abc', 'abc', 123, 'abc'）,{'abc':123, 'key': 123}
+('abc', 'abc', 123, 'abc') {'key': 123, 'abc': 123} # kwargs keeps call-site order (py3.6+)
 ```
 
 ### Return Statement
@@ -307,8 +324,8 @@ for friend in friends:
     
 for index in range(3, 10): #second will not be included in the range
     print(index) #print 3, 4, 5, 6, 7, 8, 9
-    if index == 0:
-        print("first Iteration") #show during first iteration
+    if index == 3:
+        print("first Iteration") #show during first iteration, 3 is the range start
         
 for index in range(len(friends)):
     print(friends[index])      
@@ -367,7 +384,9 @@ my_list = [(letter, num) for letter in 'abcd' for num in range(4)]
 Dict
 ```python
 # comprehension - return dictionary
-my_dict = {name: hero for name, hero in zip (name, heros)}
+names = ['Bruce', 'Wade']
+heros = ['Batman', 'Deadpool']
+my_dict = {name: hero for name, hero in zip(names, heros)}
 {"Bruce": "Batman", "Wade": "Deadpool"}
 ```
 
@@ -419,7 +438,7 @@ print(translate(input("Enter a phrase: ")))
 
 ### Sets
 > Set is one of 4 built-in data types in Python
-> unordered , _unchangeable*_, and _unindexed_.
+> unordered, _unindexed_, and _mutable_ (add/remove); elements must be hashable - use `frozenset` for an immutable set.
 
 ```python
 
@@ -434,8 +453,8 @@ _set.add(5)
 _set.remove(5)
 len(_set)
 
-# check value exist in the set
-if 1 in numebrs:
+# check value exist in the set, O(1) hash lookup (list `in` is an O(n) scan)
+if 1 in _set:
 	print("yes")
 ```
 
@@ -512,11 +531,12 @@ Local Enclosing Global Built-in
 ```python
 x = 'global x'
 
-def doSomthing()
+def do_something():
     global x
     x = 'local x'
-    
-print x 
+
+do_something() # without the call x is still 'global x'
+print(x)
 #'local x'
 ```
 
@@ -552,7 +572,7 @@ class Employee:
      
     def regular_method (self): # will automatically pass instance -> self
         self.variable # self -> edit instance variable
-        Student.variable # className -> edit class varible
+        Employee.variable # className -> edit class varible
     
     @classmethod
     def class_method (cls, value): # will automatically pass class -> cls
@@ -561,8 +581,8 @@ class Employee:
     # class constructor
     @classmethod
     def from_string(cls, emp_str):
-        name, major, gpa, is_onprobation = emp_str.split('-')
-        return cls(name, major, gpa, is_onprobation) # create a new instance
+        first, last, pay = emp_str.split('-')
+        return cls(first, last, pay) # create a new instance
     
     @staticmethod
     def is_workday(day): # not automatically pass anything
@@ -572,12 +592,11 @@ class Employee:
     
     @property
     def fullname(self):
-        return f'{first} {last}'
+        return f'{self.first} {self.last}'
 
     @fullname.setter # propertyName.setter
     def fullname(self, name): # need to be the same name
-        self.first =
-        self.last = 
+        self.first, self.last = name.split(' ')
         
     @fullname.deleter
     def fullname(self):
@@ -589,8 +608,8 @@ class Employee:
 
 ```python
 # Execute the class function    
-instance.fullname() # instance.function()
-Class.fullname(instance) # class.function(instance)
+instance.regular_method() # instance.function()
+Class.regular_method(instance) # class.function(instance)
     
 # class Method
 Class.class_method(value) # no need pass cls that will be pass in automatically
@@ -623,13 +642,22 @@ class Developer(Employee): # inherit
         self.programming_lang = programming_lang
 ```
 
-Search order: instance -> class -> built-in
+Attribute search: instance `__dict__` -> class -> parent classes in MRO order (`Class.__mro__`)
 
 ### Decorators
 
 ```python
+from functools import wraps
+
 def decorator_function(original_function):
-    def wrapper
+    @wraps(original_function) # keep __name__ / __doc__
+    def wrapper(*args, **kwargs):
+        return original_function(*args, **kwargs)
+    return wrapper
+
+@decorator_function # sugar for: func = decorator_function(func)
+def func():
+    pass
 ```
 
 ### Building a Multiple Choice Quiz
@@ -664,9 +692,11 @@ def run_test(questions):
     score = 0
     for question in questions:
         answer = input(question.prompt)
-        if answer == questions.answer:
+        if answer == question.answer:
             score += 1
-    print("You got" + str(score) + "/" + str(len(questions)) + "correct")
+    print("You got " + str(score) + "/" + str(len(questions)) + " correct")
+
+run_test(questions)
 ```
 
 ### [Special (Magic/Dunder) Methods](https://www.youtube.com/watch?v=3ohzBxoFHAY)
@@ -707,17 +737,24 @@ issubclass(Developer, Employee)
 https://docs.python.org/3/library/typing.html
 
 Python 3.5+
-python will ignore "types" at runtime, they are just meta data, only for documentation / readability purpose
+CPython does not enforce "types" at runtime, but libraries read them at runtime - dataclasses, Pydantic, FastAPI, attrs build behaviour from them
 
 ```python
-from typing import List
-
-def myFunc (array: List, device: str) -> List:
+# py3.9+ builtin generics, no typing import (PEP 585)
+def myFunc (array: list[str], device: str) -> list[str]:
     print(array)
+
+# legacy: from typing import List, Dict, Optional, Union
+# 3.10+: Optional[X] -> X | None, Union[A, B] -> A | B
 ```
 
 ``` python
-user1: string = "111"
+user1: str = "111"
+count: int = 1
+ratio: float = 0.5
+flag: bool = True
+items: list[str] = []
+lookup: dict[str, int] = {}
 ```
 
 ``` python
@@ -750,7 +787,7 @@ https://www.w3schools.com/python/ref_func_zip.asp
 a = ("John", "Charles", "Mike")  
 b = ("Jenny", "Christy", "Monica")  
   
-x = zip(a, b) 
+x = list(zip(a, b)) # zip returns a lazy iterator, exhausted after one pass
 # [("John","Jenny"), ("Charles","Christy"), ("Mike", "Monica")]
 ```
 
@@ -758,8 +795,14 @@ x = zip(a, b)
 
 ### First Class Functions
 
+functions are objects: can be stored, passed as arguments and returned
+
 ### [Lambda](https://www.w3schools.com/python/python_lambda.asp)
 
+```python
+square = lambda x: x*x
+sorted(data, key=lambda r: r[1])
+```
 
 ### Iterators and Iterables
 object has `__iter__ ` → Iterables → return Iterators
@@ -797,11 +840,11 @@ class MyRange:
 	
 	def __next__(self):
 		if self.value >= self.end:
-		raise StopIteration
-	
-	current = self.value
-	self.value += 1
-	return current
+			raise StopIteration
+		
+		current = self.value
+		self.value += 1
+		return current
 
 nums = MyRange(1, 10)
 
@@ -810,7 +853,7 @@ for num in nums:
 	print(num)
 ```
 ##### Generator
-Generator → iterator → PY 3+ new syntax
+Generator → iterator, computes lazily, holds one value at a time (`yield from` → py3.3+)
 ```python
 def my_range(start, end):
 	current = start
@@ -835,7 +878,7 @@ def my_range(start):
 
 ![[Asyncio in Python - Full Tutorial 1-56 screenshot.png]]
 ### Asyncio
-python version >= 3.4, for tasks less CPU intense
+python >= 3.7 for asyncio.run() (asyncio module itself since 3.4), for I/O-bound tasks
 Event loop
 ``` python
 import asyncio #python build-in
@@ -856,7 +899,11 @@ async def fake_fetch(delay):
 
 Task
 ``` python
+task = asyncio.create_task(fake_fetch(2))
+await task
 
+# concurrent
+results = await asyncio.gather(fake_fetch(1), fake_fetch(2), fake_fetch(3))
 ```
 
 ### [[Python Threading & Multi-processing]]

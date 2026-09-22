@@ -1,4 +1,4 @@
-
+#python
 ### time
 ``` python
 import time
@@ -15,8 +15,10 @@ end = time.perf_counter()  # end time
 print ( round(end - start, 2)) # duration
 ```
 
-### Datatime
+### Datetime
 
 ```Python
-datatime.data(2016, 7, 24) #2016-7-24 
+from datetime import date
+
+date(2016, 7, 24) #2016-7-24 
 ```

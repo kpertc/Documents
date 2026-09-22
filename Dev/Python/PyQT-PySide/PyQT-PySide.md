@@ -23,9 +23,9 @@ PyQt - PySide
 
 ### **QT - Different Licenses and company**
 
-PyQt|Riverbank Computing, early
----|---
-PySide|QT
+PyQt|Riverbank Computing, early|GPL v3 or paid commercial licence
+---|---|---
+PySide|QT|LGPL v3 (closed-source ok if dynamically linked)
 
 
 <br>
@@ -41,7 +41,7 @@ PySide|QT
 
 QT is more than just GUI
 -   Network
--   Treading
+-   Threading
 -   Databases
 -   ... other utility
 
@@ -65,6 +65,10 @@ PySide6 `site-packages` -> `PySide6` -> `Designer.app`
       `pyside6-uic mainwindow.ui > ui_mainwindow.py`
     
 -   direct load
+    
+      `from PySide6.QtUiTools import QUiLoader` → `QUiLoader().load("mainwindow.ui")`
+    
+      `from PyQt6 import uic` → `uic.loadUi("mainwindow.ui", self)`
     
 
   

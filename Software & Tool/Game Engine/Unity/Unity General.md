@@ -49,11 +49,11 @@ Transform.SetPositionAndRotationn
 
 <br/>
 
-### Update() FixUpdate() LateUpdate()
+### Update() FixedUpdate() LateUpdate()
 
 -   Update() called everyframe -> framerate dependent
     
--   FixUpdate() called before Update() Not framerate dependent
+-   FixedUpdate() called before Update() Not framerate dependent -> runs 0..n times per frame depending on frame time vs Fixed Timestep; physics only
     
     -   `Project Setting` -> `Time`
         
@@ -115,9 +115,20 @@ Assert
 Camera selfieCam = _camera;
 
 Texture2D snapShot = new Texture2D(resWidth, resHeight, TextureFormat.RGBA32, false);
-selfieCam.Render();
+
+// 顺序很重要: 先绑定 target, 再 Render, 最后 ReadPixels
+RenderTexture _rd = new RenderTexture(resWidth, resHeight, 24);
+selfieCam.targetTexture = _rd;
 RenderTexture.active = _rd;
+selfieCam.Render();
 snapShot.ReadPixels(new Rect(0, 0, resWidth, resHeight), 0, 0);
+snapShot.Apply();
+
+// 用完必须还原, 否则后续渲染全错
+selfieCam.targetTexture = null;
+RenderTexture.active = null;
+_rd.Release();
+
 byte[] bytes = snapShot.EncodeToPNG();
 
 if (!Directory.Exists(path))

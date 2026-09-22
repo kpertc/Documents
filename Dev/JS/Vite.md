@@ -1,5 +1,8 @@
 #web-dev
 
+Vite 7 (Node 20.19+ / 22.12+)
+dev: native ESM + esbuild (dep pre-bundling / transforms) → instant HMR; build: Rollup (→ Rolldown)
+
 Hot module replace(HMR)
 update part of the code and re-instantiate, not reload the page
 
@@ -7,18 +10,16 @@ update part of the code and re-instantiate, not reload the page
 
 Webpack
 -   Bundles all JS modules, CSS, and other assets
-`create react app` → [[Webpack]]
+`create react app` (sunset) → [[Webpack]]
 
-Hot Module Replacement (HMT) → Watch
+Hot Module Replacement (HMR) → Watch
 
-Speedy Web Compiler, SWC
+Speedy Web Compiler, SWC → opt-in via `@vitejs/plugin-react-swc`, not Vite's default
 
 ```shell
 npm create vite@latest projectname
 
-npm init @vitejs/app
-
-npm init vite
+npm init vite@latest
 ```
   
 No command
@@ -35,7 +36,10 @@ npm run dev -- --force
 ```
 
 ### `vite.config.ts`
-```jsx
+```ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
 export default defineConfig({
   plugins: [react()],
   server: {
@@ -45,8 +49,8 @@ export default defineConfig({
   build: {
 	outDir: "../dist",
 	emptyOutDir: true, // Empty the folder first
-	sourcemap: true, // 
-	target: "esnext" // for morden browser, (may not be able to run on some old browser)
+	sourcemap: true,
+	target: "esnext" // for modern browser, (may not be able to run on some old browser)
   }
 })
 ```

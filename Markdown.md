@@ -27,12 +27,12 @@ Heading level 2
 ```
 
 ##### New Line
-`&NewLine`
 `<br>`
-`\`
-`\`
+`\` trailing backslash
+two trailing spaces
 
-###### `Use `code` in your Markdown file.`
+###### ``Use `code` in your Markdown file.``
+use one more backtick than the longest run inside
 ```html
 <code>Use `code` in your Markdown file.</code>
 ```
@@ -146,8 +146,9 @@ Color from [Arco Design Palette](https://arco.design/palette/list)
 
 ![](./img/Houdini-Channel-Parameters/clickToSeeValue.gif)
 ```
+`|100` width suffix is Obsidian only, GitHub renders no sizing and leaks it into the alt text
 
-==folder name can not contain space==
+==folder name with space needs `%20` or `![](<./my img/a.png>)`, `![[ ]]` handles it natively==
 
 ##### HTML Image Alignment
 
@@ -176,7 +177,7 @@ Color from [Arco Design Palette](https://arco.design/palette/list)
  </div>
 
 ``` HTML
-div style="display: grid; grid-template-columns: repeat(3, 2fr); grid-gap: 10px;">
+<div style="display: grid; grid-template-columns: repeat(3, 2fr); grid-gap: 10px;">
 	<img class="fit-picture" src="https://placehold.co/300x200"/>
 <img class="fit-picture"
      src="https://placehold.co/300x200"
@@ -254,7 +255,7 @@ Embedding
 ### Table
 ##### markdown
 
-`&nbsp` for empty cell
+`&nbsp;` for empty cell
 
 ##### HTML
 ```HTML
@@ -284,7 +285,7 @@ Polynomial|多项式
 
 ### [Callout](https://help.obsidian.md/Editing+and+formatting/Callouts) for obsidian
 ```
-> [!info] > Here's a callout block. 
+> [!info] Here's a callout block. 
 > It supports **Markdown**, [[Internal link|Wikilinks]], and [[Embed files|embeds]]! 
 > ![[og-image.png]]
 ```
@@ -310,10 +311,10 @@ Types:
 
 ```mermaid
 graph LR
-start(Measure) --> Group_A_Treatment(Group A Treatment)
-start(Measure) --> Group_B_Treatment(Group A Treatment)
-Group_A_Treatment(Group B Treatment) --> Measure_(Measure)
-Group_B_Treatment(Group B Treatment) --> Measure_(Measure)
+start(Measure) --> A(Group A Treatment)
+start --> B(Group B Treatment)
+A --> M(Measure)
+B --> M
 ```
 
 ```mermaid 

@@ -30,9 +30,10 @@ $$ EPS = \frac{Earning}{shares} $$
 这种盈利模式EPS无法持续
 
 ### MACD
-Moving Average Convergence
-指数平滑异同平移平均线
+Moving Average Convergence Divergence
+指数平滑异同移动平均线
 
+默认周期 (12, 26, 9)
 DIF 快线
 DEA 慢线
 均线 时间有延迟
@@ -42,9 +43,9 @@ Relative Strength Index 相对强弱
 
 相对其他技术指标反应快
 
-Percentage
-- min-0 卖方力量强 (20 - 30) 超卖 → 该买
-- max-1(100%) 买方力量强 (70 - 80) 超买 → 该卖
+Percentage 0 - 100
+- min 0 卖方力量强 (20 - 30) 超卖 → 该买
+- max 100 买方力量强 (70 - 80) 超买 → 该卖
 
 RSI与股价背离
 - 股价上涨-RSI下降 → 买方力量减弱(预示要跌)
@@ -57,4 +58,4 @@ RSI与股价背离
 Call option - 买入
 Put option - 卖出
 
-给买方钱 -
+买方付权利金(premium)给卖方(writer) → 买方有权利, 卖方有义务

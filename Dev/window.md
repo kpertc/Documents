@@ -10,11 +10,11 @@ window.addEventListener('mousemove', (e) => {
 
 	// to get screen base 0 - 1 value (normalized)
 	e.clientX / window.innerWidth
-	e.clientX / window.innerHeight
+	e.clientY / window.innerHeight
 
 	// centered
 	e.clientX / window.innerWidth - 0.5
-	e.clientX / window.innerHeight - 0.5
+	e.clientY / window.innerHeight - 0.5
 })
 ```
 

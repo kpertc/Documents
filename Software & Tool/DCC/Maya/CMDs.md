@@ -1,7 +1,8 @@
 ### Documents Website
 
-[All Commands](https://download.autodesk.com/us/maya/2011help/Commandspython/)
-[Modelling Commands](https://download.autodesk.com/us/maya/2011help/Commandspython/cat_Modeling.html#Polygons)
+[All Commands](https://help.autodesk.com/cloudhelp/2026/ENU/Maya-Tech-Docs/CommandsPython/)
+[Modelling Commands](https://help.autodesk.com/cloudhelp/2026/ENU/Maya-Tech-Docs/CommandsPython/cat_Modeling.html#Polygons)
+[Maya Help entry (no version in URL)](https://help.autodesk.com/view/MAYAUL/ENU/)
 
 [Python Scripting for Maya Artists by Chad Vernon](https://www.chadvernon.com/python-scripting-for-maya-artists/)
 
@@ -11,7 +12,8 @@
 import maya.cmds as cmds
 from maya import cmds #as cmds
 
-reload (ge) # reload the script
+from importlib import reload
+reload(my_module) # reload the script (Python 3, Maya 2022+)
 ```
 
 ### Creating Object
@@ -21,13 +23,22 @@ cmds.polyCube(width=1, height=4, depth=2)
 cmds.polyCube(w=1, h=4, d=2)
 
 # NURBS plane
+cmds.nurbsPlane( p=(1, 1, 1), w=10, lr=1, ax=(0, 1, 0) )
+
+# poly plane
+cmds.polyPlane( w=10, h=10 )
+
+# construction plane
 cmds.plane( p=(1, 1, 1), s=10 )
 ```
 
 ### Select
 
 ```Python
-cmds.select("") # hierachy
+cmds.select('pCube1', hierarchy=True) # hierarchy
+cmds.select('obj', add=True)
+cmds.select('obj', deselect=True)
+cmds.select(clear=True)
 ```
 
 ### Object Type & Node Type
@@ -72,7 +83,7 @@ cmds.getAttr('pCube1.translateX')
 
 cmds.setAttr( objName + '.translateX', 1)
 cmds.setAttr( objName + '.visibility', 0)
-cmds.setAttr( objName , 1, 1, 1, type='double3') # with type
+cmds.setAttr( objName + '.scale', 1, 1, 1, type='double3') # with type
 
 cmds.addAttr()
 
@@ -149,9 +160,10 @@ matrix = cmds.xform('object', q=1, m=1)
 ```Python
 cmds.makeIdentity('pCube1', apply=True) #ALL
 
-cmds.makeIdentity(selected, translate=True)
-cmds.makeIdentity(selected, rotate=True)
-cmds.makeIdentity(selected, scale=True)
+cmds.makeIdentity(selected, apply=True, translate=True)
+cmds.makeIdentity(selected, apply=True, rotate=True)
+cmds.makeIdentity(selected, apply=True, scale=True)
+# 没有 apply = reset (物体会跳回原点)，apply=True 才是 freeze
 ```
 
 ### Grouping
@@ -215,6 +227,12 @@ cmds.polyEditUV(u=0.0, v=-0.1)
 
 ### UV Set
 
+```Python
+cmds.polyUVSet('pCube1', q=True, allUVSets=True)
+cmds.polyUVSet('pCube1', currentUVSet=True, uvSet='map1')
+cmds.polyUVSet('pCube1', create=True, uvSet='name')
+```
+
 ### LightLink
 
 ```Python
@@ -255,18 +273,18 @@ cmds.polyEvaluate( t=True ) #Triangle
 
 ```Python
 #Create New Material
-cmds.shadingNode("phong", asShader=True, name="myMaterial")
+shader = cmds.shadingNode("phong", asShader=True, name="myMaterial")
 
 #Create File Node
-cmds.shadingNode("file", asTexture=True, name="myImageFile")
+fileNode = cmds.shadingNode("file", asTexture=True, name="myImageFile")
 
 #Connect Image Node to Material Color
-cmds.connectAttr('filePathImage.outColor', 'myShader.color')
+cmds.connectAttr(fileNode + '.outColor', shader + '.color')
 
 #image Path -> String
-imagePath = '/Users/chenjingfu/Desktop/DJI_0088.png'
+imagePath = '/Users/userName/Desktop/DJI_0088.png'
 
-cmds.setAttr('filePathImage.fileTextureName', imagePath, type="string")
+cmds.setAttr(fileNode + '.fileTextureName', imagePath, type="string")
 ```
 
 ##### Assign Material
@@ -314,12 +332,12 @@ cmds.hyperShade(objects= materialName)
 
 ```Python
 # get object
-ref = "pSphere1"
-target = "pSphere2"
+target = "pSphere1"
+base = "pSphere2"
 
-cmds.blendShape(ref, target)
-cmds.blendShape(ref, ref2, target) # multiple blendShape
-# target -> last object
+cmds.blendShape(target, base)
+cmds.blendShape(target, target2, base) # multiple blendShape
+# last object = base (the deformed object), targets come first
 name = ""
 ```
 
@@ -399,20 +417,22 @@ cmds.parentConstraint()
 
 ### Settings
 
+[currentUnit](https://help.autodesk.com/cloudhelp/2026/ENU/Maya-Tech-Docs/CommandsPython/currentUnit.html)
+
 ```Python
 cmds.about()
 
-https://help.autodesk.com/cloudhelp/2019/ENU/Maya-Tech-Docs/CommandsPython/currentUnit.html
-
 print('Lenght Unit: ' + str(cmds.currentUnit( query=True, linear=True ))) #cm
 
-currentUnitFrameRateCoversion = {
+currentUnitFrameRateConversion = {
     "game": 15, "film": 24, "pal": 25,
     "ntsc": 30, "show": 48, "palf": 50,
     "ntscf": 60,
 }
 
-frameRate = currentUnitFrameRateCoversion.get(cmds.currentUnit( query=True, time=True ))
+# 小数帧率不在表里，返回的是 '23.976fps' / '29.97fps' 这种字符串
+timeUnit = cmds.currentUnit( query=True, time=True )
+frameRate = currentUnitFrameRateConversion.get(timeUnit) or (float(timeUnit[:-3]) if timeUnit.endswith('fps') else None)
     
 print ('fps: ' + str(frameRate))
 
@@ -453,7 +473,13 @@ cmds.launch(directory="C:/matemp")
 ### Unknown Plugin(删除未知插件)
 
 ```Python
-cmds.unknownPlugin
+# 先删未知节点，否则插件删不掉
+unknownNodes = cmds.ls(type='unknown')
+if unknownNodes:
+    cmds.delete(unknownNodes)
+
+for p in (cmds.unknownPlugin(query=True, list=True) or []):
+    cmds.unknownPlugin(p, remove=True)
 ```
 
 # Arnold Render
@@ -483,7 +509,7 @@ skyDomeLight = mutils.createLocator('aiSkyDomeLight', asLight=True)
 
 # Edit aiArealight Light Shape to disk
 lightShape = cmds.getAttr("aiAreaLightShape1.ai_translator")
-cmds.setAttr("aiAreaLightShape1.ai_translator",'cylinder',type="string") # disk
+cmds.setAttr("aiAreaLightShape1.ai_translator",'disk',type="string") # 'quad' / 'disk' / 'cylinder' / 'geometry'
 ```
 
   
@@ -517,7 +543,7 @@ Get Animation Clips Size
 ```Python
 animClips = mel.eval( 'int $nbAnimClips = `getAttr -size ($gGameFbxExporterCurrentNode + ".animClips")`; ' )
 
-print animClips
+print(animClips)
 ```
 
 Update Window

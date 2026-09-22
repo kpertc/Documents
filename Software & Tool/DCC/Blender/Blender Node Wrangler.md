@@ -15,7 +15,8 @@ Preferences > Themes > Node Editor > Noodle Curving
 ![[custom-node-name-color.gif]]
 
 ### Frame
-Shift + P / Ctrl + J Frame (Node Wrangler)
+`Shift + P` (Node Wrangler) / `Ctrl + J` new frame around selection
+select nodes then the frame → `Ctrl + P` add to an existing frame
 Select node `delete` delete frame
 Sidebar to rename & change color|Toggle Node Mute|Hold Alt move
 ![[frame.png]]

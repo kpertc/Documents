@@ -1,5 +1,5 @@
 
-Shopping mall + website ‡ Internet company
+Shopping mall + website ≠ Internet company
 
 - A/B testing
 - Short iteration time

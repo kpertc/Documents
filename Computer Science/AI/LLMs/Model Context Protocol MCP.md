@@ -15,19 +15,23 @@ MCP Protocol (API / “USB-C”)
 MCP Servers (functions)
 
 mostly written with Python and Node.js
-- `uvx` = `uv run`
+- `uvx` = `uv tool run` (ephemeral isolated env — why MCP server configs use it; `uv run` runs inside the current project env)
 
 Server
 - Tools
 - Resource - data / database
 - Prompts
-- Samplings - server ask client for more information
+
+Client
+- Sampling - server ask client to run an LLM completion for it
+- Roots - filesystem scope
+- Elicitation - server ask user for more information
 
 ```
 
 ```
 
-transportType: `stdio` `SSE` (Server-Sent Events) 
+transportType: `stdio` `Streamable HTTP` (HTTP+SSE deprecated in spec rev 2025-03-26, kept only for backwards compat) 
 
 
 Markets:

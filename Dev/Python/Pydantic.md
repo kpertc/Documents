@@ -4,8 +4,10 @@ JavaScript validation: [[Zod]]
 
 used by `langchain`, `huggingface`, `fastapi`
 
+Pydantic v2 (v1 -> v2: `@validator` -> `@field_validator`, `.dict()`/`.json()` -> `.model_dump()`/`.model_dump_json()`)
+
 ```sh
-pip install pydantic
+pip install "pydantic[email]"  # [email] = email-validator, needed by EmailStr
 ```
 
 ``` python
@@ -16,7 +18,7 @@ def create_user(first_name: str, last_name: str, age: int) -> dict:
 	pass
 ```
 
-Pydantic will check and raise error is type is mismatched 
+v2 coerces where it safely can (`"30"` -> `30`) and raises ValidationError only when it cannot; `strict=True` forbids coercion
 
 ``` python
 from pydantic import BaseModel
@@ -29,16 +31,18 @@ class User(BaseModel):
 	user_questions: str | None
 ```
 
+v2: `str | None` is REQUIRED (must be passed, may be None) - write `= None` to make it optional; v1 defaulted these to None
+
 ``` python
 from pydantic import BaseModel, EmailStr
 
 class User(BaseModel):
     username: str
-    password: EmailStr
+    email: EmailStr
 
 user1 = {
     "username": "testuser",
-    "password": "test@example.com"
+    "email": "test@example.com"
 }
 
 validUser = User(**user1)
@@ -46,17 +50,20 @@ validUser = User(**user1)
 
 Custom validation
 ``` python
+from pydantic import BaseModel, EmailStr, field_validator
+
 class User(BaseModel):
     username: str
-    password: EmailStr
+    email: EmailStr
     value: int
 
     # custom       
     # field validator inside the class 
     @field_validator("value")
+    @classmethod
     def validate_value(cls, value):
         if value <= 0:
-            raise ValueError(f"account_id must be positive")
+            raise ValueError("value must be positive")
         return value
 ```
 

@@ -1,5 +1,5 @@
 
-Scalable Vector Graphic (SVG) → Extensive markup language (XML) based
+Scalable Vector Graphic (SVG) → Extensible Markup Language (XML) based
 
 ```html
 <svg>
@@ -8,9 +8,9 @@ Scalable Vector Graphic (SVG) → Extensive markup language (XML) based
 	<circle />
 	<polygon />
 	<path />
-	<path d=”…” />
-	group
-	<g id=””> 
+	<path d="M0 0 L10 10" />
+	<!-- group -->
+	<g id=""> 
 	
 	</g>
 </svg>
@@ -22,14 +22,14 @@ Scalable Vector Graphic (SVG) → Extensive markup language (XML) based
 
 <br>
 
-Properties| 
----|---|---
+Properties|Value
+---|---
 x, y|number
 fill|fill color
 stroke|
 
 Layer → order
-html → strict `<tag> </tag>` jsx supports `<tag />`
+html → strict `<tag> </tag>`, `<div />` is not self-closing; SVG / MathML are foreign elements so `<circle />` is valid; jsx supports `<tag />`
 path -> path command
 [d path commands](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d#path_commands)
 
@@ -41,4 +41,4 @@ path -> path command
 <mask />
 ```
 
-`createElementNS`
+`document.createElementNS("http://www.w3.org/2000/svg", "circle")` → `document.createElement("circle")` silently gives an unrenderable HTMLUnknownElement

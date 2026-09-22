@@ -1,7 +1,13 @@
 #JavaScript 
 
-- 
 - reactFlow shadcn https://reactflow.dev/ui
+
+v12+: `npm i @xyflow/react`
+```tsx
+import { ReactFlow, Handle, Position, Background, Controls, MiniMap, Panel, useReactFlow } from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
+```
+v11 (legacy): package is `reactflow`
 
 ``` tsx
 const CustomNode = () => {
@@ -9,8 +15,8 @@ const CustomNode = () => {
     <>
       <div className="text-updater-node">
         <div>Custom Node Content</div>
-        <Handle type="source" position={Position.Top} />
-        <Handle type="target" position={Position.Bottom} />
+        <Handle type="target" position={Position.Top} />
+        <Handle type="source" position={Position.Bottom} />
       </div>
     </>
   );
@@ -26,9 +32,8 @@ const initialNodes = [
     data: { label: "Node 2" },
     type: "textUpdater", // specify t
   },
-  // {
-  hidden
-  }
+  // hidden: keeps the node in state but unrendered, its edges must be hidden separately
+  { id: "n3", position: { x: 0, y: 200 }, data: { label: "Node 3" }, hidden: true },
 ];
 ```
 
@@ -41,13 +46,11 @@ const initialNodes = [
 	onEdgesChange={onEdgesChange}
 	onConnect={onConnect}
 	fitView
-	
-	// 
 >
 	<Background />
 	<Controls />
 	<MiniMap />
-	// overlay UI
+	{/* overlay UI */}
 	<Panel position="top-left">
 		...
 	</Panel>
@@ -64,16 +67,19 @@ const position = screenToFlowPosition({
 });
 
 // add new node
-setNodes((nds) => [...nds, newNode]);s
+const newNode = { id: crypto.randomUUID(), position, data: { label: "New" } };
+setNodes((nds) => [...nds, newNode]);
 ```
 
-``
-```
 edge
-abunated: true
+``` tsx
+{ id: "e1-2", source: "n1", target: "n2", animated: true }
 ```
 
 
-``` check node
-
+check node
+``` tsx
+const { getNode, getNodes } = useReactFlow();
+const node = getNode("n1"); // read once
+const data = useNodesData("n1"); // subscribe to its data
 ```

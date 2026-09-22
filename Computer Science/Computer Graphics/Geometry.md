@@ -19,9 +19,10 @@
 
 	**Constructive Solid Geometry (CSG) (Implicit)**
 	-   Boolean Operations
-	-   ∩ - Union
-	-   ∪ - Intersection
+	-   ∪ - Union
+	-   ∩ - Intersection
 	-   \ - Difference
+	-   [[Set Operation]]
 
 2.  Explicit 显式几何 - 用参数设定
 
@@ -45,7 +46,7 @@ f - face
 -   **Mesh subdivision 细分**
 			
 > 		degree 点连边的数量
-> 		Extraordinary vertex degree != 4; 度不为4
+> 		Extraordinary vertex 奇异点; 四边形网格(Catmull-Clark) degree != 4, 三角网格(Loop) degree != 6
 
 Loop(人名)|Catmull(人名)-Clark(人名) Subdivision
 ---|---
