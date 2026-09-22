@@ -170,7 +170,7 @@ base
 ```
 
 utility
-```
+```css
 @utility flex-center {
 	@apply flex justify-center items-center
 }

@@ -42,7 +42,7 @@ TypeScript|Add to tscofig.json as need
 
 HTML
 
-```JavaScript
+```HTML
 <script>
     document.getElementById('id').onclick = (event) => {
         parent.postMessage({pluginMessage: {type: 'type'}}, '*')

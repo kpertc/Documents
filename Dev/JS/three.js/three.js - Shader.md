@@ -22,7 +22,7 @@ import vertex from './shaders/vertex.js'
 
 Include three.js header files
 
-```OpenGL
+```glsl
 #include <common>
 ```
 

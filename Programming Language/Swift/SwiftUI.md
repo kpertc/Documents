@@ -576,7 +576,7 @@ Picker(
 	// SegmentedPickerStyle()
 ```
 
-```jsx
+```swift
 init() {
 	// UIKit
 	UISegmentedControl.appearance().selectedSegmentTintColor = UI.Color.red

@@ -320,11 +320,13 @@ bpy.types.Scene.mass_import = bpy.props.StringProperty() # Create a new attribut
 
   
 
+```python
 # Test in Console will show
 
 C.scene.mass_import
 
 C.scene.mass_import = "1111"
+```
 
 ![[img/Blender Scripting Basics/Custom Properties.png | 300]]
 
