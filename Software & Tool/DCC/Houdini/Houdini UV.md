@@ -18,7 +18,7 @@
 		<li>UV Edit - <code>X</code> snap</li>
 		<li>UV Transform</li>
 		<hr>
-		<li>UV Layout - correct Island Area
+		<li>UV Layout - correct Island Area</li>
 	</div>
 </div>
 

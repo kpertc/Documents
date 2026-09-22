@@ -65,3 +65,4 @@ export { function1, variable1 }
 ```HTML
 <script type='module' src='main.js'></script> // only run browser support module
 <script nomodule src='main.js'></script> // only run browser does not support module 
+```
