@@ -17,7 +17,6 @@ Viewport Lighting Setup
 
 
 大教程网盘地址（仅供内部学习）
-https://internal-doc-removed
 
 ---
 MacOS can not find licence server:

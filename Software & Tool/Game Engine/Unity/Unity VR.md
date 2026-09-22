@@ -2,8 +2,8 @@
 
 ### 资源
 
-[XR 学习](https://internal-doc-removed)
-[Oculus VR 设计指南](https://internal-doc-removed)
+XR 学习
+Oculus VR 设计指南
 
 <br>
 
@@ -24,8 +24,8 @@
 ### Pico
 
 Build for Pico, Android (26) later
-[adb 的安装与使用](https://internal-doc-removed)
-[VS for Mac调试Pico(Android)下的Unity C#脚本](https://internal-doc-removed)
+adb 的安装与使用
+VS for Mac调试Pico(Android)下的Unity C#脚本
 
 <br>
 

@@ -1,6 +1,6 @@
 #PCG 
 
-[Substance Designer 教程](https://internal-doc-removed)
+Substance Designer 教程
 
 ### Shortcuts
 

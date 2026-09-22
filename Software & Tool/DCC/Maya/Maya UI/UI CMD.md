@@ -2,7 +2,7 @@
 
 Using PySide in Maya → [[PyQT-PySide]]
 
-[Maya Python Interface PySide](https://internal-doc-removed)
+Maya Python Interface PySide
 
 https://help.autodesk.com/view/MAYAUL/2020/ENU/index.html?contextId=COMMANDSPYTHON-INDEX
 

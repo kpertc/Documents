@@ -230,7 +230,7 @@ setdetailattrib()
 float area = primintrinsic(0,'measuredarea',@primnum);
 ```
 
-### [Houdini Group and VEX](https://internal-doc-removed)
+### Houdini Group and VEX
 
 ### Geometry Functions
 

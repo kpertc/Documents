@@ -209,11 +209,11 @@ URP 多Pass [LWRP/URP/HDRP中的多Pass shader，以描边效果为例](https://
 
 ### 帮助链接
 
-[URP](https://internal-doc-removed)
+URP
 
-计算机图形学 [Computer Graphics](https://internal-doc-removed)
+计算机图形学 Computer Graphics
 
-Unity Editor 工具编写 [Unity Editor](https://internal-doc-removed)
+Unity Editor 工具编写 Unity Editor
 
 <br>
 

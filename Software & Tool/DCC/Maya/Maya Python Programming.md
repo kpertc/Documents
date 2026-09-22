@@ -16,9 +16,9 @@
 ##### [[../../../Programming Language/Python/Python Basic]]
 
 
-##### [Maya Setup PyCharm](https://internal-doc-removed)
+##### Maya Setup PyCharm
 
-##### [Maya中Python文件加载方法](https://internal-doc-removed)
+##### Maya中Python文件加载方法
 
   
 
@@ -82,7 +82,7 @@ The DAG hierarchy (also known as an object hierarchy) refers to the parent-child
 DAG path
 `DagPath = House|Apartment1|Window1`
 
-[Maya Programming 入门 第六课](https://internal-doc-removed)
+Maya Programming 入门 第六课
 
 Math by Node
 ![[Maya Python Programming/Math by Node.png]]
