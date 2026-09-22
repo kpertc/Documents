@@ -24,7 +24,6 @@ gcc -v
 
 Install Command Line Tool:[[Env Tools]]
 
-```
 
 ![[img/build&run.png]]
 Build | Run I Build&Run
